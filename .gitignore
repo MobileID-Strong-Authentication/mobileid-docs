@@ -1,0 +1,15 @@
+docs/.vitepress/dist
+docs/.vitepress/cache
+node_modules
+.temp
+# Ignore system files
+.DS_Store
+
+# Ignore log files
+*.log
+
+# Ignore MacOS X thumbnail files
+._*
+
+# Ignore IDE specific files
+.vscode/

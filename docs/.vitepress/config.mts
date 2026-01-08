@@ -11,7 +11,8 @@ export default defineConfig({
 
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Reference Guide', link: '/reference-guide/introduction' }
+      { text: 'Reference Guide', link: '/reference-guide/introduction' },
+      { text: 'OIDC Integration', link: '/oidc/introduction' }
     ],
 
     sidebar: {
@@ -20,7 +21,7 @@ export default defineConfig({
           text: 'Reference Guide',
           items: [
             { text: 'Introduction', link: '/reference-guide/introduction' },
-            { text: 'Application Provider Client Integration', link: '/reference-guide/application-integration' },
+            { text: 'Application Provider Client Integration', link: '/reference-guide/app-provider-client-integration' },
             { text: 'Mobile ID API', link: '/reference-guide/mobile-id-api' },
             { text: 'Best Practices', link: '/reference-guide/best-practices' },
             { text: 'Auto Activation', link: '/reference-guide/auto-activation' },
@@ -31,16 +32,40 @@ export default defineConfig({
           ]
         }
       ],
-      '/config/': [
+      '/entraid/': [
         {
-          text: 'Config Guide',
+          text: 'EntraID Guide',
           items: [
-            { text: 'Index', link: '/config/' },
-            { text: 'One', link: '/config/one' },
-            { text: 'Two', link: '/config/two' }
+            { text: 'Index', link: '/entraid/' },
+            { text: 'One', link: '/entraid/one' },
+            { text: 'Two', link: '/entraid/two' }
+          ]
+        }
+      ],
+
+      '/oidc/': [
+        {
+          text: 'OIDC Guide',
+          items: [
+            { text: 'Introduction', link: '/oidc/introduction' },
+            { text: 'Getting Started', link: '/oidc/getting-started' },
+            { text: 'Best Practices', link: '/oidc/best-practices' }
+          ]
+        }
+      ],
+
+
+      '/rig-radius/': [
+        {
+          text: 'RIG Radius Guide',
+          items: [
+            { text: 'Index', link: '/rig-radius/' },
+            { text: 'One', link: '/rig-radius/one' },
+            { text: 'Two', link: '/rig-radius/two' }
           ]
         }
       ]
+
     },
 
     footer: {

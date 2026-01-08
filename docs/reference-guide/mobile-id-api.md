@@ -6,8 +6,6 @@
 
 ### HTTP Response
 
-![image placeholder](image1.png)
-
 ## 3.2 MSS Signature
 
 ### Signature Profiles
@@ -44,7 +42,6 @@
 
 ##### Transaction Approval (key/value pairs)
 
-![image placeholder](image2.png)
 
 ## 3.3 MSS Status Query
 
@@ -52,7 +49,6 @@
 
 ### MSS Status Query Response
 
-![image placeholder](image3.png)
 
 ## 3.4 MSS Receipt
 
@@ -64,8 +60,6 @@
 
 #### Encrypted MSS Receipts
 
-![image placeholder](image4.png)
-
 ## 3.5 MSS Profile Query
 
 ### MSS Profile Query Request
@@ -74,4 +68,3 @@
 
 ### MSS Profile Query Response
 
-![image placeholder](image5.png)

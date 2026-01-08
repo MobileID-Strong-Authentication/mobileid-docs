@@ -53,7 +53,7 @@ The **Application Provider (AP)** can select and allow one or both methods f
 
 The **SIM method** uses the **SIM Toolkit (STK)** application residing on the SIM card (or eSIM profile).
 
-![Mobile ID SIM Method Architecture](image1.png)
+
 
 The STK app communicates securely with the Mobile ID server by **encrypted SMS PDUs**, invisible to the user.
 
@@ -78,7 +78,7 @@ The STK app communicates securely with the Mobile ID server by **encrypted�
 
 The **App method** allows authentication using the **Mobile ID App** installed on an Android or iOS device.
 
-![Mobile ID App Authentication Flow](image2.png)
+
 
 #### **Activation Options**
 
@@ -96,7 +96,7 @@ The App can display plain UTF‑8 text for user confirmation — the so‑called
 
 ### **High‑Level Authentication Flow**
 
-![Mobile ID High‑Level Flow](image3.png)
+
 
 1. The Application Provider (AP) initiates an authentication or signature request.
 2. The Mobile ID platform sends an authentication challenge to the user’s device (SIM or App).

@@ -16,7 +16,7 @@ Before using the Swisscom Mobile ID Web Service, the following setup ste
      (either over the Internet or via Swisscom LAN‑I service).
    - The AP’s **public source IP address or range** must be **whitelisted** in the Swisscom firewall.
    - The customer must deliver an **X.509 client certificate** to Swisscom.
-     *(Creation is described in [Chapter 8](chapter8-create-x509-client-certificates.md).)*
+     *(Creation is described in Chapter 8*
 
 2. Swisscom provides the customer with:
    - an **AP_ID (Application Provider Identifier)**, and

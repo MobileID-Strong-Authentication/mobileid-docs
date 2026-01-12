@@ -1,4 +1,4 @@
-# 2 Getting Started
+# Getting Started
 
 Before you can integrate and use Mobile ID OpenID Connect sign-in, the client on-boarding process must have been completed by Swisscom.
 
@@ -21,7 +21,7 @@ Please check the state with your commercial contact or via **Backoffice.Security
 
 ---
 
-## 2.1 Endpoint URIs
+## Endpoint URIs
 
 A default Mobile ID OpenID Provider configuration is published on the OIDC discovery endpoint, which allows a client to discover the OAuth 2.0 and OpenID Connect endpoints, capabilities, supported cryptographic algorithms and features.
 
@@ -37,7 +37,7 @@ It is recommended to host a local copy of this file when your application relies
 
 ---
 
-## 2.2 Authorization Code Request
+## Authorization Code Request
 
 The authorization code can be obtained by performing a simple HTTP GET request towards the Authorization Code endpoint of the Mobile ID OP. The client secret is not involved yet.
 

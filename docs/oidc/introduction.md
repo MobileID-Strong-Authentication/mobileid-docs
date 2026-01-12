@@ -2,8 +2,6 @@
 
 This document provides Relying Parties (RPs) with technical guidance and best practices for integrating Mobile ID Open ID Provider (MobileID OP) into their applications.
 
----
-
 ## OpenID Connect
 
 The MobileID OP can be used for both authorization and authentication. It fully complies with the OpenID Connect specification.

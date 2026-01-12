@@ -4,7 +4,6 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'MobileID',
   description: 'Technical documentation for Mobile ID integration',
-  base: '/mobileid-docs/',
   lastUpdated: true,
 
   themeConfig: {

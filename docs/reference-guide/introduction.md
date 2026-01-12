@@ -43,24 +43,23 @@ Authentication in Mobile ID is based on a secure hardware token which can be e
 - a **Mobile ID‑compliant SIM or eSIM**, or
 - a **Mobile ID App** running on a smartphone.
 
-A single user account may have both methods enabled.
-The **Application Provider (AP)** can select and allow one or both methods for authentication.
+Therefore, a user account could have either the (e)SIM method, the App method or even both methods activated at the same time. However, the **Application Provider (AP)** may select the preferred method and allow both methods or just either one.
 
 ---
 
-### **Mobile ID (e‑)SIM Method**
+### **Mobile ID SIM - Method**
 
-The **SIM method** uses the **SIM Toolkit (STK)** application residing on the SIM card (or eSIM profile).
+An Application Provider (AP) can request SIM Toolkit (STK) based authentication, hereinafter referred as "SIM method". To utilize the SIM method, the user must have a Mobile ID compliant SIM card or eSIM. Data exchange between the Mobile ID server and the STK application is done with SMS messages using data packets (PDUs), not visible to the end-user. The Mobile ID SIM Toolkit application runs on the SIM card environment and is compliant with all mobile devices.
 
 
+![mobileid-login-accept](/img/mobileid-login-accept.png)
 
-The STK app communicates securely with the Mobile ID server by **encrypted SMS PDUs**, invisible to the user.
 
 #### **Key Advantages**
 
 - **Strong Two‑Factor Authentication**
-  - 1️⃣ *Possession Factor*: Physical SIM/eSIM
-  - 2️⃣ *Knowledge Factor*: Personal Mobile ID PIN
+  - **1st Factor:** Physical SIM/eSIM (Possession Factor)
+  - **2nd Factor:** Personal Mobile ID PIN (Knowledge Factor)
 
 - **High Level of Security**
   - Tamper‑proof secure hardware (EAL5+ and ITSEC E3 certified)
@@ -68,18 +67,17 @@ The STK app communicates securely with the Mobile ID server by **encrypted�
 
 - **Pre‑installed** STK App on the SIM/eSIM profile
 
-- Supported by most **Swiss Mobile Network Operators**
-  *(Swisscom, Sunrise, Salt, UPC)*
+- Supported by most **Swiss Mobile Network Operators** *(Swisscom, Sunrise, Salt)*
 
 ---
 
-### **Mobile ID App Method**
+### **Mobile ID App - Method**
 
-The **App method** allows authentication using the **Mobile ID App** installed on an Android or iOS device.
-
-
+An Application Provider (AP) can request mobile app based authentication, hereinafter referred as "App method". To utilize the App method, the user must have the Mobile ID App installed on a compliant Android or iOS-based smartphone. The app can be downloaded from Google Play Store and Apple App Store.
 
 #### **Activation Options**
+
+The Mobile ID App activation can be done within the mobile app (in-app enrolment) or through the selfcare portal  (in latter case, the app must scan a QR code displayed on www.mobileid.ch).
 
 1. **In‑App Enrolment**
    The user activates Mobile ID directly within the app.
@@ -88,26 +86,63 @@ The **App method** allows authentication using the **Mobile ID App** insta
    Activation via [https://www.mobileid.ch](https://www.mobileid.ch),
    where the app scans a QR code displayed on the site.
 
-The App can display plain UTF‑8 text for user confirmation — the so‑called
-**DTBD (Classic View)**.
+#### **Display Options**
+
+The App can display a plain UTF-8 string as a single text line. This is known as the
+DTBD (DataToBeDisplayed) Classic View.
+
+![app-display-utf8](/img/app-display-utf8.png)
+
+
+
+The App also supports Transaction Approval Style, which enhances readability by displaying
+a title (type-field) and one or more key-value rows.
+
+![app-display-trans-approval](/img/app-display-trans-approval.png)
+
+
+#### App Method Key Advantages
+
+- **Strong Two-Factor Authentication**
+  - **1st Factor:** Smartphone (Possession Factor)
+  - **2nd Factor:** Passcode (Knowledge Factor) or Biometry (Inherence Factor)
+
+- **High Level of Security**
+  - Authentication through dedicated mobile application (authentication app)
+  - Fast and secure (encrypted) communication
+
+- **Availability**
+  - The app is published and available in several countries of the European Union (EU)
+
 
 ---
 
-### **High‑Level Authentication Flow**
+### **Authentication Flow**
+
+Before going into more technical details, let’s have a short look at the main scenario.
+
+**Strong Authentication**:
+The end-user wants to access a corporate application protected by Mobile ID strong authentication.
+
+![auth-flow-strong-flow](/img/auth-flow-strong-flow.png)
 
 
+#### Main Steps Performed by the End-User and the Mobile Signature Service
 
-1. The Application Provider (AP) initiates an authentication or signature request.
-2. The Mobile ID platform sends an authentication challenge to the user’s device (SIM or App).
-3. The user verifies the **DTBD message** displayed and confirms using their **Mobile ID PIN** or biometrics.
-4. The device returns the signed response with the user’s **X.509 certificate**.
-5. The AP backend validates both signature and certificate chain via the **Swisscom Mobile ID API**.
+1. The end-user uses any application relying on **Mobile ID** for authentication.
+   - The application sends a mobile signature request through the dedicated web interface (of the **AP**), including the personal **MSISDN** as an input parameter to log in.
+
+2. The **AP** receives the end-user request, forms the contents to be signed (in accordance with the **ETSI TS 102 204** standard), and forwards the request to the **MID** service.
+
+3. The **MID** platform receives the signature request and validates the **AP** in accordance with the service agreement.
+
+4. The **MID** platform ensures that the end-user signature request is allowed and forwards the signature request to the end-user’s mobile phone.
+
+5. The end-user receives a message on their mobile phone to sign the mobile signature request.
+   - The end-user confirms the authentication request either by providing the **Mobile ID PIN** (SIM method) or **Passcode/Biometry** (App method).
+
+After the **AP** has received a valid response, the end-user is granted access to the corporate application.
+
 
 ---
 
-### **Security Highlights**
-
-- Meets **ETSI and Swiss regulatory requirements**.
-- End‑to‑end encryption between AP, MSSP, and user device.
-- Compatible with both **(e)SIM** and **App** deployment methods.
-- Compliant with **two‑factor authentication frameworks** and online signature standards.

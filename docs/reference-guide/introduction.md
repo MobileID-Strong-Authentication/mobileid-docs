@@ -7,7 +7,6 @@ Mobile ID can be used in multiple processes — from simple two‑factor login
 It is suitable for various system landscapes and meets strict regulatory requirements.
 
 ➡️ For more information, visit [https://mobileid.ch](https://mobileid.ch).
-The latest version of this document is published on **GitHub**.
 
 ---
 

@@ -72,7 +72,7 @@ The key validation aspects are as follows:
 2. **Validate the Mobile User’s X.509 Certificate**
    - Ensure the user certificate chains up to a **trusted root CA** contained in your local **TrustStore**.
    - The client should only trust certificates that link to a **trust anchor** matching the expected Swisscom Mobile ID CA.
-   - Your **TrustStore** should only contain the **relevant root CA certificate** (see **Section 7**).
+   - Your **TrustStore** should only contain the **relevant root CA certificate** (see **Section Root CA Certificates**).
 
 3. **Verify the Digital Signature**
    - Confirm that the received digital signature is **cryptographically valid**.
@@ -80,7 +80,7 @@ The key validation aspects are as follows:
    - The client must be capable of validating both **RSA** and **ECDSA** signatures.
 
 4. **(Optional) Validate the Mobile ID Serial Number**
-   - For the **highest level of assurance** and a fully **strong two‑factor authentication** process, validate the **Mobile ID serial number** as described in **Section 4.2**.
+   - For the **highest level of assurance** and a fully **strong two‑factor authentication** process, validate the **Mobile ID serial number** as described in **Section Mobile ID Serial Number Validation**.
 
 5. **Implement Proper Fault and Status Handling**
    - Handle all **status** and **fault codes** using structured exception handling logic to ensure stable, predictable behavior of the client application.
@@ -100,7 +100,7 @@ Concurrency handling depends on whether the request targets the **SIM** method o
 
 ---
 
-##### • SIM Method Concurrency
+##### SIM Method Concurrency
 If both signature requests target the **SIM‑based authentication method**, and the first signature transaction is still **in progress**, the **second request** is **rejected** immediately.
 
 - **Fault Code:** `406 / PB_SIGNATURE_PROCESS`
@@ -109,7 +109,7 @@ If both signature requests target the **SIM‑based authentication method**, and
 
 ---
 
-##### • App Method Concurrency
+##### App Method Concurrency
 If both requests target the **Mobile ID App‑based authentication method**, the behavior is different:
 
 - The **existing first signature transaction** is **canceled** automatically by the backend.
@@ -117,12 +117,6 @@ If both requests target the **Mobile ID App‑based authentication method**,
 
 - **Fault Code (cancellation of first transaction):** `401 / USER_CANCEL`
 - See **Section 6** for further information.
-
----
-
-**Summary:**
-- **SIM method:** concurrency → second request **rejected**.
-- **App method:** concurrency → first request **canceled**, second request **processed**.
 
 ## Mobile ID Serial Number Validation
 

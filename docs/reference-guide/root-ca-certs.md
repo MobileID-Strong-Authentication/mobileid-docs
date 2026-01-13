@@ -5,7 +5,7 @@ There are two different scenarios (described in the two chapters below) to consi
 
 ## Mobile ID X509 Server Certificate
 
-As described in section 2.3, the Mobile ID server's x.509 certificate that is used in the mutual SSL/TLS authentication process is a SwissSign certificate.
+As described in section Mutual Authentication, the Mobile ID server's x.509 certificate that is used in the mutual SSL/TLS authentication process is a SwissSign certificate.
 
 You can download the "SwissSign Gold CA - G2" certificate from the SwissSign site:
 [https://www.swisssign.com/en/support/faq.html](https://www.swisssign.com/en/support/faq.html)
@@ -17,7 +17,7 @@ You can download the "SwissSign Gold CA - G2" certificate from the SwissSign sit
 
 ## Mobile ID User X509 Certificate
 
-As described in section 1.2, the main scenario is a strong authentication, where the AP receives a signature response, which includes the signature object and the mobile user's x.509 certificate (public key). The AP should validate the signature as well as the x.509 certificate's trust chain.
+As described in section Mobile ID Signature Service, the main scenario is a strong authentication, where the AP receives a signature response, which includes the signature object and the mobile user's x.509 certificate (public key). The AP should validate the signature as well as the x.509 certificate's trust chain.
 
 The figure below depicts the Mobile ID Certificate Chain. The User Certificate (End Entity Certificate) is issued by the Intermediate Certificate. The Intermediate Certificate is issued by the Root Certificate.
 
@@ -25,7 +25,7 @@ Usually, a client's TrustStore contains the Root Certificate only, the so-called
 
 ![end-entity-certificate](/img/end-entity-certificate.svg)
 
-The Mobile ID End Entity Certificate is either based on the `Root Certificate Swisscom Root CA 4` or on the older Root `Certificate Swisscom Root CA 4`.
+The Mobile ID End Entity Certificate is either based on the Root Certificate `Swisscom Root CA 4` or on the older Root Certificate `Swisscom Root CA 4`.
 
 You can download the "Swisscom Root CA 4" certificate from the Swisscom Digital Certificate Service site:
 [http://aia.swissdigicert.ch/sdcs-root4.crt](http://aia.swissdigicert.ch/sdcs-root4.crt)
@@ -41,6 +41,6 @@ You can download the "Swisscom Root CA 2" certificate from the Swisscom Digital 
 |-------------------|
 | 77 47 4F C6 30 E4 0F 4C 47 64 3F 84 BA B8 C6 95 4A 8A 41 EC |
 
-Please ensure that your Mobile ID client's TrustStore contains both the old Root Certificate Swisscom Root CA 2 as well as the new Root Certificate Swisscom Root CA 4.
+Please ensure that your Mobile ID client's TrustStore contains both the old Root Certificate `Swisscom Root CA 2` as well as the new Root Certificate `Swisscom Root CA 4`.
 
 

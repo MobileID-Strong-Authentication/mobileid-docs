@@ -10,13 +10,12 @@ OpenID Connect is a simple identity layer on top of the OAuth 2.0 protocol. It a
 
 OpenID Connect allows clients of all types, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end-users. The specification suite is extensible, allowing participants to use optional features such as encryption of identity data, discovery of OpenID Providers, and session management, when it makes sense for them.
 
-See [https://openid.net/connect/faq/](https://openid.net/connect/faq/) for a set of answers to Frequently Asked Questions.
+See https://openid.net/connect/faq/ for a set of answers to Frequently Asked Questions.
 
 ---
 
-The Mobile ID solution protects access to your company data and applications with a comprehensive end-to-end solution for a strong multi-factor authentication (MFA). Please visit [https://mobileid.ch](https://mobileid.ch) for further information. Do not hesitate to contact us in case of any questions.
+The Mobile ID solution protects access to your company data and applications with a comprehensive end-to-end solution for a strong multi-factor authentication (MFA). Please visit https://mobileid.ch for further information. Do not hesitate to contact us in case of any questions.
 
----
 
 ## Basic Key Concepts – Terminology
 

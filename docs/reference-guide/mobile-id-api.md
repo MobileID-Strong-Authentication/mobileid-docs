@@ -17,7 +17,6 @@ The RESTful interface uses **JavaScript Object Notation (JSON)** as its media ty
 | `Content-Type` | `text/xml;charset=UTF-8` | `application/json;charset=UTF-8` |
 | `Accept` | – | `application/json` |
 
----
 
 ### HTTP Response
 

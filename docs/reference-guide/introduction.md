@@ -8,8 +8,6 @@ It is suitable for various system landscapes and meets strict regulatory require
 
 ➡️ For more information, visit [https://mobileid.ch](https://mobileid.ch).
 
----
-
 ## Terms and Abbreviations
 
 | Term | Description |

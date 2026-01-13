@@ -7,8 +7,6 @@ The repository **[`mobileid-client-java`](https://github.com/SwisscomTrustServic
 This library is ideal for Java 8+ projects that require **secure authentication and authorization** using a mobile phone.
 It can be added as a dependency to your project and used in any scenario requiring access to the **Swisscom Mobile ID** service.
 
----
-
 ## MSS Signature
 
 ### Signature Request
@@ -37,7 +35,7 @@ When constructing an **MSS Signature** request, the following best‑practice 
 
 6. **Define the `DataToBeDisplayed` (DTBD) message**
    The text shown on the user’s mobile device must comply with the following guidelines:
-   - Encoded in **UTF‑8**.
+   - Encoded in **UTF‑8** [<sup id="a17">17</sup>](#17).
    - Should include a **unique transaction reference** (e.g., timestamp, customer ID, contract ID).
    - **Length limits:**
      - Maximum **239 characters** if all characters are in the standard GSM DA character set.
@@ -47,6 +45,19 @@ When constructing an **MSS Signature** request, the following best‑practice 
    **Example DTBD:**
    > `Bank ACME: Proceed with the login? (TXN‑3D5K)`
 
+---
+
+**Footnotes**
+
+17. <span id="17"></span> Type of the AP_TransID is xsd:NCName, refer to http://www.datypic.com/sc/xsd/t-xsd_NCName.html [↩](#a17)
+
+18. <span id="17"></span> http://www.w3.org/TR/xmlschema-2/#dateTime [↩](#a17)
+
+19. <span id="17"></span> http://en.wikipedia.org/wiki/UTF-8 [↩](#a17)
+
+20. <span id="17"></span> In mobile telephony GSM 03.38 is the standard character set used in short message service. [↩](#a17)
+
+---
 
 ### Signature Response
 

@@ -17,8 +17,6 @@ Before using the **Swisscom Mobile ID** web service, some initial provisioning s
      - The DTBD Prefix is an AP‑specific keyword that must be included as a prefix in every Mobile ID request text message sent to a Mobile ID user (the message displayed on the user’s mobile phone).
      - **Example:** `"Bank ACME: "`
 
----
-
 ## Endpoint Address
 
 The Swisscom Mobile ID web service is accessible through LAN-I  or Internet. If not otherwise specified use the following default access details.

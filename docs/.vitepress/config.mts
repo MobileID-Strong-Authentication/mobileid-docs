@@ -8,7 +8,7 @@ export default defineConfig({
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/mobileid.svg',
+    logo: '/img/mobileid-logo.png',
 
     nav: [
       { text: 'Home', link: '/' },

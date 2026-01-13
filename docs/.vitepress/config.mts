@@ -50,7 +50,10 @@ export default defineConfig({
           items: [
             { text: 'Introduction', link: '/oidc/introduction' },
             { text: 'Getting Started', link: '/oidc/getting-started' },
-            { text: 'Best Practices', link: '/oidc/best-practices' }
+            { text: 'Best Practices', link: '/oidc/best-practices' },
+            { text: 'Public Cloud Integration Guide', link: '/oidc/cloud-integration-guide' },
+            { text: 'MobileID OIDC - Use Cases', link: '/oidc/oidc-use-cases' },
+            { text: 'Message Formats on the Mobile ID App', link: '/oidc/message-formats' }
           ]
         }
       ],

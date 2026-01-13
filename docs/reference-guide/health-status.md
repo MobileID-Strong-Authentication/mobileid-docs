@@ -16,7 +16,7 @@ Our health status is based on real end-to-end Mobile ID tests that are responded
 
 ## MobileID Telecommunications Providers
 
-Checks include Mobile ID SIM cards from Swisscom, Sunrise, Salt and UPC.
+Checks include Mobile ID SIM cards from Swisscom, Sunrise, Salt.
 
 ## MobileID App
 

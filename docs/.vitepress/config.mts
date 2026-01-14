@@ -5,10 +5,9 @@ export default defineConfig({
   title: 'MobileID',
   description: 'Technical documentation for Mobile ID integration',
   lastUpdated: true,
-
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/img/mobileid.svg',
+    logo: '/mobileid.svg',
 
     nav: [
       { text: 'Home', link: '/' },
@@ -31,7 +30,21 @@ export default defineConfig({
             { text: 'Create X509 Client Certificates', link: '/reference-guide/create-client-certs' },
             { text: 'Health Status Microservice', link: '/reference-guide/health-status' }
           ]
+        },
+        {
+        text: 'Release Notes',
+          items: [
+            { text: 'Release Notes', link: '/reference-guide/release-notes.md' },
+            ]
+        },
+
+        {
+        text: '',
+          items: [
+            { text: 'Imprint', link: '/reference-guide/imprint.md' },
+            ]
         }
+
       ],
       '/entraid/': [
         {
@@ -73,8 +86,7 @@ export default defineConfig({
     },
 
     footer: {
-      message: '© Swisscom (Schweiz) AG',
-      copyright: 'All rights reserved'
+      message: '© Swisscom (Schweiz) AG'
     },
 
     socialLinks: [

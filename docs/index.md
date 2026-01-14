@@ -18,11 +18,12 @@ features:
   - title: Getting Started
     details: Discover the Mobile ID documentation and learn how to secure your application.
     link: /reference-guide/introduction
-  - title: Integration Guide
+  - title: OIDC Integration Guide
     details: Follow this guide to integrate Mobile ID into your application through the OpenID Connect (OIDC) standard.
     link: /oidc/introduction
   - title: Release Notes
     details: Stay tuned for the latest updates! Discover new features, enhancements, and improvements in our upcoming release.
+    link: /reference-guide/release-notes
 ---
 
 ::: info

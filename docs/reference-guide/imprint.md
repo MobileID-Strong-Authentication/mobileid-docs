@@ -2,6 +2,7 @@
 
 ## 📇 Company Information
 **Company Name:** Swisscom (Schweiz) AG
+
 **Head Office (Sitz):** Worblaufen
 
 **Postal Address:**

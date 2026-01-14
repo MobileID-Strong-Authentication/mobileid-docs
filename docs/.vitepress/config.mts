@@ -5,9 +5,12 @@ export default defineConfig({
   title: 'MobileID',
   description: 'Technical documentation for Mobile ID integration',
   lastUpdated: true,
+
+  head: [['link', { rel: 'icon', href: '/mobileid.svg' }]],
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/mobileid.svg',
+    logo: '/img/mobileid.svg',
 
     nav: [
       { text: 'Home', link: '/' },

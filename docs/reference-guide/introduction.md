@@ -140,8 +140,3 @@ The end-user wants to access a corporate application protected by Mobile ID stro
    - The end-user confirms the authentication request either by providing the **Mobile ID PIN** (SIM method) or **Passcode/Biometry** (App method).
 
 After the **AP** has received a valid response, the end-user is granted access to the corporate application.
-
-
----
-
-![mobileid](/img/mobileid.svg)

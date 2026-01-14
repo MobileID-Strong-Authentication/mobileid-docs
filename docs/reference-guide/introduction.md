@@ -144,3 +144,4 @@ After the **AP** has received a valid response, the end-user is granted access t
 
 ---
 
+![mobileid](/img/mobileid.svg)

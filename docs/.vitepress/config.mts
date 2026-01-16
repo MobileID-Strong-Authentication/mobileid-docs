@@ -44,12 +44,6 @@ export default defineConfig({
             { text: 'Health Status Microservice', link: '/reference-guide/health-status' }
           ]
         },
-        {
-        text: 'Release Notes',
-          items: [
-            { text: 'Release Notes', link: '/reference-guide/release-notes.md' },
-            ]
-        },
 
         {
         text: '',

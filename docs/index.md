@@ -11,7 +11,7 @@ hero:
       text: Reference Guide
       link: /reference-guide/introduction
     - theme: alt
-      text: API Reference
+      text: API Specification
       link: /api-reference/api
 
 features:

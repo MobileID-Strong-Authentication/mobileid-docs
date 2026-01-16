@@ -17,7 +17,7 @@
 
 /* Dark mode override #3a3a3a */
 html.dark img.feature-icon-info {
-  content: url("/img/icon-info-light.svg");
+  content: url("/public/img/icon-info-light.svg");
 }
 
 html.dark img.feature-icon-security {

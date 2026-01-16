@@ -1,6 +1,39 @@
 /* .vitepress/theme/custom.css */
 :root {
-  --vp-c-brand-1: #009490;
-  --vp-c-brand-2: #009490;
-  --vp-c-brand-3: #008582;
+  --vp-c-brand-1: #4e5353;
+  --vp-c-brand-2: #029994; /* #009490 */
+  --vp-c-brand-3: #009490;
+  --vp-font-family-base: 'Swisscom Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --vp-font-family-heading: 'Swisscom Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+}
+
+.dark {
+  --vp-c-bg: #515151;
+  --vp-c-bg-alt: #515151;
+  --vp-c-bg-elv: #515151;
+  --vp-c-bg-soft: #515151;
+}
+
+/* Dark mode override #3a3a3a */
+html.dark img.feature-icon-info {
+  content: url("/img/icon-info-light.svg");
+}
+
+html.dark img.feature-icon-security {
+  content: url("/img/icon-security-light.svg");
+}
+
+html.dark img.feature-icon-notes {
+  content: url("/img/icon-notes-light.svg");
+}
+
+
+/* Or for more specific control */
+.VPContent.VPContent.is-home {
+  background-image: url('/img/background-4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* keep it fixed while scrolling */
+  background-position: center center;
 }

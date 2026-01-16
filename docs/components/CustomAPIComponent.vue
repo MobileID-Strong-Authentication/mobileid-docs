@@ -11,7 +11,7 @@ import { SwaggerUIBundle, SwaggerUIStandalonePreset } from 'swagger-ui-dist';
 
 onMounted(() => {
   SwaggerUIBundle({
-    url: '/api/mobileid-openapi.yaml',
+    url: '/openapi-mobileid',
     dom_id: '#swagger-ui',
     presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
   });

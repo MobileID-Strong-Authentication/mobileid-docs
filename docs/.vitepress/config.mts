@@ -18,7 +18,6 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Reference Guide', link: '/reference-guide/introduction' },
       { text: 'OIDC Integration', link: '/oidc/introduction' },
-      { text: 'Release Notes', link: '/oidc/introduction' },
       {
         text: 'More',
         items: [

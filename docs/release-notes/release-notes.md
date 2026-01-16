@@ -1,6 +1,6 @@
 # Release Notes
 
-## MobileID App
+## MobileID iOS App
 
 <details>
 <summary>Version 1.5.3</summary>

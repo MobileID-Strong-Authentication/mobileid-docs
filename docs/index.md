@@ -11,8 +11,8 @@ hero:
       text: Reference Guide
       link: /reference-guide/introduction
     - theme: alt
-      text: API Examples
-      link: /reference-guide/mobile-id-api
+      text: API Reference
+      link: /api-reference/api
 
 features:
   - title: Getting Started

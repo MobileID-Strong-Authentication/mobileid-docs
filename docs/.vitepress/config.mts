@@ -23,7 +23,7 @@ export default defineConfig({
         text: 'More',
         items: [
           { text: 'Release Notes', link: '/release-notes/release-notes' },
-          { text: 'API Specification', link: '/api/api' },
+          { text: 'API Reference', link: '/api-reference/api' },
         ]
       }
 

@@ -2,20 +2,31 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'MobileID',
+  title: ' ',
   description: 'Technical documentation for Mobile ID integration',
+  base: '/',
   lastUpdated: true,
+  appearance: false,
 
   head: [['link', { rel: 'icon', href: '/mobileid.svg' }]],
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/img/mobileid.svg',
+    logo: '/img/mobileid-colors.png',
 
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Reference Guide', link: '/reference-guide/introduction' },
-      { text: 'OIDC Integration', link: '/oidc/introduction' }
+      { text: 'OIDC Integration', link: '/oidc/introduction' },
+      { text: 'Release Notes', link: '/oidc/introduction' },
+      {
+        text: 'More',
+        items: [
+          { text: 'Release Notes', link: '/release-notes/release-notes' },
+          { text: 'API Specification', link: '/api/api' },
+        ]
+      }
+
     ],
 
     sidebar: {
@@ -86,10 +97,6 @@ export default defineConfig({
         }
       ]
 
-    },
-
-    footer: {
-      message: '© Swisscom (Schweiz) AG'
     },
 
     socialLinks: [

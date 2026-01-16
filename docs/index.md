@@ -16,14 +16,23 @@ hero:
 
 features:
   - title: Getting Started
+    icon:
+      src: /img/icon-info.svg
+      class: feature-icon-info
     details: Discover the Mobile ID documentation and learn how to secure your application.
     link: /reference-guide/introduction
   - title: OIDC Integration Guide
+    icon:
+      src: /img/icon-security.svg
+      class: feature-icon-security
     details: Follow this guide to integrate Mobile ID into your application through the OpenID Connect (OIDC) standard.
     link: /oidc/introduction
   - title: Release Notes
+    icon:
+      src: /img/icon-notes.svg
+      class: feature-icon-notes
     details: Stay tuned for the latest updates! Discover new features, enhancements, and improvements in our upcoming release.
-    link: /reference-guide/release-notes
+    link: /release-notes/release-notes
 ---
 
 ::: info

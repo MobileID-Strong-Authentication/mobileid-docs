@@ -8,7 +8,7 @@ hero:
   tagline: welcome to Mobile ID developer hub
   actions:
     - theme: brand
-      text: Reference Guide
+      text: API Reference Guide
       link: /reference-guide/introduction
     - theme: alt
       text: API Specification

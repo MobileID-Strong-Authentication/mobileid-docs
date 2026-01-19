@@ -16,7 +16,7 @@ export default defineConfig({
 
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Reference Guide', link: '/reference-guide/introduction' },
+      { text: 'API Reference Guide', link: '/reference-guide/introduction' },
       { text: 'OIDC Integration', link: '/oidc/introduction' },
       {
         text: 'More',

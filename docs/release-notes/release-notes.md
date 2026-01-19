@@ -1,5 +1,55 @@
 # Release Notes
 
+## MobileID API Reference Guide
+
+<details>
+<summary>v1.0.0</summary>
+
+### Version tbd
+
+Release Notes – Version v1.0.0
+
+**Release Date:** 19.01.2026
+
+#### 🚀 Overview
+Initial version - MobileID API Reference Guide
+
+</details>
+
+
+## MobileID OIDC Integration Guide
+
+<details>
+<summary>v1.0.0</summary>
+
+### Version tbd
+
+Release Notes – Version v1.0.0
+
+**Release Date:** 19.01.2026
+
+#### 🚀 Overview
+Initial version - MobileID Integration Guide
+
+</details>
+
+
+## MobileID Android App
+
+<details>
+<summary>Version tbd</summary>
+
+### Version tbd
+
+Release Notes – Version tbd
+
+**Release Date:** 11.08.2025
+
+#### 🚀 Overview
+This version includes a series of improvements to provide you with an even smoother, more stable, and faster experience.
+
+</details>
+
 ## MobileID iOS App
 
 <details>

@@ -1,17 +1,17 @@
 # Best Practices
 
-The **Swisscom Mobile ID** GitHub repository provides various examples of Mobile ID client implementations.
+The **Swisscom Mobile ID Strong Authentication** GitHub repository provides various examples of Mobile ID client implementations.
 
 The repository **[`mobileid-client-java`](https://github.com/SwisscomTrustServices/mobileid-client-java)** serves as the *main* Java‑based reference implementation for building **Mobile ID REST** and **SOAP** API clients.
 
 This library is ideal for Java 8+ projects that require **secure authentication and authorization** using a mobile phone.
-It can be added as a dependency to your project and used in any scenario requiring access to the **Swisscom Mobile ID** service.
+It can be added as a dependency to your project and used in any scenario requiring access to the **Swisscom Mobile ID** service.
 
-## MSS Signature
+## MSS Signature
 
 ### Signature Request
 
-When constructing an **MSS Signature** request, the following best‑practice guidelines should be followed:
+When constructing an **MSS Signature** request, the following best‑practice guidelines should be followed:
 
 1. **Define a unique `AP_TransID` (Transaction ID)**
    Each signature request must have a unique transaction identifier.
@@ -61,7 +61,7 @@ When constructing an **MSS Signature** request, the following best‑practice 
 
 ### Signature Response
 
-After receiving the **MSS Signature Response**, the client (Application Provider – AP) must perform proper response validation to ensure authenticity, integrity, and consistency with the original request.
+After receiving the **MSS Signature Response**, the client (Application Provider – AP) must perform proper response validation to ensure authenticity, integrity, and consistency with the original request.
 
 The key validation aspects are as follows:
 
@@ -72,7 +72,7 @@ The key validation aspects are as follows:
 2. **Validate the Mobile User’s X.509 Certificate**
    - Ensure the user certificate chains up to a **trusted root CA** contained in your local **TrustStore**.
    - The client should only trust certificates that link to a **trust anchor** matching the expected Swisscom Mobile ID CA.
-   - Your **TrustStore** should only contain the **relevant root CA certificate** (see **Section Root CA Certificates**).
+   - Your **TrustStore** should only contain the **relevant root CA certificate** (see **[Root CA Certificates](/reference-guide/root-ca-certs.md)**).
 
 3. **Verify the Digital Signature**
    - Confirm that the received digital signature is **cryptographically valid**.
@@ -94,13 +94,13 @@ Mobile ID user certificates are **never revoked** individually — the **Mobil
 
 ### Signature Concurrency Control
 
-This section describes the behavior of the **Mobile ID Service** when an **Application Provider (AP)** submits a new **MSS Signature** request while another signature transaction is already in progress for the **same MSISDN** and the **same authentication method**.
+This section describes the behavior of the **Mobile ID Service** when an **Application Provider (AP)** submits a new **MSS Signature** request while another signature transaction is already in progress for the **same MSISDN** and the **same authentication method**.
 
 Concurrency handling depends on whether the request targets the **SIM** method or the **Mobile ID App** method.
 
 ---
 
-##### SIM Method Concurrency
+##### SIM Method Concurrency
 If both signature requests target the **SIM‑based authentication method**, and the first signature transaction is still **in progress**, the **second request** is **rejected** immediately.
 
 - **Fault Code:** `406 / PB_SIGNATURE_PROCESS`
@@ -109,7 +109,7 @@ If both signature requests target the **SIM‑based authentication method**, and
 
 ---
 
-##### App Method Concurrency
+##### App Method Concurrency
 If both requests target the **Mobile ID App‑based authentication method**, the behavior is different:
 
 - The **existing first signature transaction** is **canceled** automatically by the backend.
@@ -124,9 +124,12 @@ With an MSS Signature response, you will get signature data and the mobile user'
 
 That X.509 certificate's Subject Name (Distinguished Name) contains a unique Mobile ID serial number.
 
-Example subject name with the serial number highlighted in pink:
+Example subject name with the serial number:
+
+```bash
 
 cn=midcheptod58qe59:pn,serialnumber=midcheptod58qe59,pseudonym=midcheptod58qe59
+```
 
 
 For highest level of assurance and a truly strong two-factor-authentication process, an AP should store this value at the first signature and then verify every subsequent signature response if that serial number value still matches.
@@ -206,7 +209,7 @@ The Mobile ID service health check is successful if a fault code 101/WRONG_PARAM
 
 The GitHub Repository at [https://github.com/MobileID-Strong-Authentication](https://github.com/MobileID-Strong-Authentication) contains different examples for a Mobile ID client.
 
-The repo 'mobileid-client-java' is the main Java-based reference implementation for the Mobile ID REST and SOAP API client.
+The repo **[`mobileid-client-java`](https://github.com/SwisscomTrustServices/mobileid-client-java)**  is the main Java-based reference implementation for the Mobile ID REST and SOAP API client.
 
 The library provided by this repository is for all clients that are developing Java-based projects that need secure authentication and authorization services using the mobile phone.
 

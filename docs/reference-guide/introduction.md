@@ -3,7 +3,7 @@
 The purpose of this document is to provide technical documentation and guidelines on how to use the **Swisscom Mobile ID Authentication API**.
 
 The Swisscom Mobile ID authentication solution protects access to your company data and applications with a comprehensive end‑to‑end solution for **two‑factor authentication (2FA)**.
-Mobile ID can be used in multiple processes — from simple two‑factor login to **password‑free authentication**, **online signatures**, and **geofencing**.
+Mobile ID can be used in multiple processes, from simple two‑factor login to **password‑free authentication**, **online signatures**, and **geofencing**.
 It is suitable for various system landscapes and meets strict regulatory requirements.
 
 ➡️ For more information, visit [https://mobileid.ch](https://mobileid.ch).
@@ -34,11 +34,11 @@ It is suitable for various system landscapes and meets strict regulatory require
 ## Mobile ID Signature Service (MSS)
 
 **Mobile ID** is a cost‑efficient, managed authentication service operated by **Swisscom**.
-The customer‑facing API follows the open standard **ETSI 102 204 V1.1.4 (2003‑08)**.
+The customer‑facing API follows the open standard **ETSI 102 204 V1.1 (2003‑08)**.
 
 Authentication in Mobile ID is based on a secure hardware token which can be either:
 
-- a **Mobile ID‑compliant SIM or eSIM**, or
+- a **Mobile ID‑compliant SIM or eSIM**, or
 - a **Mobile ID App** running on a smartphone.
 
 Therefore, a user account could have either the (e)SIM method, the App method or even both methods activated at the same time. However, the **Application Provider (AP)** may select the preferred method and allow both methods or just either one.
@@ -69,7 +69,7 @@ An Application Provider (AP) can request SIM Toolkit (STK) based authentication,
 
 ---
 
-### **Mobile ID App - Method**
+### **Mobile ID App - Method**
 
 An Application Provider (AP) can request mobile app based authentication, hereinafter referred as "App method". To utilize the App method, the user must have the Mobile ID App installed on a compliant Android or iOS-based smartphone. The app can be downloaded from Google Play Store and Apple App Store.
 
@@ -82,7 +82,7 @@ The Mobile ID App activation can be done within the mobile app (in-app enrolment
 
 2. **Self‑Care Portal Activation**
    Activation via [https://www.mobileid.ch](https://www.mobileid.ch),
-   where the app scans a QR code displayed on the site.
+   where the app scans a QR code displayed on the site.
 
 #### **Display Options**
 

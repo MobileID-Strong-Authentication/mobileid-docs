@@ -7,29 +7,34 @@ For the technical on-boarding, you will be asked to provide Swisscom following i
 | What | Quick Description | Ref. |
 |------|--------------------|------|
 | **Client Display Name** | Your client’s name, which is displayed by the authorization server. <br> Example value: `iDemo Online Shop` | |
-| **Redirect URI(s)** | Redirection URI(s) to which the response will be sent. Note that TLS (https) is always required and localhost URI is not allowed.<br> Example value:<br>`https://app01.idemo-company.ch/oauth2/authresp`<br>`https://app02.idemo-company.ch/oauth2/authresp` | oidc spec |
-| **Default ACR** | Your default ACR. Must be a value that is available for your selected Mobile ID contract.<br> Example value: `mid_al3_any` | 2.2.2 |
-| **Client Auth Mode** | Your client’s authentication method, either basic or post.<br> Example value: `client_secret_post` | 2.4 |
+| **Redirect URI(s)** | Redirection URI(s) to which the response will be sent. Note that TLS (https) is always required and localhost URI is not allowed.<br> Example value:<br>`https://app01.idemo-company.ch/oauth2/authresp`<br>`https://app02.idemo-company.ch/oauth2/authresp` | [OIDC spec](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest) |
+| **Default ACR** | Your default ACR. Must be a value that is available for your selected Mobile ID contract.<br> Example value: `mid_al3_any` | [Section Auth Code Request ](/oidc/getting-started#authorization-code-request) |
+| **Client Auth Mode** | Your client’s authentication method, either basic or post.<br> Example value: `client_secret_post` | [Section Access Token Request ](/oidc/getting-started#access-token-request) |
 | **Always Prompt For Consent** | The Mobile ID server default behaviour is to skip the consent step, provided such is already recorded for the given end-user and client.<br> Default: `false` | |
-| **MFA Number Matching** | Enable MFA number matching feature for Mobile ID SIM and Mobile ID App authentication.<br> When a user responds to an MFA notification using Mobile ID SIM or Mobile ID App, they'll be presented with a number on their mobile. They need to select that number in the sign-in prompt to complete the approval.<br> Default: `false` | video |
+| **MFA Number Matching** | Enable MFA number matching feature for Mobile ID SIM and Mobile ID App authentication.<br> When a user responds to an MFA notification using Mobile ID SIM or Mobile ID App, they'll be presented with a number on their mobile. They need to select that number in the sign-in prompt to complete the approval.<br> Default: `false` | [Video](https://youtu.be/4ACfK_kByKY) |
 | **LDAP Settings** | Optional. Mobile ID server can connect to an LDAP(S) to validate user credentials and/or retrieve user attributes from the LDAP, such as:<br> - MFA mobile number attribute<br> - Mobile ID Serialnumber attribute (required for ACR mid_al4)<br> - User password attribute | |
 | **CNAME Record** | Optional. Mobile ID server can use a custom domain instead of default m.mobileid.ch. Custom Domains are only relevant if prompt=login is used. We will need your record name (e.g. mobileid.acme.com) that routes the traffic to m.mobileid.ch. | |
 
 You will get a unique OIDC client identifier and client secret from Swisscom.
 If you did not receive your client credentials, it means that your on-boarding process is not finished yet.
-Please check the state with your commercial contact or via **Backoffice.Security@swisscom.com**.
 
----
+Check the state with your commercial contact or via **Backoffice.Security@swisscom.com**.
 
 ## Endpoint URIs
 
 A default Mobile ID OpenID Provider configuration is published on the OIDC discovery endpoint, which allows a client to discover the OAuth 2.0 and OpenID Connect endpoints, capabilities, supported cryptographic algorithms and features.
 
-It is recommended to host a local copy of this file when your application relies on constant availability of this endpoint data.
+It is recommended to host a local copy of this file when your application relies on constant availability of this
+endpoint data.
 
 | Endpoint | URL |
 |-----------|-----|
 | Discovery | https://openid.mobileid.ch/.well-known/openid-configuration |
+
+Additional Endpoint URIs:
+
+| Endpoint | URL |
+|-----------|-----|
 | Authorization | https://m.mobileid.ch/oidc/authorize |
 | Token | https://openid.mobileid.ch/token |
 | User Info | https://openid.mobileid.ch/userinfo |
@@ -67,13 +72,13 @@ The following request query string parameters are supported:
 
 | Parameter | Value | Remarks |
 |-----------|-------|---------|
-| scope | MUST contain the value `openid` | Optionally, the client may request additional scopes as specified in 2.2.1 |
+| scope | MUST contain the value `openid` | Optionally, the client may request additional scopes as specified in [Scopes and Claims](/oidc/getting-started#scopes-and-claims) |
 | response_type | MUST be the value `code` | |
 | client_id | MUST be your client ID | |
 | redirect_uri | MUST be (one of) your redirect URI(s) | |
 | state | MUST be an opaque value | Used to maintain state between the request and the callback |
 | nonce | MUST be a nonce value | |
-| acr_values | CAN be set to overwrite the client's default ACR | Authentication Level (AL) required by the client (see 2.2.2) |
+| acr_values | CAN be set to overwrite the client's default ACR | Authentication Level (AL) required by the client (see [ACR](/oidc/getting-started#authentication-context-class-reference-acr)) |
 | response_mode | SHALL NOT be used | |
 | display | SHALL NOT be used | |
 | prompt | CAN be set to `login` | |
@@ -147,7 +152,7 @@ If a user has more than one authentication method available that comply with the
 | 3 | Unknown SIM card & Active Mobile ID App | Mobile ID App |
 | 4 | Unknown SIM card & Inactive Mobile ID App | AL2: One-Time-Password SMS<br>AL3: Mobile ID App (Account Recovery)<br>AL4: Mobile ID App (Account Recovery) |
 
-If your client attempts to request a scope that is not available with your current Mobile ID contract, an OIDC error `mid_sec_2020` ("unauthorized acr_values used in request", see chapter 2.10) is returned.
+If your client attempts to request a scope that is not available with your current Mobile ID contract, an OIDC error `mid_sec_2020` ("unauthorized acr_values used in request", see [Error Scheme](/oidc/getting-started#error-scheme)) is returned.
 
 Please check with your commercial contact or via Backoffice.Security@swisscom.com if you are interested in ACR values that are listed in the table above but currently not configured for your Mobile ID OIDC account.
 
@@ -201,7 +206,7 @@ Location: https://client.example.org/cb?
 
 ## Access Token Request
 
-The obtained authorization code (2.3) can be used to receive an access token. This chapter describes how to format the access token request and which data is returned from the access token endpoint.
+The obtained authorization code ([see here](/oidc/getting-started#authorization-code-response)) can be used to receive an access token. This chapter describes how to format the access token request and which data is returned from the access token endpoint.
 
 The OpenID Connect RFC states that there are 4 possible client authentication methods (used by clients to authenticate to the Authorization Server when using the Token Endpoint).
 
@@ -264,7 +269,7 @@ Authentication Method Reference (AMR) is an attribute within the OpenID Connect 
 | mid_sim   | ✓        |          |          |
 | mid_sms   | ✓        |          |          |
 
-The AMR can be helpful in case the client requests an ACR with an "any" value, such as `mid_al3_any` (see chapter 2.2.2). Since there are multiple authentication methods that comply with such ACR, the client will know from the AMR what authentication method the user actually used for the sign-in.
+The AMR can be helpful in case the client requests an ACR with an "any" value, such as `mid_al3_any` (see section [ACR](/oidc/getting-started#authentication-context-class-reference-acr)). Since there are multiple authentication methods that comply with such ACR, the client will know from the AMR what authentication method the user actually used for the sign-in.
 
 ### Example Access Token Response
 

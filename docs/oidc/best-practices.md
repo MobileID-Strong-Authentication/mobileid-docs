@@ -141,7 +141,7 @@ Tokens, especially Refresh Tokens, must be treated as credentials and stored sec
 
 There are test user accounts available for testing and debugging purpose.
 
-Please be aware, due to the strict phone number validation during the Mobile ID authorization flow, these test phone numbers will only be accepted by the Mobile ID server if they are provided via `log-in_hint` request parameter. However, your account must be authorized to use the `login_hint` parameter and requires the use of Pushed Authorisation Requests (PAR), which keeps the parameters confidential between client and server (see chapter 3.1).
+Please be aware, due to the strict phone number validation during the Mobile ID authorization flow, these test phone numbers will only be accepted by the Mobile ID server if they are provided via `log-in_hint` request parameter. However, your account must be authorized to use the `login_hint` parameter and requires the use of Pushed Authorisation Requests (PAR), which keeps the parameters confidential between client and server (see section [Pushed Authorization Request (PAR)](/oidc/best-practices#pushed-authorization-request-par) ).
 
 | MSISDN | Auth | Description |
 |--------|------|-------------|

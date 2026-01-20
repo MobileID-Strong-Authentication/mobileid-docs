@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Mobile ID docs"
+  name: "MobileID docs"
   text: ""
   tagline: welcome to Mobile ID developer hub
   actions:

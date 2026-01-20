@@ -1,7 +1,7 @@
 # Mobile ID API
 
 The **Mobile ID** service exposes a web API available via both **SOAP** and **RESTful (JSON)** interfaces.
-Refer to **Application Provider Client Integration** for a detailed description of these interfaces, including links to the corresponding **WSDL** and **YAML** files on GitHub that describe the service definitions.
+Refer to **[Application Provider Client Intergration](/reference-guide/app-provider-client-integration)** for a detailed description of these interfaces, including links to the corresponding **WSDL** and **YAML** files on GitHub that describe the service definitions.
 
 For your convenience, the RESTful API swagger documentation is also available here:
 [API Specification](/api-reference/api)
@@ -157,3 +157,10 @@ The following steps describe a typical **synchronous (MessagingMode="synch")** M
 
 8. **Access Decision by the AP**
    Based on the Mobile ID response, the **AP** may **grant** or **deny** access to the end‑user, depending on the authentication outcome.
+
+
+## MSS Status Query
+
+## MSS Receipt
+
+## MSS Profile Query

@@ -95,6 +95,7 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/MobileID-Strong-Authentication/' },
       { icon: 'youtube', link: 'https://www.youtube.com/@Mobile-ID/' },
+      { icon: 'linkedin', link: 'https://www.linkedin.com/company/25070712/' },
     ],
 
     search: {

@@ -3,16 +3,16 @@
 ## MobileID API Reference Guide
 
 <details>
-<summary>v1.0.0</summary>
+<summary>v3.12.0</summary>
 
 ### Version tbd
 
-Release Notes – Version v1.0.0
+Release Notes – Version v3.12.0
 
 **Release Date:** 19.01.2026
 
 #### 🚀 Overview
-Initial version - MobileID API Reference Guide
+Initial version - MobileID API Reference Guide available on docs.mobileid.ch
 
 </details>
 

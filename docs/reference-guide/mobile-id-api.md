@@ -1456,6 +1456,17 @@ If MimeType is TXN‑Approval but the payload isn’t valid, the server flags `I
 ## MSS Status Query
 In case of an asynchronous MSS Signature, the AP needs to poll the status of an on-going signature transaction by sending MSS Status Query requests.
 
+### Endpoint
+
+::: code-group
+```bash [REST]
+<Base‑URL>/rest/service/status
+```
+```bash [SOAP]
+<Base‑URL>/soap/services/MSS_StatusQueryPort
+```
+:::
+
 ### MSS Status Query Request
 With the MSS Status Query an AP can poll the final MSS Signature result. At this point in time, AP has received the MSS_SignatureResp with the `MSSP_TransID="h4iof"`. The AP must take the received `MSSP_TransID="h4iof"` and use it in the MSS_StatusReq.
 
@@ -1603,6 +1614,17 @@ A typical status code for this method is `504`, which means that the transaction
 An AP may use this operation after a successful mobile signature request to provide the End-User with a "receipt" that informs him of the mobile signature transaction status.
 However, only one receipt per successful signature transaction can be sent.
 Only synchronous Signature Receipts are supported. There is no support for asynchronous Signature Receipts.
+
+### Endpoint
+
+::: code-group
+```bash [REST]
+<Base‑URL>/rest/service/receipt
+```
+```bash [SOAP]
+<Base‑URL>/soap/services/MSS_ReceiptPort
+```
+:::
 
 
 ### Synchronous MSS Receipt
@@ -1829,7 +1851,16 @@ The AP can use a Profile Query request as depicted below.
 2.	MSSP checks the user status and signature capabilities
 3.	In case of an active user, it retrieves the Signature Profiles of the end-user and sends back an MSS_ProfileResp. Otherwise, if the user is not active, the server sends back a fault response that may contain additional details about the user status.
 
+### Endpoint
 
+::: code-group
+```bash [REST]
+<Base‑URL>/rest/service/profile
+```
+```bash [SOAP]
+<Base‑URL>/soap/services/MSS_ProfilePort
+```
+:::
 
 ###	MSS Profile Query Request
 

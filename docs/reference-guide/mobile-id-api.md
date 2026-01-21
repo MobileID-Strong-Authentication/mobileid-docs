@@ -36,6 +36,20 @@ The RESTful interface uses **JavaScript Object Notation (JSON)** as its media ty
 
 ## MSS Signature
 
+### Endpoint
+
+::: code-group
+```bash [REST]
+<Base‑URL>/rest/service/sign
+```
+```bash [SOAP]
+<Base‑URL>/soap/services/MSS_SignaturePort
+```
+:::
+
+
+
+
 ### Signature Profiles
 
 For every authentication request, an AP can select the SIM or App authentication method by selecting a specific SignatureProfile-value in the MSS Signature request.

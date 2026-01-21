@@ -378,6 +378,8 @@ This is an example fault response in case of an illegal MSISDN value. Each fault
 
 In the asynchronous mode, the AP initiates the signature request by calling MSS_Signature method and an acknowledgment response is sent back immediately by the MID to AP. The AP client then starts poll-ing using MSS_StatusQuery service to receive the response as depicted below.
 
+![async-mss-signature](/img/async-mss-signature.png)
+
 
 1.	End-User uses an application that sends an authentication request.
 2.	AP receives the request and sends an asynchronous MSS_SignatureReq request message to MSSP.
@@ -1592,7 +1594,7 @@ Only synchronous Signature Receipts are supported. There is no support for async
 ### Synchronous MSS Receipt
 In the synchronous mode, the AP initiates the receipt request by calling MSS_ReceiptReq, which is then blocked until the signature has been acknowledged, cancelled or the signing times out occurs. The picture depicted below, shows the successful case.
 
-**INSERT PICTURE**
+![sync-mss-receipt](/img/sync-mss-receipt.png)
 
 1.	For each successful MSS_SignatureResp the AP can request an MSS_ReceiptReq by passing the same MSSP_TransID and same MSISDN from the MSS_SignatureResp and defining message to be displayed to the End-User.
 2.	MID backend checks the credentials.
@@ -1807,7 +1809,7 @@ An AP may use this operation to check the Mobile ID status and signature capabil
 
 The AP can use a Profile Query request as depicted below.
 
-**INSERT PICTURE**
+![mss-profile-query](/img/mss-profile-query.png)
 
 1.	Before to send a signature request for authentication, the AP validates the status and signa-ture profile capabilities of a Mobile ID user by sending an MSS_ProfileReq request to Mobile ID
 2.	MSSP checks the user status and signature capabilities
@@ -1817,7 +1819,7 @@ The AP can use a Profile Query request as depicted below.
 
 ###	MSS Profile Query Request
 
-The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/moblie-id-api#mss-profile-query-request-extensions)).
+The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/mobile-id-api#mss-profile-query-request-extensions)).
 
 ::: code-group
 

@@ -1896,7 +1896,7 @@ Optional Profile Query Extension parameters can be set in the Profile Query requ
 
 ###	MSS Profile Query Response
 
-The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/moblie-id-api#mss-profile-query-request-extensions))
+The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/mobile-id-api#mss-profile-query-request-extensions))
 
 
 ::: code-group

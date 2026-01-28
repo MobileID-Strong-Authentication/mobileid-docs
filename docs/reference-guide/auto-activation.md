@@ -17,7 +17,7 @@ To enable the Auto Activation feature for an Application Provider (AP), the AP m
 
 An AP may use the Profile Query Extensions (see [Section MSS Profile Query](/reference-guide/mobile-id-api.html#mss-profile-query)) to know if a signature request to a user will invoke auto activation or not. However, an AP does not necessarily need to know that.
 
-Please speak to your Swisscom contact if you wish to get this feature enabled for your AP account. Op-tionally we can also setup specific test SIM cards, which allows an AP to test this feature (because those test SIM cards will be configured to always trigger the auto activation).
+Please speak to your Swisscom contact if you wish to get this feature enabled for your AP account. Optionally we can also setup specific test SIM cards, which allows an AP to test this feature (because those test SIM cards will be configured to always trigger the auto activation).
 
 
 ## User Perspective

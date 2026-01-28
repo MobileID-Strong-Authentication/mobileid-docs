@@ -122,9 +122,9 @@ The ETSI 102 204  standard has defined the MSS Signature and Swisscom supports b
 The MSS_Signature method is used to submit the mobile signature request message (MSS_SignatureReq). The result is provided within the signature response message (MSS_SignatureResp).
 The Mobile ID customer (AP) can decide to call either synchronous or asynchronous signature requests. There are different aspects to consider:
 
-- With the synchronous mode, the signature response is immediately processed by the AP after it has been made available by the Mobile ID Service, the overall authentication transaction will be faster. If an Application Provider intends to invoke many signature transactions of different users in parallel, it may require more memory because each thread is waiting for its comple-tion.
+- With the synchronous mode, the signature response is immediately processed by the AP after it has been made available by the Mobile ID Service, the overall authentication transaction will be faster. If an Application Provider intends to invoke many signature transactions of different users in parallel, it may require more memory because each thread is waiting for its completion.
 
-- With the asynchronous client-server mode, the Application Provider needs to implement a poll-ing mechanism (query the transaction status every x seconds until the signature is has been made available by the Mobile ID Service).
+- With the asynchronous client-server mode, the Application Provider needs to implement a polling mechanism (query the transaction status every x seconds until the signature is has been made available by the Mobile ID Service).
 
 
 
@@ -331,7 +331,7 @@ Note that `MinorVersion` value must be set to “2” in case of a REST/JSON req
 
 :::
 
-The `Base64Signature` content is a base 64 encoded CMS  (which is an extension of PKCS#7) signature object. It contains the DTBD message that has been signed by the SIM- or mobile application on the mobile device. In addition, it includes the mobile user certificate and all related intermediate certifi-cates. Therefore, the AP will always be able to fully validate the signature response.
+The `Base64Signature` content is a base 64 encoded CMS  (which is an extension of PKCS#7) signature object. It contains the DTBD message that has been signed by the SIM- or mobile application on the mobile device. In addition, it includes the mobile user certificate and all related intermediate certificates. Therefore, the AP will always be able to fully validate the signature response.
 Note that the response contains the signature profile value to indicate what authentication method was chosen, which is helpful in case the request signature profile was `http://mid.swisscom.ch/Any-LoA4`.
 
 
@@ -403,7 +403,7 @@ In the asynchronous mode, the AP initiates the signature request by calling MSS_
 6.	The mobile application (STK applet or Mobile App) prompts the End-User to enter the Mobile ID secret (PIN, passcode, biometry). End-User confirms with the correct secret and the application digitally signs the request and sends the signature back to the Mobile ID backend (MSSP).
 
 ::: info
-Meanwhile the AP sends MSS_StatusReq requests to MID. The MID replies with MSS_StatusResp  (sta-tus code “504 OUTSTANDING_TRANSACTION”, which means that the AP will need to call again the status method).
+Meanwhile the AP sends MSS_StatusReq requests to MID. The MID replies with MSS_StatusResp  (status code “504 OUTSTANDING_TRANSACTION”, which means that the AP will need to call again the status method).
 :::
 
 7.	Mobile ID backend (MSSP) receives the signature response.
@@ -618,7 +618,7 @@ Example usage (code snippet from the MSS Signature Request):
 
 #### Geofencing
 
-Geofencing is an optional service that enables Application Providers to define geographical boundaries. They can decide who can access what within that barrier, based on the user’s location data at the mo-ment of the Mobile ID authentication. This technology can help Application Providers to lock an applica-tion use to a specific geographic location and block any Mobile ID authentication requests outside of the fencing area.
+Geofencing is an optional service that enables Application Providers to define geographical boundaries. They can decide who can access what within that barrier, based on the user’s location data at the mo-ment of the Mobile ID authentication. This technology can help Application Providers to lock an application use to a specific geographic location and block any Mobile ID authentication requests outside of the fencing area.
 
 With the geofencing service, any authorized  Application Provider (AP) may request the user’s location data in an MSS Signature request.
 
@@ -712,7 +712,7 @@ In this case, the AP can request the Geofencing service as shown in the 1st exam
 | LocationConfidence | 0.85 | Float between 0 and 1.00 | A high location confidence means that we have a high trust in the user location data, which includes device confidence score in its calculation. The value 1.0 represents the highest possible trust. <br><br>Location confidence score is based on an internal calculation, which includes different checks such as mock service- and location spoofing detection, the age of the location data and the device confidence score. <br><br>For Mobile ID SIM authentication, the location confidence calculation incorporates the cell information age. <br><br>**Note**: The score will decrease every hour by 0.01 if location data is not up-to-date! Turning on and off the Device FlightMode feature will help to have up-to-date location data. <br><br>**Recommendation**: Typically, a location confidence of 0.7 or higher can be considered as a sufficient trust level. Please also refer to the table below. |
 | Timestamp | 2021-01-01T11:00:00.000+01:00 | formatting of yyyy-MM-dd'T'HH:mm:ss.SSS'Z' | The timestamp of the location information. <br><br>**Recommendation**: Mobile Session (registered cell) information or GPS location coordination may not be up-to-date and may require action from the mobile user. Turning on and off the Device FlightMode feature will help to have up-to-date location data. |
 
-**Recommendations** regarding Confidence Score checks: Usually it is sufficient if a client implements a minimum threshold check for the Location Confidence Score since the Location Confidence Score in-cludes the Device Confidence Score in its calculation. Here’s a rationale regarding the Location Confi-dence Score:
+**Recommendations** regarding Confidence Score checks: Usually it is sufficient if a client implements a minimum threshold check for the Location Confidence Score since the Location Confidence Score in-cludes the Device Confidence Score in its calculation. Here’s a rationale regarding the Location Confidence Score:
 
 
 ![confidence-score](/img/confidence-score.png)
@@ -734,7 +734,7 @@ Location Confidence Score too low:
 - ℹ️ User must uninstall any 3rd party app that use Mock Location capabilities
 
 Geofencing service limitations:
-- Geofencing information is given without any guarantee and with the exclusion of any legal lia-bility.
+- Geofencing information is given without any guarantee and with the exclusion of any legal liability.
 - At the time of writing only MobileID App or Swisscom Mobile ID SIM cards support location data.
 - For the MobileID App, the user must have the geofencing toggle enabled and location services permitted. Both Android and iOS App version 1.2.0 or higher support geofencing.
 
@@ -1052,17 +1052,17 @@ Geofencing service limitations:
 
 #### App to App -  Mobile Only Authentication
 
-We strongly recommend making use of this service if you intend to invoke the Mobile ID authentication from your own App. The Mobile ID App2App service allows an Application Provider to automatically switch from their App to the Mobile ID App (and the Mobile ID App to automatically switch back to the originating App) as shown in step 10 and 18 in the sequence below. This will greatly improve the usa-bility for the App user.
+We strongly recommend making use of this service if you intend to invoke the Mobile ID authentication from your own App. The Mobile ID App2App service allows an Application Provider to automatically switch from their App to the Mobile ID App (and the Mobile ID App to automatically switch back to the originating App) as shown in step 10 and 18 in the sequence below. This will greatly improve the usability for the App user.
 
 ![mobile-only-auth](/img/mobile-only-auth.png)
 
-1.	While being in the Application Provider App, the user performs an action that requires authentica-tion
+1.	While being in the Application Provider App, the user performs an action that requires authentication
 2.	The Application Provider App informs the Application Provider backend
 3.	Optional: The Application Provider backend can request the Mobile ID capabilities of the user
 4.	Optional: Mobile ID backend checks the user’s capabilities and provides the response
 5.	Optional: Application Provider gets all user details to know if the user has an active Mobile ID App
-6.	The Application Provider sends an asynchronous signature request that includes the App2App ser-vice request. The URI value of the Application Provider App is provided as RedirectURI parameter.
-7.	Mobile ID API responds immediately with a Signature Response, which contains the AuthURI pa-rameter. This is the URI value of the Mobile ID App.
+6.	The Application Provider sends an asynchronous signature request that includes the App2App service request. The URI value of the Application Provider App is provided as RedirectURI parameter.
+7.	Mobile ID API responds immediately with a Signature Response, which contains the AuthURI parameter. This is the URI value of the Mobile ID App.
 8.	The Application Provider App can either immediately trigger the Mobile ID App (step 8a) or display a button, which will trigger the Mobile ID App (step 8b)
 9.	The AuthURI is triggered by the Application Provider App
 10.	The Mobile ID App is automatically opened on the user’s smartphone
@@ -1120,7 +1120,7 @@ Best Practice Guidelines:
 - Both Android and iOS are supported for the automatic App2App switch
 - This service can only be used with the asynchronous MSS Signature. In case a synchronous MSS Signature with App2App service is attempted, Mobile ID API will respond with a fault (WRONG_PARAM).
 - In case this service is requested, there will be no Mobile ID push notification triggered. That’s because a push notification is not required if the Mobile ID App is automatically opened.
-- Please refer also to the official documentation from Apple  and Android  about how to im-plement custom URL schemes in your app
+- Please refer also to the official documentation from Apple  and Android  about how to implement custom URL schemes in your app
 
 
 ##### MSS Signature Request incl. App2App service
@@ -1338,7 +1338,7 @@ Approve/Cancel becomes active only after the user scrolls to the end if content 
 #### Calssic DTBD (single-line text)
 
 A single UTF‑8 string shown on the device. It is the format used throughout the guide’s MSS Signature examples. The classic DTBD must include the AP‑specific DTBD prefix (e.g., `Bank ACME:`) and is support-ed by both SIM and App methods.
-Keep the DTBD short. Maximum 239 characters; if any character falls outside the GSM 03.38 set, effec-tive maximum is 119 characters.
+Keep the DTBD short. Maximum 239 characters; if any character falls outside the GSM 03.38 set, effective maximum is 119 characters.
 
 Use `MimeType = "text/plain"` and place the “DTBD Prefix”.
 
@@ -1416,7 +1416,7 @@ Note: `type` is not signed. If the title/category matters for your process (e.g.
 "DataToBeSigned": {
   "MimeType": "application/vnd.mobileid.txn-approval",
   "Encoding": "UTF-8",
-  "Data": "{\"type\":\"Address Change Confirmation\",\"dtbd\":[{\"key\":\"Company\",\"value\":\"Acme AG\"},{\"key\":\"Full Name\",\"value\":\"Philipp Haupt\"},{\"key\":\"Old Ad-dress\",\"value\":\"Bahnhofstrasse 1, 8001 Zürich\"},{\"key\":\"New Address\",\"value\":\"Sihlquai 55, 8005 Zürich\"},{\"key\":\"Effective Date\",\"value\":\"01 June 2025\"},{\"key\":\"Consent Instruc-tion\",\"value\":\"Reply APPROVE to consent or CANCEL\"}]}"
+  "Data": "{\"type\":\"Address Change Confirmation\",\"dtbd\":[{\"key\":\"Company\",\"value\":\"Acme AG\"},{\"key\":\"Full Name\",\"value\":\"Philipp Haupt\"},{\"key\":\"Old Address\",\"value\":\"Bahnhofstrasse 1, 8001 Zürich\"},{\"key\":\"New Address\",\"value\":\"Sihlquai 55, 8005 Zürich\"},{\"key\":\"Effective Date\",\"value\":\"01 June 2025\"},{\"key\":\"Consent Instruction\",\"value\":\"Reply APPROVE to consent or CANCEL\"}]}"
 }
 
 ```
@@ -1847,7 +1847,7 @@ The AP can use a Profile Query request as depicted below.
 
 ![mss-profile-query](/img/mss-profile-query.png)
 
-1.	Before to send a signature request for authentication, the AP validates the status and signa-ture profile capabilities of a Mobile ID user by sending an MSS_ProfileReq request to Mobile ID
+1.	Before to send a signature request for authentication, the AP validates the status and signature profile capabilities of a Mobile ID user by sending an MSS_ProfileReq request to Mobile ID
 2.	MSSP checks the user status and signature capabilities
 3.	In case of an active user, it retrieves the Signature Profiles of the end-user and sends back an MSS_ProfileResp. Otherwise, if the user is not active, the server sends back a fault response that may contain additional details about the user status.
 
@@ -2048,7 +2048,7 @@ The lines highlighted in pink are optional Profile Query Extension parameters (s
   <soapenv:Body>
     <MSS_ProfileQueryResponse>
       <mss:MSS_ProfileResp xmlns:mss="http://uri.etsi.org/TS102204/v1.1.2#"
-                           xmlns:fi="http://mss.ficom.fi/TS102204/v1.0.0#" MajorVersion="2" MinorVer-sion="0">
+                           xmlns:fi="http://mss.ficom.fi/TS102204/v1.0.0#" MajorVersion="2" MinorVersion="0">
         <mss:AP_Info AP_ID="yourAP_ID" AP_PWD="not-needed" AP_TransID="REF0101120000"
              Instant="2015-01-01T12:00:00.000+01:00" xmlns:mss="http://uri.etsi.org/TS102204/v1.1.2#"
              xmlns:fi="http://mss.ficom.fi/TS102204/v1.0.0#"/>

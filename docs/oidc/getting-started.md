@@ -63,7 +63,7 @@ A button could look like this example:
 
 ![mobileid-button](/img/mobileid-button.png)
 
-A click on the button will redirect the user to the mobileid.ch domain, where (s)he can complete the authorization code flow. In the example screenshot below, the user enters the phone number, authen-ticates with the Mobile ID App and consents to the user information (phone number, current location) that was requested by the Relying Party “iDemo App”. Finally, the user is redirected back to the Rely-ing Party’s domain.
+A click on the button will redirect the user to the mobileid.ch domain, where (s)he can complete the authorization code flow. In the example screenshot below, the user enters the phone number, authen-ticates with the Mobile ID App and consents to the user information (phone number, current location) that was requested by the Relying Party “iDemo App”. Finally, the user is redirected back to the Relying Party’s domain.
 
 ![idemo-app-login](/img/idemo-app-login.png)
 
@@ -284,7 +284,7 @@ Content-Type: application/json
   "expires_in": 600
 }
 ```
-Note, the content of the access token is meant for consumption by the `/userinfo` endpoint where the client can give the token to get the user consented claim values. The access token is not meant to convey information to the client or be peeked into by the client, only to the accessed protected re-sources.
+Note, the content of the access token is meant for consumption by the `/userinfo` endpoint where the client can give the token to get the user consented claim values. The access token is not meant to convey information to the client or be peeked into by the client, only to the accessed protected resources.
 
 ## User Info Request
 

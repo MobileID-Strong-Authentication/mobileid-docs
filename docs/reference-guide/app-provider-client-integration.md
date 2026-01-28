@@ -1,6 +1,6 @@
-# Application Provider Client Integration
+# Application Provider Client Integration
 
-This chapter describes how an **Application Provider (AP)** integrates its backend with the **Swisscom Mobile ID signature service**. It covers the necessary preconditions, endpoint configuration, and use of **mutual TLS authentication**.
+This chapter describes how an **Application Provider (AP)** integrates its backend with the **Swisscom Mobile ID signature service**. It covers the necessary preconditions, endpoint configuration, and use of **mutual TLS authentication**.
 
 ## Preconditions
 
@@ -14,10 +14,10 @@ Before using the **Swisscom Mobile ID** web service, some initial provisioning s
 2. **The Mobile ID customer receives from Swisscom:**
    - An **AP_ID** (Application Provider Identifier) value.
    - A **DataToBeDisplayed (DTBD) Prefix** value:
-     - The DTBD Prefix is an AP‑specific keyword that must be included as a prefix in every Mobile ID request text message sent to a Mobile ID user (the message displayed on the user’s mobile phone).
+     - The DTBD Prefix is an AP‑specific keyword that must be included as a prefix in every Mobile ID request text message sent to a Mobile ID user (the message displayed on the user’s mobile phone).
      - **Example:** `"Bank ACME: "`
 
-## Endpoint Address
+## Endpoint Address
 
 The Swisscom Mobile ID web service is accessible through LAN-I  or Internet. If not otherwise specified use the following default access details.
 
@@ -85,11 +85,11 @@ A certificate-based mutual authentication when accessing the Mobile ID web servi
 - The **Enhanced Key Usage** value of client certificates must include **Client Authentication** (`1.3.6.1.5.5.7.3.2`).
   - See **[Create X509 Client Certificates](/reference-guide/create-client-certs.md)** for examples of creating self‑signed certificates.
 
-- All requests to the **Mobile ID service** must originate **only** from servers that you control.
+- All requests to the **Mobile ID service** must originate **only** from servers that you control.
   - Never send requests directly from client‑side code such as **mobile apps** or **JavaScript**, as this may compromise your credentials.
 
-- To validate the **chain of trust** for the Mobile ID server certificate:
-  - Add the **SwissSign Gold CA – G2** root certificate to your client **TrustStore**.
+- To validate the **chain of trust** for the Mobile ID server certificate:
+  - Add the **SwissSign Gold CA – G2** root certificate to your client **TrustStore**.
   - The intermediate CAs are returned dynamically by the MID server and may change.
 
 ::: info

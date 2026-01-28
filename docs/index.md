@@ -25,7 +25,7 @@ features:
     icon:
       src: /img/icon-security.svg
       class: feature-icon-security
-    details: Follow this guide to integrate Mobile ID into your application through the OpenID Connect (OIDC) standard.
+    details: Follow this guide to integrate Mobile ID into your application through the OpenID Connect (OIDC) standard.
     link: /oidc/introduction
   - title: Release Notes
     icon:

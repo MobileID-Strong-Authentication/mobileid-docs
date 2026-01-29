@@ -2,8 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: ' ',
-  titleTemplate: ':title | Mobile ID Documentation',
+  title: 'Mobile ID Documentation',
   description: 'Technical documentation for Mobile ID integration',
   base: '/',
   lastUpdated: true,

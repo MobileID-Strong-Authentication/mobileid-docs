@@ -16,4 +16,4 @@ Amazon Cognito lets you add user sign-up, sign-in, and access control to your we
 
 This article explains how to integrate user sign-in with an OpenID Connect IdP such as Mobile-ID.
 
-![use-case-promt-user-credentials](/img/use-case-promt-user-credentials.png)
+![use-case-prompt-user-credentials](/img/use-case-prompt-user-credentials.png)

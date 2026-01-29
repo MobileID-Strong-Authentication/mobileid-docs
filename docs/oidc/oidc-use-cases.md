@@ -10,7 +10,7 @@ If the request does not contain a `login_hint` nor `prompt` parameter, the resul
 
 ## RP knows the MSISDN
 
-If the request contains a `login_hint` parameter with the user's phone number, the MobileID authenti-cation can start immediately.
+If the request contains a `login_hint` parameter with the user's phone number, the MobileID authentication can start immediately.
 
 ![use-case-msisdn-rp-knows](/img/use-case-msisdn-rp-knows.png)
 

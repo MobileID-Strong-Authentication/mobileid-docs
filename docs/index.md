@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "MobileID docs"
   text: ""
-  tagline: welcome to Mobile ID developer hub
+  tagline: Welcome to Mobile ID developer hub
   actions:
     - theme: brand
       text: API Reference Guide

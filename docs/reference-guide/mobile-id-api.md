@@ -578,7 +578,7 @@ Note that `MinorVersion` value must be set to “2” in case of a REST/JSON req
 
 Note that the response contains the signature profile value to indicate what authentication method was chosen, which is helpful in case the request signature profile was `http://mid.swisscom.ch/Any-LoA4`.
 
-### Additinal Services (AS)
+### Additional Services (AS)
 The **MSS Signature** supports additional services that may be requested in the request message. Some of them are mandatory and some are optional.
 
 #### User Language
@@ -1313,7 +1313,7 @@ Best Practice Guidelines:
 :::
 
 
-### Message Formats on the Moblie ID App
+### Message Formats on the Mobile ID App
 
 Mobile ID App screens can present the Data-To-Be-Displayed (DTBD) in two formats.
 Use **Classic DTBD** for short confirmations and when you must support SIM users. Keep messages concise and always include the “DTBD Prefix” (refer to chapter 2.1).
@@ -1862,7 +1862,7 @@ The AP can use a Profile Query request as depicted below.
 ```
 :::
 
-###	MSS Profile Query Request
+### MSS Profile Query Request
 
 The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/mobile-id-api#mss-profile-query-request-extensions)).
 
@@ -1939,7 +1939,7 @@ Optional Profile Query Extension parameters can be set in the Profile Query requ
 | `carddetails` | Mobile ID SIM card details, for example the Mobile Network Operator |
 
 
-###	MSS Profile Query Response
+### MSS Profile Query Response
 
 The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/mobile-id-api#mss-profile-query-request-extensions))
 

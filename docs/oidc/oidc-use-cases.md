@@ -29,6 +29,6 @@ Instead of the MobileID domain (m.mobileid.ch), we can configure your custom dom
 
 If the request contains a `login_hint` parameter set to `useLDAP:true` but there is no `prompt` parameter, the result will be that the MobileID service will look up the username on the Active Directory (LDAP) to retrieve the user's mobile phone number, before it will eventually start the MobileID authentication.
 
-![use-case-promt-user-credentials](/img/use-case-promt-user-credentials.png)
+![use-case-prompt-user-credentials](/img/use-case-prompt-user-credentials.png)
 
 

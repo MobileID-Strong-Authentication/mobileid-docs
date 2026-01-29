@@ -6,7 +6,8 @@ export default defineConfig({
   description: 'Technical documentation for Mobile ID integration',
   base: '/',
   lastUpdated: true,
-  appearance: false,
+  // Enable the built-in light/dark appearance switch in the navbar
+  appearance: true,
 
   head: [['link', { rel: 'icon', href: '/mobileid.svg' }]],
 

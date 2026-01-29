@@ -8,6 +8,17 @@
 
   /* Increase max width for better use of screen space */
   --vp-layout-max-width: 1600px;
+
+  /* Kleinere Schrift wie bei beem docs */
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Reduziere oberen Abstand */
+@media (min-width: 960px) {
+  .VPDoc {
+    padding-top: 24px !important;
+  }
 }
 
 /* Make content container wider */

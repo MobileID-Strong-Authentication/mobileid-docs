@@ -35,6 +35,10 @@ features:
     link: /release-notes/release-notes
 ---
 
-::: info
-Work in Progress: We're actively building and refining this documentation. Check back regularly for the latest updates and improvements.
-:::
+<div class="vp-doc">
+
+<div class="wip-banner">
+  <strong>Work in Progress:</strong> We're actively building and refining this documentation. Check back regularly for the latest updates and improvements.
+</div>
+
+</div>

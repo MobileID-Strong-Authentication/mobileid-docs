@@ -10,11 +10,6 @@
   --vp-layout-max-width: 1600px;
 }
 
-/* Hide the site title text in navbar, keep only the logo */
-.VPNavBarTitle .title {
-  display: none !important;
-}
-
 /* Make content container wider */
 .VPDoc.has-aside .content-container {
   max-width: 100% !important;

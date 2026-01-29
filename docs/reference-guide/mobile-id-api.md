@@ -1,7 +1,7 @@
 # Mobile ID API
 
-The **Mobile ID** service exposes a web API available via both **SOAP** and **RESTful (JSON)** interfaces.
-Refer to **[Application Provider Client Intergration](/reference-guide/app-provider-client-integration)** for a detailed description of these interfaces, including links to the corresponding **WSDL** and **YAML** files on GitHub that describe the service definitions.
+The Mobile ID service exposes a web API available via both SOAP and RESTful (JSON) interfaces.
+Refer to [Application Provider Client Integration](/reference-guide/app-provider-client-integration) for a detailed description of these interfaces, including links to the corresponding WSDL and YAML files on GitHub that describe the service definitions.
 
 For your convenience, the RESTful API swagger documentation is also available here:
 [API Specification](/api-reference/api)
@@ -11,8 +11,8 @@ For your convenience, the RESTful API swagger documentation is also available he
 
 ### HTTP Request
 
-You can send **signature requests** using the **HTTP/1.1 POST** method over either the SOAP or RESTful interface.
-The RESTful interface uses **JavaScript Object Notation (JSON)** as its media type.
+You can send signature requests using the HTTP/1.1 POST method over either the SOAP or RESTful interface.
+The RESTful interface uses JavaScript Object Notation (JSON) as its media type.
 
 **Required HTTP Header Fields:**
 
@@ -24,15 +24,15 @@ The RESTful interface uses **JavaScript Object Notation (JSON)** as its media ty
 
 ### HTTP Response
 
-- If the request **succeeds**, the **Mobile ID** server responds with:
+- If the request succeeds, the Mobile ID server responds with:
   `HTTP/1.1 200 OK`
 
-- If an **error** occurs while processing the request (for example: `USER_CANCEL`, `EXPIRED_TRANSACTION`, `UNKNOWN_CLIENT`, etc. — see **[Status and Fault Codes](/reference-guide/status-fault-codes)**),
+- If an error occurs while processing the request (for example: `USER_CANCEL`, `EXPIRED_TRANSACTION`, `UNKNOWN_CLIENT`, etc. — see **[Status and Fault Codes](/reference-guide/status-fault-codes)**),
   the Mobile ID server responds with:
   `HTTP/1.1 500 Internal Server Error`
 
-  The response will include a message containing a **Fault element** that describes the processing error.
-  This behavior applies to **both the SOAP and RESTful** interfaces.
+  The response will include a message containing a Fault element that describes the processing error.
+  This behavior applies to both the SOAP and RESTful interfaces.
 
 ## MSS Signature
 
@@ -40,10 +40,10 @@ The RESTful interface uses **JavaScript Object Notation (JSON)** as its media ty
 
 ::: code-group
 ```bash [REST]
-<Base‑URL>/rest/service/sign
+<Base-URL>/rest/service/sign
 ```
 ```bash [SOAP]
-<Base‑URL>/soap/services/MSS_SignaturePort
+<Base-URL>/soap/services/MSS_SignaturePort
 ```
 :::
 
@@ -64,7 +64,7 @@ This will give all the required flexibility for an AP to handle different use ca
 | `http://mid.swisscom.ch/Any-LoA4` | Mobile ID backend will automatically choose **SIM** or **App** authentication based on the user’s configured methods:<br>– The **SIM** method is always preferred.<br>– The **App** method is only selected if it is the *only* active method for that user.<br><br>As shown in **Section 3.2.1.1**, the response will indicate which authentication method was chosen. | By default, an AP is **not authorized** to use this profile.<br>Please contact **Swisscom** if you intend to use it. |
 | `http://mid.swisscom.ch/STK-LoA4` | Forces **SIM authentication** method. | By default, an AP is **not authorized** to use this profile.<br>Please ask **Swisscom** if you intend to use it. |
 | `http://mid.swisscom.ch/Device-LoA4` | Forces **App authentication** method. | By default, an AP is **not authorized** to use this profile.<br>Please ask **Swisscom** if you intend to use it. |
-| `http://mid.swisscom.ch/Any-Geofencing-LoA4` | Mobile ID backend will choose **SIM** or **App** authentication based on both the user’s authentication and **geo‑location** capabilities:<br>– **SIM** method is preferred but only if the SIM has geo‑location capabilities (Swisscom SIM only).<br>– **App** method is selected if it is the only active method for that user, or if the user’s SIM lacks geo‑location capabilities. | By default, an AP is **not authorized** to use this profile.<br>The AP must have **Geofencing Additional Service** permission.<br>Please ask **Swisscom** if you intend to use it. |
+| `http://mid.swisscom.ch/Any-Geofencing-LoA4` | Mobile ID backend will choose **SIM** or **App** authentication based on both the user’s authentication and **geo-location** capabilities:<br>– **SIM** method is preferred but only if the SIM has geo-location capabilities (Swisscom SIM only).<br>– **App** method is selected if it is the only active method for that user, or if the user’s SIM lacks geo-location capabilities. | By default, an AP is **not authorized** to use this profile.<br>The AP must have **Geofencing Additional Service** permission.<br>Please ask **Swisscom** if you intend to use it. |
 
 ---
 
@@ -78,14 +78,14 @@ The table below illustrates several example user scenarios and how the **MSSP** 
 Please note that these examples are **illustrative**, not exhaustive.
 
 
-#### AP confiugration example
+#### AP configuration example
 
-- The **AP** is authorized to use **all** signature profiles.
-- The **AP** has a **signature profile mapping** configured so that an incoming signature profile
+- The AP is authorized to use all signature profiles.
+- The AP has a signature profile mapping configured so that an incoming signature profile
   `http://mid.swisscom.ch/MID/v1/AuthProfile1`
   is mapped internally to
   `http://mid.swisscom.ch/Any-LoA4`.
-- These examples may **not apply** to every AP configuration;
+- These examples may not apply to every AP configuration;
   some APs may not be authorized to use all signature profiles,
   and others may not have a mapping configured.
 
@@ -113,34 +113,34 @@ Please note that these examples are **illustrative**, not exhaustive.
 
 **Note:**
 An AP can use the **MSS Profile Query** request (see **[MSS Profile Query](/reference-guide/mobile-id-api#mss-profile-query)**) to determine a user’s capabilities.
-For example, to check whether a particular user supports **SIM** and/or **App**‑based authentication before sending the signature request.
+For example, to check whether a particular user supports **SIM** and/or **App**-based authentication before sending the signature request.
 
 
 ### Signature Messaging Mode
 
-The ETSI 102 204  standard has defined the MSS Signature and Swisscom supports both synchronous and asynchronous (client-server) modes .
+The ETSI 102 204 standard has defined the MSS Signature and Swisscom supports both synchronous and asynchronous (client-server) modes.
 The MSS_Signature method is used to submit the mobile signature request message (MSS_SignatureReq). The result is provided within the signature response message (MSS_SignatureResp).
 The Mobile ID customer (AP) can decide to call either synchronous or asynchronous signature requests. There are different aspects to consider:
 
-- With the synchronous mode, the signature response is immediately processed by the AP after it has been made available by the Mobile ID Service, the overall authentication transaction will be faster. If an Application Provider intends to invoke many signature transactions of different users in parallel, it may require more memory because each thread is waiting for its completion.
+- With the synchronous mode, the signature response is immediately processed by the AP after it has been made available by the Mobile ID Service, making the overall authentication transaction faster. If an Application Provider intends to invoke many signature transactions of different users in parallel, it may require more memory because each thread is waiting for its completion.
 
-- With the asynchronous client-server mode, the Application Provider needs to implement a polling mechanism (query the transaction status every x seconds until the signature is has been made available by the Mobile ID Service).
+- With the asynchronous client-server mode, the Application Provider needs to implement a polling mechanism (query the transaction status every x seconds until the signature has been made available by the Mobile ID Service).
 
 
 
 ### Synchronous MSS Signature
 
-The following steps describe a typical **synchronous (MessagingMode="synch")** Mobile ID authentication transaction:
+The following steps describe a typical synchronous (MessagingMode="synch") Mobile ID authentication transaction:
 
 ![synchronous-mss-signature](/img/synchronous-mss-signature.png)
 
 
-1. **End‑User Action**
-   The end‑user uses an application that initiates an authentication request.
+1. **End-User Action**
+   The end-user uses an application that initiates an authentication request.
 
 2. **Application Provider (AP) Request**
-   The **AP** receives the authentication request and sends an
-   **`MSS_SignatureReq`** message with parameter **`MessagingMode="synch"`** to the **MSSP** (Mobile ID backend).
+   The AP receives the authentication request and sends an
+   `MSS_SignatureReq` message with parameter `MessagingMode="synch"` to the MSSP (Mobile ID backend).
 
 3. **AP Credential Validation**
    The **Mobile ID backend (MSSP)** validates the **AP’s credentials** and verifies its authorization.
@@ -149,21 +149,21 @@ The following steps describe a typical **synchronous (MessagingMode="synch")** M
    The **Mobile ID backend** sends a signature request to the mobile device — either to the **SIM (STK applet)** or to the **Mobile ID App**, depending on the user’s configured method.
 
 5. **User Authentication & Digital Signature**
-   The **Mobile ID application** on the mobile device prompts the user to enter their **Mobile ID secret** (PIN, passcode, or biometric factor).
+   The Mobile ID application on the mobile device prompts the user to enter their Mobile ID secret (PIN, passcode, or biometric factor).
    - The user confirms with the correct secret.
-   - The mobile application **digitally signs** the authentication payload.
-   - The resulting **digital signature** is returned to the Mobile ID backend (**MSSP**).
+   - The mobile application digitally signs the authentication payload.
+   - The resulting digital signature is returned to the Mobile ID backend (MSSP).
 
 6. **Signature Response Received**
-   The **MSSP** receives the signature response and processes it.
+   The MSSP receives the signature response and processes it.
 
 7. **Response to Application Provider**
    The **Mobile ID backend** returns a **complete response** to the **AP**, containing:
    - The **digital signature**, and
-   - The **certificate** that includes the end‑user’s public key.
+   - The **certificate** that includes the end-user’s public key.
 
 8. **Access Decision by the AP**
-   Based on the Mobile ID response, the **AP** may **grant** or **deny** access to the end‑user, depending on the authentication outcome.
+   Based on the Mobile ID response, the AP may grant or deny access to the end-user, depending on the authentication outcome.
 
 
 #### Synchronous MSS Signature Request
@@ -578,7 +578,7 @@ Note that `MinorVersion` value must be set to “2” in case of a REST/JSON req
 
 Note that the response contains the signature profile value to indicate what authentication method was chosen, which is helpful in case the request signature profile was `http://mid.swisscom.ch/Any-LoA4`.
 
-### Additinal Services (AS)
+### Additional Services (AS)
 The **MSS Signature** supports additional services that may be requested in the request message. Some of them are mandatory and some are optional.
 
 #### User Language
@@ -618,7 +618,7 @@ Example usage (code snippet from the MSS Signature Request):
 
 #### Geofencing
 
-Geofencing is an optional service that enables Application Providers to define geographical boundaries. They can decide who can access what within that barrier, based on the user’s location data at the mo-ment of the Mobile ID authentication. This technology can help Application Providers to lock an application use to a specific geographic location and block any Mobile ID authentication requests outside of the fencing area.
+Geofencing is an optional service that enables Application Providers to define geographical boundaries. They can decide who can access what within that barrier, based on the user’s location data at the moment of the Mobile ID authentication. This technology can help Application Providers to lock an application use to a specific geographic location and block any Mobile ID authentication requests outside of the fencing area.
 
 With the geofencing service, any authorized  Application Provider (AP) may request the user’s location data in an MSS Signature request.
 
@@ -1068,7 +1068,7 @@ We strongly recommend making use of this service if you intend to invoke the Mob
 10.	The Mobile ID App is automatically opened on the user’s smartphone
 11.	The Mobile ID backend invokes the authentication request on the Mobile ID App
 12.	The Mobile ID authentication message is shown on the Mobile ID App
-13.	The user confirms the authentication request with his 2nd factor (Passcode or Biometry)
+13.	The user confirms the authentication request with their 2nd factor (Passcode or Biometry)
 14.	The Mobile ID App signs the message with the private key stored on the device
 15.	The Mobile ID App sends the signed data (signature) to the Mobile ID backend
 16.	The Mobile ID backend completes the transaction
@@ -1313,13 +1313,13 @@ Best Practice Guidelines:
 :::
 
 
-### Message Formats on the Moblie ID App
+### Message Formats on the Mobile ID App
 
-Mobile ID App screens can present the Data‑To‑Be‑Displayed (DTBD) in two formats.
+Mobile ID App screens can present the Data-To-Be-Displayed (DTBD) in two formats.
 Use **Classic DTBD** for short confirmations and when you must support SIM users. Keep messages concise and always include the “DTBD Prefix” (refer to chapter 2.1).
 Use **Transaction Approval** when readability matters (e.g., PSD2 payments, contract consent, step up login verification). Force the App method with Device LoA4, keep within byte limits, and generate the escaped JSON programmatically.
 
-1. Classic DTBD (single text line) uses plain UTF‑8 string that is also signed (DTBS).
+1. Classic DTBD (single text line) uses plain UTF-8 string that is also signed (DTBS).
 
 Supported by SIM and App methods.
 
@@ -1328,7 +1328,7 @@ Length limited and no formatting options.
 ![app-display-utf8](/img/app-display-utf8.png)
 
 
-2.	Transaction Approval (key/value pairs) is a structured App‑only format that renders a title (type) and one or more key and value rows for improved readability.
+2.	Transaction Approval (key/value pairs) is a structured App-only format that renders a title (type) and one or more key and value rows for improved readability.
 
 Approve/Cancel becomes active only after the user scrolls to the end if content exceeds one screen.
 
@@ -1337,8 +1337,8 @@ Approve/Cancel becomes active only after the user scrolls to the end if content 
 
 #### Calssic DTBD (single-line text)
 
-A single UTF‑8 string shown on the device. It is the format used throughout the guide’s MSS Signature examples. The classic DTBD must include the AP‑specific DTBD prefix (e.g., `Bank ACME:`) and is support-ed by both SIM and App methods.
-Keep the DTBD short. Maximum 239 characters; if any character falls outside the GSM 03.38 set, effective maximum is 119 characters.
+A single UTF-8 string shown on the device. It is the format used throughout the guide’s MSS Signature examples. The classic DTBD must include the AP-specific DTBD prefix (e.g., `Bank ACME:`) and is support-ed by both SIM and App methods.
+Keep the DTBD short. Maximum 239 characters; if any character falls outside the GSM 03.38 set, effec-tive maximum is 119 characters.
 
 Use `MimeType = "text/plain"` and place the “DTBD Prefix”.
 
@@ -1372,11 +1372,11 @@ Use `MimeType = "text/plain"` and place the “DTBD Prefix”.
 
 A structured DTBD that the Mobile ID App renders as a title and rows of key/value pairs. If content overflows, the user must scroll to the bottom; only then are Approve/Cancel enabled.
 
-SIM does not support this format. Always select an App profile (e.g., `Device‑LoA4`).
+SIM does not support this format. Always select an App profile (e.g., `Device-LoA4`).
 
 **Rules:**
 - MimeType: `application/vnd.mobileid.txn-approval`
-- Payload structure (DataToBeSigned.Data): A single‑line JSON string (escaped) with:
+- Payload structure (DataToBeSigned.Data): A single-line JSON string (escaped) with:
 
 
 ```json
@@ -1436,8 +1436,8 @@ Note: `type` is not signed. If the title/category matters for your process (e.g.
 
 :::
 
-Tip: Generate the escaped string programmatically (e.g. `JSON.stringify` / `json.dumps` / `jq -c`) and never hand‑craft escapes.
-If MimeType is TXN‑Approval but the payload isn’t valid, the server flags `INVALID_TXNAPPROVAL_PAYLOAD` and can return a Fault.
+Tip: Generate the escaped string programmatically (e.g. `JSON.stringify` / `json.dumps` / `jq -c`) and never hand-craft escapes.
+If MimeType is TXN-Approval but the payload isn’t valid, the server flags `INVALID_TXNAPPROVAL_PAYLOAD` and can return a Fault.
 
 **Side by side comparison:**
 
@@ -1454,16 +1454,16 @@ If MimeType is TXN‑Approval but the payload isn’t valid, the server flags `I
 
 
 ## MSS Status Query
-In case of an asynchronous MSS Signature, the AP needs to poll the status of an on-going signature transaction by sending MSS Status Query requests.
+In case of an asynchronous MSS Signature, the AP needs to poll the status of an ongoing signature transaction by sending MSS Status Query requests.
 
 ### Endpoint
 
 ::: code-group
 ```bash [REST]
-<Base‑URL>/rest/service/status
+<Base-URL>/rest/service/status
 ```
 ```bash [SOAP]
-<Base‑URL>/soap/services/MSS_StatusQueryPort
+<Base-URL>/soap/services/MSS_StatusQueryPort
 ```
 :::
 
@@ -1619,10 +1619,10 @@ Only synchronous Signature Receipts are supported. There is no support for async
 
 ::: code-group
 ```bash [REST]
-<Base‑URL>/rest/service/receipt
+<Base-URL>/rest/service/receipt
 ```
 ```bash [SOAP]
-<Base‑URL>/soap/services/MSS_ReceiptPort
+<Base-URL>/soap/services/MSS_ReceiptPort
 ```
 :::
 
@@ -1855,14 +1855,14 @@ The AP can use a Profile Query request as depicted below.
 
 ::: code-group
 ```bash [REST]
-<Base‑URL>/rest/service/profile
+<Base-URL>/rest/service/profile
 ```
 ```bash [SOAP]
-<Base‑URL>/soap/services/MSS_ProfilePort
+<Base-URL>/soap/services/MSS_ProfilePort
 ```
 :::
 
-###	MSS Profile Query Request
+### MSS Profile Query Request
 
 The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/mobile-id-api#mss-profile-query-request-extensions)).
 
@@ -1939,7 +1939,7 @@ Optional Profile Query Extension parameters can be set in the Profile Query requ
 | `carddetails` | Mobile ID SIM card details, for example the Mobile Network Operator |
 
 
-###	MSS Profile Query Response
+### MSS Profile Query Response
 
 The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/mobile-id-api#mss-profile-query-request-extensions))
 

@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "MobileID docs"
+  name: "Mobile ID docs"
   text: ""
-  tagline: welcome to Mobile ID developer hub
+  tagline: seamless strong multi-factor authentication
   actions:
     - theme: brand
       text: API Reference Guide
@@ -35,6 +35,10 @@ features:
     link: /release-notes/release-notes
 ---
 
-::: info
-Work in Progress: We're actively building and refining this documentation. Check back regularly for the latest updates and improvements.
-:::
+<div class="vp-doc">
+
+<div class="wip-banner">
+  <strong>Work in Progress: We're actively building this documentation. Check back regularly for the latest updates.</strong> 
+</div>
+
+</div>

@@ -3,21 +3,80 @@
   --vp-c-brand-1: #4e5353;
   --vp-c-brand-2: #029994; /* #009490 */
   --vp-c-brand-3: #009490;
-  --vp-font-family-base: 'Swisscom Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --vp-font-family-heading: 'Swisscom Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* System fonts wie bei modernen Webseiten - ohne externe Font-Dateien */
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  --vp-font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 
+  /* Increase max width for better use of screen space */
+  --vp-layout-max-width: 1600px;
+
+  /* Kleinere Schrift wie bei beem docs */
+  font-size: 15px;
+  line-height: 1.6;
 }
 
+/* Leichtere Schrift für Body-Text - explizit 300 für dünnere Darstellung */
+body {
+  font-weight: 300;
+}
+
+/* Content-Bereich ebenfalls leichter */
+.vp-doc p,
+.vp-doc li,
+.vp-doc td {
+  font-weight: 300;
+}
+
+/* Headings etwas stärker für Kontrast */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4 {
+  font-weight: 600;
+}
+
+/* Reduziere oberen Abstand */
+@media (min-width: 960px) {
+  .VPDoc {
+    padding-top: 24px !important;
+  }
+}
+
+/* Make content container wider */
+.VPDoc.has-aside .content-container {
+  max-width: 100% !important;
+}
+
+.vp-doc {
+  max-width: 1200px !important;
+}
+
+/* Improve table responsiveness */
+.vp-doc table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 1em 0;
+}
+
+.vp-doc table th,
+.vp-doc table td {
+  white-space: normal;
+  word-wrap: break-word;
+  min-width: 100px;
+}
+
+/* Dark mode: use VitePress defaults (close to beem) */
 .dark {
-  --vp-c-bg: #515151;
-  --vp-c-bg-alt: #515151;
-  --vp-c-bg-elv: #515151;
-  --vp-c-bg-soft: #515151;
+  --vp-c-bg: #1b1b1f;
+  --vp-c-bg-alt: #161618;
+  --vp-c-bg-elv: #202127;
+  --vp-c-bg-soft: #202127;
 }
 
 /* Dark mode override #3a3a3a */
 html.dark img.feature-icon-info {
-  content: url("/public/img/icon-info-light.svg");
+  content: url("/img/icon-info-light.svg");
 }
 
 html.dark img.feature-icon-security {
@@ -31,9 +90,162 @@ html.dark img.feature-icon-notes {
 
 /* Or for more specific control */
 .VPContent.VPContent.is-home {
-  background-image: url('/img/background-4.png');
+  background-image: url('/img/background-home.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed; /* keep it fixed while scrolling */
   background-position: center center;
+}
+
+/* beem-like: navbar readable over a photo background */
+.VPNavBar {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+html.dark .VPNavBar {
+  background-color: rgba(26, 26, 26, 0.85) !important;
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.06);
+}
+
+/* beem-like: home section spacing */
+.VPHome {
+  min-height: 100vh;
+}
+
+.VPHome,
+.VPHome .VPContent {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* beem-like: improve home hero readability */
+.VPHome .tagline {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+.VPHome .name,
+.VPHome .text {
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* beem-like: consistent rounding */
+.VPButton,
+.VPFeature {
+  border-radius: 8px !important;
+}
+
+/* Frosted-glass callouts on the home page (beem-like readability) */
+.VPContent.is-home .vp-doc .custom-block {
+  background-color: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+html.dark .VPContent.is-home .vp-doc .custom-block {
+  background-color: rgba(18, 18, 18, 0.55);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* beem-like WIP banner (custom HTML block) */
+.VPContent.is-home .wip-banner {
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  line-height: 1.6;
+
+  /* frosted glass (similar to beem docs) */
+  background-color: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  border-left: 4px solid var(--vp-c-brand-2);
+  color: rgba(17, 17, 19, 0.88);
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  max-width: var(--vp-layout-max-width);
+  padding-left: calc(var(--vp-layout-max-width) / 20);
+  padding-right: calc(var(--vp-layout-max-width) / 20);
+}
+
+html.dark .VPContent.is-home .wip-banner {
+  background-color: rgba(31, 31, 31, 0.62);
+  color: #eee;
+}
+
+/* beem-like: appearance toggle styling */
+:root {
+  --mid-switch-border: rgba(60, 60, 67, 0.18);
+  --mid-switch-bg: rgba(255, 255, 255, 0.55);
+  --mid-switch-bg-hover: rgba(255, 255, 255, 0.70);
+  --mid-switch-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+html.dark {
+  --mid-switch-border: rgba(255, 255, 255, 0.14);
+  --mid-switch-bg: rgba(31, 31, 31, 0.55);
+  --mid-switch-bg-hover: rgba(31, 31, 31, 0.70);
+  --mid-switch-shadow: 0 1px 4px rgba(255, 255, 255, 0.06);
+}
+
+/* VitePress default switch: `.VPSwitch` + `.check` */
+.VPSwitchAppearance {
+  border-color: var(--mid-switch-border) !important;
+  background-color: var(--mid-switch-bg) !important;
+  box-shadow: var(--mid-switch-shadow);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.VPSwitchAppearance:hover {
+  background-color: var(--mid-switch-bg-hover) !important;
+  border-color: var(--vp-c-brand-1) !important;
+}
+
+.VPSwitchAppearance .check {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
+}
+
+html.dark .VPSwitchAppearance .check {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* Fix: keep sidebar width constant across desktop breakpoints.
+   VitePress widens/narrows sidebar/title at >=1440px using a calc() that can
+   shrink when --vp-layout-max-width is larger than the viewport (e.g. 1600px).
+*/
+@media (min-width: 1440px) {
+  .VPSidebar.VPSidebar {
+    width: var(--vp-sidebar-width) !important;
+    max-width: var(--vp-sidebar-width) !important;
+    padding-left: 32px !important;
+  }
+
+  .VPNavBar.has-sidebar .title.title {
+    width: var(--vp-sidebar-width) !important;
+    padding-left: 32px !important;
+  }
+
+  .VPNavBar.has-sidebar .content.content {
+    padding-left: var(--vp-sidebar-width) !important;
+    padding-right: 32px !important;
+  }
+}
+
+/* beem-like: smoother icons */
+.VPSwitchAppearance .icon [class^='vpi-'] {
+  transition: opacity 0.18s ease, color 0.18s ease;
+  color: rgba(60, 60, 67, 0.68);
+}
+
+html.dark .VPSwitchAppearance .icon [class^='vpi-'] {
+  color: rgba(223, 223, 214, 0.85);
 }

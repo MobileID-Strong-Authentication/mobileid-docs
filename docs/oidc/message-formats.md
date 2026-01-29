@@ -1,12 +1,12 @@
 # Message Formats on the Mobile ID App
 
-Mobile ID App screens can present the Data‑To‑Be‑Displayed (DTBD) in two formats.
+Mobile ID App screens can present the Data-To-Be-Displayed (DTBD) in two formats.
 
-Use Classic DTBD for short confirmations and when you must support SIM users. Keep messages concise and always include the "DTBD Prefix" (refer to chapter Error! Reference source not found.).
+Use Classic DTBD for short confirmations and when you must support SIM users. Keep messages concise and always include the "DTBD Prefix".
 
 Use Transaction Approval when readability matters (e.g., PSD2 payments, contract consent, step up login verification). Force the App method with Device LoA4, keep within byte limits, and generate the escaped JSON programmatically.
 
-1. **Classic DTBD** (single text line) uses plain UTF‑8 string that is also signed (DTBS).
+1. **Classic DTBD** (single text line) uses a plain UTF-8 string that is also signed (DTBS).
 
    Supported by SIM and App methods.
 
@@ -15,18 +15,18 @@ Use Transaction Approval when readability matters (e.g., PSD2 payments, contract
    ![message-formats-classic](/img/message-formats-classic.png)
 
 
-2. **Transaction Approval** (key/value pairs) is a structured App‑only format that renders a title (type) and one or more key and value rows for improved readability.
+2. **Transaction Approval** (key/value pairs) is a structured App-only format that renders a title (type) and one or more key and value rows for improved readability.
 
    Approve/Cancel becomes active only after the user scrolls to the end if content exceeds one screen.
 
    RPs request this by sending a JSON object in the dtbd authorization parameter.
 
-    ![message-formats-transcation-approval](/img/message-formats-transcation-approval.png)
+    ![message-formats-transaction-approval](/img/message-formats-transaction-approval.png)
 
 
 ## Classic DTBD
 
-A single UTF‑8 string shown on the device. The classic DTBD must include the AP‑specific DTBD prefix (e.g., Bank ACME:) and is supported by both SIM and App methods.
+A single UTF-8 string shown on the device. The classic DTBD must include the AP-specific DTBD prefix (e.g., Bank ACME:) and is supported by both SIM and App methods.
 
 Keep the DTBD short. Maximum 239 characters; if any character falls outside the GSM 03.38 set, effective maximum is 119 characters.
 

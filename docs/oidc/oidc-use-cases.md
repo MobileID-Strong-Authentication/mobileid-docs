@@ -4,13 +4,13 @@ This chapter provides additional guidelines about the various parameter settings
 
 ## Prompt user for MSISDN
 
-If the request does not contain a `login_hint` nor `prompt` parameter, the result will be that the user must enter the phone number on the MobileID side, as shown in the figure below. This is a typical B2C scenario, for example the MobileID login to a public web shop. Note that the Relying Party won't know the user's MSISDN unless the user will give his consent.
+If the request does not contain a `login_hint` nor `prompt` parameter, the result will be that the user must enter the phone number on the MobileID side, as shown in the figure below. This is a typical B2C scenario, for example the MobileID login to a public web shop. Note that the Relying Party won't know the user's MSISDN unless the user will give their consent.
 
 ![use-case-msisdn-prompt-user](/img/use-case-msisdn-prompt-user.png)
 
 ## RP knows the MSISDN
 
-If the request contains a `login_hint` parameter with the user's phone number, the MobileID authenti-cation can start immediately.
+If the request contains a `login_hint` parameter with the user's phone number, the MobileID authentication can start immediately.
 
 ![use-case-msisdn-rp-knows](/img/use-case-msisdn-rp-knows.png)
 
@@ -29,6 +29,6 @@ Instead of the MobileID domain (m.mobileid.ch), we can configure your custom dom
 
 If the request contains a `login_hint` parameter set to `useLDAP:true` but there is no `prompt` parameter, the result will be that the MobileID service will look up the username on the Active Directory (LDAP) to retrieve the user's mobile phone number, before it will eventually start the MobileID authentication.
 
-![use-case-promt-user-credentials](/img/use-case-promt-user-credentials.png)
+![use-case-prompt-user-credentials](/img/use-case-prompt-user-credentials.png)
 
 

@@ -2,17 +2,19 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: ' ',
+  title: 'Mobile ID Documentation',
   description: 'Technical documentation for Mobile ID integration',
   base: '/',
   lastUpdated: true,
-  appearance: false,
+  // Enable the built-in light/dark appearance switch in the navbar
+  appearance: true,
 
   head: [['link', { rel: 'icon', href: '/mobileid.svg' }]],
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/img/mobileid-colors.png',
+    siteTitle: false, // Hide visual title, keep only logo (HTML <title> remains)
 
     nav: [
       { text: 'Home', link: '/' },

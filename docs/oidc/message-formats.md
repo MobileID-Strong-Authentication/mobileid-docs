@@ -2,11 +2,11 @@
 
 Mobile ID App screens can present the Data-To-Be-Displayed (DTBD) in two formats.
 
-Use Classic DTBD for short confirmations and when you must support SIM users. Keep messages concise and always include the "DTBD Prefix" (refer to chapter Error! Reference source not found.).
+Use Classic DTBD for short confirmations and when you must support SIM users. Keep messages concise and always include the "DTBD Prefix".
 
 Use Transaction Approval when readability matters (e.g., PSD2 payments, contract consent, step up login verification). Force the App method with Device LoA4, keep within byte limits, and generate the escaped JSON programmatically.
 
-1. **Classic DTBD** (single text line) uses plain UTF-8 string that is also signed (DTBS).
+1. **Classic DTBD** (single text line) uses a plain UTF-8 string that is also signed (DTBS).
 
    Supported by SIM and App methods.
 

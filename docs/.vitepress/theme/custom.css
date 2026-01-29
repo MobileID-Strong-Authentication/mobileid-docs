@@ -3,8 +3,9 @@
   --vp-c-brand-1: #4e5353;
   --vp-c-brand-2: #029994; /* #009490 */
   --vp-c-brand-3: #009490;
-  --vp-font-family-base: 'Swisscom Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --vp-font-family-heading: 'Swisscom Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* System fonts wie bei modernen Webseiten - ohne externe Font-Dateien */
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  --vp-font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 
   /* Increase max width for better use of screen space */
   --vp-layout-max-width: 1600px;
@@ -12,6 +13,26 @@
   /* Kleinere Schrift wie bei beem docs */
   font-size: 15px;
   line-height: 1.6;
+}
+
+/* Leichtere Schrift für Body-Text - explizit 300 für dünnere Darstellung */
+body {
+  font-weight: 300;
+}
+
+/* Content-Bereich ebenfalls leichter */
+.vp-doc p,
+.vp-doc li,
+.vp-doc td {
+  font-weight: 300;
+}
+
+/* Headings etwas stärker für Kontrast */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4 {
+  font-weight: 600;
 }
 
 /* Reduziere oberen Abstand */

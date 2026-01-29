@@ -1,7 +1,7 @@
 # Mobile ID API
 
-The **Mobile ID** service exposes a web API available via both **SOAP** and **RESTful (JSON)** interfaces.
-Refer to **[Application Provider Client Integration](/reference-guide/app-provider-client-integration)** for a detailed description of these interfaces, including links to the corresponding **WSDL** and **YAML** files on GitHub that describe the service definitions.
+The Mobile ID service exposes a web API available via both SOAP and RESTful (JSON) interfaces.
+Refer to [Application Provider Client Integration](/reference-guide/app-provider-client-integration) for a detailed description of these interfaces, including links to the corresponding WSDL and YAML files on GitHub that describe the service definitions.
 
 For your convenience, the RESTful API swagger documentation is also available here:
 [API Specification](/api-reference/api)
@@ -11,8 +11,8 @@ For your convenience, the RESTful API swagger documentation is also available he
 
 ### HTTP Request
 
-You can send **signature requests** using the **HTTP/1.1 POST** method over either the SOAP or RESTful interface.
-The RESTful interface uses **JavaScript Object Notation (JSON)** as its media type.
+You can send signature requests using the HTTP/1.1 POST method over either the SOAP or RESTful interface.
+The RESTful interface uses JavaScript Object Notation (JSON) as its media type.
 
 **Required HTTP Header Fields:**
 
@@ -24,15 +24,15 @@ The RESTful interface uses **JavaScript Object Notation (JSON)** as its media ty
 
 ### HTTP Response
 
-- If the request **succeeds**, the **Mobile ID** server responds with:
+- If the request succeeds, the Mobile ID server responds with:
   `HTTP/1.1 200 OK`
 
-- If an **error** occurs while processing the request (for example: `USER_CANCEL`, `EXPIRED_TRANSACTION`, `UNKNOWN_CLIENT`, etc. — see **[Status and Fault Codes](/reference-guide/status-fault-codes)**),
+- If an error occurs while processing the request (for example: `USER_CANCEL`, `EXPIRED_TRANSACTION`, `UNKNOWN_CLIENT`, etc. — see **[Status and Fault Codes](/reference-guide/status-fault-codes)**),
   the Mobile ID server responds with:
   `HTTP/1.1 500 Internal Server Error`
 
-  The response will include a message containing a **Fault element** that describes the processing error.
-  This behavior applies to **both the SOAP and RESTful** interfaces.
+  The response will include a message containing a Fault element that describes the processing error.
+  This behavior applies to both the SOAP and RESTful interfaces.
 
 ## MSS Signature
 
@@ -80,12 +80,12 @@ Please note that these examples are **illustrative**, not exhaustive.
 
 #### AP configuration example
 
-- The **AP** is authorized to use **all** signature profiles.
-- The **AP** has a **signature profile mapping** configured so that an incoming signature profile
+- The AP is authorized to use all signature profiles.
+- The AP has a signature profile mapping configured so that an incoming signature profile
   `http://mid.swisscom.ch/MID/v1/AuthProfile1`
   is mapped internally to
   `http://mid.swisscom.ch/Any-LoA4`.
-- These examples may **not apply** to every AP configuration;
+- These examples may not apply to every AP configuration;
   some APs may not be authorized to use all signature profiles,
   and others may not have a mapping configured.
 
@@ -118,19 +118,19 @@ For example, to check whether a particular user supports **SIM** and/or **App**-
 
 ### Signature Messaging Mode
 
-The ETSI 102 204  standard has defined the MSS Signature and Swisscom supports both synchronous and asynchronous (client-server) modes .
+The ETSI 102 204 standard has defined the MSS Signature and Swisscom supports both synchronous and asynchronous (client-server) modes.
 The MSS_Signature method is used to submit the mobile signature request message (MSS_SignatureReq). The result is provided within the signature response message (MSS_SignatureResp).
 The Mobile ID customer (AP) can decide to call either synchronous or asynchronous signature requests. There are different aspects to consider:
 
-- With the synchronous mode, the signature response is immediately processed by the AP after it has been made available by the Mobile ID Service, the overall authentication transaction will be faster. If an Application Provider intends to invoke many signature transactions of different users in parallel, it may require more memory because each thread is waiting for its comple-tion.
+- With the synchronous mode, the signature response is immediately processed by the AP after it has been made available by the Mobile ID Service, making the overall authentication transaction faster. If an Application Provider intends to invoke many signature transactions of different users in parallel, it may require more memory because each thread is waiting for its completion.
 
-- With the asynchronous client-server mode, the Application Provider needs to implement a poll-ing mechanism (query the transaction status every x seconds until the signature is has been made available by the Mobile ID Service).
+- With the asynchronous client-server mode, the Application Provider needs to implement a polling mechanism (query the transaction status every x seconds until the signature has been made available by the Mobile ID Service).
 
 
 
 ### Synchronous MSS Signature
 
-The following steps describe a typical **synchronous (MessagingMode="synch")** Mobile ID authentication transaction:
+The following steps describe a typical synchronous (MessagingMode="synch") Mobile ID authentication transaction:
 
 ![synchronous-mss-signature](/img/synchronous-mss-signature.png)
 
@@ -139,8 +139,8 @@ The following steps describe a typical **synchronous (MessagingMode="synch")** M
    The end-user uses an application that initiates an authentication request.
 
 2. **Application Provider (AP) Request**
-   The **AP** receives the authentication request and sends an
-   **`MSS_SignatureReq`** message with parameter **`MessagingMode="synch"`** to the **MSSP** (Mobile ID backend).
+   The AP receives the authentication request and sends an
+   `MSS_SignatureReq` message with parameter `MessagingMode="synch"` to the MSSP (Mobile ID backend).
 
 3. **AP Credential Validation**
    The **Mobile ID backend (MSSP)** validates the **AP’s credentials** and verifies its authorization.
@@ -149,13 +149,13 @@ The following steps describe a typical **synchronous (MessagingMode="synch")** M
    The **Mobile ID backend** sends a signature request to the mobile device — either to the **SIM (STK applet)** or to the **Mobile ID App**, depending on the user’s configured method.
 
 5. **User Authentication & Digital Signature**
-   The **Mobile ID application** on the mobile device prompts the user to enter their **Mobile ID secret** (PIN, passcode, or biometric factor).
+   The Mobile ID application on the mobile device prompts the user to enter their Mobile ID secret (PIN, passcode, or biometric factor).
    - The user confirms with the correct secret.
-   - The mobile application **digitally signs** the authentication payload.
-   - The resulting **digital signature** is returned to the Mobile ID backend (**MSSP**).
+   - The mobile application digitally signs the authentication payload.
+   - The resulting digital signature is returned to the Mobile ID backend (MSSP).
 
 6. **Signature Response Received**
-   The **MSSP** receives the signature response and processes it.
+   The MSSP receives the signature response and processes it.
 
 7. **Response to Application Provider**
    The **Mobile ID backend** returns a **complete response** to the **AP**, containing:
@@ -163,7 +163,7 @@ The following steps describe a typical **synchronous (MessagingMode="synch")** M
    - The **certificate** that includes the end-user’s public key.
 
 8. **Access Decision by the AP**
-   Based on the Mobile ID response, the **AP** may **grant** or **deny** access to the end-user, depending on the authentication outcome.
+   Based on the Mobile ID response, the AP may grant or deny access to the end-user, depending on the authentication outcome.
 
 
 #### Synchronous MSS Signature Request
@@ -1052,11 +1052,11 @@ Geofencing service limitations:
 
 #### App to App -  Mobile Only Authentication
 
-We strongly recommend making use of this service if you intend to invoke the Mobile ID authentication from your own App. The Mobile ID App2App service allows an Application Provider to automatically switch from their App to the Mobile ID App (and the Mobile ID App to automatically switch back to the originating App) as shown in step 10 and 18 in the sequence below. This will greatly improve the usa-bility for the App user.
+We strongly recommend making use of this service if you intend to invoke the Mobile ID authentication from your own App. The Mobile ID App2App service allows an Application Provider to automatically switch from their App to the Mobile ID App (and the Mobile ID App to automatically switch back to the originating App) as shown in step 10 and 18 in the sequence below. This will greatly improve the usability for the App user.
 
 ![mobile-only-auth](/img/mobile-only-auth.png)
 
-1.	While being in the Application Provider App, the user performs an action that requires authentica-tion
+1.	While being in the Application Provider App, the user performs an action that requires authentication
 2.	The Application Provider App informs the Application Provider backend
 3.	Optional: The Application Provider backend can request the Mobile ID capabilities of the user
 4.	Optional: Mobile ID backend checks the user’s capabilities and provides the response
@@ -1068,7 +1068,7 @@ We strongly recommend making use of this service if you intend to invoke the Mob
 10.	The Mobile ID App is automatically opened on the user’s smartphone
 11.	The Mobile ID backend invokes the authentication request on the Mobile ID App
 12.	The Mobile ID authentication message is shown on the Mobile ID App
-13.	The user confirms the authentication request with his 2nd factor (Passcode or Biometry)
+13.	The user confirms the authentication request with their 2nd factor (Passcode or Biometry)
 14.	The Mobile ID App signs the message with the private key stored on the device
 15.	The Mobile ID App sends the signed data (signature) to the Mobile ID backend
 16.	The Mobile ID backend completes the transaction
@@ -1454,7 +1454,7 @@ If MimeType is TXN-Approval but the payload isn’t valid, the server flags `INV
 
 
 ## MSS Status Query
-In case of an asynchronous MSS Signature, the AP needs to poll the status of an on-going signature transaction by sending MSS Status Query requests.
+In case of an asynchronous MSS Signature, the AP needs to poll the status of an ongoing signature transaction by sending MSS Status Query requests.
 
 ### Endpoint
 

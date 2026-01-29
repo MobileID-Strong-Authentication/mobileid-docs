@@ -4,7 +4,7 @@ This chapter provides additional guidelines about the various parameter settings
 
 ## Prompt user for MSISDN
 
-If the request does not contain a `login_hint` nor `prompt` parameter, the result will be that the user must enter the phone number on the MobileID side, as shown in the figure below. This is a typical B2C scenario, for example the MobileID login to a public web shop. Note that the Relying Party won't know the user's MSISDN unless the user will give his consent.
+If the request does not contain a `login_hint` nor `prompt` parameter, the result will be that the user must enter the phone number on the MobileID side, as shown in the figure below. This is a typical B2C scenario, for example the MobileID login to a public web shop. Note that the Relying Party won't know the user's MSISDN unless the user will give their consent.
 
 ![use-case-msisdn-prompt-user](/img/use-case-msisdn-prompt-user.png)
 

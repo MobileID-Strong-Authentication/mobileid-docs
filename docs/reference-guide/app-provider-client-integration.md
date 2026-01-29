@@ -1,10 +1,10 @@
 # Application Provider Client Integration
 
-This chapter describes how an **Application Provider (AP)** integrates its backend with the **Swisscom Mobile ID signature service**. It covers the necessary preconditions, endpoint configuration, and use of **mutual TLS authentication**.
+This chapter describes how an Application Provider (AP) integrates its backend with the Swisscom Mobile ID signature service. It covers the necessary preconditions, endpoint configuration, and use of mutual TLS authentication.
 
 ## Preconditions
 
-Before using the **Swisscom Mobile ID** web service, some initial provisioning steps are required.
+Before using the Swisscom Mobile ID web service, some initial provisioning steps are required.
 
 1. **The Mobile ID customer (your company) has an agreement with Swisscom:**
    - **Connectivity** (Internet or LAN-I) between the **AP** and **Mobile ID** has been established.
@@ -19,7 +19,7 @@ Before using the **Swisscom Mobile ID** web service, some initial provisioning s
 
 ## Endpoint Address
 
-The Swisscom Mobile ID web service is accessible through LAN-I  or Internet. If not otherwise specified use the following default access details.
+The Swisscom Mobile ID web service is accessible through LAN-I or the Internet. If not otherwise specified, use the following default access details.
 
 
 | Environment       | URL                                   |
@@ -37,7 +37,7 @@ For accessing the service endpoints the Mobile ID customer can choose between SO
 
 ### **SOAP Endpoint**
 
-A description of this interface is available as a **WSDL** file on GitHub: [mobileid.yaml](https://github.com/MobileID-Strong-Authentication/mobileid-api/blob/main/soap/mobileid.wsdl)
+A description of this interface is available as a WSDL file on GitHub: [mobileid.yaml](https://github.com/MobileID-Strong-Authentication/mobileid-api/blob/main/soap/mobileid.wsdl)
 
 #### Endpoints
 
@@ -49,7 +49,7 @@ A description of this interface is available as a **WSDL** file on GitHub: [mobi
 | `<Base-URL>/soap/services/MSS_ProfilePort` | **MSS Profile Query** | [Section MSS Profile Query](/reference-guide/mobile-id-api.html#mss-profile-query)  |
 
 ### **REST Endpoint**
-A description of this interface is available here: [API Specification](/api-reference/api) or you can download the corresponding **YAML** file on GitHub: [mobileid.yaml](https://github.com/MobileID-Strong-Authentication/mobileid-api/blob/main/rest/mobileid.yaml)
+A description of this interface is available here: [API Specification](/api-reference/api) or you can download the corresponding YAML file on GitHub: [mobileid.yaml](https://github.com/MobileID-Strong-Authentication/mobileid-api/blob/main/rest/mobileid.yaml)
 
 #### Endpoints
 
@@ -68,28 +68,28 @@ A certificate-based mutual authentication when accessing the Mobile ID web servi
 ![mutual-authentication](/img/mutual-authentication.png)
 
 
-1. The **client Application Provider (AP)** requests access to a protected resource on the **Mobile ID (MID)** server.
-2. The **MID web server** presents its **server certificate** to the client AP.
-3. The **client AP** verifies the MID **server certificate**.
-4. If verification is successful, the **client AP** sends its **client certificate** to the MID server.
-5. The **MID server** verifies the **AP client credentials**.
-6. If verification succeeds, the **MID server** grants access to the protected resource requested by the client AP.
+1. The client Application Provider (AP) requests access to a protected resource on the Mobile ID (MID) server.
+2. The MID web server presents its server certificate to the client AP.
+3. The client AP verifies the MID server certificate.
+4. If verification is successful, the client AP sends its client certificate to the MID server.
+5. The MID server verifies the AP client credentials.
+6. If verification succeeds, the MID server grants access to the protected resource requested by the client AP.
 
 
 ### Important Guidelines for Certificate-Based Mutual Authentication
 
-- The client must send **only its end-entity certificate**.
+- The client must send only its end-entity certificate.
   - Authentication on the MID side does not consider validation of a full client certificate chain or any restrictions on the root CA.
-  - Authentication is **denied** if the client sends a bag with the full certificate chain.
+  - Authentication is denied if the client sends a bag with the full certificate chain.
 
-- The **Enhanced Key Usage** value of client certificates must include **Client Authentication** (`1.3.6.1.5.5.7.3.2`).
+- The Enhanced Key Usage value of client certificates must include Client Authentication (`1.3.6.1.5.5.7.3.2`).
   - See **[Create X509 Client Certificates](/reference-guide/create-client-certs.md)** for examples of creating self-signed certificates.
 
-- All requests to the **Mobile ID service** must originate **only** from servers that you control.
-  - Never send requests directly from client-side code such as **mobile apps** or **JavaScript**, as this may compromise your credentials.
+- All requests to the Mobile ID service must originate only from servers that you control.
+  - Never send requests directly from client-side code such as mobile apps or JavaScript, as this may compromise your credentials.
 
-- To validate the **chain of trust** for the Mobile ID server certificate:
-  - Add the **SwissSign Gold CA – G2** root certificate to your client **TrustStore**.
+- To validate the chain of trust for the Mobile ID server certificate:
+  - Add the SwissSign Gold CA – G2 root certificate to your client TrustStore.
   - The intermediate CAs are returned dynamically by the MID server and may change.
 
 ::: info

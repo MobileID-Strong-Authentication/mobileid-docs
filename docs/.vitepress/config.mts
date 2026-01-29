@@ -13,6 +13,7 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/img/mobileid-colors.png',
+    siteTitle: false, // Hide visual title, keep only logo (HTML <title> remains)
 
     nav: [
       { text: 'Home', link: '/' },

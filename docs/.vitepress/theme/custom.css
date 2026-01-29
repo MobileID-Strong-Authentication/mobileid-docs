@@ -218,6 +218,28 @@ html.dark .VPSwitchAppearance .check {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 
+/* Fix: keep sidebar width constant across desktop breakpoints.
+   VitePress widens/narrows sidebar/title at >=1440px using a calc() that can
+   shrink when --vp-layout-max-width is larger than the viewport (e.g. 1600px).
+*/
+@media (min-width: 1440px) {
+  .VPSidebar.VPSidebar {
+    width: var(--vp-sidebar-width) !important;
+    max-width: var(--vp-sidebar-width) !important;
+    padding-left: 32px !important;
+  }
+
+  .VPNavBar.has-sidebar .title.title {
+    width: var(--vp-sidebar-width) !important;
+    padding-left: 32px !important;
+  }
+
+  .VPNavBar.has-sidebar .content.content {
+    padding-left: var(--vp-sidebar-width) !important;
+    padding-right: 32px !important;
+  }
+}
+
 /* beem-like: smoother icons */
 .VPSwitchAppearance .icon [class^='vpi-'] {
   transition: opacity 0.18s ease, color 0.18s ease;

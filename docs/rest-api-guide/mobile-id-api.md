@@ -1,7 +1,7 @@
 # Mobile ID API
 
 The Mobile ID service exposes a web API available via both SOAP and RESTful (JSON) interfaces.
-Refer to [Application Provider Client Integration](/reference-guide/app-provider-client-integration) for a detailed description of these interfaces, including links to the corresponding WSDL and YAML files on GitHub that describe the service definitions.
+Refer to [Application Provider Client Integration](/rest-api-guide/app-provider-client-integration) for a detailed description of these interfaces, including links to the corresponding WSDL and YAML files on GitHub that describe the service definitions.
 
 For your convenience, the RESTful API swagger documentation is also available here:
 [API Specification](/api-reference/api)
@@ -27,7 +27,7 @@ The RESTful interface uses JavaScript Object Notation (JSON) as its media type.
 - If the request succeeds, the Mobile ID server responds with:
   `HTTP/1.1 200 OK`
 
-- If an error occurs while processing the request (for example: `USER_CANCEL`, `EXPIRED_TRANSACTION`, `UNKNOWN_CLIENT`, etc. — see **[Status and Fault Codes](/reference-guide/status-fault-codes)**),
+- If an error occurs while processing the request (for example: `USER_CANCEL`, `EXPIRED_TRANSACTION`, `UNKNOWN_CLIENT`, etc. — see **[Status and Fault Codes](/rest-api-guide/status-fault-codes)**),
   the Mobile ID server responds with:
   `HTTP/1.1 500 Internal Server Error`
 
@@ -54,7 +54,7 @@ The RESTful interface uses JavaScript Object Notation (JSON) as its media type.
 
 For every authentication request, an AP can select the SIM or App authentication method by selecting a specific SignatureProfile-value in the MSS Signature request.
 
-This will give all the required flexibility for an AP to handle different use cases. For example, an AP may use an MSS Profile Query ([MSS Profile Query](/reference-guide/mobile-id-api#mss-profile-query)) request to silently check the user’s authentication method capabilities before an MSS Signature request ([MSS Signature Request](/reference-guide/mobile-id-api#mss-signature-request)) is sent. In other scenarios, the AP may want to force a specific authentication method.
+This will give all the required flexibility for an AP to handle different use cases. For example, an AP may use an MSS Profile Query ([MSS Profile Query](/rest-api-guide/mobile-id-api#mss-profile-query)) request to silently check the user’s authentication method capabilities before an MSS Signature request ([MSS Signature Request](/rest-api-guide/mobile-id-api#mss-signature-request)) is sent. In other scenarios, the AP may want to force a specific authentication method.
 
 ### Signature Profile Values
 
@@ -112,7 +112,7 @@ Please note that these examples are **illustrative**, not exhaustive.
 
 
 **Note:**
-An AP can use the **MSS Profile Query** request (see **[MSS Profile Query](/reference-guide/mobile-id-api#mss-profile-query)**) to determine a user’s capabilities.
+An AP can use the **MSS Profile Query** request (see **[MSS Profile Query](/rest-api-guide/mobile-id-api#mss-profile-query)**) to determine a user’s capabilities.
 For example, to check whether a particular user supports **SIM** and/or **App**-based authentication before sending the signature request.
 
 
@@ -1864,7 +1864,7 @@ The AP can use a Profile Query request as depicted below.
 
 ### MSS Profile Query Request
 
-The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/mobile-id-api#mss-profile-query-request-extensions)).
+The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/rest-api-guide/mobile-id-api#mss-profile-query-request-extensions)).
 
 ::: code-group
 
@@ -1941,7 +1941,7 @@ Optional Profile Query Extension parameters can be set in the Profile Query requ
 
 ### MSS Profile Query Response
 
-The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/reference-guide/mobile-id-api#mss-profile-query-request-extensions))
+The lines highlighted in pink are optional Profile Query Extension parameters (see section [MSS Profile Query Request Extensions](/rest-api-guide/mobile-id-api#mss-profile-query-request-extensions))
 
 
 ::: code-group

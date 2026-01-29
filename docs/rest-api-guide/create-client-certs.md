@@ -1,4 +1,4 @@
-# Create X509 Client Certificates
+# Create Client Certificates
 
 Below are examples how to create a self-signed certificate with OpenSSL and Java Keytool.
 

@@ -31,7 +31,7 @@ It is suitable for various system landscapes and meets strict regulatory require
 
 ---
 
-## Mobile ID Signature Service (MSS)
+## MSS Signature Service
 
 Mobile ID is a cost-efficient, managed authentication service operated by Swisscom.
 The customer-facing API follows the open standard ETSI 102 204 V1.1 (2003-08).

@@ -1,4 +1,4 @@
-# Health Status Microservice
+# Health Status Service
 
 The Mobile ID Health Status Service is a microservice where you can retrieve health state details about the MobileID authentication service. The health state is based on real end-to-end authentication tests that are checked every few minutes. It's free of charge!
 

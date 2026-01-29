@@ -95,3 +95,45 @@ html.dark img.feature-icon-notes {
   background-attachment: fixed; /* keep it fixed while scrolling */
   background-position: center center;
 }
+
+/* Frosted-glass callouts on the home page (beem-like readability) */
+.VPContent.is-home .vp-doc .custom-block {
+  background-color: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+html.dark .VPContent.is-home .vp-doc .custom-block {
+  background-color: rgba(18, 18, 18, 0.55);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* beem-like WIP banner (custom HTML block) */
+.VPContent.is-home .wip-banner {
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  line-height: 1.6;
+
+  /* frosted glass (similar to beem docs) */
+  background-color: rgba(255, 255, 255, 0.20);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  border-left: 4px solid var(--vp-c-brand-2);
+  color: var(--vp-c-white);
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  max-width: var(--vp-layout-max-width);
+  padding-left: calc(var(--vp-layout-max-width) / 20);
+  padding-right: calc(var(--vp-layout-max-width) / 20);
+}
+
+html.dark .VPContent.is-home .wip-banner {
+  background-color: rgba(31, 31, 31, 0.50);
+  color: #eee;
+}

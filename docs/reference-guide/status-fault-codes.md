@@ -15,15 +15,15 @@
 |  | 208 | EXPIRED_TRANSACTION | The transaction timed out. The AP may try again. | X | X | X |  |
 |  | 209 | OTA_ERROR | A Problem related to the MSSP internal Over-The-Air (OTA) communication with the Mobile ID user's SIM. Typically, there is a temporary problem with SMS communication. | X | X |  |  |
 |  | 401 | USER_CANCEL | The user cancelled the request at the mobile phone. | X | X |  |  |
-|  | 402 | PIN_NR_BLOCKED | The Mobile ID PIN of the SIM method is blocked. The user must re-activate the Mobile ID SIM card on the Mobile ID selfcare portal. | X | X | X | X |
+|  | 402 | PIN_NR_BLOCKED | The Mobile ID PIN of the SIM method is blocked. The user must re-activate the Mobile ID SIM card on the Mobile ID self-care portal. | X | X | X | X |
 |  | 403 | CARD_BLOCKED | The Mobile ID user is currently suspended. Please contact Swisscom Support. | X | X | X | X |
-|  | 404 | NO_KEY_FOUND | The Mobile ID user exists but is not in an active state. The user must activate the account on the Mobile ID selfcare portal. | X | X | X | X |
-|  | 406 | PB_SIGNATURE_PROCESS | A signature transaction is already on-going. Please try again later. | X | X |  |  |
-|  | 422 | NO_CERT_FOUND | The Mobile ID user exists but is not in an active state. The user must activate the account on the Mobile ID selfcare portal. | X | X | X | X |
+|  | 404 | NO_KEY_FOUND | The Mobile ID user exists but is not in an active state. The user must activate the account on the Mobile ID self-care portal. | X | X | X | X |
+|  | 406 | PB_SIGNATURE_PROCESS | A signature transaction is already ongoing. Please try again later. | X | X |  |  |
+|  | 422 | NO_CERT_FOUND | The Mobile ID user exists but is not in an active state. The user must activate the account on the Mobile ID self-care portal. | X | X | X | X |
 | 500 |  | SIGNATURE | The MSS Signature transaction was successful. | X | X |  |  |
-| 501 |  | REVOKED_CERTIFICATE | The Mobile ID user's x509 certificate has been revoked. The user must re-activate the account on the Mobile ID selfcare portal. | X | X |  |  |
+| 501 |  | REVOKED_CERTIFICATE | The Mobile ID user's x509 certificate has been revoked. The user must re-activate the account on the Mobile ID self-care portal. | X | X |  |  |
 | 502 |  | VALID_SIGNATURE | The MSS Signature transaction was successful. | X | X |  |  |
-| 503 |  | INVALID_SIGNATURE | The MSS Signature transaction failed due to invalid signature data. The user may try to re-activate the account on the Mobile ID selfcare portal. It may be required to replace the SIM card. | X | X |  |  |
+| 503 |  | INVALID_SIGNATURE | The MSS Signature transaction failed due to invalid signature data. The user may try to re-activate the account on the Mobile ID self-care portal. It may be required to replace the SIM card. | X | X |  |  |
 | 504 |  | OUSTANDING_TRANSACTION | The MSS Signature transaction is outstanding. The AP must try again later. |  | X |  |  |
 |  | 900 | INTERNAL_ERROR | An internal error on MSSP has occurred. Please try again later or contact Swisscom Support, if the problem persists. | X | X | X | X |
 

@@ -6,6 +6,32 @@
   --vp-font-family-base: 'Swisscom Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --vp-font-family-heading: 'Swisscom Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
+  /* Increase max width for better use of screen space */
+  --vp-layout-max-width: 1600px;
+}
+
+/* Make content container wider */
+.VPDoc.has-aside .content-container {
+  max-width: 100% !important;
+}
+
+.vp-doc {
+  max-width: 1200px !important;
+}
+
+/* Improve table responsiveness */
+.vp-doc table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 1em 0;
+}
+
+.vp-doc table th,
+.vp-doc table td {
+  white-space: normal;
+  word-wrap: break-word;
+  min-width: 100px;
 }
 
 .dark {

@@ -284,7 +284,7 @@ Content-Type: application/json
   "expires_in": 600
 }
 ```
-Note, the content of the access token is meant for consumption by the `/userinfo` endpoint where the client can give the token to get the user consented claim values. The access token is not meant to convey information to the client or be peeked into by the client, only to the accessed protected re-sources.
+Note, the content of the access token is meant for consumption by the `/userinfo` endpoint where the client can give the token to get the user consented claim values. The access token is not meant to convey information to the client or be peeked into by the client, only to the accessed protected resources.
 
 ## User Info Request
 

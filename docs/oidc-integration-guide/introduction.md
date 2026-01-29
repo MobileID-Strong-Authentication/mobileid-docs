@@ -46,7 +46,7 @@ Mobile ID utilizes the Authorization Code Grant Type to obtain an access token t
 
 ## Refresh Token
 
-Because Access Tokens are always short-lived (see [Section Tokens](/oidc/getting-started#tokens)), a Relying Party may want to refresh the Access Token using their long-lived Refresh Token. To refresh an Access Token, the Client must always authenticate at the Token Endpoint. The Relying Party should always validate the Refresh Response.
+Because Access Tokens are always short-lived (see [Section Tokens](/oidc-integration-guide/getting-started#tokens)), a Relying Party may want to refresh the Access Token using their long-lived Refresh Token. To refresh an Access Token, the Client must always authenticate at the Token Endpoint. The Relying Party should always validate the Refresh Response.
 
 ![refresh-token](/img/refresh-token.png)
 

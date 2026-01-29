@@ -6,27 +6,20 @@ hero:
   name: "Mobile ID docs"
   text: ""
   tagline: seamless strong multi-factor authentication
-  actions:
-    - theme: brand
-      text: API Reference Guide
-      link: /reference-guide/introduction
-    - theme: alt
-      text: API Specification
-      link: /api-reference/api
 
 features:
-  - title: Getting Started
+  - title: REST API Guide
     icon:
       src: /img/icon-info.svg
       class: feature-icon-info
-    details: Discover the Mobile ID documentation and learn how to secure your application.
-    link: /reference-guide/introduction
+    details: Start here for direct integration via REST API (works for web apps and non-browser flows like native apps/backends).
+    link: /rest-api-guide/introduction
   - title: OIDC Integration Guide
     icon:
       src: /img/icon-security.svg
       class: feature-icon-security
-    details: Follow this guide to integrate Mobile ID into your application through the OpenID Connect (OIDC) standard.
-    link: /oidc/introduction
+    details: Start here for standards-based login via OpenID Connect (browser/redirect flow). Mobile ID acts as the OpenID Provider.
+    link: /oidc-integration-guide/introduction
   - title: Release Notes
     icon:
       src: /img/icon-notes.svg

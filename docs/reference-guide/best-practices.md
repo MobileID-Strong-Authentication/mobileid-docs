@@ -2,7 +2,7 @@
 
 The **Swisscom Mobile ID Strong Authentication** GitHub repository provides various examples of Mobile ID client implementations.
 
-The repository **[`mobileid-client-java`](https://github.com/SwisscomTrustServices/mobileid-client-java)** serves as the *main* Java‑based reference implementation for building **Mobile ID REST** and **SOAP** API clients.
+The repository **[`mobileid-client-java`](https://github.com/SwisscomTrustServices/mobileid-client-java)** serves as the *main* Java-based reference implementation for building **Mobile ID REST** and **SOAP** API clients.
 
 This library is ideal for Java 8+ projects that require **secure authentication and authorization** using a mobile phone.
 It can be added as a dependency to your project and used in any scenario requiring access to the **Swisscom Mobile ID** service.
@@ -11,13 +11,13 @@ It can be added as a dependency to your project and used in any scenario requiri
 
 ### Signature Request
 
-When constructing an **MSS Signature** request, the following best‑practice guidelines should be followed:
+When constructing an **MSS Signature** request, the following best-practice guidelines should be followed:
 
 1. **Define a unique `AP_TransID` (Transaction ID)**
    Each signature request must have a unique transaction identifier.
 
 2. **Set the current time for `Instant` (with time zone)**
-   The `Instant` parameter must include time zone information and must not deviate excessively from the Mobile ID Service’s current time; otherwise, a fault response with sub‑code **101** will be returned.
+   The `Instant` parameter must include time zone information and must not deviate excessively from the Mobile ID Service’s current time; otherwise, a fault response with sub-code **101** will be returned.
    - **Example:** `2020-01-01T12:00:00.000+01:00`
    - Must conform to the [W3C `xs:dateTime`](https://www.w3.org/TR/xmlschema-2/#dateTime) format.
 
@@ -35,15 +35,15 @@ When constructing an **MSS Signature** request, the following best‑practice gu
 
 6. **Define the `DataToBeDisplayed` (DTBD) message**
    The text shown on the user’s mobile device must comply with the following guidelines:
-   - Encoded in **UTF‑8** [<sup id="a17">17</sup>](#17).
+   - Encoded in **UTF-8** [<sup id="a17">17</sup>](#17).
    - Should include a **unique transaction reference** (e.g., timestamp, customer ID, contract ID).
    - **Length limits:**
      - Maximum **239 characters** if all characters are in the standard GSM DA character set.
      - If any character falls outside this set (e.g., the lowercase cedilla “ç”), the maximum length reduces to **119 characters**.
-   - Keep the message as **short and user‑friendly** as possible.
+   - Keep the message as **short and user-friendly** as possible.
 
    **Example DTBD:**
-   > `Bank ACME: Proceed with the login? (TXN‑3D5K)`
+   > `Bank ACME: Proceed with the login? (TXN-3D5K)`
 
 ---
 
@@ -80,7 +80,7 @@ The key validation aspects are as follows:
    - The client must be capable of validating both **RSA** and **ECDSA** signatures.
 
 4. **(Optional) Validate the Mobile ID Serial Number**
-   - For the **highest level of assurance** and a fully **strong two‑factor authentication** process, validate the **Mobile ID serial number** as described in **Section Mobile ID Serial Number Validation**.
+   - For the **highest level of assurance** and a fully **strong two-factor authentication** process, validate the **Mobile ID serial number** as described in **Section Mobile ID Serial Number Validation**.
 
 5. **Implement Proper Fault and Status Handling**
    - Handle all **status** and **fault codes** using structured exception handling logic to ensure stable, predictable behavior of the client application.
@@ -101,7 +101,7 @@ Concurrency handling depends on whether the request targets the **SIM** method o
 ---
 
 ##### SIM Method Concurrency
-If both signature requests target the **SIM‑based authentication method**, and the first signature transaction is still **in progress**, the **second request** is **rejected** immediately.
+If both signature requests target the **SIM-based authentication method**, and the first signature transaction is still **in progress**, the **second request** is **rejected** immediately.
 
 - **Fault Code:** `406 / PB_SIGNATURE_PROCESS`
 - **Description:** The subscriber already has an active signature operation in process.
@@ -110,7 +110,7 @@ If both signature requests target the **SIM‑based authentication method**, and
 ---
 
 ##### App Method Concurrency
-If both requests target the **Mobile ID App‑based authentication method**, the behavior is different:
+If both requests target the **Mobile ID App-based authentication method**, the behavior is different:
 
 - The **existing first signature transaction** is **canceled** automatically by the backend.
 - The **second signature request** is then displayed on the mobile device via the Mobile ID App.

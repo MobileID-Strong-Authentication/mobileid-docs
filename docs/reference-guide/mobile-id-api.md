@@ -403,7 +403,7 @@ In the asynchronous mode, the AP initiates the signature request by calling MSS_
 6.	The mobile application (STK applet or Mobile App) prompts the End-User to enter the Mobile ID secret (PIN, passcode, biometry). End-User confirms with the correct secret and the application digitally signs the request and sends the signature back to the Mobile ID backend (MSSP).
 
 ::: info
-Meanwhile the AP sends MSS_StatusReq requests to MID. The MID replies with MSS_StatusResp  (sta-tus code “504 OUTSTANDING_TRANSACTION”, which means that the AP will need to call again the status method).
+Meanwhile the AP sends MSS_StatusReq requests to MID. The MID replies with MSS_StatusResp  (status code “504 OUTSTANDING_TRANSACTION”, which means that the AP will need to call again the status method).
 :::
 
 7.	Mobile ID backend (MSSP) receives the signature response.
@@ -712,7 +712,7 @@ In this case, the AP can request the Geofencing service as shown in the 1st exam
 | LocationConfidence | 0.85 | Float between 0 and 1.00 | A high location confidence means that we have a high trust in the user location data, which includes device confidence score in its calculation. The value 1.0 represents the highest possible trust. <br><br>Location confidence score is based on an internal calculation, which includes different checks such as mock service- and location spoofing detection, the age of the location data and the device confidence score. <br><br>For Mobile ID SIM authentication, the location confidence calculation incorporates the cell information age. <br><br>**Note**: The score will decrease every hour by 0.01 if location data is not up-to-date! Turning on and off the Device FlightMode feature will help to have up-to-date location data. <br><br>**Recommendation**: Typically, a location confidence of 0.7 or higher can be considered as a sufficient trust level. Please also refer to the table below. |
 | Timestamp | 2021-01-01T11:00:00.000+01:00 | formatting of yyyy-MM-dd'T'HH:mm:ss.SSS'Z' | The timestamp of the location information. <br><br>**Recommendation**: Mobile Session (registered cell) information or GPS location coordination may not be up-to-date and may require action from the mobile user. Turning on and off the Device FlightMode feature will help to have up-to-date location data. |
 
-**Recommendations** regarding Confidence Score checks: Usually it is sufficient if a client implements a minimum threshold check for the Location Confidence Score since the Location Confidence Score in-cludes the Device Confidence Score in its calculation. Here’s a rationale regarding the Location Confi-dence Score:
+**Recommendations** regarding Confidence Score checks: Usually it is sufficient if a client implements a minimum threshold check for the Location Confidence Score since the Location Confidence Score in-cludes the Device Confidence Score in its calculation. Here’s a rationale regarding the Location Confidence Score:
 
 
 ![confidence-score](/img/confidence-score.png)
@@ -734,7 +734,7 @@ Location Confidence Score too low:
 - ℹ️ User must uninstall any 3rd party app that use Mock Location capabilities
 
 Geofencing service limitations:
-- Geofencing information is given without any guarantee and with the exclusion of any legal lia-bility.
+- Geofencing information is given without any guarantee and with the exclusion of any legal liability.
 - At the time of writing only MobileID App or Swisscom Mobile ID SIM cards support location data.
 - For the MobileID App, the user must have the geofencing toggle enabled and location services permitted. Both Android and iOS App version 1.2.0 or higher support geofencing.
 
@@ -1061,8 +1061,8 @@ We strongly recommend making use of this service if you intend to invoke the Mob
 3.	Optional: The Application Provider backend can request the Mobile ID capabilities of the user
 4.	Optional: Mobile ID backend checks the user’s capabilities and provides the response
 5.	Optional: Application Provider gets all user details to know if the user has an active Mobile ID App
-6.	The Application Provider sends an asynchronous signature request that includes the App2App ser-vice request. The URI value of the Application Provider App is provided as RedirectURI parameter.
-7.	Mobile ID API responds immediately with a Signature Response, which contains the AuthURI pa-rameter. This is the URI value of the Mobile ID App.
+6.	The Application Provider sends an asynchronous signature request that includes the App2App service request. The URI value of the Application Provider App is provided as RedirectURI parameter.
+7.	Mobile ID API responds immediately with a Signature Response, which contains the AuthURI parameter. This is the URI value of the Mobile ID App.
 8.	The Application Provider App can either immediately trigger the Mobile ID App (step 8a) or display a button, which will trigger the Mobile ID App (step 8b)
 9.	The AuthURI is triggered by the Application Provider App
 10.	The Mobile ID App is automatically opened on the user’s smartphone
@@ -1120,7 +1120,7 @@ Best Practice Guidelines:
 - Both Android and iOS are supported for the automatic App2App switch
 - This service can only be used with the asynchronous MSS Signature. In case a synchronous MSS Signature with App2App service is attempted, Mobile ID API will respond with a fault (WRONG_PARAM).
 - In case this service is requested, there will be no Mobile ID push notification triggered. That’s because a push notification is not required if the Mobile ID App is automatically opened.
-- Please refer also to the official documentation from Apple  and Android  about how to im-plement custom URL schemes in your app
+- Please refer also to the official documentation from Apple  and Android  about how to implement custom URL schemes in your app
 
 
 ##### MSS Signature Request incl. App2App service
@@ -1416,7 +1416,7 @@ Note: `type` is not signed. If the title/category matters for your process (e.g.
 "DataToBeSigned": {
   "MimeType": "application/vnd.mobileid.txn-approval",
   "Encoding": "UTF-8",
-  "Data": "{\"type\":\"Address Change Confirmation\",\"dtbd\":[{\"key\":\"Company\",\"value\":\"Acme AG\"},{\"key\":\"Full Name\",\"value\":\"Philipp Haupt\"},{\"key\":\"Old Ad-dress\",\"value\":\"Bahnhofstrasse 1, 8001 Zürich\"},{\"key\":\"New Address\",\"value\":\"Sihlquai 55, 8005 Zürich\"},{\"key\":\"Effective Date\",\"value\":\"01 June 2025\"},{\"key\":\"Consent Instruc-tion\",\"value\":\"Reply APPROVE to consent or CANCEL\"}]}"
+  "Data": "{\"type\":\"Address Change Confirmation\",\"dtbd\":[{\"key\":\"Company\",\"value\":\"Acme AG\"},{\"key\":\"Full Name\",\"value\":\"Philipp Haupt\"},{\"key\":\"Old Address\",\"value\":\"Bahnhofstrasse 1, 8001 Zürich\"},{\"key\":\"New Address\",\"value\":\"Sihlquai 55, 8005 Zürich\"},{\"key\":\"Effective Date\",\"value\":\"01 June 2025\"},{\"key\":\"Consent Instruction\",\"value\":\"Reply APPROVE to consent or CANCEL\"}]}"
 }
 
 ```
@@ -1847,7 +1847,7 @@ The AP can use a Profile Query request as depicted below.
 
 ![mss-profile-query](/img/mss-profile-query.png)
 
-1.	Before to send a signature request for authentication, the AP validates the status and signa-ture profile capabilities of a Mobile ID user by sending an MSS_ProfileReq request to Mobile ID
+1.	Before to send a signature request for authentication, the AP validates the status and signature profile capabilities of a Mobile ID user by sending an MSS_ProfileReq request to Mobile ID
 2.	MSSP checks the user status and signature capabilities
 3.	In case of an active user, it retrieves the Signature Profiles of the end-user and sends back an MSS_ProfileResp. Otherwise, if the user is not active, the server sends back a fault response that may contain additional details about the user status.
 
@@ -2048,7 +2048,7 @@ The lines highlighted in pink are optional Profile Query Extension parameters (s
   <soapenv:Body>
     <MSS_ProfileQueryResponse>
       <mss:MSS_ProfileResp xmlns:mss="http://uri.etsi.org/TS102204/v1.1.2#"
-                           xmlns:fi="http://mss.ficom.fi/TS102204/v1.0.0#" MajorVersion="2" MinorVer-sion="0">
+                           xmlns:fi="http://mss.ficom.fi/TS102204/v1.0.0#" MajorVersion="2" MinorVersion="0">
         <mss:AP_Info AP_ID="yourAP_ID" AP_PWD="not-needed" AP_TransID="REF0101120000"
              Instant="2015-01-01T12:00:00.000+01:00" xmlns:mss="http://uri.etsi.org/TS102204/v1.1.2#"
              xmlns:fi="http://mss.ficom.fi/TS102204/v1.0.0#"/>

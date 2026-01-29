@@ -1,4 +1,4 @@
-# Application Provider Client Integration
+# Integration Steps
 
 This chapter describes how an Application Provider (AP) integrates its backend with the Swisscom Mobile ID signature service. It covers the necessary preconditions, endpoint configuration, and use of mutual TLS authentication.
 
@@ -9,7 +9,7 @@ Before using the Swisscom Mobile ID web service, some initial provisioning steps
 1. **The Mobile ID customer (your company) has an agreement with Swisscom:**
    - **Connectivity** (Internet or LAN-I) between the **AP** and **Mobile ID** has been established.
      - The AP’s public source IP address (or range) must be whitelisted in the **Swisscom Firewall**.
-   - The customer has delivered the **X.509 client certificate** to Swisscom (see [Create X509 Client Certificates](/reference-guide/create-client-certs.md)).
+   - The customer has delivered the **X.509 client certificate** to Swisscom (see [Create X509 Client Certificates](/rest-api-guide/create-client-certs.md)).
 
 2. **The Mobile ID customer receives from Swisscom:**
    - An **AP_ID** (Application Provider Identifier) value.
@@ -43,10 +43,10 @@ A description of this interface is available as a WSDL file on GitHub: [mobileid
 
 | Endpoint URL | Description | Reference Section |
 |---------------|--------------|-------------------|
-| `<Base-URL>/soap/services/MSS_SignaturePort` | **MSS Signature** | [Section MSS Signature](/reference-guide/mobile-id-api.html#mss-signature)|
-| `<Base-URL>/soap/services/MSS_StatusQueryPort` | **MSS Status Query** | [Section MSS Status Query](/reference-guide/mobile-id-api.html#mss-status-query)|
-| `<Base-URL>/soap/services/MSS_ReceiptPort` | **MSS Receipt** | [Section MSS Receipt](/reference-guide/mobile-id-api.html#mss-receipt) |
-| `<Base-URL>/soap/services/MSS_ProfilePort` | **MSS Profile Query** | [Section MSS Profile Query](/reference-guide/mobile-id-api.html#mss-profile-query)  |
+| `<Base-URL>/soap/services/MSS_SignaturePort` | **MSS Signature** | [Section MSS Signature](/rest-api-guide/mobile-id-api.html#mss-signature)|
+| `<Base-URL>/soap/services/MSS_StatusQueryPort` | **MSS Status Query** | [Section MSS Status Query](/rest-api-guide/mobile-id-api.html#mss-status-query)|
+| `<Base-URL>/soap/services/MSS_ReceiptPort` | **MSS Receipt** | [Section MSS Receipt](/rest-api-guide/mobile-id-api.html#mss-receipt) |
+| `<Base-URL>/soap/services/MSS_ProfilePort` | **MSS Profile Query** | [Section MSS Profile Query](/rest-api-guide/mobile-id-api.html#mss-profile-query)  |
 
 ### **REST Endpoint**
 A description of this interface is available here: [API Specification](/api-reference/api) or you can download the corresponding YAML file on GitHub: [mobileid.yaml](https://github.com/MobileID-Strong-Authentication/mobileid-api/blob/main/rest/mobileid.yaml)
@@ -55,10 +55,10 @@ A description of this interface is available here: [API Specification](/api-refe
 
 | Endpoint URL | Description | Reference Section |
 |---------------|--------------|-------------------|
-| `<Base-URL>/rest/service/sign` | **MSS Signature** | [Section MSS Signature](/reference-guide/mobile-id-api.html#mss-signature) |
-| `<Base-URL>/rest/service/status` | **MSS Status Query** |[Section MSS Status Query](/reference-guide/mobile-id-api.html#mss-status-query) |
-| `<Base-URL>/rest/service/receipt` | **MSS Receipt** | [Section MSS Receipt](/reference-guide/mobile-id-api.html#mss-receipt)  |
-| `<Base-URL>/rest/service/profile` | **MSS Profile Query** | [Section MSS Profile Query](/reference-guide/mobile-id-api.html#mss-profile-query) |
+| `<Base-URL>/rest/service/sign` | **MSS Signature** | [Section MSS Signature](/rest-api-guide/mobile-id-api.html#mss-signature) |
+| `<Base-URL>/rest/service/status` | **MSS Status Query** |[Section MSS Status Query](/rest-api-guide/mobile-id-api.html#mss-status-query) |
+| `<Base-URL>/rest/service/receipt` | **MSS Receipt** | [Section MSS Receipt](/rest-api-guide/mobile-id-api.html#mss-receipt)  |
+| `<Base-URL>/rest/service/profile` | **MSS Profile Query** | [Section MSS Profile Query](/rest-api-guide/mobile-id-api.html#mss-profile-query) |
 
 
 ## Mutual Authentication
@@ -83,7 +83,7 @@ A certificate-based mutual authentication when accessing the Mobile ID web servi
   - Authentication is denied if the client sends a bag with the full certificate chain.
 
 - The Enhanced Key Usage value of client certificates must include Client Authentication (`1.3.6.1.5.5.7.3.2`).
-  - See **[Create X509 Client Certificates](/reference-guide/create-client-certs.md)** for examples of creating self-signed certificates.
+  - See **[Create X509 Client Certificates](/rest-api-guide/create-client-certs.md)** for examples of creating self-signed certificates.
 
 - All requests to the Mobile ID service must originate only from servers that you control.
   - Never send requests directly from client-side code such as mobile apps or JavaScript, as this may compromise your credentials.

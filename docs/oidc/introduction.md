@@ -1,6 +1,6 @@
 # Introduction
 
-This document provides **Relying Parties (RPs)** with technical guidance and best practices for integrating Mobile ID **OpenID Provider (MobileID OP)** into their applications.
+This document provides Relying Parties (RPs) with technical guidance and best practices for integrating Mobile ID OpenID Provider (MobileID OP) into their applications.
 
 The MobileID OP can be used for both authorization and authentication. It fully complies with the OpenID Connect specification.
 
@@ -38,9 +38,9 @@ Mobile ID utilizes the Authorization Code Grant Type to obtain an access token t
 
 1. An End-User requests access to a protected resource of the Relying Party. For example, the End-User clicks on a sign-in button or launches an app. The Relying Party redirects the User-Agent to the Mobile ID Authorization Endpoint at `https://m.mobileid.ch`.
 2. The Mobile ID Authorization Server authenticates the End-User (using an appropriate Mobile ID authentication method) and establishes whether the End-User grants or denies the Relying Party Client’s access request. Including access to extra user information that might have been requested in the scope of the authentication request sent by the Relying Party.
-3. The Mobile ID Authorization Server redirects the User-Agent back to the Relying Party’s web site or application using the redirection URI provided earlier in step 1. The redirection URI includes an **Authorization code** that is valid for a few minutes.
-4. Relying Party requests an **Access Token** from the Mobile ID Token Endpoint by including the **Authorization code** received in the previous step. When making the request, the Relying Party authenticates with the Mobile ID server. The client includes the redirection URI used to obtain the authorization code for verification.
-5. The Mobile ID server authenticates the client, validates the authorization code, and ensures that the redirection URI received matches the URI used to redirect the client in step 3. On success, the Mobile ID server will return a JSON object with the **ID Token** and an **Access Token**, and an optional Refresh Token.
+3. The Mobile ID Authorization Server redirects the User-Agent back to the Relying Party's web site or application using the redirection URI provided earlier in step 1. The redirection URI includes an Authorization code that is valid for a few minutes.
+4. Relying Party requests an Access Token from the Mobile ID Token Endpoint by including the Authorization code received in the previous step. When making the request, the Relying Party authenticates with the Mobile ID server. The client includes the redirection URI used to obtain the authorization code for verification.
+5. The Mobile ID server authenticates the client, validates the authorization code, and ensures that the redirection URI received matches the URI used to redirect the client in step 3. On success, the Mobile ID server will return a JSON object with the ID Token and an Access Token, and an optional Refresh Token.
 6. Optional: Relying Party requests additional, consented user information (claims). The user info endpoint returns previously consented user profile information to the client. A valid access token is required for that.
 7. Relying Party grants or denies access to the requested service and the user is logged in.
 

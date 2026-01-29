@@ -1,3 +1,5 @@
+# Ignore temporary workspace directory
+tmp/
 docs/.vitepress/dist
 docs/.vitepress/cache
 node_modules

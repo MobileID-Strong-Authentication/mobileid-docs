@@ -2,18 +2,18 @@
 
 Before you can integrate and use Mobile ID OpenID Connect sign-in, the client on-boarding process must have been completed by Swisscom.
 
-For the technical on-boarding, you will be asked to provide Swisscom following information:
+For the technical on-boarding, you will be asked to provide Swisscom with the following information:
 
 | What | Quick Description | Ref. |
 |------|--------------------|------|
 | **Client Display Name** | Your client’s name, which is displayed by the authorization server. <br> Example value: `iDemo Online Shop` | |
-| **Redirect URI(s)** | Redirection URI(s) to which the response will be sent. Note that TLS (https) is always required and localhost URI is not allowed.<br> Example value:<br>`https://app01.idemo-company.ch/oauth2/authresp`<br>`https://app02.idemo-company.ch/oauth2/authresp` | [OIDC spec](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest) |
+| **Redirect URI(s)** | Redirection URI(s) to which the response will be sent. Note that TLS (https) is always required and the localhost URI is not allowed.<br> Example value:<br>`https://app01.idemo-company.ch/oauth2/authresp`<br>`https://app02.idemo-company.ch/oauth2/authresp` | [OIDC spec](https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest) |
 | **Default ACR** | Your default ACR. Must be a value that is available for your selected Mobile ID contract.<br> Example value: `mid_al3_any` | [Section Auth Code Request ](/oidc/getting-started#authorization-code-request) |
 | **Client Auth Mode** | Your client’s authentication method, either basic or post.<br> Example value: `client_secret_post` | [Section Access Token Request ](/oidc/getting-started#access-token-request) |
-| **Always Prompt For Consent** | The Mobile ID server default behaviour is to skip the consent step, provided such is already recorded for the given end-user and client.<br> Default: `false` | |
+| **Always Prompt For Consent** | The Mobile ID server default behavior is to skip the consent step, provided such is already recorded for the given end-user and client.<br> Default: `false` | |
 | **MFA Number Matching** | Enable MFA number matching feature for Mobile ID SIM and Mobile ID App authentication.<br> When a user responds to an MFA notification using Mobile ID SIM or Mobile ID App, they'll be presented with a number on their mobile. They need to select that number in the sign-in prompt to complete the approval.<br> Default: `false` | [Video](https://youtu.be/4ACfK_kByKY) |
 | **LDAP Settings** | Optional. Mobile ID server can connect to an LDAP(S) to validate user credentials and/or retrieve user attributes from the LDAP, such as:<br> - MFA mobile number attribute<br> - Mobile ID Serialnumber attribute (required for ACR mid_al4)<br> - User password attribute | |
-| **CNAME Record** | Optional. Mobile ID server can use a custom domain instead of default m.mobileid.ch. Custom Domains are only relevant if prompt=login is used. We will need your record name (e.g. mobileid.acme.com) that routes the traffic to m.mobileid.ch. | |
+| **CNAME Record** | Optional. Mobile ID server can use a custom domain instead of the default m.mobileid.ch. Custom Domains are only relevant if prompt=login is used. We will need your record name (e.g. mobileid.acme.com) that routes the traffic to m.mobileid.ch. | |
 
 You will get a unique OIDC client identifier and client secret from Swisscom.
 If you did not receive your client credentials, it means that your on-boarding process is not finished yet.
@@ -63,7 +63,7 @@ A button could look like this example:
 
 ![mobileid-button](/img/mobileid-button.png)
 
-A click on the button will redirect the user to the mobileid.ch domain, where (s)he can complete the authorization code flow. In the example screenshot below, the user enters the phone number, authen-ticates with the Mobile ID App and consents to the user information (phone number, current location) that was requested by the Relying Party “iDemo App”. Finally, the user is redirected back to the Relying Party’s domain.
+A click on the button will redirect the user to the mobileid.ch domain, where they can complete the authorization code flow. In the example screenshot below, the user enters the phone number, authenticates with the Mobile ID App and consents to the user information (phone number, current location) that was requested by the Relying Party "iDemo App". Finally, the user is redirected back to the Relying Party's domain.
 
 ![idemo-app-login](/img/idemo-app-login.png)
 

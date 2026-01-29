@@ -50,7 +50,11 @@ Therefore, a user account could have either the (e)SIM method, the App method or
 An Application Provider (AP) can request SIM Toolkit (STK) based authentication, hereinafter referred to as "SIM method". To utilize the SIM method, the user must have a Mobile ID compliant SIM card or eSIM. Data exchange between the Mobile ID server and the STK application is done with SMS messages using data packets (PDUs), not visible to the end-user. The Mobile ID SIM Toolkit application runs on the SIM card environment and is compliant with all mobile devices.
 
 
-![mobileid-login-accept](/img/mobileid-login-accept.png)
+<img
+  src="/img/mobileid-login-accept.png"
+  alt="mobileid-login-accept"
+  style="max-height: 348px; width: auto; height: auto; max-width: 100%;"
+/>
 
 
 #### **Key Advantages**
@@ -90,8 +94,6 @@ The App can display a plain UTF-8 string as a single text line. This is known as
 DTBD (DataToBeDisplayed) Classic View.
 
 ![app-display-utf8](/img/app-display-utf8.png)
-
-
 
 The App also supports Transaction Approval Style, which enhances readability by displaying
 a title (type-field) and one or more key-value rows.

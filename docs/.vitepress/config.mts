@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { full as emoji } from 'markdown-it-emoji'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -8,6 +9,12 @@ export default defineConfig({
   lastUpdated: true,
   // Enable the built-in light/dark appearance switch in the navbar
   appearance: true,
+
+  markdown: {
+    config: (md) => {
+      md.use(emoji)
+    }
+  },
 
   head: [['link', { rel: 'icon', href: '/mobileid.svg' }]],
 

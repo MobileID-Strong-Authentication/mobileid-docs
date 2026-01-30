@@ -5,6 +5,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
+    "markdown-it-emoji": "^3.0.0",
     "vitepress": "^1.6.4"
   },
   "dependencies": {

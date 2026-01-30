@@ -31,7 +31,7 @@ features:
 <div class="vp-doc">
 
 <div class="wip-banner">
-  <strong>Work in Progress: We're actively building this documentation. Check back regularly for the latest updates.</strong> 
+  <strong>🚧 Work in Progress: We're actively building this documentation. Check back regularly for the latest updates.</strong> 
 </div>
 
 </div>

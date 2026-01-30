@@ -53,7 +53,7 @@ An Application Provider (AP) can request SIM Toolkit (STK) based authentication,
 <img
   src="/img/mobileid-login-accept.png"
   alt="mobileid-login-accept"
-  style="max-height: 348px; width: auto; height: auto; max-width: 100%;"
+  style="max-width: 360px; max-height: 360px; width: auto; height: auto;"
 />
 
 
@@ -93,12 +93,22 @@ The Mobile ID App activation can be done within the mobile app (in-app enrolment
 The App can display a plain UTF-8 string as a single text line. This is known as the
 DTBD (DataToBeDisplayed) Classic View.
 
-![app-display-utf8](/img/app-display-utf8.png)
+<img
+  src="/img/app-display-utf8.png"
+  alt="app-display-utf8"
+  style="max-width: 700px; max-height: 360px; width: auto; height: auto;"
+/>
+
+
 
 The App also supports Transaction Approval Style, which enhances readability by displaying
 a title (type-field) and one or more key-value rows.
 
-![app-display-trans-approval](/img/app-display-trans-approval.png)
+<img
+  src="/img/app-display-trans-approval.png"
+  alt="app-display-trans-approval"
+  style="max-width: 700px; max-height: 360px; width: auto; height: auto;"
+/>
 
 
 #### App Method Key Advantages
@@ -124,7 +134,11 @@ Before going into more technical details, let’s have a short look at the main 
 **Strong Authentication**:
 The end-user wants to access a corporate application protected by Mobile ID strong authentication.
 
-![auth-flow-strong-flow](/img/auth-flow-strong-flow.png)
+<img
+  src="/img/auth-flow-strong-flow.svg"
+  alt="auth-flow-strong-flow"
+  style="max-width: 700px; max-height: 360px; width: auto; height: auto;"
+/>
 
 #### Main Steps Performed by the End-User and the Mobile Signature Service
 

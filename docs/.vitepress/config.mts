@@ -27,7 +27,7 @@ export default defineConfig({
     sidebar: {
       '/rest-api-guide/': [
         {
-          text: 'Reference Guide',
+          text: 'REST API Guide',
           items: [
             { text: 'Introduction', link: '/rest-api-guide/introduction' },
             { text: 'Integration Steps', link: '/rest-api-guide/app-provider-client-integration' },
@@ -64,7 +64,7 @@ export default defineConfig({
 
       '/oidc-integration-guide/': [
         {
-          text: 'OIDC Guide',
+          text: 'OIDC Integration Guide',
           items: [
             { text: 'Introduction', link: '/oidc-integration-guide/introduction' },
             { text: 'Getting Started', link: '/oidc-integration-guide/getting-started' },
@@ -79,7 +79,7 @@ export default defineConfig({
 
       '/radius-interface-gateway-guide/': [
         {
-          text: 'RIG Radius Guide',
+          text: 'Radius Interface Gateway',
           items: [
             { text: 'Index', link: '/radius-interface-gateway-guide/' },
             { text: 'One', link: '/radius-interface-gateway-guide/one' },

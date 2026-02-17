@@ -1,8 +1,8 @@
 # Best Practices
 
-## Pushed Authorization Request (PAR)
+## Pushed Auth Request (PAR)
 
-### Back-channel submission of authorisation parameters
+### Back-channel PAR Submission
 
 The Pushed Authorisation Request (PAR) endpoint gives OAuth 2.0 clients a back-channel to post the parameters of an authorisation request to the Mobile ID server, to obtain an opaque URI handle for them, and then continue with the frontend redirection to the authorisation endpoint as usual.
 
@@ -105,13 +105,13 @@ Provide state and nonce values with sufficient entropy.
 - [OIDC Core — AuthRequest](http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest)
 - [OIDC Core — NonceNotes](http://openid.net/specs/openid-connect-core-1_0.html#NonceNotes)
 
-### Validate authentication responses
+### Validate Auth Responses
 
 Handle the state parameter correctly.
 
 - [OIDC Core — AuthResponseValidation](http://openid.net/specs/openid-connect-core-1_0.html#AuthResponseValidation)
 
-### Validate token endpoint responses
+### Validate Token Responses
 
 Validate the ID Token and verify scopes.
 

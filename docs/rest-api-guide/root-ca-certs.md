@@ -3,7 +3,7 @@
 There are two different scenarios (described in the two chapters below) to consider, where x.509 certificates are involved. Since they do not have the same root CA, you must ensure that your client's TrustStore contains all involved "Root CA" certificates.
 
 
-## Mobile ID X509 Server Certificate
+## X509 Server Certificate
 
 As described in [Section Mutual Authentication](/rest-api-guide/app-provider-client-integration.html#mutual-authentication), the Mobile ID server's x.509 certificate that is used in the mutual SSL/TLS authentication process is a SwissSign certificate.
 
@@ -15,7 +15,7 @@ You can download the "SwissSign Gold CA - G2" certificate from the SwissSign sit
 | D8 C5 38 8A B7 30 1B 1B 6E D4 7A E6 45 25 3A 6F 9F 1A 27 61 |
 
 
-## Mobile ID User X509 Certificate
+## User X509 Certificate
 
 As described in [Section MSS Signature](/rest-api-guide/mobile-id-api.html#mss-signature), the main scenario is a strong authentication, where the AP receives a signature response, which includes the signature object and the mobile user's x.509 certificate (public key). The AP should validate the signature as well as the x.509 certificate's trust chain.
 

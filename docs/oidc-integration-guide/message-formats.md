@@ -129,7 +129,7 @@ GET /oidc/authorize?
 Request an App ACR (e.g., `mid_al3_mobileapp`) if you want to ensure the App method is selected.
 :::
 
-## What exactly is signed (classic vs. Transaction Approval)
+## Signed Data Comparison
 
 **Classic DTBD:** the service signs the visible text string.
 

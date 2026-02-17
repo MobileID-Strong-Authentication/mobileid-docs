@@ -15,7 +15,7 @@ See [OpenID Connect FAQ](https://openid.net/connect/faq/) for a set of answers t
 The Mobile ID solution protects access to your company data and applications with a comprehensive end-to-end solution for a strong multi-factor authentication (MFA). Please visit [mobileid.ch](https://mobileid.ch) for further information. Do not hesitate to contact us in case of any questions.
 
 
-## Basic Key Concepts – Terminology
+## Key Concepts & Terminology
 
 The most basic key concepts are as follows.
 

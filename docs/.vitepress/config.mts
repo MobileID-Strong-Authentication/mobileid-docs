@@ -78,7 +78,7 @@ export default defineConfig({
             { text: 'Best Practices', link: '/oidc-integration-guide/best-practices' },
             { text: 'Public Cloud Integration Guide', link: '/oidc-integration-guide/cloud-integration-guide' },
             { text: 'MobileID OIDC - Use Cases', link: '/oidc-integration-guide/oidc-use-cases' },
-            { text: 'Message Formats on the Mobile ID App', link: '/oidc-integration-guide/message-formats' }
+            { text: 'App Message Formats', link: '/oidc-integration-guide/message-formats' }
           ]
         },
         {

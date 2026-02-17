@@ -19,7 +19,7 @@ If the request contains a `login_hint` parameter with the user's phone number, t
 ![use-case-msisdn-rp-knows](/img/use-case-msisdn-rp-knows.png)
 
 
-## Prompt user for user credentials
+## Prompt for User Credentials
 
 If the request contains a `login_hint` parameter set to `useLDAP:true` and a `prompt` parameter set to `login`, the result will be that the user must enter the user credentials on the MobileID side, as shown in the figure below. This is a typical **B2B** scenario, for example the MobileID login to a company service.
 

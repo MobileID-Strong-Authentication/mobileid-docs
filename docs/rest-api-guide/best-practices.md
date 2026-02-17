@@ -110,7 +110,7 @@ If both requests target the Mobile ID App-based authentication method, the behav
 - **Fault Code (cancellation of first transaction):** `401 / USER_CANCEL`
 - See **Section 6** for further information.
 
-## Mobile ID Serial Number Validation
+## Serial Number Validation
 
 With an MSS Signature response, you will get signature data and the mobile user's X.509 certificate, which contains the public key required to validate the signature data.
 

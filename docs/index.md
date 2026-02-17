@@ -10,22 +10,22 @@ hero:
 features:
   - title: REST API Guide
     icon:
-      src: /img/icon-info.svg
-      class: feature-icon-info
+      src: /img/icon-api.svg
+      class: feature-icon-api
     details: Start here for direct integration via REST API (works for web apps and non-browser flows like native apps/backends).
     link: /rest-api-guide/introduction
   - title: OIDC Integration Guide
     icon:
-      src: /img/icon-security.svg
-      class: feature-icon-security
+      src: /img/icon-key.svg
+      class: feature-icon-key
     details: Start here for standards-based login via OpenID Connect (browser/redirect flow). Mobile ID acts as the OpenID Provider.
     link: /oidc-integration-guide/introduction
-  - title: Release Notes
+  - title: RADIUS Gateway Guide
     icon:
-      src: /img/icon-notes.svg
-      class: feature-icon-notes
-    details: Stay tuned for the latest updates! Discover new features, enhancements, and improvements in our upcoming release.
-    link: /release-notes/release-notes
+      src: /img/icon-network.svg
+      class: feature-icon-network
+    details: Start here to integrate Mobile ID strong authentication into your existing RADIUS-based network via the RADIUS Interface Gateway (RIG).
+    link: /radius-interface-gateway-guide/introduction
 ---
 
 <div class="vp-doc">

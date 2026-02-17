@@ -90,16 +90,12 @@ This section describes the behavior of the Mobile ID Service when an Application
 
 Concurrency handling depends on whether the request targets the SIM method or the Mobile ID App method.
 
----
-
 ##### SIM Method Concurrency
 If both signature requests target the SIM-based authentication method, and the first signature transaction is still in progress, the second request is rejected immediately.
 
 - **Fault Code:** `406 / PB_SIGNATURE_PROCESS`
 - **Description:** The subscriber already has an active signature operation in process.
 - See **Section 6** for detailed fault code definitions.
-
----
 
 ##### App Method Concurrency
 If both requests target the Mobile ID App-based authentication method, the behavior is different:

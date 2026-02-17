@@ -28,6 +28,7 @@ The following points must be considered before you proceed with the deployment.
 
 - The NAS RADIUS Access-Request packet contains either a **unique NAS-Identifier attribute** or it has a **unique and static source IP address/range**. RIG will pick the configuration based on this info.
 - The RADIUS client timeout shall be set to **60 seconds**. This ensures enough time for the user to respond to the Mobile ID authentication request.
+- The RADIUS client retry shall be set to no more than **1**. The client should not retry because there might still be a Mobile ID authentication session ongoing.
 
 ### Connectivity Requirements
 
@@ -43,6 +44,16 @@ You can verify the LDAP connectivity using the following command on the node whe
 
 ```bash
 ldapwhoami -x -w <passwd> -D "cn=<tbd>,ou=<tbd>,dc=<tbd>,dc=<tbd>" -H ldap://<ldap.myserver.com>:389
+```
+
+When troubleshooting LDAP configuration issues, you can use `ldapsearch` to query user attributes directly:
+
+```bash
+ldapsearch -LLL -H ldap://<ldap.myserver.com>:389 \
+  -b "ou=<tbd>,dc=<tbd>,dc=<tbd>" \
+  -D "cn=<admin>,dc=<tbd>,dc=<tbd>" \
+  -w <passwd> \
+  -s sub "(&(objectclass=inetOrgPerson)(uid=<user>))"
 ```
 
 You can verify the Mobile ID API connectivity using the following command on the node where the RIG container application is running:
@@ -61,11 +72,11 @@ Here is an I18N Error Message JSON configuration example. Add the JSON content e
 
 ## Docker Run
 
-You can pull the Docker images from [Docker Hub](https://hub.docker.com/) (or alternatively from Amazon ECR).
+You can pull the Docker images from [Docker Hub](https://hub.docker.com/repository/docker/mobileidch/mid-radius-rig) or from [Amazon ECR](https://gallery.ecr.aws/mobileidch/mid-radius-rig).
 
 For high availability, you will need the following components, running at least two instances each:
 
-- **Mobile ID RADIUS Interface Gateway application** — [Docker Hub](https://hub.docker.com/) or Amazon ECR
+- **Mobile ID RADIUS Interface Gateway application** — [Docker Hub](https://hub.docker.com/repository/docker/mobileidch/mid-radius-rig) or [Amazon ECR](https://gallery.ecr.aws/mobileidch/mid-radius-rig)
 - **Redis database** using `redis` (requires 3 nodes for HA; alternatively, `keydb` may be used)
 - **Redis web management tool** using `redis-commander` to manage the Redis database content
 - **UDP network load balancer** using `nginx` with a custom `nginx.conf` configuration
@@ -74,6 +85,12 @@ How to pull an image from Docker Hub:
 
 ```bash
 docker pull mobileidch/mid-radius-rig
+```
+
+How to pull an image from Amazon ECR:
+
+```bash
+docker pull public.ecr.aws/mobileidch/mid-radius-rig
 ```
 
 How to run a Docker application:

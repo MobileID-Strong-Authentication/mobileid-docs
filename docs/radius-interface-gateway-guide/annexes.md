@@ -49,6 +49,31 @@ echo "User-Name=test,User-Password=mypass,Framed-Protocol=PPP" | \
 echo "Message-Authenticator = 0x00" | /usr/local/bin/radclient localhost:1812 auth s3cr3t
 ```
 
+#### Testing a RIG Instance
+
+The following examples show how to use `radclient` to test a running RIG instance specifically.
+
+**Without LDAP** — the MSISDN is provided as part of the User-Name:
+
+```bash
+echo "User-Name=<MyMobileNumber>@<mycompany.com>,NAS-Identifier=<ch_mycompany>" | \
+  radclient -c 1 -r 1 -x -t 30 <server-ip> auth <shared-secret>
+```
+
+**With LDAP** — the RIG service retrieves the user's mobile number via LDAP:
+
+```bash
+echo "User-Name=<username>,User-Password=<user-password>,NAS-Identifier=<ch_mycompany>" | \
+  radclient -c 1 -r 1 -x -t 30 <server-ip> auth <shared-secret>
+```
+
+**OTP (SMS) challenge-response** — if the authentication falls back to OTP via SMS, you will receive an `Access-Challenge` response that includes a `State` value. You must respond with another `Access-Request` that includes the OTP as `User-Password` and the retrieved `State` value:
+
+```bash
+echo "User-Name=<MyMobileNumber>@<mycompany.com>,User-Password=<otp>,State=<state>,NAS-Identifier=<ch_mycompany>" | \
+  radclient -c 1 -r 1 -x -t 30 <server-ip> auth <shared-secret>
+```
+
 ### RADIUS Online Test
 
 The idBlender company provides a free online web application that functions as a RADIUS client. It uses a backend service to perform the actual RADIUS request (so it is not the browser that sends the RADIUS requests, but a backend service) and can be used to test publicly available RADIUS servers.

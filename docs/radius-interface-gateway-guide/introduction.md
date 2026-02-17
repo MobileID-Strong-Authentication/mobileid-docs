@@ -10,11 +10,10 @@ During authentication via RADIUS, an extra step requires users to confirm the ac
 
 Some clients might decide to move from 1FA (one-factor authentication) to 2FA: username + password and Mobile ID. Other clients might decide to stick with 2FA but replace the existing combination of username + password and security device challenge with username + password plus Mobile ID as additional MFA.
 
-RADIUS users are typically defined in the format `user@domain`. However, Mobile ID requires the phone number (MSISDN) of the user. Therefore, the phone number of the target user should be provided with one of the following options (RIG supports all three):
+RADIUS users are typically defined in the format `user@domain`. However, Mobile ID requires the phone number (MSISDN) of the user. Therefore, the phone number of the target user should be provided with one of the following options:
 
 - RIG connects to a customer's **Directory Service (LDAP)** to retrieve user attributes such as phone number (MSISDN) or other optional attributes such as User-Language, MobileID serial number, or the user's preferred authentication method.
 - The RADIUS client provides the **MSISDN as part of the User-Name** (e.g. `4179xxxxxxx@mydomain.com`).
-- The RADIUS client provides the **MSISDN via Vendor Specific Attribute** (`X-MSS-MSISDN`).
 
 ## RIG Feature List
 
@@ -23,12 +22,24 @@ RADIUS users are typically defined in the format `user@domain`. However, Mobile 
 - Multitenancy
 - Cloud-native microservice architecture (horizontal scalability)
 - Authentication: Mobile ID SIM, Mobile ID App, OTP Text SMS
-- Geofencing
-- LDAP lookup (`userPassword`, `mobile`, `preferredLanguage`, `midSerial`, `preferredMFA`)
+- Automatic authentication fallback with configurable priority
+- MFA method selection via LDAP group membership (`memberOf`)
+- MFA method "None" (temporarily disable MFA per user or group)
+- Geofencing (whitelist/blacklist configuration, AD group-based, configurable confidence scores)
+- LDAP(S) integration (`userPassword`, `mobile`, `preferredLanguage`, `midSerial`, `preferredMFA`)
+- LDAP search scope and referral configuration
+- Flexible LDAP search filters with multiple username placeholders
+- LDAP authentication without admin/service user
+- User Account Control attribute support
 - Mobile ID user's serial number validation (optional)
+- RADIUS Accounting
+- RADIUS Class attribute in Access-Accept
 - Custom RADIUS Reply Messages for Access-Reject
 - Custom Text SMS notification for specific error events
+- Accounting Webhook (forward accounting traffic to external systems)
 - Supports Fortinet Vendor Specific Attributes (VSA)
+- Support for Docker secrets via `_FILE` environment variables
+- BlastRADIUS mitigation — Message-Authenticator support (CVE-2024-3596)
 
 ### Features Planned
 

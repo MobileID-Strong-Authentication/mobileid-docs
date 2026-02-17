@@ -1332,7 +1332,7 @@ Length limited and no formatting options.
 
 Approve/Cancel becomes active only after the user scrolls to the end if content exceeds one screen.
 
-![app-display-trans-approval(/img/app-display-trans-approval.png)
+![app-display-trans-approval](/img/app-display-trans-approval.png)
 
 
 #### Calssic DTBD (single-line text)

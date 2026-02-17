@@ -23,6 +23,8 @@ Please speak to your Swisscom contact if you wish to get this feature enabled fo
 ## User Perspective
 From a user perspective, the steps displayed on the mobile device look very similar, if you compare the signature process of an active Mobile ID SIM vs. the process of an inactive Mobile ID SIM.
 
+![auto-activation-user-perspective](/img/auto-activation-user-perspective.png)
+
 Note that in case of a successful auto activation, the Mobile ID server sends a Text SMS to the user, to remind the user to create a Mobile ID recovery code [<sup id="a24">24</sup>](#24).
 
 **References**

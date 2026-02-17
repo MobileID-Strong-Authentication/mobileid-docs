@@ -9,6 +9,7 @@
     "vitepress": "^1.6.4"
   },
   "dependencies": {
+    "medium-zoom": "^1.1.0",
     "swagger-ui": "^5.31.0",
     "swagger-ui-dist": "^5.31.0"
   },

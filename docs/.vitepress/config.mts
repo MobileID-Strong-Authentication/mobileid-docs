@@ -80,6 +80,10 @@ export default defineConfig({
             { text: 'MobileID OIDC - Use Cases', link: '/oidc-integration-guide/oidc-use-cases' },
             { text: 'Message Formats on the Mobile ID App', link: '/oidc-integration-guide/message-formats' }
           ]
+        },
+        {
+          text: '',
+          items: [{ text: 'Imprint', link: '/oidc-integration-guide/imprint.md' }]
         }
       ],
 

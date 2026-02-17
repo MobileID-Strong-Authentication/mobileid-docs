@@ -1,11 +1,10 @@
 # Best Practices
 
-The Swisscom Mobile ID Strong Authentication GitHub repository provides various examples of Mobile ID client implementations.
+This page provides guidelines for constructing requests, validating responses, and handling errors when integrating with the Mobile ID API.
 
-The repository [`mobileid-client-java`](https://github.com/SwisscomTrustServices/mobileid-client-java) serves as the *main* Java-based reference implementation for building Mobile ID REST and SOAP API clients.
-
-This library is ideal for Java 8+ projects that require secure authentication and authorization using a mobile phone.
-It can be added as a dependency to your project and used in any scenario requiring access to the Swisscom Mobile ID service.
+::: tip Java Reference Client
+For Java projects, use the official [Java Reference Client](/rest-api-guide/java-reference-client) — a production-ready library that implements all of these best practices out of the box.
+:::
 
 ## MSS Signature
 
@@ -198,12 +197,12 @@ The Mobile ID service health check is successful if a fault code 101/WRONG_PARAM
 ```
 
 
-## Mobile ID Client Examples
+## Client Libraries
 
-The GitHub Repository at [https://github.com/MobileID-Strong-Authentication](https://github.com/MobileID-Strong-Authentication) contains different examples for a Mobile ID client.
+The [MobileID-Strong-Authentication](https://github.com/MobileID-Strong-Authentication) GitHub organisation provides reference implementations and examples for building Mobile ID clients.
 
-The repo **[`mobileid-client-java`](https://github.com/SwisscomTrustServices/mobileid-client-java)**  is the main Java-based reference implementation for the Mobile ID REST and SOAP API client.
+| Library | Language | Description |
+|---------|----------|-------------|
+| [mobileid-client-java](https://github.com/MobileID-Strong-Authentication/mobileid-client-java) | Java 8+ | Official reference implementation for REST and SOAP APIs |
 
-The library provided by this repository is for all clients that are developing Java-based projects that need secure authentication and authorization services using the mobile phone.
-
-The library works with Java 8+ projects and can be added as a project dependency and used in any scenario that needs to access the Swisscom Mobile ID service.
+See the [Java Reference Client](/rest-api-guide/java-reference-client) page for setup instructions, code examples, and usage patterns.

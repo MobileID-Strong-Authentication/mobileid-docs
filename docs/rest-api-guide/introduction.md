@@ -29,8 +29,6 @@ It is suitable for various system landscapes and meets strict regulatory require
 | **X509** | Public-Key Infrastructure and digital certificates standard. |
 | **XML** | Extensible Markup Language — structured, human- and machine-readable document format. |
 
----
-
 ## MSS Signature Service
 
 Mobile ID is a cost-efficient, managed authentication service operated by Swisscom.
@@ -42,8 +40,6 @@ Authentication in Mobile ID is based on a secure hardware token which can be eit
 - a Mobile ID App running on a smartphone.
 
 Therefore, a user account could have either the (e)SIM method, the App method or even both methods activated at the same time. However, the Application Provider (AP) may select the preferred method and allow both methods or just either one.
-
----
 
 ### **Mobile ID SIM - Method**
 
@@ -70,8 +66,6 @@ An Application Provider (AP) can request SIM Toolkit (STK) based authentication,
 - **Pre-installed** STK App on the SIM/eSIM profile
 
 - Supported by most **Swiss Mobile Network Operators** *(Swisscom, Sunrise, Salt)*
-
----
 
 ### **Mobile ID App - Method**
 
@@ -123,9 +117,6 @@ a title (type-field) and one or more key-value rows.
 
 - **Availability**
   - The app is published and available in several countries of the European Union (EU)
-
-
----
 
 ### **Authentication Flow**
 

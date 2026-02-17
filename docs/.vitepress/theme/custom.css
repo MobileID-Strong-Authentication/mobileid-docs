@@ -74,17 +74,17 @@ body {
   --vp-c-bg-soft: #202127;
 }
 
-/* Dark mode override #3a3a3a */
-html.dark img.feature-icon-info {
-  content: url("/img/icon-info-light.svg");
+/* Dark mode override: swap feature icons to light variants */
+html.dark img.feature-icon-api {
+  content: url("/img/icon-api-light.svg");
 }
 
-html.dark img.feature-icon-security {
-  content: url("/img/icon-security-light.svg");
+html.dark img.feature-icon-key {
+  content: url("/img/icon-key-light.svg");
 }
 
-html.dark img.feature-icon-notes {
-  content: url("/img/icon-notes-light.svg");
+html.dark img.feature-icon-network {
+  content: url("/img/icon-network-light.svg");
 }
 
 

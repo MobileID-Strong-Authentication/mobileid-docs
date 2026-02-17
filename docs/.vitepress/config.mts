@@ -27,8 +27,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'REST API Guide', link: '/rest-api-guide/introduction' },
       { text: 'OIDC Integration Guide', link: '/oidc-integration-guide/introduction' },
-      { text: 'Release Notes', link: '/release-notes/release-notes' }
-
+      { text: 'RADIUS Gateway Guide', link: '/radius-interface-gateway-guide/introduction' }
     ],
 
     sidebar: {
@@ -76,7 +75,7 @@ export default defineConfig({
             { text: 'Introduction', link: '/oidc-integration-guide/introduction' },
             { text: 'Getting Started', link: '/oidc-integration-guide/getting-started' },
             { text: 'Best Practices', link: '/oidc-integration-guide/best-practices' },
-            { text: 'Public Cloud Integration Guide', link: '/oidc-integration-guide/cloud-integration-guide' },
+            { text: 'Public Cloud Integration', link: '/oidc-integration-guide/cloud-integration-guide' },
             { text: 'MobileID OIDC - Use Cases', link: '/oidc-integration-guide/oidc-use-cases' },
             { text: 'App Message Formats', link: '/oidc-integration-guide/message-formats' }
           ]
@@ -90,12 +89,17 @@ export default defineConfig({
 
       '/radius-interface-gateway-guide/': [
         {
-          text: 'Radius Interface Gateway',
+          text: 'RADIUS Gateway Guide',
           items: [
-            { text: 'Index', link: '/radius-interface-gateway-guide/' },
-            { text: 'One', link: '/radius-interface-gateway-guide/one' },
-            { text: 'Two', link: '/radius-interface-gateway-guide/two' }
+            { text: 'Introduction', link: '/radius-interface-gateway-guide/introduction' },
+            { text: 'RIG Deployment', link: '/radius-interface-gateway-guide/deployment' },
+            { text: 'The RADIUS Protocol', link: '/radius-interface-gateway-guide/radius-protocol' },
+            { text: 'Annexes', link: '/radius-interface-gateway-guide/annexes' }
           ]
+        },
+        {
+          text: '',
+          items: [{ text: 'Imprint', link: '/radius-interface-gateway-guide/imprint.md' }]
         }
       ]
 

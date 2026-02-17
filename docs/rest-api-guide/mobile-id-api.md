@@ -66,8 +66,6 @@ This will give all the required flexibility for an AP to handle different use ca
 | `http://mid.swisscom.ch/Device-LoA4` | Forces **App authentication** method. | By default, an AP is **not authorized** to use this profile.<br>Please ask **Swisscom** if you intend to use it. |
 | `http://mid.swisscom.ch/Any-Geofencing-LoA4` | Mobile ID backend will choose **SIM** or **App** authentication based on both the user’s authentication and **geo-location** capabilities:<br>– **SIM** method is preferred but only if the SIM has geo-location capabilities (Swisscom SIM only).<br>– **App** method is selected if it is the only active method for that user, or if the user’s SIM lacks geo-location capabilities. | By default, an AP is **not authorized** to use this profile.<br>The AP must have **Geofencing Additional Service** permission.<br>Please ask **Swisscom** if you intend to use it. |
 
----
-
 ::: warning Note
 If an AP is not authorized to use a specific signature profile, the request is rejected with the fault response.
 :::

@@ -43,8 +43,6 @@ Additional Endpoint URIs:
 | User Info | https://openid.mobileid.ch/userinfo |
 | Pushed Authorization Requests | https://openid.mobileid.ch/par |
 
----
-
 ## Authorization Code Request
 
 The authorization code can be obtained by performing a simple HTTP GET request towards the Authorization endpoint of the Mobile ID OP. The client secret is not involved yet.

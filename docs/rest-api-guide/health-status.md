@@ -1,26 +1,18 @@
 # Health Status Service
 
-The Mobile ID Health Status Service is a microservice where you can retrieve health state details about the MobileID authentication service. The health state is based on real end-to-end authentication tests that are checked every few minutes. It's free of charge!
+The Mobile ID Health Status Service is a microservice for retrieving health state details about the MobileID authentication service.
+
+- **Based on**: Real end-to-end authentication tests, checked every few minutes
+- **Scope**: Different telecommunications providers, IP+ and LAN-i endpoints, and the geofencing service
+- **Cost**: Free of charge
 
 For more information, please visit https://digital.swisscom.com/products/mobile-id
 
-## Active Probing
+## What is Monitored
 
-Retrieve a detailed health state about the Mobile ID authentication service. The scope of the health status service includes different telecommunications providers, IP+ and LAN-i endpoints and the geofencing service.
-
-The health status service is free of charge!
-
-## Real End-To-End Testing
-
-Our health status is based on real end-to-end Mobile ID tests that are responded by special robotic equipment at different physical locations.
-
-## MobileID Telecommunications Providers
-
-Checks include Mobile ID SIM cards from Swisscom, Sunrise, Salt.
-
-## MobileID App
-
-Checks include the Mobile ID mobile application.
+- **Telecommunications Providers**: Mobile ID SIM cards from Swisscom, Sunrise, Salt
+- **Mobile ID App**: The Mobile ID mobile application
+- **End-to-end tests**: Real Mobile ID tests responded by special robotic equipment at different physical locations
 
 ## Health Status Levels
 

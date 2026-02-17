@@ -45,19 +45,12 @@ When constructing an MSS Signature request, the following best-practice guidelin
    **Example DTBD:**
    > `Bank ACME: Proceed with the login? (TXN-3D5K)`
 
----
-
-**Footnotes**
-
+::: details Footnotes
 17. <span id="17"></span> Type of the AP_TransID is xsd:NCName, refer to http://www.datypic.com/sc/xsd/t-xsd_NCName.html [↩](#a17)
-
 18. <span id="17"></span> http://www.w3.org/TR/xmlschema-2/#dateTime [↩](#a17)
-
 19. <span id="17"></span> http://en.wikipedia.org/wiki/UTF-8 [↩](#a17)
-
 20. <span id="17"></span> In mobile telephony GSM 03.38 is the standard character set used in short message service. [↩](#a17)
-
----
+:::
 
 ### Signature Response
 
@@ -85,11 +78,10 @@ The key validation aspects are as follows:
 5. **Implement Proper Fault and Status Handling**
    - Handle all status and fault codes using structured exception handling logic to ensure stable, predictable behavior of the client application.
 
----
-
-**Important Note:**
+::: warning Important
 Certificate revocation checks are not recommended.
 Mobile ID user certificates are never revoked individually — the Mobile ID service backend manages account validity and state directly.
+:::
 
 
 ### Signature Concurrency Control
@@ -134,10 +126,13 @@ cn=midcheptod58qe59:pn,serialnumber=midcheptod58qe59,pseudonym=midcheptod58qe59
 
 For highest level of assurance and a truly strong two-factor-authentication process, an AP should store this value at the first signature and then verify every subsequent signature response if that serial number value still matches.
 
+::: warning
 If the value does not match anymore, it means that the user re-activated their account without a valid recovery option. In such case (serial number mismatch) the 2nd factor (knowledge/inherence) is not assured.
+:::
 
 ## Timeout Value
 
+::: info Recommended Timeout Values
 Use the reference values below to set an appropriate transaction timeout:
 
 | MSS Operation | Transaction Timeout | Client Connection Timeout |
@@ -147,6 +142,8 @@ Use the reference values below to set an appropriate transaction timeout:
 | MSS Status Query | - | 10 seconds |
 | MSS Receipt | - | 90 seconds |
 | MSS Profile Query | - | 10 seconds |
+
+:::
 
 ## Mobile ID FAQ
 

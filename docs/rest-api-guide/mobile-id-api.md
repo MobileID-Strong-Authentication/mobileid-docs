@@ -68,10 +68,13 @@ This will give all the required flexibility for an AP to handle different use ca
 
 ---
 
-¹ **Note:**
-If an AP is not authorized to use a specific signature profile, the request is rejected with the fault response:
+::: warning Note
+If an AP is not authorized to use a specific signature profile, the request is rejected with the fault response.
+:::
 
 ### User Scenario Examples (Signature Profile Handling)
+
+The following examples demonstrate how the Mobile ID backend responds to different signature profile values, depending on the user's active authentication methods (SIM, App, or both).
 
 The table below illustrates several example user scenarios and how the **MSSP** (Mobile ID backend) responds to a given **MSS Signature** request, depending on the user’s authentication capabilities and the selected **SignatureProfile** value.
 
@@ -111,9 +114,10 @@ Please note that these examples are **illustrative**, not exhaustive.
 | |  |  | `http://mid.swisscom.ch/Device-LoA4` | `http://mid.swisscom.ch/Device-LoA4` |
 
 
-**Note:**
+::: info Note
 An AP can use the **MSS Profile Query** request (see **[MSS Profile Query](/rest-api-guide/mobile-id-api#mss-profile-query)**) to determine a user’s capabilities.
 For example, to check whether a particular user supports **SIM** and/or **App**-based authentication before sending the signature request.
+:::
 
 
 ### Signature Messaging Mode
@@ -250,7 +254,9 @@ The following steps describe a typical synchronous (MessagingMode="synch") Mobil
 :::
 
 
-Note that `MinorVersion` value must be set to “2” in case of a REST/JSON request message.
+::: info
+`MinorVersion` value must be set to “2” in case of a REST/JSON request message.
+:::
 
 
 #### Synchronous MSS Signature Response
@@ -412,7 +418,7 @@ Meanwhile the AP sends MSS_StatusReq requests to MID. The MID replies with MSS_S
 10.	Depending on the response of MID, the AP may grant or deny access to the End-User.
 
 
-#### Aynchronous MSS Signature Request
+#### Asynchronous MSS Signature Request
 In pink the differences compared to the sync mode. This value isn’t the same for SOAP and REST.
 
 ::: code-group
@@ -503,9 +509,11 @@ In pink the differences compared to the sync mode. This value isn’t the same f
 
 :::
 
-Note that `MinorVersion` value must be set to “2” in case of a REST/JSON request message.
+::: info
+`MinorVersion` value must be set to “2” in case of a REST/JSON request message.
+:::
 
-#### Aynchronous MSS Signature Response
+#### Asynchronous MSS Signature Response
 
 ::: code-group
 
@@ -576,7 +584,9 @@ Note that `MinorVersion` value must be set to “2” in case of a REST/JSON req
 
 :::
 
-Note that the response contains the signature profile value to indicate what authentication method was chosen, which is helpful in case the request signature profile was `http://mid.swisscom.ch/Any-LoA4`.
+::: info
+The response contains the signature profile value to indicate what authentication method was chosen, which is helpful in case the request signature profile was `http://mid.swisscom.ch/Any-LoA4`.
+:::
 
 ### Additional Services (AS)
 The **MSS Signature** supports additional services that may be requested in the request message. Some of them are mandatory and some are optional.
@@ -584,7 +594,7 @@ The **MSS Signature** supports additional services that may be requested in the 
 #### User Language
 
 The `UserLang` is a mandatory service for all Signature Requests.
-One of the supported languages (EN, DE, FR, IT) must be defined. Please refer to section Synchronous MSS Signature Request or Aynchronous MSS Signature for an example. It should correspond to the language of the DataToBeDisplayed (DTBT) text message.
+One of the supported languages (EN, DE, FR, IT) must be defined. Please refer to section Synchronous MSS Signature Request or Asynchronous MSS Signature for an example. It should correspond to the language of the DataToBeDisplayed (DTBT) text message.
 Example usage (code snippet from the MSS Signature Request):
 
 ::: code-group
@@ -624,7 +634,10 @@ With the geofencing service, any authorized  Application Provider (AP) may reque
 
 Geofencing can be requested with the MSS Signature's additional service URI set to `http://mid.swisscom.ch/as#geofencing`.
 
+##### Geofencing Policy Enforcement
+
 There are three different ways to enforce a Geofencing policy.
+
 1.	The AP requests the Geofencing additional service by adding the URI http://mid.swisscom.ch/as#geofencing  to the MSS Signature request:
 
 ```json
@@ -702,18 +715,26 @@ The policy may contain a country-based whitelist or blacklist and minimum thresh
 The policy may contain a country-based whitelist or blacklist and minimum threshold values for the confidence scores, timestamp and accuracy.
 In this case, the AP can request the Geofencing service as shown in the 1st example. The Mobile ID server will enforce the custom Geofencing Policy that has been set for the AP.
 
-##### Geofencing Service Data
+##### Geofencing Service Data and Confidence Scores
 
 | Key | Value Example | Format | Description |
 |-----|---------------|--------|-------------|
-| Country | CH | ISO 3166-1 alpha-2 | A two-letter country code of the current SIM or Device location. Current Country location of the SIM (country code of the currently registered mobile cell) or Device (country code based on the reverse geocoding of the device's GPS coordination). <br><br>**Recommendation**: Allow or block access based on the country code returned in this response. |
-| Accuracy | 16 | An integer value. | Accuracy of the Device GPS, in meters. <br><br>In case of Mobile ID SIM authentications, the location is based on the mobile session information (country code of the currently registered mobile cell) and the accuracy is always 0 (the distance between the cell and the mobile device is unknown). <br><br>In case of Mobile ID App authentications, the location information is based on the device's GPS coordinates. The accuracy is a sum of the GPS accuracy and the distance between the GPS location point and the nearest geocoding data point (we do reverse geocoding of coordinates to country codes). <br><br>**Recommendation**: For Mobile ID App authentications, the accuracy depends on various factors. When the user is inside buildings or underground, the GPS is sometimes inaccurate. On latest iOS and Android, the user may also disable location precision, which will cause a high value for accuracy. |
-| DeviceConfidence | 0.99 | Float between 0 and 1.00 | A high device confidence means that we have a high trust in the user device and OS version. The value 1.0 represents the highest possible trust. <br><br>Device confidence score is based on an internal calculation, which includes different checks such as root or jailbreak detection. <br><br>**Recommendation**: A score below 0.5 is an indication that the user's device may be rooted or jailbroken. |
-| LocationConfidence | 0.85 | Float between 0 and 1.00 | A high location confidence means that we have a high trust in the user location data, which includes device confidence score in its calculation. The value 1.0 represents the highest possible trust. <br><br>Location confidence score is based on an internal calculation, which includes different checks such as mock service- and location spoofing detection, the age of the location data and the device confidence score. <br><br>For Mobile ID SIM authentication, the location confidence calculation incorporates the cell information age. <br><br>**Note**: The score will decrease every hour by 0.01 if location data is not up-to-date! Turning on and off the Device FlightMode feature will help to have up-to-date location data. <br><br>**Recommendation**: Typically, a location confidence of 0.7 or higher can be considered as a sufficient trust level. Please also refer to the table below. |
-| Timestamp | 2021-01-01T11:00:00.000+01:00 | formatting of yyyy-MM-dd'T'HH:mm:ss.SSS'Z' | The timestamp of the location information. <br><br>**Recommendation**: Mobile Session (registered cell) information or GPS location coordination may not be up-to-date and may require action from the mobile user. Turning on and off the Device FlightMode feature will help to have up-to-date location data. |
+| Country | CH | ISO 3166-1 alpha-2 | A two-letter country code of the current SIM or Device location. Based on the currently registered mobile cell (SIM) or reverse geocoding of the device's GPS coordinates (App). |
+| Accuracy | 16 | Integer | Accuracy of the Device GPS, in meters. For SIM authentications, accuracy is always 0. For App authentications, it is the sum of the GPS accuracy and distance to the nearest geocoding data point. |
+| DeviceConfidence | 0.99 | Float (0–1.00) | Trust level in the user device and OS version. Value 1.0 represents the highest possible trust. Based on internal checks including root/jailbreak detection. |
+| LocationConfidence | 0.85 | Float (0–1.00) | Trust level in the user location data, which includes device confidence in its calculation. Value 1.0 represents the highest possible trust. Score decreases by 0.01 every hour if location data is not updated. |
+| Timestamp | 2021-01-01T11:00:00.000+01:00 | yyyy-MM-dd'T'HH:mm:ss.SSS'Z' | The timestamp of the location information. |
 
-**Recommendations** regarding Confidence Score checks: Usually it is sufficient if a client implements a minimum threshold check for the Location Confidence Score since the Location Confidence Score in-cludes the Device Confidence Score in its calculation. Here’s a rationale regarding the Location Confidence Score:
-
+::: tip Recommendations per Service Data Key
+- **Country**: Allow or block access based on the country code returned in this response.
+- **Accuracy**: For Mobile ID App authentications, the accuracy depends on various factors. When the user is inside buildings or underground, the GPS is sometimes inaccurate. On latest iOS and Android, the user may also disable location precision, which will cause a high value for accuracy.
+- **DeviceConfidence**: A score below 0.5 is an indication that the user's device may be rooted or jailbroken.
+- **LocationConfidence**: Typically, a location confidence of 0.7 or higher can be considered as a sufficient trust level. Please also refer to the confidence score interpretation below.
+- **Timestamp**: Mobile Session (registered cell) information or GPS location data may not be up-to-date and may require action from the mobile user. Turning on and off the Device FlightMode feature will help to have up-to-date location data.
+:::
+::: tip Recommendations for Confidence Score Checks
+Usually it is sufficient if a client implements a minimum threshold check for the Location Confidence Score since the Location Confidence Score includes the Device Confidence Score in its calculation. Here’s a rationale regarding the Location Confidence Score:
+:::
 
 ![confidence-score](/img/confidence-score.png)
 
@@ -721,22 +742,25 @@ In this case, the AP can request the Geofencing service as shown in the 1st exam
 - A score of `0.8` as minimum target threshold can be considered as a very high trust score and is a recommended target threshold for most critical services.
 - A score of `0.7` as minimum target threshold is still a better confidence score than IP based location solutions and therefore a recommended target threshold for most standard services.
 
-In case a user has a too low location confidence score, the following points should be checked by the user.
+::: warning Low Location Confidence Score
+In case a user has a too low location confidence score, the following points should be checked by the user:
 
-Timestamp value indicates that location data is older than 1 hour:
-- ℹ️ Turn on and off the FlightMode, which usually helps to have up-to-date location data
+**Timestamp value indicates that location data is older than 1 hour:**
+- Turn on and off the FlightMode, which usually helps to have up-to-date location data.
 
-Location- and Device Confidence Score are very low:
-- ℹ️ User must not use a rooted or jailbroken device
+**Location- and Device Confidence Score are very low:**
+- User must not use a rooted or jailbroken device.
 
-Location Confidence Score too low:
-- ℹ️ User must have Developer Mode disabled
-- ℹ️ User must uninstall any 3rd party app that use Mock Location capabilities
+**Location Confidence Score too low:**
+- User must have Developer Mode disabled.
+- User must uninstall any 3rd party app that use Mock Location capabilities.
+:::
 
-Geofencing service limitations:
+::: info Geofencing Service Limitations
 - Geofencing information is given without any guarantee and with the exclusion of any legal liability.
 - At the time of writing only MobileID App or Swisscom Mobile ID SIM cards support location data.
 - For the MobileID App, the user must have the geofencing toggle enabled and location services permitted. Both Android and iOS App version 1.2.0 or higher support geofencing.
+:::
 
 
 
@@ -1029,8 +1053,8 @@ Geofencing service limitations:
 
 ##### Geofencing Error Codes
 
-
-ℹ️ The table below contains all error codes that the geofencing additional service may return. Note that the exact error message may vary for a given error code.
+::: details Click to expand the full list of Geofencing error codes
+The table below contains all error codes that the geofencing additional service may return. Note that the exact error message may vary for a given error code.
 
 | Code | Message |
 |------|---------|
@@ -1047,6 +1071,7 @@ Geofencing service limitations:
 | 123  | User has a non-Swisscom SIM card. |
 | 200  | No location returned from mobile app. |
 | 201  | App outdated, geofencing not supported. |
+:::
 
 
 
@@ -1056,11 +1081,16 @@ We strongly recommend making use of this service if you intend to invoke the Mob
 
 ![mobile-only-auth](/img/mobile-only-auth.png)
 
+**Setup Phase** *(Steps 1–5)*
+
 1.	While being in the Application Provider App, the user performs an action that requires authentication
 2.	The Application Provider App informs the Application Provider backend
 3.	Optional: The Application Provider backend can request the Mobile ID capabilities of the user
 4.	Optional: Mobile ID backend checks the user’s capabilities and provides the response
 5.	Optional: Application Provider gets all user details to know if the user has an active Mobile ID App
+
+**Authentication Phase** *(Steps 6–16)*
+
 6.	The Application Provider sends an asynchronous signature request that includes the App2App service request. The URI value of the Application Provider App is provided as RedirectURI parameter.
 7.	Mobile ID API responds immediately with a Signature Response, which contains the AuthURI parameter. This is the URI value of the Mobile ID App.
 8.	The Application Provider App can either immediately trigger the Mobile ID App (step 8a) or display a button, which will trigger the Mobile ID App (step 8b)
@@ -1072,6 +1102,9 @@ We strongly recommend making use of this service if you intend to invoke the Mob
 14.	The Mobile ID App signs the message with the private key stored on the device
 15.	The Mobile ID App sends the signed data (signature) to the Mobile ID backend
 16.	The Mobile ID backend completes the transaction
+
+**Completion Phase** *(Steps 17–22)*
+
 17.	The RedirectURI is triggered by the Mobile ID App
 18.	The Application Provider App is automatically opened on the user’s smartphone
 19.	The Application Provider polls the Mobile ID transaction status by sending a MSS Status Request
@@ -1115,12 +1148,13 @@ Example usage (code snippet from the MSS Signature Request):
 :::
 
 
-Best Practice Guidelines:
-- It is highly recommended for an Application Provider to implement the App2App service as it will greatly improve the usability for any user that uses the Mobile ID App as authentication method
-- Both Android and iOS are supported for the automatic App2App switch
+::: tip Best Practice Guidelines
+- It is highly recommended for an Application Provider to implement the App2App service as it will greatly improve the usability for any user that uses the Mobile ID App as authentication method.
+- Both Android and iOS are supported for the automatic App2App switch.
 - This service can only be used with the asynchronous MSS Signature. In case a synchronous MSS Signature with App2App service is attempted, Mobile ID API will respond with a fault (WRONG_PARAM).
 - In case this service is requested, there will be no Mobile ID push notification triggered. That’s because a push notification is not required if the Mobile ID App is automatically opened.
-- Please refer also to the official documentation from Apple  and Android  about how to implement custom URL schemes in your app
+- Please refer also to the official documentation from Apple and Android about how to implement custom URL schemes in your app.
+:::
 
 
 ##### MSS Signature Request incl. App2App service
@@ -1335,7 +1369,7 @@ Approve/Cancel becomes active only after the user scrolls to the end if content 
 ![app-display-trans-approval](/img/app-display-trans-approval.png)
 
 
-#### Calssic DTBD (single-line text)
+#### Classic DTBD (single-line text)
 
 A single UTF-8 string shown on the device. It is the format used throughout the guide’s MSS Signature examples. The classic DTBD must include the AP-specific DTBD prefix (e.g., `Bank ACME:`) and is support-ed by both SIM and App methods.
 Keep the DTBD short. Maximum 239 characters; if any character falls outside the GSM 03.38 set, effec-tive maximum is 119 characters.
@@ -1405,7 +1439,9 @@ Input: `{"type":"Login","dtbd":[{"key":"Company","value":"Test"}]}`
 
 Signed: `{"for-mat_version":1,"content_string":"[{\"key\":\"Company\",\"value\":\"Test\"}]"}`
 
-Note: `type` is not signed. If the title/category matters for your process (e.g., “PSD2 Payment”), add a dedicated dtbd row for it (e.g., {"key":"Category","value":"PSD2 Payment"}).
+::: warning
+`type` is not signed. If the title/category matters for your process (e.g., “PSD2 Payment”), add a dedicated dtbd row for it (e.g., {"key":"Category","value":"PSD2 Payment"}).
+:::
 
 **Example Payload / Transaction Approval:**
 
@@ -1436,8 +1472,10 @@ Note: `type` is not signed. If the title/category matters for your process (e.g.
 
 :::
 
-Tip: Generate the escaped string programmatically (e.g. `JSON.stringify` / `json.dumps` / `jq -c`) and never hand-craft escapes.
+::: tip
+Generate the escaped string programmatically (e.g. `JSON.stringify` / `json.dumps` / `jq -c`) and never hand-craft escapes.
 If MimeType is TXN-Approval but the payload isn’t valid, the server flags `INVALID_TXNAPPROVAL_PAYLOAD` and can return a Fault.
+:::
 
 **Side by side comparison:**
 
@@ -1582,7 +1620,9 @@ Here is an example Status Response with the final MSS Signature result (status 5
 ```
 :::
 
-Note that the Status Query response does not contain the signature profile value, as this value was already returned with the asynchronous MSS Signature response.
+::: info
+The Status Query response does not contain the signature profile value, as this value was already returned with the asynchronous MSS Signature response.
+:::
 
 A typical status code for this method is `504`, which means that the transaction is not yet completed, and the AP must call MSS_StatusReq again (polling). Example for an MSS_StatusResp with a `504` Status Code:
 
@@ -1746,7 +1786,9 @@ NOTE: The lines highlighted in pink is an optional extension to get a more detai
 
 #### MSS Receipt Response
 
-Note that the `ReceiptResponseExtension` highlighted in pink is an optional extension to get a more detailed receipt response. The response will only contain this part if `ReceiptRequestExtension` was requested in the Receipt Request message. This extension is currently supported by the SIM method only. The table below describes different `ReceiptResponseExtension` related scenarios.
+::: info
+The `ReceiptResponseExtension` highlighted in pink is an optional extension to get a more detailed receipt response. The response will only contain this part if `ReceiptRequestExtension` was requested in the Receipt Request message. This extension is currently supported by the SIM method only. The table below describes different `ReceiptResponseExtension` related scenarios.
+:::
 
 | Response scenario | UserAck | User Response | Fault Message |
 |-------------------|---------|----------------|---------------|

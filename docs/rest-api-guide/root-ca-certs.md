@@ -41,6 +41,8 @@ You can download the "Swisscom Root CA 2" certificate from the Swisscom Digital 
 |-------------------|
 | 77 47 4F C6 30 E4 0F 4C 47 64 3F 84 BA B8 C6 95 4A 8A 41 EC |
 
+::: warning Important
 Please ensure that your Mobile ID client's TrustStore contains both the old Root Certificate `Swisscom Root CA 2` as well as the new Root Certificate `Swisscom Root CA 4`.
+:::
 
 

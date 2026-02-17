@@ -1,16 +1,25 @@
 # Auto Activation
 ## Introduction
-Auto Activation is an optional feature for APs, which can greatly improve the user experience for Mobile ID SIM authentications. It is applicable for SIM authentication only and this Auto Activation feature is not relevant for Mobile ID App authentications.
 
-Usually, a brand new Mobile ID SIM card must be activated just once on the MyMobileID Portal. With this Mobile ID activation process, the user can set their personal Mobile ID PIN (Set & Confirm PIN) and it will create the required signing key on the SIM card. After that, the SIM card is ready to be used for Mobile ID authentications.
+Auto Activation is an optional feature for Application Providers (APs) that can greatly improve the user experience for Mobile ID SIM authentications.
 
-Auto Activation is an optional feature that is disabled by default but can be enabled per Application Provider. If enabled, a Signature Request to a user with an inactive Mobile ID SIM (which means the user did not yet set their personal Mobile ID PIN) will invoke an implicit activation process during the ongoing signature transaction.
+- **Applicable to**: SIM authentication only (not relevant for Mobile ID App authentications).
+- **Default state**: Disabled by default, but can be enabled per Application Provider.
 
-So, the Auto Activation will achieve both a successful Mobile ID activation and a successful authentication (Signature Response) at the same time! From now on, that user will be Mobile ID active.
+### How it works
 
-From AP perspective, the user will just have a successful authentication and there is no difference whether the user was auto-activated (during the authentication transaction) or not.
+Usually, a brand new Mobile ID SIM card must be activated once on the MyMobileID Portal. During this activation, the user sets their personal Mobile ID PIN and a signing key is created on the SIM card.
 
+With Auto Activation enabled, a Signature Request to a user with an **inactive** Mobile ID SIM will invoke an implicit activation process during the ongoing signature transaction. This achieves:
+
+- A successful Mobile ID activation **and**
+- A successful authentication (Signature Response) at the same time
+
+From the AP perspective, the user simply has a successful authentication -- there is no difference whether the user was auto-activated during the transaction or not.
+
+::: tip
 Auto Activation feature can successfully prevent a fault sub-code 404 (this fault code means that the user did not yet activate their Mobile ID SIM card) which can happen when an AP attempts to do a Mobile ID authentication with a user that has an inactive Mobile ID SIM card.
+:::
 
 ## How to implement this feature
 To enable the Auto Activation feature for an Application Provider (AP), the AP must ensure that the user has accepted the Mobile ID specific terms & conditions prior to proceeding with the auto activation steps.
@@ -25,13 +34,13 @@ From a user perspective, the steps displayed on the mobile device look very simi
 
 ![auto-activation-user-perspective](/img/auto-activation-user-perspective.png)
 
-Note that in case of a successful auto activation, the Mobile ID server sends a Text SMS to the user, to remind the user to create a Mobile ID recovery code [<sup id="a24">24</sup>](#24).
+::: info
+In case of a successful auto activation, the Mobile ID server sends a Text SMS to the user, to remind the user to create a Mobile ID recovery code [<sup id="a24">24</sup>](#24).
+:::
 
-**References**
-
-**Footnotes**
-
+::: details References and Footnotes
 24. <span id="24"></span> Each time a user completes the Mobile ID activation process, they will receive a code that enables them to recover Mobile ID and maintain their existing pairings to service providers, if you lose your phone, change SIM cards or switch to an e-SIM card. See https://mobileid.ch/recovery [↩](#a17)
+:::
 
 
 

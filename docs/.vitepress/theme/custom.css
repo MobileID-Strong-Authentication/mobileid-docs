@@ -240,6 +240,32 @@ html.dark .VPSwitchAppearance .check {
   }
 }
 
+/* Medium-zoom: clickable image hint */
+.vp-doc img:not(.no-zoom) {
+  cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vp-doc img:not(.no-zoom):hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+html.dark .vp-doc img:not(.no-zoom):hover {
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.08);
+}
+
+/* Medium-zoom overlay and image */
+.medium-zoom-overlay {
+  z-index: 999;
+}
+
+.medium-zoom-image--opened {
+  z-index: 1000;
+  background: #ffffff !important;
+  border-radius: 4px;
+  padding: 16px;
+}
+
 /* beem-like: smoother icons */
 .VPSwitchAppearance .icon [class^='vpi-'] {
   transition: opacity 0.18s ease, color 0.18s ease;

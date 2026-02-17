@@ -43,7 +43,9 @@ export default defineConfig({
             { text: 'Status and Fault Codes', link: '/rest-api-guide/status-fault-codes' },
             { text: 'Root CA Certificates', link: '/rest-api-guide/root-ca-certs' },
             { text: 'Create Client Certificates', link: '/rest-api-guide/create-client-certs' },
-            { text: 'Health Status Service', link: '/rest-api-guide/health-status' }
+            { text: 'Health Status Service', link: '/rest-api-guide/health-status' },
+            { text: 'Java Reference Client', link: '/rest-api-guide/java-reference-client' },
+            { text: 'Troubleshooting', link: '/rest-api-guide/troubleshooting' }
           ]
         },
 

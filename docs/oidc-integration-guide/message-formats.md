@@ -14,7 +14,7 @@ Use **Transaction Approval** when readability matters (e.g., PSD2 payments, cont
 
    Length limited and no formatting options.
 
-   ![message-formats-classic](/img/message-formats-classic.png)
+   <img src="/img/message-formats-classic.png" alt="message-formats-classic" width="350">
 
 
 2. **Transaction Approval** (key/value pairs) is a structured App-only format that renders a title (type) and one or more key and value rows for improved readability.
@@ -23,7 +23,7 @@ Use **Transaction Approval** when readability matters (e.g., PSD2 payments, cont
 
    RPs request this by sending a JSON object in the dtbd authorization parameter.
 
-   ![message-formats-transaction-approval](/img/message-formats-transaction-approval.png)
+   <img src="/img/message-formats-transaction-approval.png" alt="message-formats-transaction-approval" width="350">
 
 
 ## Classic DTBD

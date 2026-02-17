@@ -65,11 +65,15 @@ For data privacy reasons, it is highly recommended that the Relying Party does n
 
 A button could look like this example:
 
-![mobileid-button](/img/mobileid-button.png)
+<img src="/img/mobileid-button.png" alt="mobileid-button" width="300">
 
 A click on the button will redirect the user to the mobileid.ch domain, where they can complete the authorization code flow. In the example screenshots below, the user enters the phone number, authenticates with the Mobile ID App and consents to the user information (phone number, current location) that was requested by the Relying Party "iDemo App". Finally, the user is redirected back to the Relying Party's domain.
 
-![idemo-app-login](/img/idemo-app-login.png) ![idemo-app-auth](/img/idemo-app-auth.png) ![idemo-app-consens](/img/idemo-app-consens.png)
+<div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+  <img src="/img/idemo-app-login.png" alt="idemo-app-login" width="200">
+  <img src="/img/idemo-app-auth.png" alt="idemo-app-auth" width="200">
+  <img src="/img/idemo-app-consens.png" alt="idemo-app-consens" width="200">
+</div>
 
 
 The following request query string parameters are supported:

@@ -32,7 +32,7 @@ It is suitable for various system landscapes and meets strict regulatory require
 ## MSS Signature Service
 
 Mobile ID is a cost-efficient, managed authentication service operated by Swisscom.
-The customer-facing API follows the open standard ETSI 102 204 V1.1 (2003-08).
+The customer-facing API follows the open standard [ETSI TS 102 204](https://www.etsi.org/deliver/etsi_ts/102200_102299/102204/) V1.1 (2003-08).
 
 Authentication in Mobile ID is based on a secure hardware token which can be either:
 
@@ -60,7 +60,7 @@ An Application Provider (AP) can request SIM Toolkit (STK) based authentication,
   - **2nd Factor:** Personal Mobile ID PIN (Knowledge Factor)
 
 - **High Level of Security**
-  - Tamper-proof secure hardware (EAL5+ and ITSEC E3 certified)
+  - Tamper-proof secure hardware ([EAL5+](https://www.commoncriteriaportal.org/ccra/) and ITSEC E3 certified)
   - Authentication via a separate encrypted channel
 
 - **Pre-installed** STK App on the SIM/eSIM profile

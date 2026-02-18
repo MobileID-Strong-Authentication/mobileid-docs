@@ -6,25 +6,25 @@ The following list contains a set of RFCs that cover the various aspects of the 
 
 | RFC | Title |
 |-----|-------|
-| RFC 2865 | Remote Authentication Dial-In User Service (RADIUS) |
-| RFC 2866 | RADIUS Accounting |
-| RFC 2867 | RADIUS Accounting Modifications for Tunnel Protocol Support |
-| RFC 2868 | RADIUS Attributes for Tunnel Protocol Support |
-| RFC 2869 | RADIUS Extensions |
-| RFC 3162 | RADIUS and IPv6 |
-| RFC 3575 | IANA Considerations for RADIUS |
-| RFC 3579 | RADIUS Support for Extensible Authentication Protocol |
-| RFC 3580 | IEEE 802.1X RADIUS Usage Guidelines |
-| RFC 5080 | Common RADIUS Implementation Issues and Suggested Fixes |
-| RFC 6158 | RADIUS Design Guidelines |
-| RFC 6572 | RADIUS Support for Proxy Mobile IPv6 |
-| RFC 6613 | RADIUS over TCP (updated by RFC 7930) |
-| RFC 6614 | Transport Layer Security (TLS) Encryption for RADIUS |
-| RFC 6929 | RADIUS Protocol Extensions |
-| RFC 7268 | RADIUS Attributes for IEEE 802 Networks |
-| RFC 7930 | Larger Packets for RADIUS over TCP |
-| RFC 8044 | Data Types in RADIUS |
-| RFC 2607 | Proxy Chaining and Policy Implementation in Roaming |
+| [RFC 2865](https://datatracker.ietf.org/doc/html/rfc2865) | Remote Authentication Dial-In User Service (RADIUS) |
+| [RFC 2866](https://datatracker.ietf.org/doc/html/rfc2866) | RADIUS Accounting |
+| [RFC 2867](https://datatracker.ietf.org/doc/html/rfc2867) | RADIUS Accounting Modifications for Tunnel Protocol Support |
+| [RFC 2868](https://datatracker.ietf.org/doc/html/rfc2868) | RADIUS Attributes for Tunnel Protocol Support |
+| [RFC 2869](https://datatracker.ietf.org/doc/html/rfc2869) | RADIUS Extensions |
+| [RFC 3162](https://datatracker.ietf.org/doc/html/rfc3162) | RADIUS and IPv6 |
+| [RFC 3575](https://datatracker.ietf.org/doc/html/rfc3575) | IANA Considerations for RADIUS |
+| [RFC 3579](https://datatracker.ietf.org/doc/html/rfc3579) | RADIUS Support for Extensible Authentication Protocol |
+| [RFC 3580](https://datatracker.ietf.org/doc/html/rfc3580) | IEEE 802.1X RADIUS Usage Guidelines |
+| [RFC 5080](https://datatracker.ietf.org/doc/html/rfc5080) | Common RADIUS Implementation Issues and Suggested Fixes |
+| [RFC 6158](https://datatracker.ietf.org/doc/html/rfc6158) | RADIUS Design Guidelines |
+| [RFC 6572](https://datatracker.ietf.org/doc/html/rfc6572) | RADIUS Support for Proxy Mobile IPv6 |
+| [RFC 6613](https://datatracker.ietf.org/doc/html/rfc6613) | RADIUS over TCP (updated by [RFC 7930](https://datatracker.ietf.org/doc/html/rfc7930)) |
+| [RFC 6614](https://datatracker.ietf.org/doc/html/rfc6614) | Transport Layer Security (TLS) Encryption for RADIUS |
+| [RFC 6929](https://datatracker.ietf.org/doc/html/rfc6929) | RADIUS Protocol Extensions |
+| [RFC 7268](https://datatracker.ietf.org/doc/html/rfc7268) | RADIUS Attributes for IEEE 802 Networks |
+| [RFC 7930](https://datatracker.ietf.org/doc/html/rfc7930) | Larger Packets for RADIUS over TCP |
+| [RFC 8044](https://datatracker.ietf.org/doc/html/rfc8044) | Data Types in RADIUS |
+| [RFC 2607](https://datatracker.ietf.org/doc/html/rfc2607) | Proxy Chaining and Policy Implementation in Roaming |
 
 ## RADIUS Testing Tools
 

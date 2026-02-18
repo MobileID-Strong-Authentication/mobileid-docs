@@ -25,7 +25,7 @@ When constructing an MSS Signature request, the following best-practice guidelin
    Duplicate triplets are rejected.
 
 4. **Specify `MSISDN` in international format**
-   The user's phone number must follow international (E.164) notation without spaces.
+   The user's phone number must follow international ([E.164](https://www.itu.int/rec/T-REC-E.164/)) notation without spaces.
    A leading “+” is allowed but optional.
    - **Example:** `+41791234567`
 
@@ -37,7 +37,7 @@ When constructing an MSS Signature request, the following best-practice guidelin
    - Encoded in UTF-8 [<sup id="a17">17</sup>](#17).
    - Should include a unique transaction reference (e.g., timestamp, customer ID, contract ID).
    - **Length limits:**
-     - Maximum 239 characters if all characters are in the standard GSM DA character set.
+     - Maximum 239 characters if all characters are in the standard [GSM 03.38](https://en.wikipedia.org/wiki/GSM_03.38) character set.
      - If any character falls outside this set (e.g., the lowercase cedilla "ç"), the maximum length reduces to 119 characters.
    - Keep the message as short and user-friendly as possible.
 

@@ -1,5 +1,9 @@
 # Passkey Authentication (early access)
 
+::: warning Early Access — Pilot Phase
+MobileID Passkeys are currently available to **pilot testers only** and are not yet generally available in the production environment. This documentation is published in advance so Relying Parties can prepare their integration. General availability for all customers and users is expected **very soon**. Check back shortly for updates.
+:::
+
 MobileID now supports **FIDO2 Passkeys** as an authentication method within the OpenID Connect service. Relying Parties can allow their users to authenticate using MobileID Passkeys - alongside or instead of the existing MobileID SIM, App, and OTP SMS methods.
 
 ## What Are Passkeys?
@@ -19,13 +23,13 @@ Key characteristics of passkeys:
 
 The term "Passkeys" is an **umbrella term** for FIDO2-based authenticators. Under the hood, these can be **platform authenticators** (built into a device, such as Touch ID or Windows Hello) or **roaming authenticators** (external hardware keys, such as a YubiKey). These authenticator types differ significantly in how they store the private key - and this distinction directly impacts the security assurance level they can achieve.
 
-For MobileID, one of the most relevant security standards is [**NIST AAL3**](https://pages.nist.gov/800-63-3/sp800-63b.html) (Authentication Assurance Level 3), which specifies the highest level of authentication assurance. To achieve AAL3, the authenticator must be **device-bound** (the private key cannot be exported or synced) and the hardware must be **FIPS 140-2 certified**. Cloud-synced passkeys - while phishing-resistant and suitable for AAL2 - do not meet AAL3 because the private key is exportable across devices.
+For MobileID, one of the most relevant security standards is [**NIST AAL3**](https://pages.nist.gov/800-63-3/sp800-63b.html) (Authentication Assurance Level 3), which specifies the highest level of authentication assurance. To achieve AAL3, the authenticator must be **device-bound** (the private key cannot be exported or synced) and the hardware must be **[FIPS 140-2](https://csrc.nist.gov/pubs/fips/140-2/upd2/final) certified**. Cloud-synced passkeys - while phishing-resistant and suitable for AAL2 - do not meet AAL3 because the private key is exportable across devices.
 
 This distinction matters for Relying Parties integrating MobileID: while **MobileID users are free to register any type of passkey** in their [MyMobileID Dashboard](https://mobileid.ch/login), the **RP has full control** over which passkey types are accepted during authentication. Through the passkey claims returned by MobileID (see [Passkey Scope and Claims](#passkey-scope-and-claims)), the RP can enforce specific requirements - for example, accepting only FIPS 140-2 certified, device-bound passkeys for high-assurance use cases.
 
 | Aspect | Device-Bound Passkeys | Cloud-Synced Passkeys |
 |--------|----------------------|----------------------|
-| **Private key storage** | Stored locally on a single device's secure hardware (e.g., Secure Enclave, TPM) | Synced across devices via encrypted cloud services (e.g., iCloud Keychain, Google Password Manager) |
+| **Private key storage** | Stored locally on a single device's secure hardware (e.g., Secure Enclave, [TPM](https://trustedcomputinggroup.org/resource/tpm-library-specification/)) | Synced across devices via encrypted cloud services (e.g., iCloud Keychain, Google Password Manager) |
 | **Examples** | YubiKey, Windows Hello, hardware security keys | Apple Passkeys, Google Passkeys |
 | **Portability** | Tied to one device; if lost, the passkey is lost | Available on all devices within the user's ecosystem |
 | **NIST AAL3 compliance** | Yes (if FIPS 140-2 certified) | No (private key is exportable) |
@@ -151,8 +155,8 @@ To receive passkey-related claims, add the `mid_passkey` scope to the authorizat
 | | `mid_pk_cert_level` | string | `FIPS140-2` \| `CommonCriteria` | Certification level of the authenticator |
 | | `mid_pk_created_ts` | number | `1717584000` | When the credential was first registered (Unix epoch) |
 | | `mid_pk_last_used_ts` | number | `1717591234` | Last usage timestamp (helps risk engines spot dormant keys) |
-| | `mid_pk_aaguid` | string | `2fc0579f-8113-...` | FIDO Metadata Service identifier; maps to authenticator vendor/model |
-| | `mid_pk_cred_fingerprint` | string | `pQECAyYgASFY...` | SHA-256 of the credential public key (COSE format) |
+| | `mid_pk_aaguid` | string | `2fc0579f-8113-...` | [FIDO Metadata Service](https://fidoalliance.org/metadata/) identifier; maps to authenticator vendor/model |
+| | `mid_pk_cred_fingerprint` | string | `pQECAyYgASFY...` | SHA-256 of the credential public key ([COSE](https://datatracker.ietf.org/doc/html/rfc9052) format) |
 | | `mid_pk_auth_attachment` | string | `platform` \| `cross-platform` | Authenticator attachment modality |
 | | `mid_pk_os_family` | string | `iOS` \| `Android` \| `Windows` | OS family of the authenticator platform |
 

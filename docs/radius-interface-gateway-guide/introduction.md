@@ -39,7 +39,7 @@ RADIUS users are typically defined in the format `user@domain`. However, Mobile 
 - Accounting Webhook (forward accounting traffic to external systems)
 - Supports Fortinet Vendor Specific Attributes (VSA)
 - Support for Docker secrets via `_FILE` environment variables
-- BlastRADIUS mitigation — Message-Authenticator support (CVE-2024-3596)
+- [BlastRADIUS](https://www.blastradius.fail/) mitigation — Message-Authenticator support ([CVE-2024-3596](https://nvd.nist.gov/vuln/detail/CVE-2024-3596))
 
 ### Features Planned
 

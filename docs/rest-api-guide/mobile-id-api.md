@@ -120,7 +120,7 @@ For example, to check whether a particular user supports **SIM** and/or **App**-
 
 ### Signature Messaging Mode
 
-The ETSI 102 204 standard has defined the MSS Signature and Swisscom supports both synchronous and asynchronous (client-server) modes.
+The [ETSI TS 102 204](https://www.etsi.org/deliver/etsi_ts/102200_102299/102204/) standard has defined the MSS Signature and Swisscom supports both synchronous and asynchronous (client-server) modes.
 The MSS_Signature method is used to submit the mobile signature request message (MSS_SignatureReq). The result is provided within the signature response message (MSS_SignatureResp).
 The Mobile ID customer (AP) can decide to call either synchronous or asynchronous signature requests. There are different aspects to consider:
 
@@ -335,7 +335,7 @@ The following steps describe a typical synchronous (MessagingMode="synch") Mobil
 
 :::
 
-The `Base64Signature` content is a base 64 encoded CMS  (which is an extension of PKCS#7) signature object. It contains the DTBD message that has been signed by the SIM- or mobile application on the mobile device. In addition, it includes the mobile user certificate and all related intermediate certificates. Therefore, the AP will always be able to fully validate the signature response.
+The `Base64Signature` content is a base 64 encoded [CMS](https://datatracker.ietf.org/doc/html/rfc5652) (which is an extension of PKCS#7) signature object. It contains the DTBD message that has been signed by the SIM- or mobile application on the mobile device. In addition, it includes the mobile user certificate and all related intermediate certificates. Therefore, the AP will always be able to fully validate the signature response.
 Note that the response contains the signature profile value to indicate what authentication method was chosen, which is helpful in case the request signature profile was `http://mid.swisscom.ch/Any-LoA4`.
 
 

@@ -4,7 +4,7 @@
 
 ### Back-channel PAR Submission
 
-The Pushed Authorisation Request (PAR) endpoint gives OAuth 2.0 clients a back-channel to post the parameters of an authorisation request to the Mobile ID server, to obtain an opaque URI handle for them, and then continue with the frontend redirection to the authorisation endpoint as usual.
+The [Pushed Authorisation Request (PAR)](https://datatracker.ietf.org/doc/html/rfc9126) endpoint gives OAuth 2.0 clients a back-channel to post the parameters of an authorisation request to the Mobile ID server, to obtain an opaque URI handle for them, and then continue with the frontend redirection to the authorisation endpoint as usual.
 
 ::: info
 Introducing an extra backend call to submit the authorisation parameters has three benefits:
@@ -48,7 +48,7 @@ response_type=code
 &redirect_uri=https%3A%2F%2Fclient.example.org%2Fcb
 ```
 
-Example PAR request for a public client with PKCE:
+Example PAR request for a public client with [PKCE](https://datatracker.ietf.org/doc/html/rfc7636):
 
 ```http
 POST /par HTTP/1.1

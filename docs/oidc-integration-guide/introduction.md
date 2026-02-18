@@ -2,10 +2,10 @@
 
 This document provides Relying Parties (RPs) with technical guidance and best practices for integrating Mobile ID OpenID Provider (MobileID OP) into their applications.
 
-The MobileID OP can be used for both authorization and authentication. It fully complies with the OpenID Connect specification.
+The MobileID OP can be used for both authorization and authentication. It fully complies with the [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) specification.
 
 ::: info OpenID Connect
-OpenID Connect is a simple identity layer on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.
+OpenID Connect is a simple identity layer on top of the [OAuth 2.0](https://datatracker.ietf.org/doc/html/rfc6749) protocol. It allows clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.
 
 OpenID Connect allows clients of all types, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end-users. The specification suite is extensible, allowing participants to use optional features such as encryption of identity data, discovery of OpenID Providers, and session management, when it makes sense for them.
 
@@ -26,7 +26,7 @@ The most basic key concepts are as follows.
 - **Scopes** are identifiers used to specify what access privileges are being requested.
 - **Claims** are simply key & value pairs that contain information about an End-User, as well as meta-information about the authentication event. Non-standard claims can be specified as custom claims.
 - **Access Token** is a credential used to access protected resources directly. Access tokens usually have an expiration date and are short-lived. They must be kept secret, though security considerations are less strict due to their shorter life.
-- **ID Token** is an identity token provided by the OpenID Provider to the Relying Party. The identity token contains a number of claims about that End-User and also attributes about the End-User authentication event, in a standard JWT format and signed by the OpenID Provider (so it can be verified by the intended recipients). It may optionally be encrypted for confidentiality.
+- **ID Token** is an identity token provided by the OpenID Provider to the Relying Party. The identity token contains a number of claims about that End-User and also attributes about the End-User authentication event, in a standard [JWT](https://datatracker.ietf.org/doc/html/rfc7519) format and signed by the OpenID Provider (so it can be verified by the intended recipients). It may optionally be encrypted for confidentiality.
 - **Refresh Token** carries the information necessary to get a new access token. Refresh tokens can also expire but are rather long-lived.
 
 ## Authorization Code Grant Flow

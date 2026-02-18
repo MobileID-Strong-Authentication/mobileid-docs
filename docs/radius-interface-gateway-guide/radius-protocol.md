@@ -14,10 +14,10 @@ The RADIUS protocol is a binary network protocol, operating on ports **1812** an
 
 The protocol is covered by several RFCs, the most important ones being:
 
-- **RFC 2865** — Remote Authentication Dial-In User Service (RADIUS)
-- **RFC 2866** — RADIUS Accounting
-- **RFC 2869** — RADIUS Extensions
-- **RFC 6613** — RADIUS over TCP (updated by RFC 7930)
+- **[RFC 2865](https://datatracker.ietf.org/doc/html/rfc2865)** — Remote Authentication Dial-In User Service (RADIUS)
+- **[RFC 2866](https://datatracker.ietf.org/doc/html/rfc2866)** — RADIUS Accounting
+- **[RFC 2869](https://datatracker.ietf.org/doc/html/rfc2869)** — RADIUS Extensions
+- **[RFC 6613](https://datatracker.ietf.org/doc/html/rfc6613)** — RADIUS over TCP (updated by [RFC 7930](https://datatracker.ietf.org/doc/html/rfc7930))
 
 A larger list of related RFCs can be found in the [Annexes](/radius-interface-gateway-guide/annexes#radius-related-rfcs).
 

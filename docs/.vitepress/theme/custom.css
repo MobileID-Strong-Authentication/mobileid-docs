@@ -218,6 +218,33 @@ html.dark .VPSwitchAppearance .check {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 
+/* Sidebar: active item uses MobileID green (#004844) for better visibility */
+.VPSidebarItem.is-active > .item .link > .text {
+  color: #004844 !important;
+  font-weight: 600 !important;
+}
+
+html.dark .VPSidebarItem.is-active > .item .link > .text {
+  color: #2dd4b0 !important;
+}
+
+.VPSidebarItem.is-active > .item > .indicator {
+  background-color: #004844 !important;
+}
+
+html.dark .VPSidebarItem.is-active > .item > .indicator {
+  background-color: #2dd4b0 !important;
+}
+
+/* Sidebar: hover uses MobileID green too */
+.VPSidebarItem.is-link > .item > .link:hover .text {
+  color: #004844 !important;
+}
+
+html.dark .VPSidebarItem.is-link > .item > .link:hover .text {
+  color: #2dd4b0 !important;
+}
+
 /* Fix: keep sidebar width constant across desktop breakpoints.
    VitePress widens/narrows sidebar/title at >=1440px using a calc() that can
    shrink when --vp-layout-max-width is larger than the viewport (e.g. 1600px).

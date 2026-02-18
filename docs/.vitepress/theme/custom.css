@@ -59,6 +59,12 @@ body {
   margin: 1em 0;
 }
 
+.vp-doc table.acr-table,
+.vp-doc table.amr-table {
+  display: table;
+  overflow: visible;
+}
+
 .vp-doc table th,
 .vp-doc table td {
   white-space: normal;

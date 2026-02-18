@@ -236,7 +236,7 @@ The following table shows how passkeys fit into the MobileID Authentication Leve
   <th rowspan="2">acr_values</th>
   <th colspan="4" style="text-align:center">Authentication Method</th>
   <th colspan="2" style="text-align:center">Additional Checks</th>
-  <th rowspan="2" class="col-icon">NIST<br>AAL3</th>
+  <th rowspan="2" class="col-icon">NIST-AAL3</th>
   <th rowspan="2">Remarks</th>
 </tr>
 <tr>
@@ -244,7 +244,7 @@ The following table shows how passkeys fit into the MobileID Authentication Leve
   <th class="col-icon"><img src="/img/oidc/smartphone_LIGHT_1.png" width="22" height="22"><br>App</th>
   <th class="col-icon"><img src="/img/oidc/mobile-message_LIGHT.png" width="22" height="22"><br>OTP</th>
   <th class="col-icon"><img src="/img/oidc/passkey-icon-nobg.png" width="22" height="22"><br>Passkey</th>
-  <th class="col-icon"><img src="/img/oidc/map_pointer_LIGHT.png" width="22" height="22"><br>CH Loc</th>
+  <th class="col-icon"><img src="/img/oidc/map_pointer_LIGHT.png" width="22" height="22"><br>CH</th>
   <th class="col-icon"><img src="/img/oidc/passport_LIGHT.png" width="22" height="22"><br>KeyRing</th>
 </tr>
 </thead>
@@ -258,7 +258,7 @@ The following table shows how passkeys fit into the MobileID Authentication Leve
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
-  <td>Passkey-preferred if <code>passkeys_enabled:true</code>. Fallback to SIM/App/SMS if passkey auth fails.</td>
+  <td><strong>Passkey-preferred</strong>, if <code>passkeys_enabled:true</code> for the client account.<br><strong>User can select a fallback method</strong> if Passkey Auth fails.<br>Use this AL if UX is more important than security.<br><br>Optional <code>login_hint</code> to provide MSISDN:<br><code class="code-inline">{"enableManualInput": false, "hints": [{"msisdn":"+41765XXXXXX"}]}</code></td>
 </tr>
 <tr>
   <td class="col-acr"><code>mid_al3_any</code></td>
@@ -313,7 +313,7 @@ The following table shows how passkeys fit into the MobileID Authentication Leve
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
-  <td>Passkey-preferred if <code>passkeys_enabled:true</code>. Fallback to SIM/App. RP must provide <code>sn</code> and <code>keyringId</code> in <code>login_hint</code>.</td>
+  <td><strong>Passkey-preferred</strong>, if <code>passkeys_enabled:true</code> for the client account.<br>User can select a fallback method if Passkey Auth fails.<br>Use this AL if security is important and phishing risk is acceptable.<br><br>RP must provide <strong>SN</strong> and <strong>KeyRingId</strong> (if Passkey is enabled) in <code>login_hint</code>:<br><code class="code-inline">{"enableManualInput": false, "hints": [{"msisdn":"+41765XXXXXX", "sn":"+574XXXXXX", "keyringId":"MIDPKXXXXXXXXXX"}]}</code></td>
 </tr>
 <tr>
   <td class="col-acr"><code>mid_al4_any_ch</code></td>
@@ -357,7 +357,7 @@ The following table shows how passkeys fit into the MobileID Authentication Leve
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
-  <td><strong>Passkey-only</strong> &amp; phishing-resistant. RP must provide <code>keyringId</code> in <code>login_hint</code>. NIST AAL3 if FIPS 140-2 certified authenticator.</td>
+  <td><strong>Passkey-only</strong> &amp; <strong>phishing-resistant</strong>.<br>Use this AL if security and phishing-resistance is important, with a trade-off that only Passkeys can be used.<br><br><strong>Optionally</strong>, this scenario may be used to comply with <strong>NIST AAL3</strong>, which requires the user to have a FIPS 140-2 certified authenticator (passkey) registered.<br><br>RP must provide <strong>KeyRingId</strong> in <code>login_hint</code>:<br><code class="code-inline">{"hints": [{"msisdn":"+41765XXXXXX", "keyringId":"MIDPKXXXXXXXXXX"}]}</code></td>
 </tr>
 </tbody>
 </table>
@@ -539,7 +539,10 @@ Start with `mid_al2_any` (passkey-preferred with fallback) for the smoothest use
 
 .acr-table,
 .amr-table {
+  display: table;
+  overflow: visible;
   width: auto;
+  min-width: 1200px;
   border-collapse: collapse;
   font-size: 0.9em;
   margin-bottom: 20px;
@@ -578,6 +581,7 @@ Start with `mid_al2_any` (passkey-preferred with fallback) for the smoothest use
   text-align: center;
   white-space: nowrap;
   width: 1%;
+  min-width: 0 !important;
   padding: 6px 8px;
 }
 
@@ -585,9 +589,25 @@ Start with `mid_al2_any` (passkey-preferred with fallback) for the smoothest use
   white-space: nowrap;
 }
 
+.acr-table td:last-child,
+.acr-table th:last-child {
+  min-width: 500px;
+}
+
 .acr-table td img,
 .amr-table td img {
   vertical-align: middle;
   display: inline-block;
+}
+
+.acr-table .code-inline,
+.amr-table .code-inline {
+  display: block;
+  margin-top: 4px;
+  padding: 4px 8px;
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 4px;
+  font-size: 0.82em;
+  word-break: break-all;
 }
 </style>

@@ -84,6 +84,7 @@ export default defineConfig({
             { text: 'Getting Started', link: '/oidc-integration-guide/getting-started' },
             { text: 'Best Practices', link: '/oidc-integration-guide/best-practices' },
             { text: 'Public Cloud Integration', link: '/oidc-integration-guide/cloud-integration-guide' },
+            { text: 'Passkey Authentication', link: '/oidc-integration-guide/passkey-authentication' },
             { text: 'MobileID OIDC - Use Cases', link: '/oidc-integration-guide/oidc-use-cases' },
             { text: 'App Message Formats', link: '/oidc-integration-guide/message-formats' }
           ]

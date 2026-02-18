@@ -125,8 +125,14 @@ You can use the following login hint in combination with the `prompt=login` para
 {"useLDAP": true}
 ```
 
+If passkeys are enabled for your account, you can include the `keyringId` field in the login hint:
+
+```json
+{"hints": [{"msisdn":"+41765XXXXXX", "keyringId":"MIDPKXXXXXXXXXX"}]}
+```
+
 ::: info
-The `sn` parameter is optional and only required for ACR `mid_al4`.
+The `sn` parameter is optional and only required for ACR `mid_al4`. The `keyringId` is required for `mid_al4_passkey` and `mid_al4_any` (when passkeys are enabled). See [Passkey Authentication](/oidc-integration-guide/passkey-authentication) for details.
 :::
 
 #### DTBD Parameter
@@ -156,9 +162,10 @@ Given below is the list of supported scopes that can be requested during the aut
 | `profile` | name | string |
 | `phone` | phone_number<br>phone_number_verified | string<br>boolean |
 | `mid_location` | mid_geo_accuracy<br>mid_geo_country<br>mid_geo_device_confidence<br>mid_geo_location_confidence<br>mid_geo_timestamp | number<br>string<br>number<br>number<br>string |
-| `mid_profile` | mid_profile_recovery_code_status<br>mid_profile_serial<br>mid_profile_sim_status<br>mid_profile_sim_pin_status<br>mid_profile_sim_mcc<br>mid_profile_sim_mnc<br>mid_profile_sim_network<br>mid_profile_app_status | boolean<br>string<br>string<br>string<br>string<br>string<br>string<br>string |
+| `mid_profile` | mid_profile_recovery_code_status<br>mid_profile_serial<br>mid_pk_keyringid<br>mid_profile_sim_status<br>mid_profile_sim_pin_status<br>mid_profile_sim_mcc<br>mid_profile_sim_mnc<br>mid_profile_sim_network<br>mid_profile_app_status<br>mid_profile_sscds<br>mid_profile_alias | boolean<br>string<br>string<br>string<br>string<br>string<br>string<br>string<br>string<br>string<br>string |
 | `mid_cms` | mid_cms_content | string |
 | `mid_esign_basic` | mid_esign_basic_assurance_level<br>mid_esign_basic_jurisdictions<br>mid_esign_basic_has_valid_evidence | string<br>string<br>boolean |
+| `mid_passkey` | mid_pk_keyringid<br>mid_pk_binding<br>mid_pk_cert_level<br>mid_pk_created_ts<br>mid_pk_last_used_ts<br>mid_pk_aaguid<br>mid_pk_cred_fingerprint<br>mid_pk_auth_attachment<br>mid_pk_os_family | string<br>string<br>string<br>number<br>number<br>string<br>string<br>string<br>string |
 
 ::: tip
 A Relying Party should always respect the user's privacy and keep the requested claims down to the very essential. For example, using scope `openid` only, the user sign-in will be anonymous. Neither the phone number nor any other user information will be passed on to the Relying Party's application.
@@ -188,17 +195,20 @@ Below is an overview of all authentication means offered and supported by Mobile
 
 An ACR can include one or several different authentication methods. The Mobile ID OP will check the user's authentication possibilities and will select an authentication method that complies with the ACR.
 
-| Authentication Level (AL) | ACR value | SIM Card | Mobile App | OTP Text SMS | CH Loc. Check | MID SN Check |
-|---------------------------|------------|----------|------------|--------------|----------------|---------------|
-| 2 | `mid_al2_any` | ✓ | ✓ | ✓ | | |
-| 3 | `mid_al3_any` | ✓ | ✓ | | | |
-| | `mid_al3_simcard` | ✓ | | | | |
-| | `mid_al3_mobileapp` | | ✓ | | | |
-| | `mid_al3_any_ch` | ✓ | ✓ | | ✓ | |
-| 4 | `mid_al4_any` | ✓ | ✓ | | | ✓ |
-| | `mid_al4_simcard` | ✓ | | | | ✓ |
-| | `mid_al4_mobileapp` | | ✓ | | | ✓ |
-| | `mid_al4_any_ch` | ✓ | ✓ | | ✓ | ✓ |
+| Authentication Level (AL) | ACR value | SIM Card | Mobile App | OTP Text SMS | Passkey | CH Loc. Check | SN / KeyRing Check |
+|---------------------------|------------|----------|------------|--------------|---------|----------------|---------------------|
+| 2 | `mid_al2_any` | ✓ | ✓ | ✓ | (✓) | | |
+| 3 | `mid_al3_any` | ✓ | ✓ | | | | |
+| | `mid_al3_simcard` | ✓ | | | | | |
+| | `mid_al3_mobileapp` | | ✓ | | | | |
+| | `mid_al3_any_ch` | ✓ | ✓ | | | ✓ | |
+| 4 | `mid_al4_any` | ✓ | ✓ | | (✓) | | ✓ |
+| | `mid_al4_simcard` | ✓ | | | | | ✓ |
+| | `mid_al4_mobileapp` | | ✓ | | | | ✓ |
+| | `mid_al4_any_ch` | ✓ | ✓ | | | ✓ | ✓ |
+| | `mid_al4_passkey` | | | | ✓ | | ✓ |
+
+(✓) Passkey is included for `_any` ACRs only if `passkeys_enabled:true` is configured for the client account. `mid_al4_passkey` is passkey-only and phishing-resistant. See [Passkey Authentication](/oidc-integration-guide/passkey-authentication) for detailed passkey ACR documentation.
 
 If a user has more than one authentication method available that comply with the requested ACR, the Mobile ID OP will use the following preference (note, all authentication methods are equally billed):
 
@@ -323,17 +333,20 @@ The ID token is a JWT and is created (and thus signed, RS256 by default) by the 
 
 Authentication Method Reference (AMR) is an attribute within the OpenID Connect Identity Token. The AMR claim makes statements about the authentication method that was used (including additional factors such as geolocation).
 
-| AMR Value | SIM Auth | App Auth | OTP Auth |
-|-----------|----------|----------|----------|
-| `mid_app`   |          | ✓        |          |
-| `mid_geo`   | (✓)      | (✓)      |          |
-| `mid_hwk`   |          | ✓        |          |
-| `mid_otp`   |          |          | ✓        |
-| `mid_sim`   | ✓        |          |          |
-| `mid_sms`   | ✓        |          |          |
+| AMR Value | SIM Auth | App Auth | OTP Auth | Passkey Auth |
+|-----------|----------|----------|----------|--------------|
+| `mid_app`   |          | ✓        |          |              |
+| `mid_geo`   | (✓)      | (✓)      |          |              |
+| `mid_otp`   |          |          | ✓        |              |
+| `mid_sim`   | ✓        |          |          |              |
+| `mid_sms`   | ✓        |          | ✓        |              |
+| `phr`       |          |          |          | ✓            |
+| `hwk`       | ✓        | ✓        |          | ✓            |
 
 ::: info
 The AMR can be helpful in case the client requests an ACR with an "any" value, such as `mid_al3_any` (see section [ACR](/oidc-integration-guide/getting-started#authentication-context-class-reference-acr)). Since there are multiple authentication methods that comply with such ACR, the client will know from the AMR what authentication method the user actually used for the sign-in.
+
+**Passkey-specific AMR values:** `phr` (Phishing-Resistant, only for `mid_al4_passkey`) and `hwk` (Hardware Key, [RFC 8176](https://datatracker.ietf.org/doc/html/rfc8176)). The `mid_hwk` AMR has been deprecated in favor of the standard `hwk` value. See [Passkey Authentication](/oidc-integration-guide/passkey-authentication#passkey-amr-values) for details.
 :::
 
 ### Example Access Token Response
@@ -485,6 +498,8 @@ This table presents all the error codes that are currently implemented.
 | `invalid_scope` | `mid_req_1110` | Invalid scopes in request |
 | `invalid_request` | `mid_req_1120` | AL4 requested but login_hint is empty |
 | `invalid_request` | `mid_req_1130` | Invalid request, missing query string |
+| `invalid_request` | `mid_req_1140` | Invalid keyring ID in `login_hint` |
+| `invalid_request` | `mid_req_1150` | Invalid `login_hint`, AL4 passkey requested but keyring ID is empty |
 | `invalid_request` | `mid_req_1900` | Invalid client request, check request parameters |
 | `unauthorized_client` | `mid_sec_2010` | Unauthorized scopes used in request |
 | `unauthorized_client` | `mid_sec_2020` | Unauthorized acr_values used in request |
@@ -501,12 +516,24 @@ This table presents all the error codes that are currently implemented.
 | `access_denied` | `mid_auth_3040` | Country (geo-location) validation failed |
 | `access_denied` | `mid_auth_3050` | MSISDN ownership verification failed |
 | `access_denied` | `mid_auth_3060` | Mobile ID account activation failed |
+| `access_denied` | `mid_auth_3065` | Mobile ID app account activation not completed in time |
 | `access_denied` | `mid_auth_3070` | Mobile ID SIM card required for this authentication |
 | `access_denied` | `mid_auth_3080` | No authentication method available |
 | `access_denied` | `mid_auth_3090` | Authentication via SMS OTP failed |
+| `access_denied` | `mid_auth_3100` | Geo accuracy limit validation failed |
+| `access_denied` | `mid_auth_3110` | Geo device confidence score limit validation failed |
+| `access_denied` | `mid_auth_3120` | Geo location confidence score limit validation failed |
+| `access_denied` | `mid_auth_3125` | Geofencing policy violated for referenced AP ID |
 | `access_denied` | `mid_auth_3300` | Authentication failed; user did not respond |
 | `access_denied` | `mid_auth_3310` | Authentication failed; user is busy with another authentication |
+| `access_denied` | `mid_auth_3320` | Authentication failed; provided LDAP credentials were invalid |
+| `access_denied` | `mid_auth_3330` | Authentication failed; mandatory LDAP attribute is missing |
+| `access_denied` | `mid_auth_3340` | Authentication failed; LDAP server communication exception |
+| `access_denied` | `mid_auth_3350` | Authentication failed; LDAP (OIDC) account is time locked |
+| `access_denied` | `mid_auth_3400` | Authentication failed; generic LDAP exception |
+| `access_denied` | `mid_auth_3500` | Authentication failed; passkey keyring mismatch |
 | `access_denied` | `mid_auth_3900` | Authentication failed for other reasons |
+| `invalid_request` | `mid_auth_4000` | Invalid `dtbd` parameter used in request |
 | `server_error` | `mid_sys_9900` | Internal server error |
 
 

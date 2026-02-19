@@ -1,14 +1,21 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type HeadConfig } from 'vitepress'
 import { full as emoji } from 'markdown-it-emoji'
+
+const SITE_URL = 'https://docs.mobileid.ch'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Mobile ID docs',
   description: 'Technical documentation for Mobile ID integration',
+  lang: 'en',
   base: '/',
   lastUpdated: true,
   // Enable the built-in light/dark appearance switch in the navbar
   appearance: true,
+
+  sitemap: {
+    hostname: SITE_URL,
+  },
 
   markdown: {
     config: (md) => {
@@ -22,7 +29,30 @@ export default defineConfig({
     ['link', { rel: 'shortcut icon', href: '/favicon.ico' }],
     ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
+    ['meta', { name: 'robots', content: 'index, follow' }],
+    ['meta', { property: 'og:site_name', content: 'Mobile ID docs' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:locale', content: 'en' }],
+    ['meta', { name: 'twitter:card', content: 'summary' }],
   ],
+
+  transformPageData(pageData) {
+    const pagePath = pageData.relativePath
+      .replace(/index\.md$/, '')
+      .replace(/\.md$/, '.html')
+    const canonicalUrl = `${SITE_URL}/${pagePath}`
+
+    const ogTitle = pageData.title || 'Mobile ID docs'
+    const ogDesc = pageData.description || 'Technical documentation for Mobile ID integration'
+
+    pageData.frontmatter.head ??= []
+    pageData.frontmatter.head.push(
+      ['link', { rel: 'canonical', href: canonicalUrl }],
+      ['meta', { property: 'og:title', content: ogTitle }],
+      ['meta', { property: 'og:description', content: ogDesc }],
+      ['meta', { property: 'og:url', content: canonicalUrl }],
+    )
+  },
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

@@ -1,6 +1,8 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+title: Mobile ID docs
+description: Technical documentation for Mobile ID – seamless strong multi-factor authentication via REST API, OpenID Connect and RADIUS.
 
 hero:
   name: "Mobile ID docs"

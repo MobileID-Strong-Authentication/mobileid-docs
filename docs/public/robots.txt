@@ -1,4 +1,7 @@
+# docs.mobileid.ch
+
 User-agent: *
 Allow: /
 
+# Sitemap location
 Sitemap: https://docs.mobileid.ch/sitemap.xml

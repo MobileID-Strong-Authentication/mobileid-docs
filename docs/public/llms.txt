@@ -4,46 +4,104 @@
 > This site contains integration guides for REST API, OpenID Connect (OIDC),
 > RADIUS gateway, and Passkey authentication.
 
+
 ## Main entry points
 
-- Homepage: https://docs.mobileid.ch/
-- REST API Guide: https://docs.mobileid.ch/rest-api-guide/introduction.html
-- OIDC Integration Guide: https://docs.mobileid.ch/oidc-integration-guide/introduction.html
-- RADIUS Gateway Guide: https://docs.mobileid.ch/radius-interface-gateway-guide/introduction.html
+- Homepage
+  https://docs.mobileid.ch/
+
+- REST API Guide
+  https://docs.mobileid.ch/rest-api-guide/introduction.html
+
+- OIDC Integration Guide
+  https://docs.mobileid.ch/oidc-integration-guide/introduction.html
+
+- RADIUS Gateway Guide
+  https://docs.mobileid.ch/radius-interface-gateway-guide/introduction.html
+
 
 ## REST API Guide
 
-- Introduction: https://docs.mobileid.ch/rest-api-guide/introduction.html
-- Integration Steps: https://docs.mobileid.ch/rest-api-guide/app-provider-client-integration.html
-- Mobile ID API: https://docs.mobileid.ch/rest-api-guide/mobile-id-api.html
-- Best Practices: https://docs.mobileid.ch/rest-api-guide/best-practices.html
-- Auto Activation: https://docs.mobileid.ch/rest-api-guide/auto-activation.html
-- Status and Fault Codes: https://docs.mobileid.ch/rest-api-guide/status-fault-codes.html
-- Root CA Certificates: https://docs.mobileid.ch/rest-api-guide/root-ca-certs.html
-- Create Client Certificates: https://docs.mobileid.ch/rest-api-guide/create-client-certs.html
-- Health Status Service: https://docs.mobileid.ch/rest-api-guide/health-status.html
-- Java Reference Client: https://docs.mobileid.ch/rest-api-guide/java-reference-client.html
-- Troubleshooting: https://docs.mobileid.ch/rest-api-guide/troubleshooting.html
-- API Specification (OpenAPI): https://docs.mobileid.ch/rest-api-guide/api-specification.html
+- Introduction
+  https://docs.mobileid.ch/rest-api-guide/introduction.html
+
+- Integration Steps
+  https://docs.mobileid.ch/rest-api-guide/app-provider-client-integration.html
+
+- Mobile ID API
+  https://docs.mobileid.ch/rest-api-guide/mobile-id-api.html
+
+- Best Practices
+  https://docs.mobileid.ch/rest-api-guide/best-practices.html
+
+- Auto Activation
+  https://docs.mobileid.ch/rest-api-guide/auto-activation.html
+
+- Status and Fault Codes
+  https://docs.mobileid.ch/rest-api-guide/status-fault-codes.html
+
+- Root CA Certificates
+  https://docs.mobileid.ch/rest-api-guide/root-ca-certs.html
+
+- Create Client Certificates
+  https://docs.mobileid.ch/rest-api-guide/create-client-certs.html
+
+- Health Status Service
+  https://docs.mobileid.ch/rest-api-guide/health-status.html
+
+- Java Reference Client
+  https://docs.mobileid.ch/rest-api-guide/java-reference-client.html
+
+- Troubleshooting
+  https://docs.mobileid.ch/rest-api-guide/troubleshooting.html
+
+- API Specification (OpenAPI)
+  https://docs.mobileid.ch/rest-api-guide/api-specification.html
+
 
 ## OIDC Integration Guide
 
-- Introduction: https://docs.mobileid.ch/oidc-integration-guide/introduction.html
-- Getting Started: https://docs.mobileid.ch/oidc-integration-guide/getting-started.html
-- Best Practices: https://docs.mobileid.ch/oidc-integration-guide/best-practices.html
-- Passkey Authentication: https://docs.mobileid.ch/oidc-integration-guide/passkey-authentication.html
-- Public Cloud Integration: https://docs.mobileid.ch/oidc-integration-guide/cloud-integration-guide.html
-- OIDC Use Cases: https://docs.mobileid.ch/oidc-integration-guide/oidc-use-cases.html
-- App Message Formats: https://docs.mobileid.ch/oidc-integration-guide/message-formats.html
+- Introduction
+  https://docs.mobileid.ch/oidc-integration-guide/introduction.html
+
+- Getting Started
+  https://docs.mobileid.ch/oidc-integration-guide/getting-started.html
+
+- Best Practices
+  https://docs.mobileid.ch/oidc-integration-guide/best-practices.html
+
+- Passkey Authentication
+  https://docs.mobileid.ch/oidc-integration-guide/passkey-authentication.html
+
+- Public Cloud Integration
+  https://docs.mobileid.ch/oidc-integration-guide/cloud-integration-guide.html
+
+- OIDC Use Cases
+  https://docs.mobileid.ch/oidc-integration-guide/oidc-use-cases.html
+
+- App Message Formats
+  https://docs.mobileid.ch/oidc-integration-guide/message-formats.html
+
 
 ## RADIUS Gateway Guide
 
-- Introduction: https://docs.mobileid.ch/radius-interface-gateway-guide/introduction.html
-- RIG Deployment: https://docs.mobileid.ch/radius-interface-gateway-guide/deployment.html
-- The RADIUS Protocol: https://docs.mobileid.ch/radius-interface-gateway-guide/radius-protocol.html
-- Annexes: https://docs.mobileid.ch/radius-interface-gateway-guide/annexes.html
+- Introduction
+  https://docs.mobileid.ch/radius-interface-gateway-guide/introduction.html
+
+- RIG Deployment
+  https://docs.mobileid.ch/radius-interface-gateway-guide/deployment.html
+
+- The RADIUS Protocol
+  https://docs.mobileid.ch/radius-interface-gateway-guide/radius-protocol.html
+
+- Annexes
+  https://docs.mobileid.ch/radius-interface-gateway-guide/annexes.html
+
 
 ## Additional resources
 
-- Release Notes: https://docs.mobileid.ch/release-notes/release-notes.html
-- API Reference: https://docs.mobileid.ch/api-reference/api.html
+- Release Notes
+  https://docs.mobileid.ch/release-notes/release-notes.html
+
+- API Reference
+  https://docs.mobileid.ch/api-reference/api.html

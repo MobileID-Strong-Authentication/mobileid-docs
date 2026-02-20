@@ -99,17 +99,6 @@ export default withMermaid(defineConfig({
         }
 
       ],
-      '/entraid-guide/': [
-        {
-          text: 'EntraID Guide',
-          items: [
-            { text: 'Index', link: '/entraid-guide/' },
-            { text: 'One', link: '/entraid-guide/one' },
-            { text: 'Two', link: '/entraid-guide/two' }
-          ]
-        }
-      ],
-
       '/oidc-integration-guide/': [
         {
           text: 'OIDC Integration Guide',

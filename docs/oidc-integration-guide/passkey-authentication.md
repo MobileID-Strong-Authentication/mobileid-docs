@@ -446,7 +446,7 @@ The following AMR (Authentication Method Reference) values are returned in the I
 </tr>
 <tr>
   <td class="col-acr"><code>mid_sms</code></td>
-  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>

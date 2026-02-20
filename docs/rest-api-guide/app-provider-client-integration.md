@@ -40,7 +40,7 @@ For accessing the service endpoints the Mobile ID customer can choose between SO
 
 ### **SOAP Endpoint**
 
-A description of this interface is available as a WSDL file on GitHub: [mobileid.yaml](https://github.com/MobileID-Strong-Authentication/mobileid-api/blob/main/soap/mobileid.wsdl)
+A description of this interface is available as a WSDL file: <a href="/wsdl/mobileid.wsdl" download="mobileid.wsdl">mobileid.wsdl</a>
 
 #### Endpoints
 
@@ -52,7 +52,7 @@ A description of this interface is available as a WSDL file on GitHub: [mobileid
 | `<Base-URL>/soap/services/MSS_ProfilePort` | **MSS Profile Query** | [Section MSS Profile Query](/rest-api-guide/mobile-id-api.html#mss-profile-query)  |
 
 ### **REST Endpoint**
-A description of this interface is available here: [API Specification](/api-reference/api) or you can download the corresponding YAML file on GitHub: [mobileid.yaml](https://github.com/MobileID-Strong-Authentication/mobileid-api/blob/main/rest/mobileid.yaml)
+A description of this interface is available here: [API Specification](/api-reference/api) or you can download the corresponding YAML file: <a href="/openapi-mobileid.yaml" download="openapi-mobileid.yaml">openapi-mobileid.yaml</a>
 
 #### Endpoints
 

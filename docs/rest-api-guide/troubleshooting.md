@@ -67,11 +67,11 @@ Most initial integration issues are related to the TLS/mTLS connection setup. Un
 
 **Symptom:** TLS handshake fails with an error like `Certificate for <hostname> doesn't match any of the subject alternative names`.
 
-**Cause:** The hostname in the endpoint URL does not match the server certificate's Subject Alternative Names (SANs). This can happen when using a test or pre-production environment.
+**Cause:** The hostname in the endpoint URL does not match the server certificate's Subject Alternative Names (SANs). This typically means the endpoint URL is incorrect.
 
 **Solutions:**
-- In production, use the standard endpoint URL `https://mobileid.swisscom.com`.
-- For test environments, you may need to temporarily disable hostname verification in your client (not recommended for production).
+- Use the standard endpoint URL `https://mobileid.swisscom.com` (see [Integration Steps — Endpoint Address](/rest-api-guide/app-provider-client-integration#endpoint-address)).
+- If connecting via Swisscom LAN-I, ensure hostname verification is configured for the LAN-I endpoint.
 
 ### Server Certificate Not Trusted
 

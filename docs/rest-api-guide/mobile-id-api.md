@@ -1,7 +1,7 @@
 # Mobile ID API
 
 The Mobile ID service exposes a web API available via both SOAP and RESTful (JSON) interfaces.
-Refer to [Application Provider Client Integration](/rest-api-guide/app-provider-client-integration) for a detailed description of these interfaces, including links to the corresponding WSDL and YAML files on GitHub that describe the service definitions.
+Refer to [Application Provider Client Integration](/rest-api-guide/app-provider-client-integration) for a detailed description of these interfaces, including download links for the corresponding WSDL and YAML files that describe the service definitions.
 
 For your convenience, the RESTful API swagger documentation is also available here:
 [API Specification](/api-reference/api)

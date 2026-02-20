@@ -17,7 +17,7 @@ It is suitable for various system landscapes and meets strict regulatory require
 | **DTBD** | *Data-To-Be-Displayed* — message displayed on the mobile phone (authentication context). |
 | **DTBS** | *Data-To-Be-Signed* — equal to DTBD; the data that will be signed with the Mobile ID signing key. |
 | **JSON** | JavaScript Object Notation — text-based open standard data interchange format. |
-| **LAN-I** | Swisscom LAN-Interconnect Service (Enterprise WAN). |
+| **EC** | Swisscom [Enterprise Connect](https://www.swisscom.ch/en/business/enterprise/offer/wireline/enterprise-connect.html) (replaces the former LAN-Interconnect). |
 | **MID** | Mobile ID platform providing the mobile signature service. |
 | **MNO** | Mobile Network Operator — also called wireless service provider or carrier. |
 | **MSISDN** | Number uniquely identifying a mobile subscription in a GSM/UMTS network. |

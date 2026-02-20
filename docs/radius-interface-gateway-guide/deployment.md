@@ -36,7 +36,7 @@ Connectivity must be allowed as follows:
 
 - **RADIUS** (UDP/1812) — Requests from your NAS (e.g. VPN server) to the RIG application (or the UDP network load balancer that forwards the requests to the RIG application nodes).
 - **LDAPS** (TCP/636) — From the RIG application to your LDAP server.
-- **HTTPS** (TCP/443) — From the RIG application to the Mobile ID API endpoint at `mobileid.swisscom.com` (Internet) or `195.65.233.218` (LAN-I).
+- **HTTPS** (TCP/443) — From the RIG application to the Mobile ID API endpoint at `mobileid.swisscom.com` (Internet) or `195.65.233.218` ([EC](https://www.swisscom.ch/en/business/enterprise/offer/wireline/enterprise-connect.html)).
 - **REDIS** (TCP/6379) — Between the RIG application nodes and the Redis database cluster.
 - **HTTP** (TCP/80) — Local connectivity for the Docker health check (optional).
 
@@ -109,7 +109,7 @@ At least the following parameters must be updated in the env file:
   base64 -w 0 <MyKey.pfx>
   ```
 
-- **`Schnittstellen__MobileIdClient__Host`** — This shall be the Mobile ID API endpoint, which is either `https://mobileid.swisscom.com` (Internet) or `https://195.65.233.218` (LAN-I).
+- **`Schnittstellen__MobileIdClient__Host`** — This shall be the Mobile ID API endpoint, which is either `https://mobileid.swisscom.com` (Internet) or `https://195.65.233.218` (EC).
 
 ## Docker Compose
 
@@ -132,7 +132,7 @@ At least the following parameters must be updated in the YAML file:
   base64 -w 0 <MyKey.pfx>
   ```
 
-- **`Schnittstellen__MobileIdClient__Host`** — This shall be the Mobile ID API endpoint, which is either `https://mobileid.swisscom.com` (Internet) or `https://195.65.233.218` (LAN-I).
+- **`Schnittstellen__MobileIdClient__Host`** — This shall be the Mobile ID API endpoint, which is either `https://mobileid.swisscom.com` (Internet) or `https://195.65.233.218` (EC).
 
 How to spin up using Docker Compose — make sure that both `docker-compose.yml` and `nginx.conf` exist in the same directory before you run the command below:
 

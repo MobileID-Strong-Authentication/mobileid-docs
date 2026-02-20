@@ -1,10 +1,11 @@
 import { defineConfig, type HeadConfig } from 'vitepress'
 import { full as emoji } from 'markdown-it-emoji'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
 const SITE_URL = 'https://docs.mobileid.ch'
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'Mobile ID docs',
   description: 'Technical documentation for Mobile ID integration',
   lang: 'en',
@@ -87,7 +88,10 @@ export default defineConfig({
 
         {
           text: '',
-          items: [{ text: 'API Specification', link: '/rest-api-guide/api-specification' }]
+          items: [
+            { text: 'API Specification', link: '/rest-api-guide/api-specification' },
+            { text: 'API Explorer', link: '/api-reference/openapi-explorer' },
+          ]
         },
         {
           text: '',
@@ -151,7 +155,19 @@ export default defineConfig({
     ],
 
     search: {
-      provider: 'local'
-    }
-  }
-})
+      provider: 'local',
+      options: {
+        detailedView: true,
+        miniSearch: {
+          searchOptions: {
+            fuzzy: 0.2,
+            prefix: true,
+            boost: { title: 4, text: 2, titles: 1 },
+          },
+        },
+      },
+    },
+  },
+
+  mermaid: {},
+}))

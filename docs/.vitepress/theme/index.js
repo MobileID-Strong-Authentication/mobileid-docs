@@ -1,11 +1,24 @@
 import DefaultTheme from 'vitepress/theme'
 import mediumZoom from 'medium-zoom'
-import { onMounted, watch, nextTick } from 'vue'
+import { h, onMounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vitepress'
+import { theme as openApiTheme, useOpenapi } from 'vitepress-openapi/client'
+import 'vitepress-openapi/dist/style.css'
+import specYaml from '../../public/openapi-mobileid.yaml?raw'
+import DocFeedback from './DocFeedback.vue'
 import './custom.css'
 
 export default {
   extends: DefaultTheme,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      'doc-after': () => h(DocFeedback),
+    })
+  },
+  async enhanceApp({ app }) {
+    useOpenapi({ spec: specYaml })
+    openApiTheme.enhanceApp({ app })
+  },
   setup() {
     const route = useRoute()
 

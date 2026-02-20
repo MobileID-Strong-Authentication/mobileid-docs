@@ -16,7 +16,14 @@ export default {
     })
   },
   async enhanceApp({ app }) {
-    useOpenapi({ spec: specYaml })
+    useOpenapi({
+      spec: specYaml,
+      config: {
+        operation: {
+          hiddenSlots: ['playground'],
+        },
+      },
+    })
     openApiTheme.enhanceApp({ app })
   },
   setup() {

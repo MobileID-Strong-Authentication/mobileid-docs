@@ -1,24 +1,32 @@
 <script setup>
-import { useData, useRoute } from 'vitepress'
+import { useData } from 'vitepress'
 import { computed } from 'vue'
 
 const REPO = 'MobileID-Strong-Authentication/mobileid-docs'
 
-const { page, frontmatter } = useData()
-const route = useRoute()
+const { page, frontmatter, site } = useData()
+
+const visible = computed(() => {
+  if (frontmatter.value.layout === 'home') return false
+  if (frontmatter.value.feedback === false) return false
+  if (!REPO) return false
+  return true
+})
 
 const feedbackUrl = computed(() => {
-  const title = encodeURIComponent(`Feedback: ${page.value.title}`)
-  const path = page.value.relativePath
+  if (!visible.value) return ''
+  const pageTitle = page.value.title || 'Untitled'
+  const relativePath = page.value.relativePath || ''
+  const title = encodeURIComponent(`Feedback: ${pageTitle}`)
   const body = encodeURIComponent(
-    `**Page:** ${page.value.title}\n**Path:** \`${path}\`\n\n---\n\n_Your feedback:_\n\n`
+    `**Page:** ${pageTitle}\n**Path:** \`${relativePath}\`\n\n---\n\n_Your feedback:_\n\n`
   )
   return `https://github.com/${REPO}/issues/new?title=${title}&body=${body}&labels=feedback`
 })
 </script>
 
 <template>
-  <div v-if="frontmatter?.layout !== 'home'" class="doc-feedback">
+  <div v-if="visible" class="doc-feedback">
     <a :href="feedbackUrl" target="_blank" rel="noopener noreferrer">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

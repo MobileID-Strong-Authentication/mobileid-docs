@@ -1,11 +1,8 @@
 ---
-# Keep title short; sidebar label is configured in config.mts
+aside: false
+outline: false
 ---
-
-<script setup>
-import CustomAPIComponent from '../components/CustomAPIComponent.vue'
-</script>
 
 # API Specification
 
-<CustomAPIComponent />
+<OASpec />

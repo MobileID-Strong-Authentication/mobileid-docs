@@ -88,10 +88,7 @@ export default withMermaid(defineConfig({
 
         {
           text: '',
-          items: [
-            { text: 'API Specification', link: '/rest-api-guide/api-specification' },
-            { text: 'API Explorer', link: '/api-reference/openapi-explorer' },
-          ]
+          items: [{ text: 'API Specification', link: '/rest-api-guide/api-specification' }]
         },
         {
           text: '',

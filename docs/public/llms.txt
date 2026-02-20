@@ -55,8 +55,11 @@
 - Troubleshooting
   https://docs.mobileid.ch/rest-api-guide/troubleshooting.html
 
-- API Specification (OpenAPI)
+- API Specification (OpenAPI / REST)
   https://docs.mobileid.ch/rest-api-guide/api-specification.html
+
+- WSDL Specification (SOAP)
+  https://docs.mobileid.ch/rest-api-guide/wsdl-specification.html
 
 
 ## OIDC Integration Guide

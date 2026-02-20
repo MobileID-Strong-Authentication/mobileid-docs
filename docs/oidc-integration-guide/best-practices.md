@@ -119,7 +119,27 @@ Validate the ID Token and verify scopes.
 
 ### Validate ID token
 
-Relying Party must validate ID Tokens.
+Relying Parties must validate ID Tokens. The Mobile ID OP signs ID Tokens with **RS256** by default. To verify the signature, fetch the public key from the JWKS endpoint:
+
+| Resource | URL |
+|----------|-----|
+| Discovery | https://openid.mobileid.ch/.well-known/openid-configuration |
+| JWKS | https://openid.mobileid.ch/jwks.json |
+
+**Practical validation steps:**
+
+1. Decode the JWT header and extract the `kid` (Key ID).
+2. Fetch the matching public key from the [JWKS endpoint](https://openid.mobileid.ch/jwks.json) (cache the key set and refresh when an unknown `kid` appears).
+3. Verify the RS256 signature using the public key.
+4. Validate the standard claims:
+   - `iss` must equal `https://openid.mobileid.ch`
+   - `aud` must contain your `client_id`
+   - `exp` must not be in the past
+   - `nonce` must match the value you sent in the authorization request
+
+::: tip
+Most OIDC client libraries (e.g. `openid-client` for Node.js, `authlib` for Python, Spring Security for Java) handle JWKS fetching and ID Token validation automatically when configured with the discovery URL. It is strongly recommended to rely on a well-maintained library rather than implementing token validation manually.
+:::
 
 - [OIDC Core — IDTokenValidation](http://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
 

@@ -1,7 +1,9 @@
-<script setup>
-import CustomAPIComponent from '../components/CustomAPIComponent.vue'
-</script>
+---
+aside: false
+outline: false
+---
 
+# API Reference
 
-<CustomAPIComponent />
+<OASpec />
 

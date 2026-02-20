@@ -155,17 +155,42 @@ The default authentication message is:
 
 Given below is the list of supported scopes that can be requested during the authorization code request.
 
-| Scope | Member (Claims) | Type |
-|-------|-----------------|------|
-| `openid` | sub | string |
-| `offline_access` | - | - |
-| `profile` | name | string |
-| `phone` | phone_number<br>phone_number_verified | string<br>boolean |
-| `mid_location` | mid_geo_accuracy<br>mid_geo_country<br>mid_geo_device_confidence<br>mid_geo_location_confidence<br>mid_geo_timestamp | number<br>string<br>number<br>number<br>string |
-| `mid_profile` | mid_profile_recovery_code_status<br>mid_profile_serial<br>mid_pk_keyringid<br>mid_profile_sim_status<br>mid_profile_sim_pin_status<br>mid_profile_sim_mcc<br>mid_profile_sim_mnc<br>mid_profile_sim_network<br>mid_profile_app_status<br>mid_profile_sscds<br>mid_profile_alias | boolean<br>string<br>string<br>string<br>string<br>string<br>string<br>string<br>string<br>string<br>string |
-| `mid_cms` | mid_cms_content | string |
-| `mid_esign_basic` | mid_esign_basic_assurance_level<br>mid_esign_basic_jurisdictions<br>mid_esign_basic_has_valid_evidence | string<br>string<br>boolean |
-| `mid_passkey` | mid_pk_keyringid<br>mid_pk_binding<br>mid_pk_cert_level<br>mid_pk_created_ts<br>mid_pk_last_used_ts<br>mid_pk_aaguid<br>mid_pk_cred_fingerprint<br>mid_pk_auth_attachment<br>mid_pk_os_family | string<br>string<br>string<br>number<br>number<br>string<br>string<br>string<br>string |
+| Scope | Claim | Type | Example Value | Description |
+|-------|-------|------|---------------|-------------|
+| `openid` | `sub` | string | `3246d772d2edb208...` | Subject identifier (unique, pairwise per client) |
+| `offline_access` | — | — | — | Requests a refresh token |
+| `profile` | `name` | string | `+41791234567` | User's display name |
+| `phone` | `phone_number` | string | `+41791234567` | Phone number in E.164 format |
+| | `phone_number_verified` | boolean | `true` | Whether the phone number has been verified |
+| `mid_location` | `mid_geo_accuracy` | number | `0` | GPS accuracy in meters |
+| | `mid_geo_country` | string | `CH` | ISO country code of the device |
+| | `mid_geo_device_confidence` | number | `1.0` | Device confidence score |
+| | `mid_geo_location_confidence` | number | `1.0` | Location confidence score |
+| | `mid_geo_timestamp` | string | `2022-03-17T05:49:03+01:00` | Timestamp of the geolocation measurement |
+| `mid_profile` | `mid_profile_recovery_code_status` | boolean | `true` | Whether a recovery code has been set |
+| | `mid_profile_serial` | string | `MIDCHEYUD1YE4QB1` | Mobile ID serial number |
+| | `mid_pk_keyringid` | string | `MIDPK123A567B90` | Passkey keyring identifier |
+| | `mid_profile_sim_status` | string | `active` | SIM card activation status |
+| | `mid_profile_sim_pin_status` | string | `active` | SIM PIN status |
+| | `mid_profile_sim_mcc` | string | `228` | Mobile Country Code |
+| | `mid_profile_sim_mnc` | string | `01` | Mobile Network Code |
+| | `mid_profile_sim_network` | string | `Swisscom` | Mobile network operator name |
+| | `mid_profile_app_status` | string | `active` | Mobile ID App activation status |
+| | `mid_profile_sscds` | string | — | Secure signature creation device descriptor |
+| | `mid_profile_alias` | string | `John` | User-defined alias |
+| `mid_cms` | `mid_cms_content` | string | — | CMS signed data (Base64-encoded) |
+| `mid_esign_basic` | `mid_esign_basic_assurance_level` | string | `basic` | E-signature assurance level |
+| | `mid_esign_basic_jurisdictions` | string | `CH` | Applicable jurisdictions |
+| | `mid_esign_basic_has_valid_evidence` | boolean | `true` | Whether valid identity evidence exists |
+| `mid_passkey` | `mid_pk_keyringid` | string | `MIDPK123A567B90` | Passkey keyring identifier |
+| | `mid_pk_binding` | string | `device-bound` \| `syncable` | Whether the passkey is device-bound or synced |
+| | `mid_pk_cert_level` | string | `FIPS140-2` \| `CommonCriteria` | Certification level of the authenticator |
+| | `mid_pk_created_ts` | number | `1717584000` | Credential creation timestamp (Unix epoch) |
+| | `mid_pk_last_used_ts` | number | `1717591234` | Last usage timestamp (Unix epoch) |
+| | `mid_pk_aaguid` | string | `2fc0579f-8113-...` | [FIDO MDS](https://fidoalliance.org/metadata/) authenticator identifier |
+| | `mid_pk_cred_fingerprint` | string | `pQECAyYgASFY...` | SHA-256 of the credential public key ([COSE](https://datatracker.ietf.org/doc/html/rfc9052)) |
+| | `mid_pk_auth_attachment` | string | `platform` \| `cross-platform` | Authenticator attachment modality |
+| | `mid_pk_os_family` | string | `iOS` \| `Android` \| `Windows` | OS family of the authenticator platform |
 
 ::: tip
 A Relying Party should always respect the user's privacy and keep the requested claims down to the very essential. For example, using scope `openid` only, the user sign-in will be anonymous. Neither the phone number nor any other user information will be passed on to the Relying Party's application.
@@ -195,20 +220,147 @@ Below is an overview of all authentication means offered and supported by Mobile
 
 An ACR can include one or several different authentication methods. The Mobile ID OP will check the user's authentication possibilities and will select an authentication method that complies with the ACR.
 
-| Authentication Level (AL) | ACR value | SIM Card | Mobile App | OTP Text SMS | Passkey | CH Loc. Check | SN / KeyRing Check |
-|---------------------------|------------|----------|------------|--------------|---------|----------------|---------------------|
-| 2 | `mid_al2_any` | ✓ | ✓ | ✓ | (✓) | | |
-| 3 | `mid_al3_any` | ✓ | ✓ | | | | |
-| | `mid_al3_simcard` | ✓ | | | | | |
-| | `mid_al3_mobileapp` | | ✓ | | | | |
-| | `mid_al3_any_ch` | ✓ | ✓ | | | ✓ | |
-| 4 | `mid_al4_any` | ✓ | ✓ | | (✓) | | ✓ |
-| | `mid_al4_simcard` | ✓ | | | | | ✓ |
-| | `mid_al4_mobileapp` | | ✓ | | | | ✓ |
-| | `mid_al4_any_ch` | ✓ | ✓ | | | ✓ | ✓ |
-| | `mid_al4_passkey` | | | | ✓ | | ✓ |
+<div class="icon-legend">
+  <span><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"> Included</span>
+  <span><img src="/img/oidc/lightbulb.svg" width="16" height="16"> Excluded</span>
+  <span><img src="/img/oidc/star.svg" width="16" height="16"> Included, if 'Passkeys' feature is enabled for the client account</span>
+</div>
 
-(✓) Passkey is included for `_any` ACRs only if `passkeys_enabled:true` is configured for the client account. `mid_al4_passkey` is passkey-only and phishing-resistant. See [Passkey Authentication](/oidc-integration-guide/passkey-authentication) for detailed passkey ACR documentation.
+<div class="table-scroll">
+<table class="acr-table">
+<thead>
+<tr>
+  <th rowspan="2">acr_values</th>
+  <th colspan="4" style="text-align:center">Authentication Method</th>
+  <th colspan="2" style="text-align:center">Additional Checks</th>
+  <th rowspan="2" class="col-icon">NIST-AAL3</th>
+  <th rowspan="2">Remarks</th>
+</tr>
+<tr>
+  <th class="col-icon"><img src="/img/oidc/simkarte_LIGHT.png" width="22" height="22"><br>SIM</th>
+  <th class="col-icon"><img src="/img/oidc/smartphone_LIGHT_1.png" width="22" height="22"><br>App</th>
+  <th class="col-icon"><img src="/img/oidc/mobile-message_LIGHT.png" width="22" height="22"><br>OTP</th>
+  <th class="col-icon"><img src="/img/oidc/passkey-icon-nobg.png" width="22" height="22"><br>Passkey</th>
+  <th class="col-icon"><img src="/img/oidc/map_pointer_LIGHT.png" width="22" height="22"><br>CH</th>
+  <th class="col-icon"><img src="/img/oidc/passport_LIGHT.png" width="22" height="22"><br>KeyRing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class="col-acr"><code>mid_al2_any</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/star.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td><strong>Passkey-preferred</strong>, if <code>passkeys_enabled:true</code> for the client account.<br><strong>User can select a fallback method</strong> if Passkey Auth fails.<br>Use this AL if UX is more important than security.<br><br>Optional <code>login_hint</code> to provide MSISDN:<br><code class="code-inline">{"enableManualInput": false, "hints": [{"msisdn":"+41765XXXXXX"}]}</code></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_al3_any</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td>See note <sup>[1]</sup></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_al3_any_ch</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_al3_simcard</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_al3_mobileapp</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_al4_any</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/star.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td><strong>Passkey-preferred</strong>, if <code>passkeys_enabled:true</code> for the client account.<br>User can select a fallback method if Passkey Auth fails.<br>Use this AL if security is important and phishing risk is acceptable.<br><br>RP must provide <strong>SN</strong> and <strong>KeyRingId</strong> (if Passkey is enabled) in <code>login_hint</code>:<br><code class="code-inline">{"enableManualInput": false, "hints": [{"msisdn":"+41765XXXXXX", "sn":"+574XXXXXX", "keyringId":"MIDPKXXXXXXXXXX"}]}</code></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_al4_any_ch</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_al4_simcard</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_al4_mobileapp</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_al4_passkey</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/star.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td><strong>Passkey-only</strong> &amp; <strong>phishing-resistant</strong>.<br>Use this AL if security and phishing-resistance is important, with a trade-off that only Passkeys can be used.<br><br><strong>Optionally</strong>, this scenario may be used to comply with <strong>NIST AAL3</strong>, which requires the user to have a FIPS 140-2 certified authenticator (passkey) registered.<br><br>RP must provide <strong>KeyRingId</strong> in <code>login_hint</code>:<br><code class="code-inline">{"hints": [{"msisdn":"+41765XXXXXX", "keyringId":"MIDPKXXXXXXXXXX"}]}</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+**[1]** Passkeys are only supported with AL2 or AL4. There is no support for Passkeys with AL3. See [Passkey Authentication](/oidc-integration-guide/passkey-authentication) for detailed passkey ACR documentation.
 
 If a user has more than one authentication method available that comply with the requested ACR, the Mobile ID OP will use the following preference (note, all authentication methods are equally billed):
 
@@ -333,15 +485,86 @@ The ID token is a JWT and is created (and thus signed, RS256 by default) by the 
 
 Authentication Method Reference (AMR) is an attribute within the OpenID Connect Identity Token. The AMR claim makes statements about the authentication method that was used (including additional factors such as geolocation).
 
-| AMR Value | SIM Auth | App Auth | OTP Auth | Passkey Auth |
-|-----------|----------|----------|----------|--------------|
-| `mid_app`   |          | ✓        |          |              |
-| `mid_geo`   | (✓)      | (✓)      |          |              |
-| `mid_otp`   |          |          | ✓        |              |
-| `mid_sim`   | ✓        |          |          |              |
-| `mid_sms`   | ✓        |          | ✓        |              |
-| `phr`       |          |          |          | ✓            |
-| `hwk`       | ✓        | ✓        |          | ✓            |
+<div class="icon-legend">
+  <span><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"> Included</span>
+  <span><img src="/img/oidc/lightbulb.svg" width="16" height="16"> Excluded</span>
+</div>
+
+<div class="table-scroll">
+<table class="amr-table">
+<thead>
+<tr>
+  <th rowspan="2">amr_values</th>
+  <th colspan="4" style="text-align:center">Authentication Method</th>
+  <th rowspan="2">Remarks</th>
+</tr>
+<tr>
+  <th class="col-icon"><img src="/img/oidc/simkarte_LIGHT.png" width="22" height="22"><br>SIM</th>
+  <th class="col-icon"><img src="/img/oidc/smartphone_LIGHT_1.png" width="22" height="22"><br>App</th>
+  <th class="col-icon"><img src="/img/oidc/mobile-message_LIGHT.png" width="22" height="22"><br>OTP</th>
+  <th class="col-icon"><img src="/img/oidc/passkey-icon-nobg.png" width="22" height="22"><br>Passkey</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class="col-acr"><code>mid_app</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_geo</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_otp</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_sim</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>mid_sms</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td></td>
+</tr>
+<tr>
+  <td class="col-acr"><code>phr</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td>Standard AMR "<strong>Phishing-Resistant</strong>". Only for ACR <code>mid_al4_passkey</code>.</td>
+</tr>
+<tr>
+  <td class="col-acr"><code>hwk</code></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
+  <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
+  <td>Standard AMR <a href="https://datatracker.ietf.org/doc/html/rfc8176">RFC 8176</a> "<strong>Hardware Key</strong>"</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 ::: info
 The AMR can be helpful in case the client requests an ACR with an "any" value, such as `mid_al3_any` (see section [ACR](/oidc-integration-guide/getting-started#authentication-context-class-reference-acr)). Since there are multiple authentication methods that comply with such ACR, the client will know from the AMR what authentication method the user actually used for the sign-in.
@@ -547,3 +770,102 @@ This table provides details on OIDC and OAUTH tokens and how the Relying Party s
 | Authorization Code | string | 2 min | no | no | no | no | For obtaining the access_token, the id_token and refresh_token |
 | ID Token | JWT | 60 min | no | yes | yes | no | Proof of IdP's authentication. Expired ID tokens should never be accepted for processing |
 | Refresh Token | bearer | configurable per client | yes | yes | no | yes | for obtaining new valid refresh_token, access_token and id_token |
+
+<style>
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.icon-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  font-size: 0.9em;
+  background-color: var(--vp-c-bg-soft);
+}
+
+.icon-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.acr-table,
+.amr-table {
+  display: table;
+  overflow: visible;
+  width: auto;
+  min-width: 1200px;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+
+.acr-table th,
+.acr-table td,
+.amr-table th,
+.amr-table td {
+  border: 1px solid var(--vp-c-divider);
+  padding: 8px 10px;
+  vertical-align: middle;
+}
+
+.acr-table thead th,
+.amr-table thead th {
+  background-color: var(--vp-c-bg-soft);
+  font-weight: 600;
+  vertical-align: bottom;
+}
+
+.acr-table thead th.col-icon,
+.amr-table thead th.col-icon {
+  text-align: center;
+}
+
+.acr-table thead th img,
+.amr-table thead th img {
+  display: block;
+  margin: 0 auto 4px auto;
+  height: 22px;
+  object-fit: contain;
+}
+
+.col-icon {
+  text-align: center;
+  white-space: nowrap;
+  width: 1%;
+  min-width: 0 !important;
+  padding: 6px 8px;
+}
+
+.col-acr {
+  white-space: nowrap;
+}
+
+.acr-table td:last-child,
+.acr-table th:last-child {
+  min-width: 500px;
+}
+
+.acr-table td img,
+.amr-table td img {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.acr-table .code-inline,
+.amr-table .code-inline {
+  display: block;
+  margin-top: 4px;
+  padding: 4px 8px;
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 4px;
+  font-size: 0.82em;
+  word-break: break-all;
+}
+</style>

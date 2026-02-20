@@ -71,7 +71,7 @@ Most initial integration issues are related to the TLS/mTLS connection setup. Un
 
 **Solutions:**
 - Use the standard endpoint URL `https://mobileid.swisscom.com` (see [Integration Steps — Endpoint Address](/rest-api-guide/app-provider-client-integration#endpoint-address)).
-- If connecting via Swisscom LAN-I, ensure hostname verification is configured for the LAN-I endpoint.
+- If connecting via Swisscom EC, ensure hostname verification is configured for the EC endpoint.
 
 ### Server Certificate Not Trusted
 

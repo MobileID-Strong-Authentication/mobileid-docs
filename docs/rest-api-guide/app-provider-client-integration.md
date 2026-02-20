@@ -7,7 +7,7 @@ This chapter describes how an Application Provider (AP) integrates its backend w
 Before using the Swisscom Mobile ID web service, some initial provisioning steps are required.
 
 1. **The Mobile ID customer (your company) has an agreement with Swisscom:**
-   - **Connectivity** (Internet or LAN-I) between the **AP** and **Mobile ID** has been established.
+   - **Connectivity** (Internet or [EC](https://www.swisscom.ch/en/business/enterprise/offer/wireline/enterprise-connect.html)) between the **AP** and **Mobile ID** has been established.
    - The customer has delivered the **X.509 client certificate** to Swisscom (see [Create X509 Client Certificates](/rest-api-guide/create-client-certs.md)).
 
 ::: warning Firewall Whitelisting
@@ -22,17 +22,40 @@ The AP’s public source IP address (or range) must be whitelisted in the **Swis
 
 ## Endpoint Address
 
-The Swisscom Mobile ID web service is accessible through LAN-I or the Internet. If not otherwise specified, use the following default access details.
+The Swisscom Mobile ID web service is accessible through EC ([Enterprise Connect](https://www.swisscom.ch/en/business/enterprise/offer/wireline/enterprise-connect.html)) or the Internet. If not otherwise specified, use the following default access details.
 
 
 | Environment       | URL                                   |
 |-------------------|----------------------------------------|
 | **Internet**      | [https://mobileid.swisscom.com](https://mobileid.swisscom.com) |
-| **Swisscom LAN-I** | [https://195.65.233.218](https://195.65.233.218) |
+| **Swisscom EC** | [https://195.65.233.218](https://195.65.233.218) |
 
 ### Overview Access
 
-![interconnection-backend](/img/interconnection-backend.png)
+```mermaid
+flowchart LR
+  subgraph CE[Customer Environment]
+    direction TB
+    AP[AP_ID<br/>Application Provider]
+  end
+
+  FW1{{Firewall}}
+  INTERNET((Internet))
+  EC((EC))
+  FW2{{Firewall}}
+
+  subgraph ME[Mobile ID Backend]
+    direction TB
+    MSS[MSS Platform<br/>Mobile Signature Service]
+  end
+
+  AP --- FW1
+  FW1 --- INTERNET
+  FW1 --- EC
+  INTERNET --- FW2
+  EC --- FW2
+  FW2 --- MSS
+  ```
 
 ::: info
 For accessing the service endpoints the Mobile ID customer can choose between SOAP or RESTful endpoints.

@@ -4,7 +4,7 @@ The Mobile ID service exposes a web API available via both SOAP and RESTful (JSO
 Refer to [Application Provider Client Integration](/rest-api-guide/app-provider-client-integration) for a detailed description of these interfaces, including download links for the corresponding WSDL and YAML files that describe the service definitions.
 
 The OpenAPI specification for the RESTful API is also available here:
-[API Specification](/api-reference/api)
+[API Specification](/rest-api-guide/api-specification)
 
 
 ## HTTP/1.1 Header

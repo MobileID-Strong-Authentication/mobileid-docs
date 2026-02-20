@@ -75,7 +75,7 @@ A description of this interface is available as a WSDL file: <a href="/wsdl/mobi
 | `<Base-URL>/soap/services/MSS_ProfilePort` | **MSS Profile Query** | [Section MSS Profile Query](/rest-api-guide/mobile-id-api.html#mss-profile-query)  |
 
 ### **REST Endpoint**
-A description of this interface is available here: [API Specification](/api-reference/api) or you can download the corresponding YAML file: <a href="/openapi-mobileid.yaml" download="openapi-mobileid.yaml">openapi-mobileid.yaml</a>
+A description of this interface is available here: [API Specification](/rest-api-guide/api-specification) or you can download the corresponding YAML file: <a href="/openapi-mobileid.yaml" download="openapi-mobileid.yaml">openapi-mobileid.yaml</a>
 
 #### Endpoints
 

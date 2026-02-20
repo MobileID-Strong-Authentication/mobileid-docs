@@ -103,8 +103,5 @@
 
 ## Additional resources
 
-- Release Notes
-  https://docs.mobileid.ch/release-notes/release-notes.html
-
-- API Reference
-  https://docs.mobileid.ch/api-reference/api.html
+- API Specification (OpenAPI / REST)
+  https://docs.mobileid.ch/rest-api-guide/api-specification.html

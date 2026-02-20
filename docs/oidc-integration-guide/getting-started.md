@@ -182,8 +182,8 @@ Example claim values, retrieved from the UserInfo endpoint:
   "mid_geo_timestamp": "2022-03-17T05:49:03.597+01:00",
   "mid_profile_recovery_code_status": true,
   "mid_profile_serial": "MIDCHEYUD1YE4QB1",
-  "name": "+41797895164",
-  "phone_number": "+41797895164",
+  "name": "+41791234567",
+  "phone_number": "+41791234567",
   "phone_number_verified": true,
   "sub": "3246d772d2edb20797fe9359cb3d07da6d01df7db2642e14554d241aef1d1d84"
 }

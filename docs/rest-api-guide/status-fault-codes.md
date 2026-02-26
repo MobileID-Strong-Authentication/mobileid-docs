@@ -10,7 +10,7 @@
 | 501 | REVOKED_CERTIFICATE | The Mobile ID user's x509 certificate has been revoked. The user must re-activate the account on the Mobile ID self-care portal. | Signature, Status Query |
 | 502 | VALID_SIGNATURE | The MSS Signature transaction was successful. | Signature, Status Query |
 | 503 | INVALID_SIGNATURE | The MSS Signature transaction failed due to invalid signature data. The user may try to re-activate the account on the Mobile ID self-care portal. It may be required to replace the SIM card. | Signature, Status Query |
-| 504 | OUSTANDING_TRANSACTION | The MSS Signature transaction is outstanding. The AP must try again later. | Status Query |
+| 504 | OUTSTANDING_TRANSACTION | The MSS Signature transaction is outstanding. The AP must try again later. | Status Query |
 
 ### Fault Codes (Error)
 
@@ -39,7 +39,7 @@
 
 Specific MSISDNs are available to test different type of response status and fault codes. By placing a request to one of this number the related status or fault code will be raised. The following MSISDN structure is used for testing fault codes, which might help a developer to test the error handling of their Mobile ID client.
 
-- `+41000092<faultcode>` - Use one of the 3-digit fault sub-code values listed in section 6.1.
+- `+41000092<faultcode>` - Use one of the 3-digit fault sub-code values listed in the [Fault Codes](#fault-codes-error) table above.
 
 On the other hand, a successful Mobile ID signature response can be tested by using one of the two MSISDNs listed below, which might help with CI/CD pipelines that include automated regression testing with Mobile ID authentications. However, your account will require specific permissions to be able to use the test-MSISDNs for successful Mobile ID responses. Please ask your Swisscom contact if you need this permission.
 

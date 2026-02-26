@@ -26,17 +26,17 @@ $ openssl req -new -newkey rsa:4096 -nodes -rand /dev/urandom \
 
 ### Self-Sign Certificate
 
-```bash
+Create a small extension file `ext.cnf` that adds the required Client Authentication Extended Key Usage:
 
-$ openssl x509 -req -days 1825 -sha256 -in mycert.csr -signkey mycert.key -out my-cert.crt
-
+```ini
+[v3_req]
+extendedKeyUsage = clientAuth
 ```
 
-and run:
+Then self-sign the certificate:
 
 ```bash
-
-$ openssl x509 -req -days 1825 -sha256 -extfile ext.cnf \
+$ openssl x509 -req -days 1825 -sha256 -extfile ext.cnf -extensions v3_req \
   -in mycert.csr -signkey mycert.key -out mycert.crt
 ```
 

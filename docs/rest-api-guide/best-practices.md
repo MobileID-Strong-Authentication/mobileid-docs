@@ -34,7 +34,7 @@ When constructing an MSS Signature request, the following best-practice guidelin
 
 6. **Define the `DataToBeDisplayed` (DTBD) message**
    The text shown on the user’s mobile device must comply with the following guidelines:
-   - Encoded in UTF-8 [<sup id="a17">17</sup>](#17).
+   - Encoded in UTF-8.
    - Should include a unique transaction reference (e.g., timestamp, customer ID, contract ID).
    - **Length limits:**
      - Maximum 239 characters if all characters are in the standard [GSM 03.38](https://en.wikipedia.org/wiki/GSM_03.38) character set.
@@ -44,12 +44,6 @@ When constructing an MSS Signature request, the following best-practice guidelin
    **Example DTBD:**
    > `Bank ACME: Proceed with the login? (TXN-3D5K)`
 
-::: details Footnotes
-17. <span id="17"></span> Type of the AP_TransID is xsd:NCName, refer to http://www.datypic.com/sc/xsd/t-xsd_NCName.html [↩](#a17)
-18. <span id="17"></span> http://www.w3.org/TR/xmlschema-2/#dateTime [↩](#a17)
-19. <span id="17"></span> http://en.wikipedia.org/wiki/UTF-8 [↩](#a17)
-20. <span id="17"></span> In mobile telephony GSM 03.38 is the standard character set used in short message service. [↩](#a17)
-:::
 
 ### Signature Response
 
@@ -72,7 +66,7 @@ The key validation aspects are as follows:
    - The client must be capable of validating both RSA and ECDSA signatures.
 
 4. **(Optional) Validate the Mobile ID Serial Number**
-   - For the highest level of assurance and a fully strong two-factor authentication process, validate the Mobile ID serial number as described in **Section Mobile ID Serial Number Validation**.
+   - For the highest level of assurance and a fully strong two-factor authentication process, validate the Mobile ID serial number as described in **[Serial Number Validation](/rest-api-guide/best-practices#serial-number-validation)**.
 
 5. **Implement Proper Fault and Status Handling**
    - Handle all status and fault codes using structured exception handling logic to ensure stable, predictable behavior of the client application.
@@ -94,7 +88,7 @@ If both signature requests target the SIM-based authentication method, and the f
 
 - **Fault Code:** `406 / PB_SIGNATURE_PROCESS`
 - **Description:** The subscriber already has an active signature operation in process.
-- See **Section 6** for detailed fault code definitions.
+- See **[Status and Fault Codes](/rest-api-guide/status-fault-codes)** for detailed fault code definitions.
 
 ##### App Method Concurrency
 If both requests target the Mobile ID App-based authentication method, the behavior is different:
@@ -103,7 +97,7 @@ If both requests target the Mobile ID App-based authentication method, the behav
 - The second signature request is then displayed on the mobile device via the Mobile ID App.
 
 - **Fault Code (cancellation of first transaction):** `401 / USER_CANCEL`
-- See **Section 6** for further information.
+- See **[Status and Fault Codes](/rest-api-guide/status-fault-codes)** for further information.
 
 ## Serial Number Validation
 

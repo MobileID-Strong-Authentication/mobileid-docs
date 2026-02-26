@@ -33,7 +33,7 @@ features:
 <div class="vp-doc">
 
 <div class="wip-banner">
-  <strong>🚧 Work in Progress: We're actively building this documentation. Check back regularly for the latest updates.</strong> 
+  This documentation is actively maintained and updated as Mobile ID evolves. Use <em>"Give feedback on this page"</em> to suggest improvements.
 </div>
 
 </div>

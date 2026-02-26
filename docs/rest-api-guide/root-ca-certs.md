@@ -28,14 +28,14 @@ Usually, a client's TrustStore contains the Root Certificate only, the so-called
 The Mobile ID End Entity Certificate is either based on the Root Certificate `Swisscom Root CA 4` or on the older Root Certificate `Swisscom Root CA 2`.
 
 You can download the "Swisscom Root CA 4" certificate from the Swisscom Digital Certificate Service site:
-[http://aia.swissdigicert.ch/sdcs-root4.crt](http://aia.swissdigicert.ch/sdcs-root4.crt)
+[https://aia.swissdigicert.ch/sdcs-root4.crt](https://aia.swissdigicert.ch/sdcs-root4.crt)
 
 | SHA-1 Fingerprint |
 |-------------------|
 | B9 82 1B 0C 87 7D 30 24 DD 6A 8F 6E 44 3E F5 38 8E 53 16 1B |
 
 You can download the "Swisscom Root CA 2" certificate from the Swisscom Digital Certificate Service site:
-[http://aia.swissdigicert.ch/sdcs-root2.crt](http://aia.swissdigicert.ch/sdcs-root2.crt)
+[https://aia.swissdigicert.ch/sdcs-root2.crt](https://aia.swissdigicert.ch/sdcs-root2.crt)
 
 | SHA-1 Fingerprint |
 |-------------------|

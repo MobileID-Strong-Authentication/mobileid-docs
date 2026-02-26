@@ -95,7 +95,7 @@ export default withMermaid(defineConfig({
         },
         {
           text: '',
-          items: [{ text: 'Imprint', link: '/rest-api-guide/imprint.md' }]
+          items: [{ text: 'Imprint', link: '/rest-api-guide/imprint' }]
         }
 
       ],
@@ -108,13 +108,13 @@ export default withMermaid(defineConfig({
             { text: 'Best Practices', link: '/oidc-integration-guide/best-practices' },
             { text: 'Passkey Authentication', link: '/oidc-integration-guide/passkey-authentication' },
             { text: 'Public Cloud Integration', link: '/oidc-integration-guide/cloud-integration-guide' },
-            { text: 'MobileID OIDC - Use Cases', link: '/oidc-integration-guide/oidc-use-cases' },
+            { text: 'Use Cases', link: '/oidc-integration-guide/oidc-use-cases' },
             { text: 'App Message Formats', link: '/oidc-integration-guide/message-formats' }
           ]
         },
         {
           text: '',
-          items: [{ text: 'Imprint', link: '/oidc-integration-guide/imprint.md' }]
+          items: [{ text: 'Imprint', link: '/oidc-integration-guide/imprint' }]
         }
       ],
 
@@ -131,7 +131,7 @@ export default withMermaid(defineConfig({
         },
         {
           text: '',
-          items: [{ text: 'Imprint', link: '/radius-interface-gateway-guide/imprint.md' }]
+          items: [{ text: 'Imprint', link: '/radius-interface-gateway-guide/imprint' }]
         }
       ]
 

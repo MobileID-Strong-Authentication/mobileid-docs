@@ -847,7 +847,7 @@ In case a user has a too low location confidence score, the following points sho
       </MSS_Signature>
 
 ```
-
+:::
 
 ##### MSS Signature Response incl. Geofencing Location Data
 

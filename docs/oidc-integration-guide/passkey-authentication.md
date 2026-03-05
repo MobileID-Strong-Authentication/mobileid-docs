@@ -1,6 +1,6 @@
 # Passkey Authentication (early access)
 
-::: warning Early Access — Pilot Phase
+::: warning Early Access - Pilot Phase
 MobileID Passkeys are currently available to **pilot testers only** and are not yet generally available in the production environment. This documentation is published in advance so Relying Parties can prepare their integration. General availability for all customers and users is expected **very soon**. Check back shortly for updates.
 :::
 
@@ -37,6 +37,27 @@ This distinction matters for Relying Parties integrating MobileID: while **Mobil
 
 ::: info
 Only **device-bound passkeys** on **FIPS 140-2 certified** authenticators (e.g., YubiKey 5 FIPS Series with firmware 5.7+) can meet [NIST AAL3](https://pages.nist.gov/800-63-3/sp800-63b.html) requirements. Cloud-synced passkeys are phishing-resistant and meet AAL2, but do not satisfy AAL3 because the private key can be exported.
+:::
+
+### Platform and Browser Compatibility
+
+FIDO2/WebAuthn support is **not uniform** across operating systems, browsers, and transport methods (USB, NFC, Bluetooth). Whether a given passkey works in a particular environment depends on the combination of the operating system, browser, authenticator type, and whether user verification (PIN or biometrics) is required. These factors can lead to situations where a passkey that works on one platform fails on another.
+
+::: warning Known limitation: Hardware security keys over NFC on Android
+At the time of writing, **Android does not support PIN-protected FIDO2 credentials over NFC**. Only USB transport is supported for credentials that require user verification via PIN. This means that **FIPS-compliant hardware security keys** that enforce a PIN (such as the YubiKey 5 FIPS Series) **cannot be used via NFC on Android devices**, although they work as expected over USB. The same keys work fine over both NFC and USB on **iOS/iPadOS** and **desktop platforms**.
+
+This is a platform-level restriction, not a MobileID limitation. The current status may change as Android and Google Play Services evolve.
+:::
+
+The passkey ecosystem is evolving rapidly. Rather than providing version-specific compatibility details here (which would quickly become outdated), Relying Parties and their users should consult the following **actively maintained resources** for the latest platform and browser support status:
+
+- [**passkeys.dev: Device Support**](https://passkeys.dev/device-support/) - FIDO Alliance community-maintained device and browser support matrix.
+- [**Yubico: WebAuthn Browser Support**](https://developers.yubico.com/WebAuthn/WebAuthn_Browser_Support/) - Detailed compatibility tables for hardware security keys, including transport method support (USB, NFC, Lightning) per platform.
+- [**Token2: FIDO2 OS and Browser Compatibility**](https://www.token2.com/site/page/understanding-fido2-authentication-across-different-operating-systems-and-browsers) - Broader overview of FIDO2 support across operating systems and browsers, including known limitations.
+- [**Can I Use: Web Authentication API**](https://caniuse.com/webauthn) - Browser-level WebAuthn API support overview.
+
+::: tip Recommendation for Relying Parties
+To accommodate users on platforms with incomplete passkey support, prefer **fallback ACR values** (`mid_al2_any` or `mid_al4_any`) over passkey-only ACRs. This ensures users can always complete authentication, falling back to MobileID SIM, App, or OTP SMS, even when their device or browser does not support their passkey's transport method. See [Passkey-Only vs. Fallback](#passkey-only-vs-fallback) for details.
 :::
 
 ## Why MobileID Passkeys?

@@ -520,7 +520,7 @@ Authentication Method Reference (AMR) is an attribute within the OpenID Connect 
   <td class="col-icon"><img src="/img/oidc/lightbulb_on.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
   <td class="col-icon"><img src="/img/oidc/lightbulb.svg" width="16" height="16"></td>
-  <td></td>
+  <td>Only returned when an ACR with the <code>_ch</code> suffix was used (<code>mid_al3_any_ch</code>, <code>mid_al4_any_ch</code>), indicating that geolocation was verified to be in Switzerland (CH).</td>
 </tr>
 <tr>
   <td class="col-acr"><code>mid_otp</code></td>

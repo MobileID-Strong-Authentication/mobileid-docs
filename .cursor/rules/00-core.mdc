@@ -1,0 +1,13 @@
+---
+description: Core guardrails for mobileid-docs documentation changes
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+- Keep edits narrow; avoid broad rewrites unless requested.
+- Prefer factual accuracy over stylistic polish.
+- Do not invent parameters, guarantees, or flow behavior.
+- Keep terminology consistent with existing pages/navigation.
+- Use safe placeholder data only; never include real secrets or PII.
+- If implementation evidence is unclear, state assumptions explicitly.

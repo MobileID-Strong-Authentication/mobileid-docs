@@ -1,0 +1,14 @@
+---
+description: Docs guardrails for publishable, implementation-aligned content
+globs:
+  - "docs/**"
+  - "README.md"
+alwaysApply: true
+---
+
+- Keep text aligned with `mobileid-helper` and `mybank-demo-app`.
+- Distinguish normative Mobile-ID behavior from demo/helper behavior.
+- Avoid marketing phrasing; use concrete behavior and constraints.
+- Preserve existing structure, frontmatter, and navigation conventions.
+- Keep links clean; avoid unnecessary query parameters in references/sources.
+- Keep snippets realistic, safe, and copy-paste plausible.

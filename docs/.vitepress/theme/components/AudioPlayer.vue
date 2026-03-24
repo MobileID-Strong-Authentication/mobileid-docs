@@ -43,6 +43,11 @@ function seek(event) {
   audio.value.currentTime = ratio * duration.value
 }
 
+function seekRelative(delta) {
+  if (!audio.value) return
+  audio.value.currentTime = Math.max(0, Math.min(duration.value, audio.value.currentTime + delta))
+}
+
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60)
   const s = Math.floor(seconds % 60)
@@ -75,7 +80,18 @@ onUnmounted(() => {
 
     <div class="audio-player-info">
       <div v-if="title" class="audio-player-title">{{ title }}</div>
-      <div class="audio-player-bar" @click="seek">
+      <div
+        class="audio-player-bar"
+        role="slider"
+        tabindex="0"
+        :aria-label="'Fortschritt'"
+        :aria-valuemin="0"
+        :aria-valuemax="Math.round(duration)"
+        :aria-valuenow="Math.round(currentTime)"
+        @click="seek"
+        @keydown.left.prevent="seekRelative(-5)"
+        @keydown.right.prevent="seekRelative(5)"
+      >
         <div class="audio-player-progress" :style="{ width: progress + '%' }" />
       </div>
       <div class="audio-player-time">

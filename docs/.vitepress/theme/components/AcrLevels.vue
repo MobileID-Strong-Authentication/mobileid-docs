@@ -38,6 +38,7 @@ const colorMap = {
       v-for="level in levels"
       :key="level.acr"
       class="acr-card"
+      tabindex="0"
       :style="{
         borderTopColor: colorMap[level.color]?.border || 'var(--blog-green)',
         background: colorMap[level.color]?.bg || 'rgba(0,148,144,0.06)',
@@ -105,10 +106,19 @@ const colorMap = {
   margin-top: 0;
 }
 
-.acr-card:hover .acr-description {
+.acr-card:hover .acr-description,
+.acr-card:focus-within .acr-description {
   max-height: 80px;
   opacity: 1;
   margin-top: 8px;
+}
+
+@media (hover: none) {
+  .acr-description {
+    max-height: 80px;
+    opacity: 1;
+    margin-top: 8px;
+  }
 }
 
 @media (max-width: 600px) {

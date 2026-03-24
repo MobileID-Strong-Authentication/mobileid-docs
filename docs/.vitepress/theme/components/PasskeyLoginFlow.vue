@@ -27,6 +27,7 @@ const showFallback = ref(false)
 const containerRef = ref(null)
 let observer = null
 let animationTimer = null
+let fallbackTimer = null
 
 onMounted(() => {
   observer = new IntersectionObserver(
@@ -46,6 +47,7 @@ onMounted(() => {
 onUnmounted(() => {
   if (observer) observer.disconnect()
   if (animationTimer) clearInterval(animationTimer)
+  if (fallbackTimer) clearTimeout(fallbackTimer)
 })
 
 function startAnimation() {
@@ -53,7 +55,7 @@ function startAnimation() {
   animationTimer = setInterval(() => {
     if (activeStep.value >= props.steps.length - 1) {
       clearInterval(animationTimer)
-      setTimeout(() => { showFallback.value = true }, 800)
+      fallbackTimer = setTimeout(() => { showFallback.value = true }, 800)
       return
     }
     activeStep.value++

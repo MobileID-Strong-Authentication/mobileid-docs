@@ -17,7 +17,16 @@ async function play() {
 </script>
 
 <template>
-  <div class="video-embed" @click="play" :class="{ 'video-embed--playing': started }">
+  <div
+    class="video-embed"
+    :class="{ 'video-embed--playing': started }"
+    :role="started ? undefined : 'button'"
+    :tabindex="started ? undefined : 0"
+    :aria-label="started ? undefined : 'Video abspielen'"
+    @click="play"
+    @keydown.enter="play"
+    @keydown.space.prevent="play"
+  >
     <video
       v-if="started"
       ref="video"

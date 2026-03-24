@@ -1,0 +1,273 @@
+/* Blog-specific styles — scoped to .blog-layout */
+
+/* Font Loading */
+@font-face {
+  font-family: 'Lato';
+  src: url('/blog/fonts/Lato-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('/blog/fonts/Merriweather-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('/blog/fonts/Merriweather-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Typography & Colors */
+.blog-layout {
+  font-family: 'Merriweather', Georgia, serif;
+  line-height: 1.618;
+
+  --blog-green: #009490;
+  --blog-green-80: #007B77;
+  --blog-green-60: #00615D;
+  --blog-green-40: #004844;
+  --blog-pink: #A70064;
+  --blog-pink-80: #8E004B;
+  --blog-text: #333;
+  --blog-text-muted: #666;
+  --blog-bg-subtle: #f8f9fa;
+  --blog-border: #e5e7eb;
+  --blog-card-bg: #fff;
+}
+
+.blog-layout h1,
+.blog-layout h2,
+.blog-layout h3,
+.blog-layout h4 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  line-height: 1.333;
+}
+
+/* Dark Mode */
+.dark .blog-layout {
+  --blog-text: #e5e7eb;
+  --blog-text-muted: #9ca3af;
+  --blog-bg-subtle: #1a1a1a;
+  --blog-border: #374151;
+  --blog-card-bg: #1f2937;
+}
+
+/* Hero gradient (used by both layouts) */
+.blog-hero {
+  background: linear-gradient(135deg, var(--blog-green-40) 0%, var(--blog-green) 100%);
+  color: #fff;
+  padding: 48px 40px;
+}
+
+.dark .blog-hero {
+  background: linear-gradient(135deg, #002422 0%, var(--blog-green-40) 100%);
+}
+
+@media (max-width: 768px) {
+  .blog-hero {
+    padding: 32px 20px;
+  }
+}
+
+/* Blog content area */
+.blog-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  color: var(--blog-text);
+}
+
+.blog-content p {
+  margin-bottom: 1.2em;
+  font-weight: 400;
+}
+
+.blog-content h2 {
+  color: var(--blog-green-40);
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+  font-size: 1.5em;
+}
+
+.dark .blog-content h2 {
+  color: var(--blog-green);
+}
+
+.blog-content h3 {
+  color: var(--blog-green-40);
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+  font-size: 1.2em;
+}
+
+.dark .blog-content h3 {
+  color: var(--blog-green-80);
+}
+
+/* Lead text */
+.blog-lead {
+  font-size: 1.1em;
+  font-weight: 700;
+  border-left: 3px solid var(--blog-green);
+  padding-left: 16px;
+  margin-bottom: 2em;
+  color: var(--blog-text);
+}
+
+/* Blog index card */
+.blog-card {
+  border: 1px solid var(--blog-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+  background: var(--blog-card-bg);
+  max-width: 720px;
+}
+
+.blog-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.dark .blog-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.blog-card-thumbnail {
+  height: 200px;
+  background: linear-gradient(135deg, var(--blog-green) 0%, var(--blog-green-40) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.blog-card-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-card-body {
+  padding: 24px;
+}
+
+.blog-card-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8em;
+  color: var(--blog-text-muted);
+  margin-bottom: 12px;
+  font-family: 'Lato', sans-serif;
+}
+
+.blog-card-title {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--blog-green-40);
+  margin-bottom: 8px;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.333;
+}
+
+.dark .blog-card-title {
+  color: var(--blog-green);
+}
+
+.blog-card-description {
+  font-size: 0.9em;
+  color: var(--blog-text-muted);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.blog-card-link {
+  font-size: 0.9em;
+  color: var(--blog-green);
+  font-weight: 600;
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+}
+
+.blog-card-link:hover {
+  text-decoration: underline;
+}
+
+/* Slide deck download banner */
+.blog-download-banner {
+  background: linear-gradient(135deg, var(--blog-green-40), var(--blog-green));
+  border-radius: 12px;
+  padding: 32px;
+  color: #fff;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.dark .blog-download-banner {
+  background: linear-gradient(135deg, #002422, var(--blog-green-40));
+}
+
+.blog-download-banner h3 {
+  color: #fff;
+  margin: 0 0 8px;
+}
+
+.blog-download-banner p {
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+
+.blog-download-banner a {
+  display: inline-block;
+  background: #fff;
+  color: var(--blog-green-40);
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  transition: transform 0.2s;
+}
+
+.blog-download-banner a:hover {
+  transform: translateY(-1px);
+}
+
+/* Utility: full-width breakout from content column */
+.blog-wide {
+  margin-left: -24px;
+  margin-right: -24px;
+}
+
+@media (max-width: 768px) {
+  .blog-content {
+    padding: 24px 16px;
+  }
+  .blog-wide {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+}
+
+/* Infographic image */
+.blog-infographic {
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.5em 0;
+  background: var(--blog-bg-subtle);
+}
+
+.blog-infographic img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

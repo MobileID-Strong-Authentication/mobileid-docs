@@ -15,3 +15,7 @@ node_modules
 
 # Ignore IDE specific files
 .vscode/
+
+# Ignore worktrees and brainstorm artifacts
+.worktrees/
+.superpowers/

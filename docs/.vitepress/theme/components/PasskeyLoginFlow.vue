@@ -108,8 +108,9 @@ function startAnimation() {
 .login-flow-main {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 0;
   padding: 24px 0;
-  overflow-x: auto;
 }
 
 .login-flow-step {
@@ -131,9 +132,9 @@ function startAnimation() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 12px 16px;
-  border-radius: 10px;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 8px;
   white-space: nowrap;
   border: 2px solid transparent;
   transition: border-color 0.3s, background 0.3s;
@@ -175,11 +176,11 @@ function startAnimation() {
 }
 
 .login-flow-icon {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .login-flow-label {
-  font-size: 0.75em;
+  font-size: 0.7em;
   font-weight: 600;
   color: var(--blog-text);
 }
@@ -189,8 +190,8 @@ function startAnimation() {
 }
 
 .login-flow-arrow {
-  padding: 0 8px;
-  font-size: 1.2em;
+  padding: 0 4px;
+  font-size: 1em;
   color: var(--blog-green);
   opacity: 0;
   transition: opacity 0.3s;

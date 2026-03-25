@@ -125,6 +125,7 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'Introduction', link: '/radius-interface-gateway-guide/introduction' },
             { text: 'RIG Deployment', link: '/radius-interface-gateway-guide/deployment' },
+            { text: 'Configuration', link: '/radius-interface-gateway-guide/configuration' },
             { text: 'The RADIUS Protocol', link: '/radius-interface-gateway-guide/radius-protocol' },
             { text: 'Annexes', link: '/radius-interface-gateway-guide/annexes' }
           ]

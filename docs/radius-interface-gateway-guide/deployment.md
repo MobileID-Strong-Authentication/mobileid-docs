@@ -64,11 +64,14 @@ openssl s_client -connect mobileid.swisscom.com:443
 
 Note: The firewall on the Mobile ID API side has an IP-based whitelist. Therefore, the source IP address/range of the request sent to the Mobile ID API must be in the whitelist. If the IP address is unknown, the packet will be dropped and your request will time out.
 
-## Configuration (Redis)
+## Configuration
 
-Here is a customer JSON configuration example. Add the JSON content example to your Redis database and change the configuration according to your preferences. You may configure one or multiple customers.
+RIG supports two configuration sources for customer settings and I18N error messages:
 
-Here is an I18N Error Message JSON configuration example. Add the JSON content example to your Redis database and change the configuration according to your preferences. This allows you to customize any Reply-Message content that is used for Access-Reject packets.
+- **KeyValueStorage (Redis)** — Customer configurations and I18N messages are stored as JSON in Redis. This is the recommended approach for production and multi-node deployments, as configurations can be updated at runtime.
+- **AppSettings (Environment Variables)** — All configuration is provided via environment variables. This is suitable for single-node deployments without Redis.
+
+For detailed configuration options including customer setup, LDAP integration, geofencing, Fortinet VSA, MFA method mapping, SMS notifications, and I18N error messages, see the [Configuration](/radius-interface-gateway-guide/configuration) page.
 
 ## Docker Run
 
@@ -99,45 +102,237 @@ How to run a Docker application:
 docker run -d -p 1812:1812/udp --env-file <my-env-file> mobileidch/mid-radius-rig
 ```
 
-Here is an env example file for the RIG application. Change the example according to your preferences.
+### Environment File
 
-At least the following parameters must be updated in the env file:
+Below is an example `.env` file for a clustered RIG setup with Redis. Change the example according to your preferences.
 
-- **`MID_CLIENT_CERTIFICATE`** — This shall be your base64-encoded Mobile ID API key.
+At least the following parameters must be updated:
+
+- **`MID_CLIENT_CERTIFICATE`** — Your base64-encoded Mobile ID API key (PFX/PKCS#12, without password).
 
   ```bash
   base64 -w 0 <MyKey.pfx>
   ```
 
-- **`Schnittstellen__MobileIdClient__Host`** — This shall be the Mobile ID API endpoint, which is either `https://mobileid.swisscom.com` (Internet) or `https://195.65.233.218` (EC).
+- **`Schnittstellen__MobileIdClient__Host`** — The Mobile ID API endpoint: `https://mobileid.swisscom.com` (Internet) or `https://195.65.233.218` ([Enterprise Connect](https://www.swisscom.ch/en/business/enterprise/offer/wireline/enterprise-connect.html)).
+
+- **`Schnittstellen__KeyValueStorage__ConnectionString`** — Your Redis connection string.
+
+```bash
+# Application Configuration
+ASPNETCORE_ENVIRONMENT=Production
+
+# Base64-encoded MobileID Client Key (PFX/P12, PKCS#12, without password)
+MID_CLIENT_CERTIFICATE=MIIJW***
+
+# Serilog Log Configuration
+# Valid levels: Verbose -> Debug -> Information -> Warning -> Error -> Fatal
+Serilog__MinimumLevel__Default=Information
+Serilog__MinimumLevel__Override__Microsoft=Warning
+Serilog__MinimumLevel__Override__Microsoft.Hosting.Lifetime=Warning
+Serilog__MinimumLevel__Override__Microsoft.Extensions.Diagnostics.HealthChecks=Error
+Serilog__MinimumLevel__Override__Flexinets.Radius.RadiusServer=Information
+Serilog__MinimumLevel__Override__Flexinets.Radius.Core=Information
+Serilog__WriteTo__0__Args__outputTemplate={Timestamp:yyyy-MM-dd HH:mm:ss.fff} {Level:u4} [{CorrelationId}] {SourceContext} - {Message:lj}{NewLine}{Exception}
+
+# WebServer Port (used for health check endpoint)
+WebServer__Port=80
+
+# RADIUS Server Configuration
+RadiusServer__Port=1812
+RadiusServer__OtpValiditySeconds=120
+RadiusServer__OtpMaxAllowedLoginAttempts=3
+RadiusServer__DuplicatePacketHandlingExpirationSeconds=120
+
+# Configuration Sources (KeyValueStorage = Redis, AppSettings = Environment Variables)
+RadiusServer__CustomerConfigSource=KeyValueStorage
+RadiusServer__I18nMessagesSource=KeyValueStorage
+
+# Key-Value Storage (Redis)
+Schnittstellen__KeyValueStorage__Storage=Redis
+Schnittstellen__KeyValueStorage__ConnectionString=<redis-url>:6379,password=<password>,ssl=False,abortConnect=False
+
+# MobileID Client
+Schnittstellen__MobileIdClient__Host=https://mobileid.swisscom.com
+Schnittstellen__MobileIdClient__ClientCertFromEnv=true
+Schnittstellen__MobileIdClient__TransactionTimeoutSeconds=60
+Schnittstellen__MobileIdClient__SignatureTrust__ValidateCertTrust=true
+Schnittstellen__MobileIdClient__SignatureTrust__ValidateSignature=true
+Schnittstellen__MobileIdClient__SignatureTrust__ValidateSignaturePayload=true
+Schnittstellen__MobileIdClient__ServerTrust__ValidateCertTrust=true
+
+# TrustStore Configuration
+# Base64-encode each ROOT CA certificate (PEM format):
+# $ base64 -w 0 Swisscom_Root_CA_4.cer
+Schnittstellen__MobileIdClient__SignatureTrust__TrustStore__0=<base64-Swisscom-Root-CA-4>
+Schnittstellen__MobileIdClient__SignatureTrust__TrustStore__1=<base64-Swisscom-Root-CA-2>
+Schnittstellen__MobileIdClient__ServerTrust__TrustStore__0=<base64-SwissSign-Gold-CA-G2>
+```
+
+::: tip
+The TrustStore certificates (Swisscom Root CA 4, Swisscom Root CA 2, SwissSign Gold CA-G2) are pre-encoded in the sample files available on [GitHub](https://github.com/MobileID-Strong-Authentication/mid-radius-rig). You can copy the base64 values directly from there.
+:::
+
+### Single-Node Deployment (without Redis)
+
+For deployments that only use **SIM** and/or **APP** authentication (no OTP), RIG can run as a single container without Redis. In this mode, set the storage to `InMemory` and provide the customer configuration and I18N messages via environment variables:
+
+```bash
+# Key-Value Storage (InMemory - no Redis required)
+Schnittstellen__KeyValueStorage__Storage=InMemory
+
+# Configuration Sources (AppSettings = Environment Variables)
+RadiusServer__CustomerConfigSource=AppSettings
+RadiusServer__I18nMessagesSource=AppSettings
+```
+
+The customer configuration is then provided as indexed environment variables. See the [Configuration](/radius-interface-gateway-guide/configuration#configuration-via-environment-variables) page for the full environment variable reference.
+
+::: warning
+OTP authentication is **not supported** without Redis, as OTP session state requires shared storage across request cycles.
+:::
 
 ## Docker Compose
 
-With Compose, you can create a YAML file to define the services and, with a single command, spin everything up or tear it all down. With this sample, you start multiple RIG container instances.
+With Compose, you can create a YAML file to define the services and, with a single command, spin everything up or tear it all down. The following example starts a complete RIG cluster with all required components.
 
-Here is a `docker-compose.yaml` example with services defined as follows:
+The services are:
 
-- **Mobile ID RADIUS Interface Gateway application** — from Docker Hub (or alternatively from Amazon ECR)
+- **Mobile ID RADIUS Interface Gateway application** — from [Docker Hub](https://hub.docker.com/repository/docker/mobileidch/mid-radius-rig) (or alternatively from [Amazon ECR](https://gallery.ecr.aws/mobileidch/mid-radius-rig))
 - **Redis database** using `redis` (or alternatively `keydb` may be used)
-- **Redis web management tool** using `redis-commander` to manage the Redis database content
+- **Redis web management tool** using `redis-commander` to manage the Redis database content (customer configs, I18N messages)
 - **UDP network load balancer** using `nginx` with a custom `nginx.conf` configuration
 
-Change the example according to your preferences.
+### docker-compose.yml
 
-At least the following parameters must be updated in the YAML file:
+Update `MID_CLIENT_CERTIFICATE`, `Schnittstellen__KeyValueStorage__ConnectionString`, and `Schnittstellen__MobileIdClient__Host` according to your setup.
 
-- **`MID_CLIENT_CERTIFICATE`** — This shall be your base64-encoded Mobile ID API key.
+```yaml
+services:
 
-  ```bash
-  base64 -w 0 <MyKey.pfx>
-  ```
+  mid-radius-rig:
+    # Option 1: Pull image from Docker Hub
+    image: mobileidch/mid-radius-rig:latest
+    # Option 2: Pull image from AWS ECR
+    # image: public.ecr.aws/r4c1w5d3/mid-radius-rig:latest
+    hostname: "rig_gateway"
+    ports:
+      - "1812/udp"
+      # Health check endpoint mapped to port 8055 on Docker host
+      - "8055:80/tcp"
+    links:
+      - redis
+    restart: always
+    environment:
+      - Serilog__MinimumLevel__Default=Information
+      - Serilog__MinimumLevel__Override__Microsoft=Warning
+      - Serilog__MinimumLevel__Override__Microsoft.Hosting.Lifetime=Warning
+      - Serilog__MinimumLevel__Override__Microsoft.Extensions.Diagnostics.HealthChecks=Error
+      - Serilog__MinimumLevel__Override__Flexinets.Radius.RadiusServer=Information
+      - Serilog__MinimumLevel__Override__Flexinets.Radius.Core=Information
+      - Serilog__WriteTo__0__Args__outputTemplate={Timestamp:yyyy-MM-dd HH:mm:ss.fff} {Level:u4} [{CorrelationId}] {SourceContext} - {Message:lj}{NewLine}{Exception}
+      - ASPNETCORE_ENVIRONMENT=Production
+      - MID_CLIENT_CERTIFICATE=<base64-encoded-pfx-nopassword>
+      - RadiusServer__Port=1812
+      - RadiusServer__OtpValiditySeconds=120
+      - RadiusServer__OtpMaxAllowedLoginAttempts=3
+      - RadiusServer__CustomerConfigSource=KeyValueStorage
+      - RadiusServer__I18nMessagesSource=KeyValueStorage
+      - RadiusServer__DuplicatePacketHandlingExpirationSeconds=120
+      - Schnittstellen__KeyValueStorage__Storage=Redis
+      - Schnittstellen__KeyValueStorage__ConnectionString=redis:6379,password=<password>,ssl=False,abortConnect=False
+      - Schnittstellen__MobileIdClient__Host=https://mobileid.swisscom.com
+      - Schnittstellen__MobileIdClient__ClientCertFromEnv=true
+      - Schnittstellen__MobileIdClient__SignatureTrust__ValidateCertTrust=true
+      - Schnittstellen__MobileIdClient__SignatureTrust__ValidateSignature=true
+      - Schnittstellen__MobileIdClient__SignatureTrust__ValidateSignaturePayload=true
+      - Schnittstellen__MobileIdClient__ServerTrust__ValidateCertTrust=true
+      - Schnittstellen__MobileIdClient__TransactionTimeoutSeconds=60
+      # TrustStore certificates (see env file sample for base64 values)
+      - Schnittstellen__MobileIdClient__SignatureTrust__TrustStore__0=<base64-Swisscom-Root-CA-4>
+      - Schnittstellen__MobileIdClient__SignatureTrust__TrustStore__1=<base64-Swisscom-Root-CA-2>
+      - Schnittstellen__MobileIdClient__ServerTrust__TrustStore__0=<base64-SwissSign-Gold-CA-G2>
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 20s
+      retries: 3
+      start_period: 10s
+      timeout: 3s
 
-- **`Schnittstellen__MobileIdClient__Host`** — This shall be the Mobile ID API endpoint, which is either `https://mobileid.swisscom.com` (Internet) or `https://195.65.233.218` (EC).
+  redis:
+    image: redis:latest
+    container_name: "rig_redis"
+    hostname: "rig_redis"
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    restart: always
 
-How to spin up using Docker Compose — make sure that both `docker-compose.yml` and `nginx.conf` exist in the same directory before you run the command below:
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: "rig_redis_commander"
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+      - HTTP_USER=admin
+      - HTTP_PASSWORD=<your-password>
+    ports:
+      - 8081:8081
+    depends_on:
+      - redis
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: "rig_nginx"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - mid-radius-rig
+    ports:
+      - "11812:1812/udp"
+
+volumes:
+  redis-data:
+```
+
+### nginx.conf
+
+The following `nginx.conf` configures a UDP load balancer that forwards RADIUS traffic to the RIG container(s). Place this file in the same directory as `docker-compose.yml`.
+
+```nginx
+user  nginx;
+
+events {
+    worker_connections   1000;
+}
+stream {
+    upstream rig-nginx {
+        server mid-radius-rig:1812;
+    }
+
+    server {
+        listen 1812 udp;
+        proxy_pass rig-nginx;
+    }
+}
+```
+
+### Starting the Cluster
+
+Make sure that both `docker-compose.yml` and `nginx.conf` exist in the same directory, then run:
 
 ```bash
 docker-compose up --scale mid-radius-rig=3
+```
+
+This starts 3 RIG instances behind the nginx UDP load balancer, with Redis for shared state. The health check endpoint is available at `http://localhost:8055/health`.
+
+You can verify the health check status with:
+
+```bash
+docker inspect --format='{{json .State.Health}}' <container-name>
 ```
 
 ## Integration Scenarios

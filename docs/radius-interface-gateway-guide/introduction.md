@@ -19,27 +19,30 @@ RADIUS users are typically defined in the format `user@domain`. However, Mobile 
 
 ### Features Available
 
-- Multitenancy
-- Cloud-native microservice architecture (horizontal scalability)
-- Authentication: Mobile ID SIM, Mobile ID App, OTP Text SMS
-- Automatic authentication fallback with configurable priority
-- MFA method selection via LDAP group membership (`memberOf`)
-- MFA method "None" (temporarily disable MFA per user or group)
-- Geofencing (whitelist/blacklist configuration, AD group-based, configurable confidence scores)
-- LDAP(S) integration (`userPassword`, `mobile`, `preferredLanguage`, `midSerial`, `preferredMFA`)
-- LDAP search scope and referral configuration
-- Flexible LDAP search filters with multiple username placeholders
-- LDAP authentication without admin/service user
-- User Account Control attribute support
-- Mobile ID user's serial number validation (optional)
-- RADIUS Accounting
-- RADIUS Class attribute in Access-Accept
-- Custom RADIUS Reply Messages for Access-Reject
-- Custom Text SMS notification for specific error events
-- Accounting Webhook (forward accounting traffic to external systems)
-- Supports Fortinet Vendor Specific Attributes (VSA)
-- Support for Docker secrets via `_FILE` environment variables
-- [BlastRADIUS](https://www.blastradius.fail/) mitigation — Message-Authenticator support ([CVE-2024-3596](https://nvd.nist.gov/vuln/detail/CVE-2024-3596))
+- **Multitenancy** — configure one or multiple customers, each with their own AP_ID, RADIUS shared secret, LDAP settings, and MFA preferences
+- **Cloud-native microservice architecture** — horizontal scalability with Redis-based cluster synchronization
+- **Single-node deployment** — run without Redis for SIM/APP-only setups (no OTP); ideal for smaller deployments and proof-of-concept environments
+- **Authentication methods** — Mobile ID SIM digital signature, Mobile ID App digital signature, OTP via Text SMS
+- **Automatic authentication fallback** with configurable method priority per customer
+- **MFA method selection via LDAP** — per-user method assignment via LDAP attribute or group membership (`memberOf`)
+- **MFA method "None"** — temporarily disable MFA per user or group
+- **Geofencing** — whitelist/blacklist country configuration, LDAP group-based geofencing, configurable device and location confidence scores
+- **LDAP(S) integration** — retrieve `userPassword`, `mobile`, `preferredLanguage`, serial number, and preferred MFA method; supports primary/secondary/tertiary host failover
+- **LDAP search scope and referral** configuration
+- **Flexible LDAP search filters** with `{username}`, `{domain}`, and `{userdn}` placeholders
+- **LDAP authentication without admin/service user** — authenticate using the client's own credentials
+- **User Account Control** attribute support (Active Directory)
+- **Mobile ID serial number validation** — optionally validate the user's Mobile ID serial number against an LDAP attribute
+- **RADIUS Accounting** with optional webhook forwarding to external systems
+- **RADIUS Class attribute** in Access-Accept responses, mapped from LDAP group membership
+- **Custom RADIUS Reply Messages** for Access-Reject packets, with I18N support (German, French, Italian, English)
+- **Custom Text SMS notifications** for specific error events (e.g., serial number mismatch, geofencing errors)
+- **SMS notifications for inactive Mobile ID users** — notify users to activate their Mobile ID account after a fallback authentication
+- **Fortinet Vendor Specific Attributes (VSA)** — map LDAP groups to Fortinet group names and access profiles
+- **Duplicate packet handling** — configurable deduplication to prevent redundant authentication sessions
+- **Docker secrets support** via `_FILE` environment variables
+- **Health check endpoint** — HTTP `/health` endpoint for container orchestration
+- [**BlastRADIUS**](https://www.blastradius.fail/) **mitigation** — Message-Authenticator support ([CVE-2024-3596](https://nvd.nist.gov/vuln/detail/CVE-2024-3596))
 
 ### Features Planned
 
@@ -62,6 +65,15 @@ The following diagram shows a cluster setup for RIG:
 Since nodes need a way of communicating between them and considering the specific target runtime environment, a good approach for this inter-node synchronization is via a common **Redis database cluster**. Each node connects to this database and is able to save and read data from all the other nodes in a RIG cluster. An ongoing authentication session, for example, will have its data stored by node A in the Redis database, with node B later reading the data for that session and carrying it on.
 
 Requests coming from outside of the RIG cluster reach a proxy service and are then dispatched to one appropriate RIG node. It is up to the proxy to select the right node, but any policy will work fine, as all RIG nodes have the same quality and level of data access, so any one of them could handle a request at any time. Of course, the proxy is responsible for carefully distributing the load on available nodes, but from the point of view of the RIG nodes, the functionality is the same, regardless of the chosen node.
+
+### Single-Node Deployment (without Redis)
+
+For smaller deployments or proof-of-concept setups, RIG can be deployed as a single container instance without a Redis database. In this mode, session state is stored in-memory. This is suitable when:
+
+- Only **SIM** and/or **APP** authentication methods are used (no OTP)
+- High availability and horizontal scaling are not required
+
+This deployment mode significantly reduces infrastructure requirements — only a single RIG container is needed. See the [Deployment](/radius-interface-gateway-guide/deployment) page for configuration details.
 
 Moving one level down in the architectural view, the following diagram shows the main logical parts of the RIG service:
 

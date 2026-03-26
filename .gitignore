@@ -19,3 +19,7 @@ node_modules
 # Ignore worktrees and brainstorm artifacts
 .worktrees/
 .superpowers/
+
+# AI assistant / editor local tooling (never commit)
+.claude/
+.cursor/

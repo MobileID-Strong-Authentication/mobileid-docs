@@ -1,6 +1,6 @@
 import { createContentLoader } from 'vitepress'
 
-export interface BlogPost {
+export interface ReleaseNotesPost {
   url: string
   title: string
   date: string
@@ -10,9 +10,10 @@ export interface BlogPost {
   author: string
 }
 
-export default createContentLoader('blog/posts/*.md', {
-  transform(raw): BlogPost[] {
+export default createContentLoader('release-notes/posts/*.md', {
+  transform(raw): ReleaseNotesPost[] {
     return raw
+      .filter(({ url }) => !/\.\w{2}\.html$/.test(url))
       .sort((a, b) => +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date))
       .map(({ url, frontmatter }) => ({
         url,

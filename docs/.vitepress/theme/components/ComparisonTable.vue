@@ -5,12 +5,12 @@ const props = defineProps({
   rows: {
     type: Array,
     default: () => [
-      { feature: 'Phishing-Schutz', classic: false, passkey: true },
-      { feature: 'Kein Passwort nötig', classic: false, passkey: true },
-      { feature: 'Login-Zeit', classic: '~15 Sek', passkey: '<3 Sek' },
-      { feature: 'Zentrale Verwaltung', classic: false, passkey: true },
-      { feature: 'NIST AAL3 möglich', classic: false, passkey: true },
-      { feature: 'Kein Hardware-Token', classic: false, passkey: true },
+      { feature: 'Phishing protection', classic: false, passkey: true },
+      { feature: 'No password required', classic: false, passkey: true },
+      { feature: 'Login time', classic: '~15 sec', passkey: '<3 sec' },
+      { feature: 'Centralized management', classic: false, passkey: true },
+      { feature: 'NIST AAL3 capable', classic: false, passkey: true },
+      { feature: 'No hardware token', classic: false, passkey: true },
     ],
   },
 })
@@ -61,7 +61,7 @@ function formatValue(val) {
   <div ref="containerRef" class="comparison-table">
     <div class="comparison-header">
       <div class="comparison-cell comparison-feature">Feature</div>
-      <div class="comparison-cell comparison-classic">Passwort + SMS</div>
+      <div class="comparison-cell comparison-classic">Password + SMS</div>
       <div class="comparison-cell comparison-passkey">Mobile ID Passkeys</div>
     </div>
     <div

@@ -1,10 +1,10 @@
 <script setup>
-import { data as posts } from './blog.data.mts'
+import { data as posts } from './release-notes.data.mts'
 
 function formatDate(dateStr) {
   if (!dateStr) return ''
   const d = new Date(dateStr)
-  return d.toLocaleDateString('de-CH', {
+  return d.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -15,9 +15,9 @@ function formatDate(dateStr) {
 <template>
   <div class="blog-layout">
     <div class="blog-hero">
-      <h1 style="color: #fff; margin: 0; font-size: 2em;">Blog</h1>
+      <h1 style="color: #fff; margin: 0; font-size: 2em;">Release Notes</h1>
       <p style="opacity: 0.85; margin-top: 8px; font-size: 1em;">
-        Neuigkeiten und Insights rund um Mobile ID
+        New features and updates for Mobile ID
       </p>
     </div>
 
@@ -40,11 +40,11 @@ function formatDate(dateStr) {
           <div class="blog-card-meta">
             <span>{{ formatDate(post.date) }}</span>
             <span v-if="post.readingTime">·</span>
-            <span v-if="post.readingTime">{{ post.readingTime }} Min. Lesezeit</span>
+            <span v-if="post.readingTime">{{ post.readingTime }} min read</span>
           </div>
           <div class="blog-card-title">{{ post.title }}</div>
           <div class="blog-card-description">{{ post.description }}</div>
-          <span class="blog-card-link">Weiterlesen →</span>
+          <span class="blog-card-link">Read more →</span>
         </div>
       </a>
     </div>

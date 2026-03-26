@@ -12,14 +12,14 @@ const phases = [
   {
     number: 2,
     title: 'macOS, iPadOS, Windows',
-    description: 'Lokale Passkey Provider',
+    description: 'Local Passkey Providers',
     icon: '💻',
     color: 'green',
   },
   {
     number: 3,
     title: 'Swiss Cloud-Synced Passkeys',
-    description: 'E2E-verschlüsselt in der Schweiz',
+    description: 'E2E-encrypted in Switzerland',
     icon: '🇨🇭',
     color: 'pink',
   },

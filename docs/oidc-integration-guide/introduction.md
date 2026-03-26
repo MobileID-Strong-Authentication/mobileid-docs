@@ -33,8 +33,69 @@ The most basic key concepts are as follows.
 
 Mobile ID utilizes the **Authorization Code Grant Type** to obtain an access token that allows the application to retrieve user data after authenticating. The Authorization Code Flow, in abstract, follows these steps:
 
-![auth-code-grant-flow](/img/auth-code-grant-flow.png)
+```mermaid
+sequenceDiagram
+    actor EU as End-User
+    participant UA as User-Agent<br/>(Browser, App)
+    participant RP as Relying Party<br/>company.ch
+    participant AuthZ as Mobile ID (OP)<br/>Authorization Endpoint
+    participant Tok as Mobile ID (OP)<br/>Token Endpoint
+    participant UI as Mobile ID (OP)<br/>UserInfo Endpoint
 
+    rect rgb(240, 248, 255)
+        Note over EU, AuthZ: (A)
+        EU->>UA: User clicks sign-in button at https://company.ch to request access to protected resource
+        UA->>RP:
+        Note right of RP: optional parameters are<br/>login_hint, ui_locales,<br/>dtbd, acr_values
+        RP->>AuthZ:
+        AuthZ->>UA: Redirect to https://m.mobileid.ch
+    end
+
+    rect rgb(240, 255, 240)
+        Note over EU, AuthZ: (B)
+        UA->>AuthZ: Authentication request : client_id, redirect_uri, scope
+        AuthZ->>AuthZ: Validate client
+        AuthZ->>UA: Return sign-in page of https://m.mobileid.ch
+        UA->>AuthZ: User starts sign-in at https://m.mobileid.ch
+        AuthZ->>AuthZ: Start Mobile ID authentication & authorization<br/>incl. account recovery, if needed
+        AuthZ->>EU: Mobile ID authentication request to confirm sign in to protected resource
+        Note left of EU: Authenticate with<br/>Mobile ID
+        EU->>AuthZ: Mobile ID authentication response
+        AuthZ->>AuthZ: Cache authentication data temporarily
+        EU->>AuthZ: User grants access to user information (authorization step)
+    end
+
+    rect rgb(255, 248, 240)
+        Note over UA, AuthZ: (C)
+        AuthZ->>UA: Redirect to https://company.ch + authorization-code (short lived)
+        UA->>RP: Authorization-code
+    end
+
+    rect rgb(240, 240, 255)
+        Note over RP, Tok: (D)
+        RP->>Tok: Request access token and ID token using authorization-code
+        Tok->>Tok: Validate authorization-code
+    end
+
+    rect rgb(255, 240, 255)
+        Note over RP, Tok: (E)
+        Tok->>RP: access token & ID token returned (short-lived)
+    end
+
+    rect rgb(255, 255, 240)
+        Note over RP, UI: (F) Optionally to retrieve extra user info
+        RP->>UI: request user claims using ID token
+        UI->>UI: Validate token
+        UI->>RP: claims returned (phone number, location, etc.)
+        RP->>RP: Validate extra user info
+    end
+
+    rect rgb(245, 245, 245)
+        Note over EU, RP: (G)
+        RP->>UA: Allow or deny access based on access token and optional user info
+        UA->>EU: User is signed in
+    end
+```
 
 1. An **End-User** requests access to a protected resource of the Relying Party. For example, the End-User clicks on a sign-in button or launches an app. The Relying Party redirects the User-Agent to the Mobile ID Authorization Endpoint at `https://m.mobileid.ch`.
 2. The Mobile ID Authorization Server **authenticates** the End-User (using an appropriate Mobile ID authentication method) and establishes whether the End-User grants or denies the Relying Party Client's access request, including access to extra user information that might have been requested in the scope of the authentication request sent by the Relying Party.

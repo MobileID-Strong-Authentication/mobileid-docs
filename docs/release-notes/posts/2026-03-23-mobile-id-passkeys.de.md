@@ -17,7 +17,6 @@ import PasskeyLoginFlow from '../../.vitepress/theme/components/PasskeyLoginFlow
 import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCards.vue'
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import HybridAuthComparisonTable from '../../.vitepress/theme/components/HybridAuthComparisonTable.vue'
-import PasskeyVaultRoadmap from '../../.vitepress/theme/components/PasskeyVaultRoadmap.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
 import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue'
 </script>
@@ -223,33 +222,15 @@ Wenn ein Benutzer bei einer Relying Party auf "Sign in with Mobile ID" klickt, e
 
 Je nach konfiguriertem ACR-Wert wird der passende Flow ausgelöst. Bei `mid_al4_passkey` wird ausschliesslich ein Passkey akzeptiert. Bei `mid_al2_any` kann der Benutzer zwischen Passkey, SIM, App oder SMS wählen. Bei Fehlern oder fehlenden Passkeys kann die RP einen sicheren Fallback auf andere Methoden zulassen.
 
-Wenn Passkeys für einen Client aktiviert sind (`passkeys_enabled = true`), ist die Prioritätsreihenfolge: Passkey, SIM, App, SMS.
-
 <PasskeyLoginFlow />
 
 ## Roadmap: Der Mobile ID Passkey Vault
 
-Mobile ID verfolgt mit dem Passkey Vault die Vision einer souveränen Passkey-Infrastruktur. Die Mobile ID App wird dabei selbst zum 3rd-Party Passkey Provider auf iOS und Android. Swisscom verfolgt einen Make-not-Buy-Ansatz und baut den Authenticator selbst.
+Mit dem Mobile ID Passkey Vault befindet sich eine Roadmap-Lösung in Entwicklung, die AAL3 mit der Mobile ID App ermöglichen soll. Ziel ist ein Authenticator, der die strengen Anforderungen von AAL3 erfüllt und auf demselben Sicherheitsniveau spielt wie ein FIPS-zertifizierter Hardware-Key, dabei aber vollständig ins Mobile-ID-Ökosystem integriert bleibt.
 
-### Phase 1: Mobile MVP
+Gegenüber physischen Hardware-Keys bietet der Passkey Vault klare operative Vorteile: Die Passkey-Anmeldung lässt sich direkt mit Geoblocking und explizitem User Consent kombinieren, und der Authenticator lässt sich deutlich einfacher und kostengünstiger ausrollen und skalieren als teure Hardware-Token.
 
-Device-Bound Passkeys auf iOS und Android, verwaltet durch die Mobile ID App. Kombiniert mit Mobile ID Push für den Hybrid Auth Flow. Nutzung der Credential Manager API (Android) und AuthenticationServices (iOS).
-
-### Phase 2: Desktop-Erweiterung
-
-Unterstützung für macOS, iPadOS und Windows. Cross-Device-Authentisierung über BLE/NFC, damit der Passkey auf dem Smartphone auch für Desktop-Logins genutzt werden kann.
-
-### Phase 3: Swiss Cloud-Synced Passkeys
-
-Ende-zu-Ende verschlüsselter Synchronisierungsdienst mit Datenhaltung in Schweizer Rechenzentren. Damit wird das CLOUD-Act-Risiko der US-Big-Tech-Clouds eliminiert, bei gleichem Komfort wie Apple iCloud Keychain oder Google Password Manager.
-
-### Phase 4: Attestation und FIDO MDS
-
-Registrierung der Mobile ID App im FIDO Metadata Service mit eigener AAGUID. Damit können Relying Parties die Mobile ID App als vertrauenswürdigen Authenticator erkennen und das Sicherheitsniveau automatisiert einordnen.
-
-Die App wird zum One-Stop Authentication Tool: SIM-Authentisierung, Push-basierte MFA, Passkey-Provider und Transaction Signing in einer einzigen Anwendung.
-
-<PasskeyVaultRoadmap />
+Die Mobile ID App entwickelt sich damit zu einem skalierbaren Software-Authenticator, der SIM-Authentisierung, Push-basierte MFA, Passkey-Funktionalität und Transaction Signing in einer einzigen Anwendung vereint.
 
 ## Fazit: Alles aus einer Hand
 

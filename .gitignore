@@ -19,6 +19,11 @@ node_modules
 # Ignore worktrees and brainstorm artifacts
 .worktrees/
 .superpowers/
+docs/superpowers/
+**/plans/
+*-plan.md
+*-plan-*.md
+plan-*.md
 
 # AI assistant / editor local tooling (never commit)
 .claude/

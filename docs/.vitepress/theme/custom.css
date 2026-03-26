@@ -93,6 +93,10 @@ html.dark img.feature-icon-network {
   content: url("/img/icon-network-light.svg");
 }
 
+html.dark img.feature-icon-megaphone {
+  content: url("/img/icon-megaphone-light.svg");
+}
+
 
 /* Or for more specific control */
 .VPContent.VPContent.is-home {

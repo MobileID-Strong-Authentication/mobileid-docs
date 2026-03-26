@@ -28,6 +28,12 @@ features:
       class: feature-icon-network
     details: Start here to integrate Mobile ID strong authentication into your existing RADIUS-based network via the RADIUS Interface Gateway (RIG).
     link: /radius-interface-gateway-guide/introduction
+  - title: Release Notes
+    icon:
+      src: /img/icon-megaphone.svg
+      class: feature-icon-megaphone
+    details: Stay up to date with the latest Mobile ID features, enhancements, and in-depth articles on authentication capabilities.
+    link: /release-notes/
 ---
 
 <div class="vp-doc">

@@ -1,8 +1,79 @@
 import { defineConfig, type HeadConfig } from 'vitepress'
 import { full as emoji } from 'markdown-it-emoji'
 import { withMermaid } from 'vitepress-plugin-mermaid'
+import { existsSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const SITE_URL = 'https://docs.mobileid.ch'
+const DOCS_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const RELEASE_NOTES_POST_LAYOUT = 'release-notes-post'
+const SUPPORTED_LANGS = ['en', 'de', 'fr', 'it'] as const
+
+type SupportedLang = typeof SUPPORTED_LANGS[number]
+
+const HREFLANG_BY_LANG: Record<SupportedLang, string> = {
+  en: 'en',
+  de: 'de-CH',
+  fr: 'fr-CH',
+  it: 'it-CH',
+}
+
+const OG_LOCALE_BY_LANG: Record<SupportedLang, string> = {
+  en: 'en_US',
+  de: 'de_CH',
+  fr: 'fr_CH',
+  it: 'it_CH',
+}
+
+function toAbsoluteUrl(url: string): string {
+  if (/^https?:\/\//.test(url)) return url
+  return `${SITE_URL}${url.startsWith('/') ? '' : '/'}${url}`
+}
+
+function getPageLang(pageData: { relativePath: string; frontmatter: Record<string, any> }): SupportedLang {
+  const frontmatterLang = pageData.frontmatter.lang
+  if (SUPPORTED_LANGS.includes(frontmatterLang)) return frontmatterLang
+
+  const langFromPath = pageData.relativePath.match(/\.(de|fr|it|en)\.md$/)?.[1]
+  if (langFromPath && SUPPORTED_LANGS.includes(langFromPath as SupportedLang)) {
+    return langFromPath as SupportedLang
+  }
+
+  return 'en'
+}
+
+function getPagePath(relativePath: string): string {
+  return relativePath
+    .replace(/index\.md$/, '')
+    .replace(/\.md$/, '.html')
+}
+
+function getSourceRelativePath(url: string): string {
+  const normalizedUrl = url.replace(/^\//, '')
+  if (!normalizedUrl) return 'index.md'
+  if (normalizedUrl.endsWith('/')) return `${normalizedUrl}index.md`
+  return normalizedUrl.replace(/\.html$/, '.md')
+}
+
+function getAlternatePages(relativePath: string) {
+  const baseRel = relativePath
+    .replace(/\.md$/, '')
+    .replace(/\.(de|fr|it|en)$/, '')
+
+  return SUPPORTED_LANGS.flatMap((lang) => {
+    const candidateRel = lang === 'en' ? `${baseRel}.md` : `${baseRel}.${lang}.md`
+    if (!existsSync(resolve(DOCS_ROOT, candidateRel))) return []
+
+    return [{
+      lang,
+      hreflang: HREFLANG_BY_LANG[lang],
+      ogLocale: OG_LOCALE_BY_LANG[lang],
+      path: `/${getPagePath(candidateRel)}`,
+      url: toAbsoluteUrl(`/${getPagePath(candidateRel)}`),
+    }]
+  })
+}
 
 // https://vitepress.dev/reference/site-config
 export default withMermaid(defineConfig({
@@ -16,6 +87,32 @@ export default withMermaid(defineConfig({
 
   sitemap: {
     hostname: SITE_URL,
+    transformItems(items) {
+      return items
+        .filter((item) => !String(item.url).startsWith('superpowers/'))
+        .map((item) => {
+          const alternates = getAlternatePages(getSourceRelativePath(String(item.url)))
+          if (alternates.length < 2) return item
+
+          const xDefault = alternates.find((alternate) => alternate.lang === 'en')
+
+          return {
+            ...item,
+            links: [
+              ...alternates.map((alternate) => ({
+                lang: alternate.hreflang,
+                url: alternate.path,
+              })),
+              ...(xDefault
+                ? [{
+                    lang: 'x-default',
+                    url: xDefault.path,
+                  }]
+                : []),
+            ],
+          }
+        })
+    },
   },
 
   markdown: {
@@ -30,29 +127,113 @@ export default withMermaid(defineConfig({
     ['link', { rel: 'shortcut icon', href: '/favicon.ico' }],
     ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
-    ['meta', { name: 'robots', content: 'index, follow' }],
+    ['meta', { name: 'robots', content: 'index, follow, max-image-preview:large' }],
     ['meta', { property: 'og:site_name', content: 'Mobile ID docs' }],
-    ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:locale', content: 'en' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
   ],
 
   transformPageData(pageData) {
-    const pagePath = pageData.relativePath
-      .replace(/index\.md$/, '')
-      .replace(/\.md$/, '.html')
+    const pagePath = getPagePath(pageData.relativePath)
     const canonicalUrl = `${SITE_URL}/${pagePath}`
+    const lang = getPageLang(pageData)
+    const alternates = getAlternatePages(pageData.relativePath)
 
     const ogTitle = pageData.title || 'Mobile ID docs'
     const ogDesc = pageData.description || 'Technical documentation for Mobile ID integration'
-
-    pageData.frontmatter.head ??= []
-    pageData.frontmatter.head.push(
+    const socialImage = pageData.frontmatter.thumbnail
+      ? toAbsoluteUrl(pageData.frontmatter.thumbnail)
+      : undefined
+    const isReleaseNotesPost = pageData.frontmatter.layout === RELEASE_NOTES_POST_LAYOUT
+    const head: HeadConfig[] = [
       ['link', { rel: 'canonical', href: canonicalUrl }],
       ['meta', { property: 'og:title', content: ogTitle }],
       ['meta', { property: 'og:description', content: ogDesc }],
       ['meta', { property: 'og:url', content: canonicalUrl }],
-    )
+      ['meta', { property: 'og:type', content: isReleaseNotesPost ? 'article' : 'website' }],
+      ['meta', { property: 'og:locale', content: OG_LOCALE_BY_LANG[lang] }],
+    ]
+
+    if (socialImage) {
+      head.push(
+        ['meta', { property: 'og:image', content: socialImage }],
+        ['meta', { property: 'og:image:alt', content: ogTitle }],
+        ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+        ['meta', { name: 'twitter:image', content: socialImage }],
+      )
+    }
+
+    if (isReleaseNotesPost) {
+      const publishedDate = pageData.frontmatter.date
+        ? new Date(pageData.frontmatter.date).toISOString()
+        : undefined
+
+      head.push(
+        ['meta', { name: 'twitter:title', content: ogTitle }],
+        ['meta', { name: 'twitter:description', content: ogDesc }],
+      )
+
+      if (publishedDate) {
+        head.push(['meta', { property: 'article:published_time', content: publishedDate }])
+      }
+
+      if (pageData.frontmatter.author) {
+        head.push(['meta', { property: 'article:author', content: pageData.frontmatter.author }])
+      }
+
+      head.push(['meta', { property: 'article:section', content: 'Release Notes' }])
+
+      if (alternates.length > 1) {
+        const currentAlternate = alternates.find((alternate) => alternate.lang === lang)
+        const xDefault = alternates.find((alternate) => alternate.lang === 'en') ?? currentAlternate
+
+        for (const alternate of alternates) {
+          head.push(['link', { rel: 'alternate', hreflang: alternate.hreflang, href: alternate.url }])
+        }
+
+        if (xDefault) {
+          head.push(['link', { rel: 'alternate', hreflang: 'x-default', href: xDefault.url }])
+        }
+
+        for (const alternate of alternates) {
+          if (alternate.lang !== lang) {
+            head.push(['meta', { property: 'og:locale:alternate', content: alternate.ogLocale }])
+          }
+        }
+      }
+
+      const articleSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: ogTitle,
+        description: ogDesc,
+        url: canonicalUrl,
+        mainEntityOfPage: canonicalUrl,
+        datePublished: publishedDate,
+        inLanguage: HREFLANG_BY_LANG[lang],
+        articleSection: 'Release Notes',
+        image: socialImage ? [socialImage] : undefined,
+        author: pageData.frontmatter.author
+          ? {
+              '@type': 'Organization',
+              name: pageData.frontmatter.author,
+            }
+          : undefined,
+        publisher: {
+          '@type': 'Organization',
+          name: 'Swisscom',
+          url: 'https://www.swisscom.ch/mobileid',
+        },
+      }
+
+      head.push([
+        'script',
+        { type: 'application/ld+json' },
+        JSON.stringify(articleSchema),
+      ])
+    }
+
+    pageData.frontmatter.head ??= []
+    pageData.frontmatter.head.push(...head)
   },
 
   themeConfig: {

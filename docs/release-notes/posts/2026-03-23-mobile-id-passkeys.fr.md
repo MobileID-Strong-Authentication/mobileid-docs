@@ -189,10 +189,9 @@ Les utilisateurs gèrent leurs Passkeys via le tableau de bord MyMobileID sur mo
 
 Le processus d'enregistrement :
 
-1. Connexion sur mobileid.ch (vérification par SMS-OTP pour confirmer le numéro de mobile)
-2. Dans le tableau de bord, sélectionner la tuile « Mobile ID Passkey » et cliquer sur « MANAGE PASSKEYS »
-
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="Tableau de bord MyMobileID : tuile Mobile ID Passkey avec bouton MANAGE PASSKEYS">
+<p><strong>1.</strong> Connexion sur mobileid.ch (vérification par SMS-OTP pour confirmer le numéro de mobile).</p>
+<p><strong>2.</strong> Dans le tableau de bord, sélectionner la tuile « Mobile ID Passkey » et cliquer sur « MANAGE PASSKEYS ».</p>
 <p><strong>3.</strong> Choisir « Add a passkey ». Le dialogue natif du navigateur apparaît (Touch ID, Face ID ou clé de sécurité).</p>
 <p><strong>4.</strong> Confirmation biométrique ou saisie du PIN sur l'authenticateur.</p>
 </ScreenshotStep>
@@ -216,10 +215,9 @@ Le processus d'enregistrement :
 
 Lorsqu'un utilisateur clique sur « Sign in with Mobile ID » chez une Relying Party, un flux OIDC Authorization Code se déclenche :
 
-1. La RP redirige l'utilisateur vers Mobile ID, avec la valeur ACR souhaitée dans la requête d'autorisation
-2. Mobile ID affiche la page d'authentification par Passkey (« Passkey ou clé de sécurité FIDO2 »)
-
 <ScreenshotStep img="/release-notes/media/sign-in-with-passkey.png" alt="Connexion par Passkey : dialogue natif iOS pour l'authentification par Passkey sur mobileid.ch">
+<p><strong>1.</strong> La RP redirige l'utilisateur vers Mobile ID, avec la valeur ACR souhaitée dans la requête d'autorisation.</p>
+<p><strong>2.</strong> Mobile ID affiche la page d'authentification par Passkey (« Passkey ou clé de sécurité FIDO2 »).</p>
 <p><strong>3.</strong> Le dialogue natif du navigateur apparaît : « Sign in to mobileid.ch with your passkey ».</p>
 <p><strong>4.</strong> L'utilisateur confirme par biométrie ou clé de sécurité.</p>
 <p><strong>5.</strong> Mobile ID valide l'assertion et redirige avec un Authorization Code vers la RP.</p>

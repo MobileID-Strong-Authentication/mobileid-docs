@@ -189,10 +189,9 @@ Users manage their Passkeys via the MyMobileID Dashboard on mobileid.ch/login. T
 
 The registration process:
 
-1. Login on mobileid.ch (verification via SMS OTP to confirm the mobile number)
-2. Select the "Mobile ID Passkey" tile on the dashboard and click "MANAGE PASSKEYS"
-
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="MyMobileID Dashboard: Mobile ID Passkey tile with MANAGE PASSKEYS button">
+<p><strong>1.</strong> Login on mobileid.ch (verification via SMS OTP to confirm the mobile number).</p>
+<p><strong>2.</strong> Select the "Mobile ID Passkey" tile on the dashboard and click "MANAGE PASSKEYS".</p>
 <p><strong>3.</strong> Select "Add a passkey". The native browser dialog appears (Touch ID, Face ID or Security Key).</p>
 <p><strong>4.</strong> Biometric confirmation or PIN entry on the authenticator.</p>
 </ScreenshotStep>
@@ -216,10 +215,9 @@ The registration process:
 
 When a user clicks "Sign in with Mobile ID" at a Relying Party, an OIDC Authorization Code Flow takes place:
 
-1. The RP redirects the user to Mobile ID, with the desired ACR value in the Authorization Request
-2. Mobile ID displays the Passkey authentication page ("Passkey or FIDO2 Security Key")
-
 <ScreenshotStep img="/release-notes/media/sign-in-with-passkey.png" alt="Passkey login: native iOS dialog for authentication with Passkey on mobileid.ch">
+<p><strong>1.</strong> The RP redirects the user to Mobile ID, with the desired ACR value in the Authorization Request.</p>
+<p><strong>2.</strong> Mobile ID displays the Passkey authentication page ("Passkey or FIDO2 Security Key").</p>
 <p><strong>3.</strong> The native browser dialog appears: "Sign in to mobileid.ch with your passkey".</p>
 <p><strong>4.</strong> The user confirms via biometrics or security key.</p>
 <p><strong>5.</strong> Mobile ID validates the assertion and redirects back to the RP with an authorization code.</p>

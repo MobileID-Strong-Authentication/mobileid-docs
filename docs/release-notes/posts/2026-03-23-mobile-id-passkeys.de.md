@@ -10,7 +10,6 @@ layout: release-notes-post
 ---
 
 <script setup>
-import ComparisonTable from '../../.vitepress/theme/components/ComparisonTable.vue'
 import AcrLevels from '../../.vitepress/theme/components/AcrLevels.vue'
 import PasskeyRegistrationFlow from '../../.vitepress/theme/components/PasskeyRegistrationFlow.vue'
 import PasskeyLoginFlow from '../../.vitepress/theme/components/PasskeyLoginFlow.vue'
@@ -45,8 +44,6 @@ Bevor die einzelnen Methoden im Detail betrachtet werden, ist ein gemeinsames Ve
 Passkeys sind eine benutzerfreundliche Implementierung des FIDO2-Standards und der WebAuthn-API. Sie ersetzen Passwörter durch kryptografische Schlüsselpaare und ermöglichen einen Login per Biometrie in unter 3 Sekunden. Das Kernprinzip: Der private Schlüssel verlässt das Gerät des Benutzers nie. Stattdessen signiert der Authenticator eine Challenge, die der Server mit dem öffentlichen Schlüssel verifiziert.
 
 Das Besondere an Passkeys ist das sogenannte Origin-Binding: Der Schlüssel ist kryptografisch an die Domain des Dienstes gebunden. Selbst wenn ein Benutzer auf eine perfekt nachgebaute Phishing-Seite gelangt, scheitert die Authentisierung, weil der Browser die falsche Domain erkennt und den Schlüssel nicht freigibt.
-
-<ComparisonTable />
 
 ## Passkey-Typen: Komfort vs. maximale Sicherheit
 

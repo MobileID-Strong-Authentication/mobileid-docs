@@ -89,7 +89,6 @@ export default withMermaid(defineConfig({
     hostname: SITE_URL,
     transformItems(items) {
       return items
-        .filter((item) => !String(item.url).startsWith('superpowers/'))
         .map((item) => {
           const alternates = getAlternatePages(getSourceRelativePath(String(item.url)))
           if (alternates.length < 2) return item

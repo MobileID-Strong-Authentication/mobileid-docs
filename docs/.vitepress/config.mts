@@ -127,6 +127,7 @@ export default withMermaid(defineConfig({
     ['link', { rel: 'shortcut icon', href: '/favicon.ico' }],
     ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
+    ['meta', { name: 'google-site-verification', content: '2x5Mq4fWD8x1K2N_Z9W0za5Bwjb2WGSv0EdXZjtboPQ' }],
     ['meta', { name: 'robots', content: 'index, follow, max-image-preview:large' }],
     ['meta', { property: 'og:site_name', content: 'Mobile ID docs' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],

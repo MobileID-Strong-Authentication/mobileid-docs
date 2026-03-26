@@ -184,6 +184,12 @@ Le déploiement technique est remarquablement simple pour les Relying Parties.
 
 Les utilisateurs gèrent leurs Passkeys via le tableau de bord MyMobileID sur mobileid.ch/login. Ils peuvent y ajouter de nouvelles clés, modifier ou supprimer les clés existantes. Les Passkeys sont stockés sur le domaine m.mobileid.ch et sont ensuite disponibles auprès de toutes les Relying Parties connectées.
 
+<div class="blog-infographic">
+  <img src="/release-notes/media/infografik-flows.webp" alt="Flux d'enregistrement et de connexion Passkey : gestion centralisée et connexion basée sur OIDC" />
+</div>
+
+Le processus d'enregistrement :
+
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="Tableau de bord MyMobileID : tuile Mobile ID Passkey avec bouton MANAGE PASSKEYS">
 <p><strong>1.</strong> Connexion sur mobileid.ch (vérification par SMS-OTP pour confirmer le numéro de mobile).</p>
 <p><strong>2.</strong> Dans le tableau de bord, sélectionner la tuile « Mobile ID Passkey » et cliquer sur « MANAGE PASSKEYS ».</p>
@@ -199,12 +205,6 @@ Les utilisateurs gèrent leurs Passkeys via le tableau de bord MyMobileID sur mo
 <ScreenshotStep img="/release-notes/media/passkey-management-list-passkeys.png" alt="Gestion des Passkeys : liste des Passkeys enregistrés avec badges de type et KeyRingID">
 <p>Dans la gestion des Passkeys, l'utilisateur voit tous les Passkeys enregistrés avec leur indication de type : les Device-Bound Keys affichent un badge étoile, les Cloud-Synced Keys affichent les badges « Synced » et « StepUp ». Chaque entrée montre la KeyRingID, la date de création et la dernière utilisation.</p>
 </ScreenshotStep>
-
-<div class="blog-infographic">
-  <img src="/release-notes/media/infografik-flows.webp" alt="Flux d'enregistrement et de connexion Passkey : gestion centralisée et connexion basée sur OIDC" />
-</div>
-
-Le processus d'enregistrement :
 
 <PasskeyRegistrationFlow />
 

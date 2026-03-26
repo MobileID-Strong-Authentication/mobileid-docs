@@ -231,3 +231,5 @@ Les entreprises bénéficient d'une intégration OIDC standard, d'un hébergemen
 **Le client décide quelle méthode convient le mieux à son cas d'utilisation. Mobile ID offre la flexibilité nécessaire.**
 
 *Mobile ID : la bonne méthode pour chaque scénario. Tout au sein d'un seul écosystème.*
+
+Si vous souhaitez discuter de votre cas d'utilisation, contactez-nous via [swisscom.ch/mobileid](https://www.swisscom.ch/mobileid).

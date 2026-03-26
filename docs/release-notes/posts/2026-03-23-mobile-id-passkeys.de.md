@@ -14,7 +14,6 @@ import ComparisonTable from '../../.vitepress/theme/components/ComparisonTable.v
 import AcrLevels from '../../.vitepress/theme/components/AcrLevels.vue'
 import PasskeyRegistrationFlow from '../../.vitepress/theme/components/PasskeyRegistrationFlow.vue'
 import PasskeyLoginFlow from '../../.vitepress/theme/components/PasskeyLoginFlow.vue'
-import SzenarienMatrix from '../../.vitepress/theme/components/SzenarienMatrix.vue'
 import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCards.vue'
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import HybridAuthComparisonTable from '../../.vitepress/theme/components/HybridAuthComparisonTable.vue'
@@ -125,8 +124,6 @@ SIM und App können auch für Browser-Logins eingesetzt werden. Nicht jeder Use 
   <img src="/release-notes/media/infografik-methoden-szenarien.webp" alt="Authentifizierungsmethoden im Überblick: Passkeys, SIM und App im Szenarien-Vergleich" />
 </div>
 
-<SzenarienMatrix />
-
 ## Warum SIM und App unverzichtbar bleiben
 
 Passkeys sind eine starke Ergänzung für Browser-Szenarien. SIM und App spielen ihre einzigartigen Stärken dort aus, wo WebAuthn an Grenzen stösst.
@@ -187,8 +184,6 @@ Der technische Rollout ist für Relying Parties denkbar einfach.
 
 Benutzer verwalten ihre Passkeys über das MyMobileID Dashboard auf mobileid.ch/login. Dort können sie neue Keys hinzufügen, bestehende bearbeiten oder löschen. Die Passkeys werden auf der Domain m.mobileid.ch gespeichert und stehen anschliessend bei allen angebundenen Relying Parties zur Verfügung.
 
-Der Registrierungsablauf:
-
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="MyMobileID Dashboard: Mobile ID Passkey Kachel mit MANAGE PASSKEYS Button">
 <p><strong>1.</strong> Login auf mobileid.ch (Verifizierung via SMS-OTP zur Bestätigung der Mobilnummer).</p>
 <p><strong>2.</strong> Im Dashboard die Kachel "Mobile ID Passkey" anwählen und "MANAGE PASSKEYS" klicken.</p>
@@ -208,6 +203,8 @@ Der Registrierungsablauf:
 <div class="blog-infographic">
   <img src="/release-notes/media/infografik-flows.webp" alt="Passkey Registration und Login Flows: zentrale Verwaltung und OIDC-basierter Login" />
 </div>
+
+Der Registrierungsablauf:
 
 <PasskeyRegistrationFlow />
 

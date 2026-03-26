@@ -7,10 +7,10 @@ const props = defineProps({
 
 const i18n = {
   en: {
-    requirement: 'Requirement',
+    requirement: 'NIST AAL3 Requirements',
     cloudSync: 'Cloud-Sync Passkey',
     push: 'Mobile ID Push',
-    hybrid: 'Hybrid Auth (Passkeys-Plus)',
+    hybrid: 'Passkeys-Plus',
     rows: [
       { label: 'Two-factor auth with distinct factors', cloud: true, push: true, hybrid: true },
       { label: 'Verifier Impersonation Resistance', cloud: true, push: true, hybrid: true },
@@ -29,10 +29,10 @@ const i18n = {
     conditional: 'with suitable FIPS 140-2 certified hardware',
   },
   de: {
-    requirement: 'Anforderung',
+    requirement: 'NIST-AAL3-Anforderungen',
     cloudSync: 'Cloud-Sync Passkey',
     push: 'Mobile ID Push',
-    hybrid: 'Hybrid Auth (Passkeys-Plus)',
+    hybrid: 'Passkeys-Plus',
     rows: [
       { label: 'Zwei-Faktor-Auth mit unterschiedlichen Faktoren', cloud: true, push: true, hybrid: true },
       { label: 'Verifier Impersonation Resistance', cloud: true, push: true, hybrid: true },
@@ -51,10 +51,10 @@ const i18n = {
     conditional: 'mit geeigneter FIPS-140-2-zertifizierter Hardware',
   },
   fr: {
-    requirement: 'Exigence',
+    requirement: 'Exigences NIST AAL3',
     cloudSync: 'Cloud-Sync Passkey',
     push: 'Mobile ID Push',
-    hybrid: 'Hybrid Auth (Passkeys-Plus)',
+    hybrid: 'Passkeys-Plus',
     rows: [
       { label: 'Authentification à deux facteurs avec facteurs distincts', cloud: true, push: true, hybrid: true },
       { label: "Résistance à l'usurpation du vérificateur", cloud: true, push: true, hybrid: true },
@@ -73,10 +73,10 @@ const i18n = {
     conditional: 'avec matériel approprié certifié FIPS 140-2',
   },
   it: {
-    requirement: 'Requisito',
+    requirement: 'Requisiti NIST AAL3',
     cloudSync: 'Cloud-Sync Passkey',
     push: 'Mobile ID Push',
-    hybrid: 'Hybrid Auth (Passkeys-Plus)',
+    hybrid: 'Passkeys-Plus',
     rows: [
       { label: 'Autenticazione a due fattori con fattori distinti', cloud: true, push: true, hybrid: true },
       { label: "Resistenza all'impersonazione del verificatore", cloud: true, push: true, hybrid: true },

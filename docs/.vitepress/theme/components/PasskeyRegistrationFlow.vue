@@ -10,7 +10,7 @@ const props = defineProps({
       { label: 'Passkeys', icon: '🛡️' },
       { label: 'Add Passkey', icon: '➕' },
       { label: 'Touch ID', icon: '👆' },
-      { label: 'Registriert ✓', icon: '✅' },
+      { label: 'Registered ✓', icon: '✅' },
     ],
   },
 })

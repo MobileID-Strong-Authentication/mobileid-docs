@@ -1,7 +1,7 @@
 # Passkey Authentication (early access)
 
-::: warning Early Access - Pilot Phase
-MobileID Passkeys are currently available to **pilot testers only** and are not yet generally available in the production environment. This documentation is published in advance so Relying Parties can prepare their integration. General availability for all customers and users is expected **very soon**. Check back shortly for updates.
+::: warning Early Access
+MobileID Passkeys are now live in the production environment as a **freshly launched capability**. We still describe the feature as early access because the rollout is recent and platform compatibility, policy options, and operational guidance may continue to evolve quickly. Check back shortly for updates.
 :::
 
 MobileID now supports **FIDO2 Passkeys** as an authentication method within the OpenID Connect service. Relying Parties can allow their users to authenticate using MobileID Passkeys - alongside or instead of the existing MobileID SIM, App, and OTP SMS methods.

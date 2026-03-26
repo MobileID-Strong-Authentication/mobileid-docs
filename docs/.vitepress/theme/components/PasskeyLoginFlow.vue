@@ -8,15 +8,15 @@ const props = defineProps({
       { label: 'acme.com', icon: '🌐', type: 'rp' },
       { label: 'OIDC Redirect', icon: '🔀', type: 'redirect' },
       { label: 'mobileid.ch', icon: '🛡️', type: 'idp' },
-      { label: 'Biometrie', icon: '👆', type: 'auth' },
+      { label: 'Biometrics', icon: '👆', type: 'auth' },
       { label: 'Login ✓', icon: '✅', type: 'success' },
     ],
   },
   fallbackSteps: {
     type: Array,
     default: () => [
-      { label: 'Passkey fehlgeschlagen', icon: '⚠️' },
-      { label: 'Andere Methode wählen', icon: '🔄' },
+      { label: 'Passkey failed', icon: '⚠️' },
+      { label: 'Choose another method', icon: '🔄' },
       { label: 'SIM / App / SMS', icon: '📱' },
     ],
   },
@@ -88,7 +88,7 @@ function startAnimation() {
 
     <!-- Fallback Path -->
     <div class="login-flow-fallback" :class="{ 'login-flow-fallback--visible': showFallback }">
-      <div class="login-flow-fallback-header">Fallback-Pfad</div>
+      <div class="login-flow-fallback-header">Fallback Path</div>
       <div class="login-flow-fallback-steps">
         <span v-for="(step, i) in fallbackSteps" :key="i" class="login-flow-fallback-item">
           {{ step.icon }} {{ step.label }}

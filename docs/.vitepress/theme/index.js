@@ -6,10 +6,10 @@ import { theme as openApiTheme, useOpenapi } from 'vitepress-openapi/client'
 import 'vitepress-openapi/dist/style.css'
 import specYaml from '../../public/openapi-mobileid.yaml?raw'
 import DocFeedback from './DocFeedback.vue'
-import BlogLayout from './BlogLayout.vue'
-import BlogPostLayout from './BlogPostLayout.vue'
+import ReleaseNotesLayout from './ReleaseNotesLayout.vue'
+import ReleaseNotesPostLayout from './ReleaseNotesPostLayout.vue'
 import './custom.css'
-import './blog.css'
+import './release-notes.css'
 
 export default {
   extends: DefaultTheme,
@@ -19,8 +19,8 @@ export default {
         const { frontmatter } = useData()
         return () => {
           const layout = frontmatter.value.layout
-          if (layout === 'blog-index') return h(BlogLayout)
-          if (layout === 'blog-post') return h(BlogPostLayout)
+          if (layout === 'release-notes-index') return h(ReleaseNotesLayout)
+          if (layout === 'release-notes-post') return h(ReleaseNotesPostLayout)
           return h(DefaultTheme.Layout, null, {
             'doc-after': () => h(DocFeedback),
           })

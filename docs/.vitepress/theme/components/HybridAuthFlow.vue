@@ -38,10 +38,10 @@ function startAnimation() {
 }
 
 const criteria = [
-  { label: 'Zwei Faktoren', cloud: '✅', push: '✅', hybrid: '✅✅' },
-  { label: 'Public-Key Kryptografie (FIDO2)', cloud: '✅', push: '—', hybrid: '✅' },
-  { label: 'Phishing-resistent (Browser)', cloud: '✅', push: '—', hybrid: '✅' },
-  { label: 'Hardware-basiert (FIPS 140)', cloud: '❌', push: '✅', hybrid: '✅' },
+  { label: 'Two factors', cloud: '✅', push: '✅', hybrid: '✅✅' },
+  { label: 'Public-key cryptography (FIDO2)', cloud: '✅', push: '—', hybrid: '✅' },
+  { label: 'Phishing-resistant (Browser)', cloud: '✅', push: '—', hybrid: '✅' },
+  { label: 'Hardware-based (FIPS 140)', cloud: '❌', push: '✅', hybrid: '✅' },
   { label: 'Non-exportable Key', cloud: '❌', push: '✅', hybrid: '✅' },
   { label: 'User Intent / Consent', cloud: '✅', push: '✅', hybrid: '✅✅' },
 ]
@@ -54,7 +54,7 @@ const criteria = [
       <div class="hybrid-step" :class="{ 'hybrid-step--active': phase >= 1 }">
         <div class="hybrid-step-badge hybrid-step-badge--green">Step 1</div>
         <div class="hybrid-step-title">Cloud-Sync Passkey</div>
-        <div class="hybrid-step-desc">Phishing-resistent, Origin-bound</div>
+        <div class="hybrid-step-desc">Phishing-resistant, Origin-bound</div>
         <div class="hybrid-step-level">AAL2</div>
       </div>
 
@@ -71,15 +71,15 @@ const criteria = [
 
       <div class="hybrid-result" :class="{ 'hybrid-result--active': phase >= 3 }">
         <div class="hybrid-result-title">Hybrid Auth</div>
-        <div class="hybrid-result-desc">Alle NIST AAL3 Kriterien erfüllt</div>
-        <div class="hybrid-result-badge">AAL3 ✅</div>
+        <div class="hybrid-result-desc">AAL3 possible with suitable FIPS 140-2 hardware</div>
+        <div class="hybrid-result-badge">AAL3 possible</div>
       </div>
     </div>
 
     <!-- Criteria Table -->
     <div class="hybrid-table" :class="{ 'hybrid-table--visible': phase >= 3 }">
       <div class="hybrid-table-header">
-        <div class="hybrid-table-cell hybrid-table-label">Kriterium</div>
+        <div class="hybrid-table-cell hybrid-table-label">Criterion</div>
         <div class="hybrid-table-cell">Cloud-Sync Passkey</div>
         <div class="hybrid-table-cell">Mobile ID Push</div>
         <div class="hybrid-table-cell hybrid-table-highlight">Hybrid</div>
@@ -104,17 +104,19 @@ const criteria = [
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 24px 0;
-  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 0;
+  flex-wrap: nowrap;
 }
 
 .hybrid-step {
   background: var(--blog-bg-subtle);
-  border-radius: 12px;
-  padding: 16px 20px;
+  border-radius: 10px;
+  padding: 10px 12px;
   text-align: center;
-  min-width: 160px;
+  min-width: 0;
+  flex: 1 1 0;
+  max-width: 180px;
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 0.5s, transform 0.5s;
@@ -130,14 +132,14 @@ const criteria = [
 }
 
 .hybrid-step-badge {
-  font-size: 0.7em;
+  font-size: 0.65em;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 2px 10px;
-  border-radius: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
   display: inline-block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   color: #fff;
 }
 
@@ -146,31 +148,32 @@ const criteria = [
 
 .hybrid-step-title {
   font-weight: 700;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: var(--blog-text);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .hybrid-step-desc {
-  font-size: 0.75em;
+  font-size: 0.68em;
   color: var(--blog-text-muted);
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .hybrid-step-level {
-  font-size: 0.7em;
+  font-size: 0.65em;
   font-weight: 700;
   color: var(--blog-green-80);
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .hybrid-plus,
 .hybrid-equals {
-  font-size: 1.6em;
+  font-size: 1.2em;
   font-weight: 700;
   color: var(--blog-green);
   opacity: 0;
   transition: opacity 0.5s;
+  flex-shrink: 0;
 }
 
 .hybrid-plus--active,
@@ -181,10 +184,12 @@ const criteria = [
 .hybrid-result {
   background: var(--blog-green-40);
   color: #fff;
-  border-radius: 12px;
-  padding: 16px 24px;
+  border-radius: 10px;
+  padding: 10px 12px;
   text-align: center;
-  min-width: 160px;
+  min-width: 0;
+  flex: 1 1 0;
+  max-width: 180px;
   opacity: 0;
   transform: scale(0.9);
   transition: opacity 0.5s, transform 0.5s;
@@ -197,18 +202,18 @@ const criteria = [
 
 .hybrid-result-title {
   font-weight: 700;
-  font-size: 1em;
-  margin-bottom: 4px;
+  font-size: 0.85em;
+  margin-bottom: 2px;
 }
 
 .hybrid-result-desc {
-  font-size: 0.75em;
+  font-size: 0.68em;
   opacity: 0.85;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .hybrid-result-badge {
-  font-size: 0.85em;
+  font-size: 0.8em;
   font-weight: 700;
 }
 
@@ -267,14 +272,19 @@ const criteria = [
 @media (max-width: 600px) {
   .hybrid-steps {
     flex-direction: column;
+    flex-wrap: wrap;
   }
   .hybrid-step {
     min-width: auto;
+    max-width: none;
     width: 100%;
+    flex: none;
   }
   .hybrid-result {
     min-width: auto;
+    max-width: none;
     width: 100%;
+    flex: none;
   }
   .hybrid-table {
     overflow-x: auto;

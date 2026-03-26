@@ -5,20 +5,20 @@ defineProps({
     default: () => [
       {
         acr: 'mid_al2_any',
-        label: 'UX-fokussiert',
-        description: 'Passkey bevorzugt, Fallback auf SIM/App/SMS',
+        label: 'UX-focused',
+        description: 'Passkey preferred, fallback to SIM/App/SMS',
         color: 'green',
       },
       {
         acr: 'mid_al4_any',
-        label: 'Security-fokussiert',
-        description: 'Passkey bevorzugt, Fallback auf SIM/App',
+        label: 'Security-focused',
+        description: 'Passkey preferred, fallback to SIM/App',
         color: 'darkgreen',
       },
       {
         acr: 'mid_al4_passkey',
-        label: 'Höchste Sicherheit / AAL3',
-        description: 'Passkey-only, kein Fallback',
+        label: 'Highest security / AAL3',
+        description: 'Passkey-only, no fallback',
         color: 'pink',
       },
     ],

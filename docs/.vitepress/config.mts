@@ -65,11 +65,11 @@ export default withMermaid(defineConfig({
       { text: 'REST API Guide', link: '/rest-api-guide/introduction' },
       { text: 'OIDC Integration Guide', link: '/oidc-integration-guide/introduction' },
       { text: 'RADIUS Gateway Guide', link: '/radius-interface-gateway-guide/introduction' },
-      { text: 'Blog', link: '/blog/' }
+      { text: 'Release Notes', link: '/release-notes/' }
     ],
 
     sidebar: {
-      '/blog/': false,
+      '/release-notes/': false,
       '/rest-api-guide/': [
         {
           text: 'REST API Guide',

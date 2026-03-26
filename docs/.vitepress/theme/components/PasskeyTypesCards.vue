@@ -6,7 +6,7 @@ const types = [
     icon: '☁️',
     level: 'AAL2',
     color: 'green',
-    traits: ['Bequem & überall verfügbar', 'Exportierbar', 'Beste User Experience'],
+    traits: ['Convenient & available everywhere', 'Exportable', 'Best user experience'],
   },
   {
     title: 'Device-Bound',
@@ -14,7 +14,7 @@ const types = [
     icon: '🔐',
     level: 'AAL3',
     color: 'pink',
-    traits: ['Höchste Sicherheit', 'Non-exportable', 'Hardware-Token nötig'],
+    traits: ['Highest security', 'Non-exportable', 'Hardware token required'],
   },
   {
     title: 'Platform',
@@ -22,7 +22,7 @@ const types = [
     icon: '💻',
     level: 'AAL2–3',
     color: 'darkgreen',
-    traits: ['Eingebaut & praktisch', 'Gerätegebunden', 'Kein Zubehör nötig'],
+    traits: ['Built-in & practical', 'Device-bound', 'No accessories needed'],
   },
   {
     title: 'MID Passkey Vault',
@@ -30,7 +30,7 @@ const types = [
     icon: '🇨🇭',
     level: 'AAL3',
     color: 'pink',
-    traits: ['Device-bound als App', 'Skalierbar ohne Token', 'Swiss Sovereignty'],
+    traits: ['Device-bound as app', 'Scalable without tokens', 'Swiss Sovereignty'],
     roadmap: true,
   },
 ]

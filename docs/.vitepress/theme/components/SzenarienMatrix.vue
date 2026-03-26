@@ -5,32 +5,32 @@ const scenarios = [
   {
     name: 'Browser-Login (Web)',
     passkey: { status: 'ideal', label: 'Ideal' },
-    sim: { status: 'ok', label: 'Stark' },
-    app: { status: 'ok', label: 'Stark' },
+    sim: { status: 'ok', label: 'Strong' },
+    app: { status: 'ok', label: 'Strong' },
   },
   {
     name: 'VPN / Remote Desktop',
-    passkey: { status: 'no', label: 'Nicht möglich' },
+    passkey: { status: 'no', label: 'Not possible' },
     sim: { status: 'ideal', label: 'Ideal' },
     app: { status: 'ideal', label: 'Ideal' },
   },
   {
     name: 'App-to-App (Banking)',
-    passkey: { status: 'no', label: 'Nicht möglich' },
-    sim: { status: 'ok', label: 'Möglich' },
+    passkey: { status: 'no', label: 'Not possible' },
+    sim: { status: 'ok', label: 'Possible' },
     app: { status: 'ideal', label: 'Ideal' },
   },
   {
     name: 'Kiosk / Terminal',
-    passkey: { status: 'limited', label: 'Eingeschränkt' },
+    passkey: { status: 'limited', label: 'Limited' },
     sim: { status: 'ideal', label: 'Ideal' },
-    app: { status: 'ok', label: 'Möglich' },
+    app: { status: 'ok', label: 'Possible' },
   },
   {
-    name: 'Ohne Internet',
-    passkey: { status: 'no', label: 'Nicht möglich' },
-    sim: { status: 'ideal', label: 'GSM genügt' },
-    app: { status: 'no', label: 'Braucht Internet' },
+    name: 'Offline',
+    passkey: { status: 'no', label: 'Not possible' },
+    sim: { status: 'ideal', label: 'GSM only' },
+    app: { status: 'no', label: 'Needs Internet' },
   },
 ]
 
@@ -81,7 +81,7 @@ function animateRows() {
 <template>
   <div ref="containerRef" class="szenarien-matrix">
     <div class="szenarien-header">
-      <div class="szenarien-cell szenarien-scenario">Szenario</div>
+      <div class="szenarien-cell szenarien-scenario">Scenario</div>
       <div class="szenarien-cell szenarien-method">Passkeys</div>
       <div class="szenarien-cell szenarien-method">Mobile ID SIM</div>
       <div class="szenarien-cell szenarien-method">Mobile ID App</div>

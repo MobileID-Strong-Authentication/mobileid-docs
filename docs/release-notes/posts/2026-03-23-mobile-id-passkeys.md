@@ -14,7 +14,6 @@ import ComparisonTable from '../../.vitepress/theme/components/ComparisonTable.v
 import AcrLevels from '../../.vitepress/theme/components/AcrLevels.vue'
 import PasskeyRegistrationFlow from '../../.vitepress/theme/components/PasskeyRegistrationFlow.vue'
 import PasskeyLoginFlow from '../../.vitepress/theme/components/PasskeyLoginFlow.vue'
-import SzenarienMatrix from '../../.vitepress/theme/components/SzenarienMatrix.vue'
 import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCards.vue'
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import HybridAuthComparisonTable from '../../.vitepress/theme/components/HybridAuthComparisonTable.vue'
@@ -125,8 +124,6 @@ SIM and App can also be used for browser logins. Not every use case requires max
   <img src="/release-notes/media/infografik-methoden-szenarien.webp" alt="Authentication methods overview: Passkeys, SIM and App compared across scenarios" />
 </div>
 
-<SzenarienMatrix />
-
 ## Why SIM and App Remain Indispensable
 
 Passkeys are a strong addition for browser scenarios. SIM and App leverage their unique strengths where WebAuthn reaches its limits.
@@ -187,8 +184,6 @@ The technical rollout is straightforward for Relying Parties.
 
 Users manage their Passkeys via the MyMobileID Dashboard on mobileid.ch/login. There they can add new keys, edit existing ones or delete them. The Passkeys are stored on the domain m.mobileid.ch and are subsequently available across all connected Relying Parties.
 
-The registration process:
-
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="MyMobileID Dashboard: Mobile ID Passkey tile with MANAGE PASSKEYS button">
 <p><strong>1.</strong> Login on mobileid.ch (verification via SMS OTP to confirm the mobile number).</p>
 <p><strong>2.</strong> Select the "Mobile ID Passkey" tile on the dashboard and click "MANAGE PASSKEYS".</p>
@@ -208,6 +203,8 @@ The registration process:
 <div class="blog-infographic">
   <img src="/release-notes/media/infografik-flows.webp" alt="Passkey registration and login flows: centralized management and OIDC-based login" />
 </div>
+
+The registration process:
 
 <PasskeyRegistrationFlow />
 

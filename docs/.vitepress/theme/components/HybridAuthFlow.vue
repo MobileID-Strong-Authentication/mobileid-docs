@@ -37,14 +37,6 @@ function startAnimation() {
   }, 1000)
 }
 
-const criteria = [
-  { label: 'Two factors', cloud: '✅', push: '✅', hybrid: '✅✅' },
-  { label: 'Public-key cryptography (FIDO2)', cloud: '✅', push: '—', hybrid: '✅' },
-  { label: 'Phishing-resistant (Browser)', cloud: '✅', push: '—', hybrid: '✅' },
-  { label: 'Hardware-based (FIPS 140)', cloud: '❌', push: '✅', hybrid: '✅' },
-  { label: 'Non-exportable Key', cloud: '❌', push: '✅', hybrid: '✅' },
-  { label: 'User Intent / Consent', cloud: '✅', push: '✅', hybrid: '✅✅' },
-]
 </script>
 
 <template>
@@ -73,22 +65,6 @@ const criteria = [
         <div class="hybrid-result-title">Hybrid Auth</div>
         <div class="hybrid-result-desc">AAL3 possible with suitable FIPS 140-2 hardware</div>
         <div class="hybrid-result-badge">AAL3 possible</div>
-      </div>
-    </div>
-
-    <!-- Criteria Table -->
-    <div class="hybrid-table" :class="{ 'hybrid-table--visible': phase >= 3 }">
-      <div class="hybrid-table-header">
-        <div class="hybrid-table-cell hybrid-table-label">Criterion</div>
-        <div class="hybrid-table-cell">Cloud-Sync Passkey</div>
-        <div class="hybrid-table-cell">Mobile ID Push</div>
-        <div class="hybrid-table-cell hybrid-table-highlight">Hybrid</div>
-      </div>
-      <div v-for="row in criteria" :key="row.label" class="hybrid-table-row">
-        <div class="hybrid-table-cell hybrid-table-label">{{ row.label }}</div>
-        <div class="hybrid-table-cell">{{ row.cloud }}</div>
-        <div class="hybrid-table-cell">{{ row.push }}</div>
-        <div class="hybrid-table-cell hybrid-table-highlight">{{ row.hybrid }}</div>
       </div>
     </div>
   </div>
@@ -217,58 +193,6 @@ const criteria = [
   font-weight: 700;
 }
 
-/* Criteria Table */
-.hybrid-table {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--blog-border);
-  margin-top: 16px;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.6s, transform 0.6s;
-}
-
-.hybrid-table--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.hybrid-table-header {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr;
-  background: var(--blog-bg-subtle);
-  font-weight: 700;
-  font-size: 0.8em;
-}
-
-.hybrid-table-row {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr;
-  border-top: 1px solid var(--blog-border);
-}
-
-.hybrid-table-cell {
-  padding: 10px 12px;
-  font-size: 0.85em;
-  text-align: center;
-}
-
-.hybrid-table-label {
-  text-align: left;
-  font-weight: 600;
-  color: var(--blog-text);
-}
-
-.hybrid-table-highlight {
-  background: rgba(0, 148, 144, 0.05);
-  font-weight: 600;
-  color: var(--blog-green);
-}
-
-.dark .hybrid-table-highlight {
-  background: rgba(0, 148, 144, 0.1);
-}
-
 @media (max-width: 600px) {
   .hybrid-steps {
     flex-direction: column;
@@ -285,13 +209,6 @@ const criteria = [
     max-width: none;
     width: 100%;
     flex: none;
-  }
-  .hybrid-table {
-    overflow-x: auto;
-  }
-  .hybrid-table-header,
-  .hybrid-table-row {
-    min-width: 480px;
   }
 }
 </style>

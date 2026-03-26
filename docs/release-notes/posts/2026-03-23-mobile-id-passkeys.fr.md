@@ -14,7 +14,6 @@ import ComparisonTable from '../../.vitepress/theme/components/ComparisonTable.v
 import AcrLevels from '../../.vitepress/theme/components/AcrLevels.vue'
 import PasskeyRegistrationFlow from '../../.vitepress/theme/components/PasskeyRegistrationFlow.vue'
 import PasskeyLoginFlow from '../../.vitepress/theme/components/PasskeyLoginFlow.vue'
-import SzenarienMatrix from '../../.vitepress/theme/components/SzenarienMatrix.vue'
 import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCards.vue'
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import HybridAuthComparisonTable from '../../.vitepress/theme/components/HybridAuthComparisonTable.vue'
@@ -125,8 +124,6 @@ SIM et App peuvent aussi être utilisés pour les connexions navigateur. Tous le
   <img src="/release-notes/media/infografik-methoden-szenarien.webp" alt="Méthodes d'authentification en aperçu : Passkeys, SIM et App comparés par scénario" />
 </div>
 
-<SzenarienMatrix />
-
 ## Pourquoi SIM et App restent indispensables
 
 Les Passkeys sont un excellent complément pour les scénarios navigateur. SIM et App déploient leurs atouts uniques là où WebAuthn atteint ses limites.
@@ -187,8 +184,6 @@ Le déploiement technique est remarquablement simple pour les Relying Parties.
 
 Les utilisateurs gèrent leurs Passkeys via le tableau de bord MyMobileID sur mobileid.ch/login. Ils peuvent y ajouter de nouvelles clés, modifier ou supprimer les clés existantes. Les Passkeys sont stockés sur le domaine m.mobileid.ch et sont ensuite disponibles auprès de toutes les Relying Parties connectées.
 
-Le processus d'enregistrement :
-
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="Tableau de bord MyMobileID : tuile Mobile ID Passkey avec bouton MANAGE PASSKEYS">
 <p><strong>1.</strong> Connexion sur mobileid.ch (vérification par SMS-OTP pour confirmer le numéro de mobile).</p>
 <p><strong>2.</strong> Dans le tableau de bord, sélectionner la tuile « Mobile ID Passkey » et cliquer sur « MANAGE PASSKEYS ».</p>
@@ -208,6 +203,8 @@ Le processus d'enregistrement :
 <div class="blog-infographic">
   <img src="/release-notes/media/infografik-flows.webp" alt="Flux d'enregistrement et de connexion Passkey : gestion centralisée et connexion basée sur OIDC" />
 </div>
+
+Le processus d'enregistrement :
 
 <PasskeyRegistrationFlow />
 

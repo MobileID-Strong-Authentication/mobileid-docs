@@ -14,7 +14,6 @@ import ComparisonTable from '../../.vitepress/theme/components/ComparisonTable.v
 import AcrLevels from '../../.vitepress/theme/components/AcrLevels.vue'
 import PasskeyRegistrationFlow from '../../.vitepress/theme/components/PasskeyRegistrationFlow.vue'
 import PasskeyLoginFlow from '../../.vitepress/theme/components/PasskeyLoginFlow.vue'
-import SzenarienMatrix from '../../.vitepress/theme/components/SzenarienMatrix.vue'
 import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCards.vue'
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import HybridAuthComparisonTable from '../../.vitepress/theme/components/HybridAuthComparisonTable.vue'
@@ -125,8 +124,6 @@ SIM e App possono essere impiegati anche per i login nel browser. Non tutti i ca
   <img src="/release-notes/media/infografik-methoden-szenarien.webp" alt="Panoramica dei metodi di autenticazione: Passkeys, SIM e App nel confronto tra scenari" />
 </div>
 
-<SzenarienMatrix />
-
 ## Perché SIM e App restano indispensabili
 
 I Passkeys sono un valido complemento per gli scenari browser. SIM e App esprimono i loro punti di forza unici laddove WebAuthn raggiunge i propri limiti.
@@ -187,8 +184,6 @@ Il rollout tecnico per le Relying Party è estremamente semplice.
 
 Gli utenti gestiscono i propri Passkeys tramite il dashboard MyMobileID su mobileid.ch/login. Lì possono aggiungere nuove chiavi, modificare o eliminare quelle esistenti. I Passkeys vengono memorizzati sul dominio m.mobileid.ch e sono successivamente disponibili presso tutte le Relying Party collegate.
 
-Il processo di registrazione:
-
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="Dashboard MyMobileID: riquadro Mobile ID Passkey con pulsante MANAGE PASSKEYS">
 <p><strong>1.</strong> Login su mobileid.ch (verifica tramite SMS-OTP per la conferma del numero di cellulare).</p>
 <p><strong>2.</strong> Nel dashboard selezionare il riquadro "Mobile ID Passkey" e cliccare "MANAGE PASSKEYS".</p>
@@ -208,6 +203,8 @@ Il processo di registrazione:
 <div class="blog-infographic">
   <img src="/release-notes/media/infografik-flows.webp" alt="Flussi di registrazione e login Passkey: gestione centralizzata e login basato su OIDC" />
 </div>
+
+Il processo di registrazione:
 
 <PasskeyRegistrationFlow />
 

@@ -184,6 +184,12 @@ Der technische Rollout ist für Relying Parties denkbar einfach.
 
 Benutzer verwalten ihre Passkeys über das MyMobileID Dashboard auf mobileid.ch/login. Dort können sie neue Keys hinzufügen, bestehende bearbeiten oder löschen. Die Passkeys werden auf der Domain m.mobileid.ch gespeichert und stehen anschliessend bei allen angebundenen Relying Parties zur Verfügung.
 
+<div class="blog-infographic">
+  <img src="/release-notes/media/infografik-flows.webp" alt="Passkey Registration und Login Flows: zentrale Verwaltung und OIDC-basierter Login" />
+</div>
+
+Der Registrierungsablauf:
+
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="MyMobileID Dashboard: Mobile ID Passkey Kachel mit MANAGE PASSKEYS Button">
 <p><strong>1.</strong> Login auf mobileid.ch (Verifizierung via SMS-OTP zur Bestätigung der Mobilnummer).</p>
 <p><strong>2.</strong> Im Dashboard die Kachel "Mobile ID Passkey" anwählen und "MANAGE PASSKEYS" klicken.</p>
@@ -199,12 +205,6 @@ Benutzer verwalten ihre Passkeys über das MyMobileID Dashboard auf mobileid.ch/
 <ScreenshotStep img="/release-notes/media/passkey-management-list-passkeys.png" alt="Passkey-Management: Liste registrierter Passkeys mit Typ-Badges und KeyRingID">
 <p>Im Passkey-Management sieht der Benutzer alle registrierten Passkeys mit Typ-Kennzeichnung: Device-Bound Keys zeigen ein Stern-Badge, Cloud-Synced Keys zeigen "Synced" und "StepUp" Badges. Jeder Eintrag zeigt die KeyRingID, das Erstellungsdatum und die letzte Nutzung.</p>
 </ScreenshotStep>
-
-<div class="blog-infographic">
-  <img src="/release-notes/media/infografik-flows.webp" alt="Passkey Registration und Login Flows: zentrale Verwaltung und OIDC-basierter Login" />
-</div>
-
-Der Registrierungsablauf:
 
 <PasskeyRegistrationFlow />
 

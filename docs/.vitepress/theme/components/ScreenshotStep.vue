@@ -1,7 +1,7 @@
 <template>
   <div class="screenshot-step">
     <div class="screenshot-step-img">
-      <img :src="img" :alt="alt" @click="openLightbox" />
+      <img :src="img" :alt="alt" class="no-zoom" @click="openLightbox" />
     </div>
     <div class="screenshot-step-text">
       <slot />

@@ -231,3 +231,5 @@ Enterprises benefit from a standard OIDC integration, Swiss data residency and t
 **The customer decides which method best fits their use case. Mobile ID provides the flexibility to make it happen.**
 
 *Mobile ID: the right method for every scenario. Everything from one ecosystem.*
+
+If you would like to discuss your use case, contact us via [swisscom.ch/mobileid](https://www.swisscom.ch/mobileid).

@@ -231,3 +231,5 @@ Unternehmen profitieren von einer Standard-OIDC-Integration, Schweizer Datenhalt
 **Der Kunde entscheidet, welche Methode für seinen Use Case am besten passt. Mobile ID liefert die Flexibilität dazu.**
 
 *Mobile ID: die richtige Methode für jedes Szenario. Alles aus einem Ökosystem.*
+
+Wenn Sie Ihren Use Case besprechen möchten, kontaktieren Sie uns über [swisscom.ch/mobileid](https://www.swisscom.ch/mobileid).

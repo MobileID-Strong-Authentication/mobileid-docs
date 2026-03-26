@@ -189,10 +189,9 @@ Gli utenti gestiscono i propri Passkeys tramite il dashboard MyMobileID su mobil
 
 Il processo di registrazione:
 
-1. Login su mobileid.ch (verifica tramite SMS-OTP per la conferma del numero di cellulare)
-2. Nel dashboard selezionare il riquadro "Mobile ID Passkey" e cliccare "MANAGE PASSKEYS"
-
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="Dashboard MyMobileID: riquadro Mobile ID Passkey con pulsante MANAGE PASSKEYS">
+<p><strong>1.</strong> Login su mobileid.ch (verifica tramite SMS-OTP per la conferma del numero di cellulare).</p>
+<p><strong>2.</strong> Nel dashboard selezionare il riquadro "Mobile ID Passkey" e cliccare "MANAGE PASSKEYS".</p>
 <p><strong>3.</strong> Selezionare "Add a passkey". Compare il dialogo nativo del browser (Touch ID, Face ID o chiave di sicurezza).</p>
 <p><strong>4.</strong> Conferma biometrica o inserimento del PIN sull'authenticator.</p>
 </ScreenshotStep>
@@ -216,10 +215,9 @@ Il processo di registrazione:
 
 Quando un utente clicca "Sign in with Mobile ID" presso una Relying Party, si avvia un OIDC Authorization Code Flow:
 
-1. La RP reindirizza l'utente verso Mobile ID, con il valore ACR desiderato nell'Authorization Request
-2. Mobile ID mostra la pagina di autenticazione Passkey ("Passkey o chiave di sicurezza FIDO2")
-
 <ScreenshotStep img="/release-notes/media/sign-in-with-passkey.png" alt="Login con Passkey: dialogo nativo iOS per l'autenticazione tramite Passkey su mobileid.ch">
+<p><strong>1.</strong> La RP reindirizza l'utente verso Mobile ID, con il valore ACR desiderato nell'Authorization Request.</p>
+<p><strong>2.</strong> Mobile ID mostra la pagina di autenticazione Passkey ("Passkey o chiave di sicurezza FIDO2").</p>
 <p><strong>3.</strong> Compare il dialogo nativo del browser: "Sign in to mobileid.ch with your passkey".</p>
 <p><strong>4.</strong> L'utente conferma tramite biometria o chiave di sicurezza.</p>
 <p><strong>5.</strong> Mobile ID valida l'assertion e reindirizza con l'Authorization Code alla RP.</p>

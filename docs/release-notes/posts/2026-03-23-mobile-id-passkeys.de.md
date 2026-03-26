@@ -189,10 +189,9 @@ Benutzer verwalten ihre Passkeys über das MyMobileID Dashboard auf mobileid.ch/
 
 Der Registrierungsablauf:
 
-1. Login auf mobileid.ch (Verifizierung via SMS-OTP zur Bestätigung der Mobilnummer)
-2. Im Dashboard die Kachel "Mobile ID Passkey" anwählen und "MANAGE PASSKEYS" klicken
-
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="MyMobileID Dashboard: Mobile ID Passkey Kachel mit MANAGE PASSKEYS Button">
+<p><strong>1.</strong> Login auf mobileid.ch (Verifizierung via SMS-OTP zur Bestätigung der Mobilnummer).</p>
+<p><strong>2.</strong> Im Dashboard die Kachel "Mobile ID Passkey" anwählen und "MANAGE PASSKEYS" klicken.</p>
 <p><strong>3.</strong> "Add a passkey" wählen. Der native Browser-Dialog erscheint (Touch ID, Face ID oder Security Key).</p>
 <p><strong>4.</strong> Biometrische Bestätigung oder PIN-Eingabe am Authenticator.</p>
 </ScreenshotStep>
@@ -216,10 +215,9 @@ Der Registrierungsablauf:
 
 Wenn ein Benutzer bei einer Relying Party auf "Sign in with Mobile ID" klickt, erfolgt ein OIDC Authorization Code Flow:
 
-1. Die RP leitet den Benutzer per Redirect zu Mobile ID weiter, mit dem gewünschten ACR-Wert im Authorization Request
-2. Mobile ID zeigt die Passkey-Authentisierungsseite ("Passkey oder FIDO2 Sicherheitsschlüssel")
-
 <ScreenshotStep img="/release-notes/media/sign-in-with-passkey.png" alt="Passkey-Login: Nativer iOS-Dialog zur Authentisierung mit Passkey auf mobileid.ch">
+<p><strong>1.</strong> Die RP leitet den Benutzer per Redirect zu Mobile ID weiter, mit dem gewünschten ACR-Wert im Authorization Request.</p>
+<p><strong>2.</strong> Mobile ID zeigt die Passkey-Authentisierungsseite ("Passkey oder FIDO2 Sicherheitsschlüssel").</p>
 <p><strong>3.</strong> Der native Browser-Dialog erscheint: "Sign in to mobileid.ch with your passkey".</p>
 <p><strong>4.</strong> Der Benutzer bestätigt per Biometrie oder Security Key.</p>
 <p><strong>5.</strong> Mobile ID validiert die Assertion und leitet mit Authorization Code zurück zur RP.</p>

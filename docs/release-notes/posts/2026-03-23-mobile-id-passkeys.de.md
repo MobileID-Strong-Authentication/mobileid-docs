@@ -16,7 +16,6 @@ import PasskeyRegistrationFlow from '../../.vitepress/theme/components/PasskeyRe
 import PasskeyLoginFlow from '../../.vitepress/theme/components/PasskeyLoginFlow.vue'
 import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCards.vue'
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
-import HybridAuthComparisonTable from '../../.vitepress/theme/components/HybridAuthComparisonTable.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
 import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue'
 </script>
@@ -156,8 +155,6 @@ Der Ansatz kombiniert zwei bereits existierende Komponenten zu einem Hybrid Auth
 Die Kombination liefert: Origin-gebundenen Login plus gerätegebundenen, nicht exportierbaren Schlüssel plus expliziten User Consent plus Geolokation. Damit ist AAL3 in Deployments möglich, in denen der zweite Faktor auf geeigneter FIPS-140-2-zertifizierter Hardware läuft. Ob dies regulatorisch in jedem Fall als vollständiges AAL3 anerkannt wird, muss weiterhin pro Use Case, Hardwarebasis und Compliance-Rahmen beurteilt werden. Eine breitere Abdeckung mit FIPS-validierter Kryptografie und Device Attestation im Mobile ID Push Step ist erst nach zukünftigen Erweiterungen vollständig gegeben.
 
 Der Push-Schritt bleibt auf dem Smartphone. Am Desktop authentisiert sich der Benutzer lokal mit dem Passkey, und der Step-Up erfolgt out-of-band über das Telefon.
-
-<HybridAuthComparisonTable lang="de" />
 
 <div class="blog-infographic">
   <img src="/release-notes/media/infografik-hybrid-auth.webp" alt="Hybrid-Authentifizierung für NIST AAL3: Cloud-Sync Passkey kombiniert mit Mobile ID Push Step-Up" />

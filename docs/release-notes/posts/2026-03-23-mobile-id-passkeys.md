@@ -183,10 +183,6 @@ The technical rollout is straightforward for Relying Parties.
 
 Users manage their Passkeys via the MyMobileID Dashboard on mobileid.ch/login. There they can add new keys, edit existing ones or delete them. The Passkeys are stored on the domain m.mobileid.ch and are subsequently available across all connected Relying Parties.
 
-<div class="blog-infographic">
-  <img src="/release-notes/media/infografik-flows.webp" alt="Passkey registration and login flows: centralized management and OIDC-based login" />
-</div>
-
 The registration process:
 
 <ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="MyMobileID Dashboard: Mobile ID Passkey tile with MANAGE PASSKEYS button">

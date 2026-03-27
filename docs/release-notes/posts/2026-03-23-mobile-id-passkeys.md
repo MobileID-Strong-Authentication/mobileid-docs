@@ -25,8 +25,14 @@ import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue
 Microsoft blocks roughly 7,000 password attacks per second every day, and 47% of consumers abandon a purchase when they forget their password. In a world where phishing remains the most common attack vector, a fundamentally new answer is needed. <strong>Passkeys</strong> are that answer. Mobile ID now integrates them natively into its OIDC ecosystem and combines them with the proven strengths of SIM and App.
 </div>
 
-<div class="blog-infographic">
-  <img src="/release-notes/media/infografik-overview.webp" alt="Mobile ID Passkeys: ecosystem overview with centralized Passkey management and OIDC integration" />
+<div class="blog-video">
+  <video controls preload="metadata" poster="/release-notes/media/infografik-overview.webp">
+    <source src="/release-notes/media/passkey-advantage.mp4" type="video/mp4" />
+  </video>
+  <div class="blog-video-caption">
+    <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    <span>Video summary (7 min) — The key points of this article at a glance.</span>
+  </div>
 </div>
 
 ## NIST AAL: The Reference Framework for Security Levels

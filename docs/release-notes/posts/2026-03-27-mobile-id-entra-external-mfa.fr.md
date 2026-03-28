@@ -213,9 +213,8 @@ La mise en place de Mobile ID comme fournisseur External MFA dans Entra ID repos
 
 La configuration pas à pas est documentée dans le [Cloud Integration Guide](/oidc-integration-guide/cloud-integration-guide#microsoft-entra-id), y compris la configuration de la politique Conditional Access, le consentement administrateur et les étapes optionnelles pour prioriser Mobile ID par rapport à Microsoft Authenticator.
 
-<div class="blog-infographic">
-  <img src="/release-notes/media/infografik-entra-integration-flow.jpg" alt="Architecture d'intégration Mobile ID avec Microsoft Entra ID : flux d'authentification basé sur OIDC montrant l'évaluation des politiques, External MFA et le contrôle d'accès" />
-</div>
+<!-- Static integration flow infographic removed: the interactive EntraIntegrationFlow
+     component above already visualizes this flow with correct provider-side framing. -->
 
 ## Conclusion
 

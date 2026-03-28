@@ -2,7 +2,7 @@
 title: "Mobile ID e Microsoft Entra ID: MFA rafforzata con External Authentication"
 date: 2026-03-27
 author: Mobile ID Team
-description: "Microsoft Entra External MFA è generalmente disponibile. Scopri come Mobile ID aggiunge MFA basata su SIM e app per Entra ID, VPN, applicazioni web e workforce ibride."
+description: "Microsoft Entra External MFA è generalmente disponibile. Scopri come Mobile ID si integra come provider External MFA basato su OIDC e come SIM, App e Passkeys si articolano correttamente."
 thumbnail: /release-notes/img/entra-eam-thumb.png
 lang: it
 keywords:
@@ -13,6 +13,7 @@ keywords:
   - Conditional Access
   - MFA basata su SIM
   - MFA basata su app
+  - Passkeys
   - VPN MFA
 readingTime: 10
 layout: release-notes-post
@@ -28,7 +29,7 @@ import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher
 <LanguageSwitcher />
 
 <div class="blog-lead">
-Microsoft Entra ID è la piattaforma di identità alla base di milioni di ambienti aziendali. Con <strong>External MFA ora generalmente disponibile</strong>, le organizzazioni possono integrare un provider di autenticazione di terze parti affidabile in Entra ID, mantenendo il pieno controllo sulle policy Conditional Access. Mobile ID, operato da Swisscom, aggiunge <a href="/rest-api-guide/introduction#mobile-id-sim---method">l'autenticazione hardware-grade basata su SIM</a> e <a href="/rest-api-guide/introduction#mobile-id-app---method">l'autenticazione push tramite app con Geofencing</a> ai login Entra ID che richiedono MFA.
+Microsoft Entra ID è la piattaforma di identità alla base di milioni di ambienti aziendali. Con <strong>External MFA ora generalmente disponibile</strong>, le organizzazioni possono integrare un provider di autenticazione di terze parti affidabile in Entra ID, mantenendo il pieno controllo sulle policy Conditional Access. Mobile ID, operato da Swisscom, combina <a href="/rest-api-guide/introduction#mobile-id-sim---method">l'autenticazione hardware-grade basata su SIM</a>, <a href="/rest-api-guide/introduction#mobile-id-app---method">l'autenticazione push tramite app con Geofencing</a> e un ecosistema OIDC più ampio che ora include anche i <a href="/oidc-integration-guide/passkey-authentication">Mobile ID Passkeys</a>. Nel percorso Entra External MFA, Entra consuma il risultato del provider mentre Mobile ID esegue l'esperienza di secondo fattore.
 </div>
 
 <div class="blog-video">
@@ -47,9 +48,11 @@ Microsoft Entra ID è la piattaforma centrale di gestione delle identità e degl
 
 Entra ID offre già diversi metodi MFA integrati: Authenticator app, chiavi di sicurezza FIDO2, SMS e chiamate telefoniche. Per le organizzazioni che avevano bisogno di integrare un **provider di autenticazione di terze parti**, l'unica opzione era un meccanismo legacy chiamato **Custom Controls**. Custom Controls consentiva il reindirizzamento degli utenti a un provider esterno, ma con limitazioni significative. L'autenticazione esterna non veniva pienamente riconosciuta come MFA da Entra ID, il che ne limitava l'utilizzo nelle policy Conditional Access e nei grant controls.
 
-**External MFA** cambia questo scenario. Lanciata in anteprima pubblica nel maggio 2024 e [generalmente disponibile da marzo 2026](https://techcommunity.microsoft.com/blog/microsoft-entra-blog/external-mfa-in-microsoft-entra-id-is-now-generally-available/4488926), External MFA consente a un provider esterno di registrarsi come metodo di autenticazione multifattore pienamente riconosciuto. Entra ID tratta la risposta External MFA esattamente come i propri metodi integrati: soddisfa i requisiti MFA di Conditional Access, funziona con le policy di frequenza di accesso e si integra nel flusso di autenticazione standard.
+**External MFA** cambia questo scenario. Lanciata in anteprima pubblica nel maggio 2024 e [generalmente disponibile da marzo 2026](https://techcommunity.microsoft.com/blog/microsoft-entra-blog/external-mfa-in-microsoft-entra-id-is-now-generally-available/4488926), External MFA consente a un provider esterno di soddisfare il requisito MFA di Entra ID tramite un'integrazione provider basata su standard. In pratica, può soddisfare il grant control di Conditional Access **Require multifactor authentication** ed è gestita insieme agli altri metodi di autenticazione in Entra ID.
 
-L'integrazione utilizza **OpenID Connect (OIDC)**, un protocollo aperto e conforme agli standard. Nessuna API proprietaria, nessun vendor lock-in.
+Questo non significa però che sia identica a ogni metodo integrato di Entra. Microsoft al momento non supporta External MFA con le Authentication Strengths. L'affermazione importante è più precisa: External MFA è un modo supportato per soddisfare il requisito MFA di Entra ID con un provider terzo.
+
+L'integrazione utilizza **OpenID Connect (OIDC)** tra Entra ID e il provider esterno. Per Microsoft Entra External MFA si tratta del pattern provider documentato da Microsoft, non di una relying party che usa il normale Authorization Code Flow di Mobile ID.
 
 ::: info
 External MFA sostituisce Custom Controls, che Microsoft prevede di [deprecare il 30 settembre 2026](https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-authentication-external-method-manage). Le organizzazioni che utilizzano ancora Custom Controls dovrebbero pianificare la migrazione sin da ora.
@@ -57,17 +60,21 @@ External MFA sostituisce Custom Controls, che Microsoft prevede di [deprecare il
 
 ## Come funziona External MFA?
 
-Il flusso è trasparente per l'utente finale. Quando qualcuno accede a un'applicazione protetta, Entra ID valuta la policy Conditional Access. Se è richiesta la MFA e Mobile ID è configurato come provider esterno, l'utente viene reindirizzato tramite OIDC a Mobile ID per l'autenticazione. Dopo la verifica avvenuta con successo, l'utente ritorna a Entra ID con un claim MFA valido e ottiene l'accesso.
+Il flusso resta semplice per l'utente finale, ma tecnicamente **non coincide** con una normale integrazione Mobile ID in Authorization Code da parte di una relying party. Nello scenario External MFA, Microsoft Entra ID chiama l'endpoint di autorizzazione OIDC del provider usando il proprio profilo implicit per provider esterni, includendo parametri come `response_type=id_token`, `response_mode=form_post` e un `id_token_hint` che identifica utente e tenant.
+
+Mobile ID valida questo contesto Entra, esegue il percorso di secondo fattore lato provider e restituisce a Entra ID un `id_token` firmato. Entra ID valida quel token e verifica se il requisito MFA è stato soddisfatto.
 
 <EntraIntegrationFlow />
 
-Entra ID resta il **control plane dell'identità** durante l'intero processo: valutazione delle policy, decisioni di accesso, emissione dei token e gestione delle sessioni. Mobile ID gestisce il passaggio di autenticazione vero e proprio, in cui l'utente dimostra la propria identità tramite un secondo fattore.
+Entra ID resta il **control plane dell'identità** durante l'intero processo: valutazione delle policy, decisioni di accesso, emissione dei token e gestione delle sessioni. Mobile ID gestisce il passaggio di autenticazione vero e proprio.
 
-Il risultato è una netta separazione delle responsabilità. Da un lato il motore di policy e le capacità di governance di Microsoft, dall'altro i metodi di autenticazione specializzati e l'infrastruttura operata in Svizzera di Mobile ID.
+Questa separazione è fondamentale. Entra decide **quando** è richiesto l'MFA e consuma il risultato del provider. Mobile ID decide **come** l'utente si autentica nel percorso provider. Entra non ha bisogno di capire se Mobile ID ha soddisfatto internamente il secondo fattore tramite SIM, App o Passkey.
 
 ## Perché Mobile ID come provider External MFA?
 
 La maggior parte dei provider External MFA offre notifiche push basate su app. Mobile ID va oltre, con una combinazione di metodi di autenticazione che copre scenari che altri provider semplicemente non possono affrontare.
+
+Nel più ampio ecosistema Mobile ID esistono ora **tre metodi forti**: **SIM**, **App** e **Passkeys**. Per Entra External MFA, il punto importante non è che Entra scelga fra questi metodi; non lo fa. Mobile ID esegue il percorso lato provider e Entra consuma l'esito positivo.
 
 ### Autenticazione basata su SIM: nessuna app necessaria
 
@@ -83,12 +90,14 @@ La [Mobile ID App](/rest-api-guide/introduction#mobile-id-app---method) per iOS 
 
 L'app è basata sulla tecnologia di Futurae, uno spin-off dell'ETH di Zurigo, e conserva le chiavi nel Trusted Execution Environment (TEE) del dispositivo.
 
-### Autenticazione Passkey: login resistente al phishing
+### Autenticazione Passkey: capacità browser resistente al phishing
 
-Oltre a SIM e App, Mobile ID supporta i [Passkeys FIDO2](/oidc-integration-guide/passkey-authentication) per l'autenticazione resistente al phishing nel proprio ecosistema OIDC. I Passkeys sono legati crittograficamente al dominio, il che li rende immuni allo URL spoofing. Gli utenti registrano i propri Passkeys una sola volta su [mobileid.ch](https://mobileid.ch/login) e possono utilizzarli su tutti i relying party connessi.
+Oltre a SIM e App, Mobile ID supporta ora anche i [Passkeys FIDO2](/oidc-integration-guide/passkey-authentication) nel proprio ecosistema OIDC. I Passkeys sono legati crittograficamente al dominio e quindi resistenti allo URL spoofing. Gli utenti registrano i propri Passkeys su [mobileid.ch](https://mobileid.ch/login) e possono usarli presso le relying party connesse configurate per i Mobile ID Passkeys.
+
+Per le integrazioni OIDC dirette con Mobile ID, i Passkeys possono essere combinati con controlli specifici di Mobile ID come valori ACR orientati ai Passkeys e la gestione di `keyringId`. Questi controlli appartengono all'integrazione standard tra relying party e Mobile ID, non alla superficie amministrativa di Entra External MFA.
 
 ::: info
-I Passkeys sono una funzionalità generale di Mobile ID disponibile tramite l'integrazione OIDC standard. Nel contesto di Entra ID External MFA, SIM e App sono i metodi di autenticazione principali. Per dettagli sui Passkeys e il loro ruolo nell'ecosistema Mobile ID più ampio, consultare l'articolo correlato: [Mobile ID Passkeys: autenticazione resistente al phishing per scenari browser](/release-notes/posts/2026-03-30-mobile-id-passkeys).
+Nel contesto di Entra ID External MFA, Entra continua a consumare solo il risultato del flusso provider Mobile ID. Entra non distingue SIM, App o Passkey come metodi Mobile ID separati. Se i Passkeys sono abilitati nella configurazione del provider Mobile ID dietro un'integrazione Entra, restano una scelta di metodo lato Mobile ID e non un'impostazione lato Entra. Per maggiori dettagli sui Passkeys e sul loro ruolo nell'ecosistema Mobile ID, consultare l'articolo correlato: [Mobile ID Passkeys: autenticazione resistente al phishing per scenari browser](/release-notes/posts/2026-03-30-mobile-id-passkeys).
 :::
 
 ### Operatività svizzera e residenza dei dati
@@ -108,7 +117,7 @@ Questi sono scenari in cui un approccio basato solo su app raggiunge i propri li
 
 ## Casi d'uso aziendali
 
-External MFA con Mobile ID copre un'ampia gamma di scenari aziendali. Il metodo di autenticazione più adatto (SIM o App) dipende dai requisiti di sicurezza e dal contesto dell'utente.
+External MFA con Mobile ID copre un'ampia gamma di scenari aziendali. SIM e App coprono i percorsi enterprise out-of-band più ampi. I Passkeys completano i percorsi browser-centrici dove il supporto WebAuthn è disponibile end-to-end.
 
 <EntraUseCaseCards />
 
@@ -120,11 +129,15 @@ Questo è particolarmente prezioso per le organizzazioni che desiderano un **uni
 
 ### VPN e accesso remoto
 
-Per gateway VPN, ambienti Citrix, sessioni VDI e accesso desktop remoto, Mobile ID fornisce la MFA tramite il [RADIUS Interface Gateway](/radius-interface-gateway-guide/introduction) o direttamente via OIDC. Il metodo SIM è particolarmente adatto in questo contesto perché funziona in modo affidabile anche in ambienti dove l'autenticazione basata su app non è praticabile. Una sessione desktop remoto, ad esempio, spesso blocca la comunicazione Bluetooth con una chiave di sicurezza.
+Per gateway VPN, ambienti Citrix, sessioni VDI e accesso desktop remoto, Mobile ID fornisce la MFA tramite il [RADIUS Interface Gateway](/radius-interface-gateway-guide/introduction) o direttamente via OIDC. Sia SIM sia App si adattano bene a questi scenari out-of-band, perché nessuno dei due metodi dipende dal Bluetooth verso una chiave hardware. Restano quindi pratici anche quando la sessione protetta è remota o guidata da un client.
+
+I Passkeys possono comunque completare percorsi di accesso remoto browser-centrici quando WebAuthn è supportato end-to-end. Nei flussi VDI, RDP o VPN basati su client, però, sono spesso meno pratici perché il supporto browser/WebAuthn e il cross-device handoff non sono disponibili in modo coerente.
 
 ### Privileged Access Management
 
-Gli account amministratore e l'accesso a sistemi sensibili richiedono il massimo livello di garanzia. Le policy Conditional Access di Entra ID possono essere indirizzate a ruoli amministrativi specifici e applicazioni sensibili per richiedere External MFA tramite Mobile ID. Mobile ID autentica quindi l'utente con i metodi disponibili. Per le organizzazioni che utilizzano Mobile ID anche al di fuori del contesto Entra (ad es. per applicazioni web o VPN), i [valori ACR granulari](/oidc-integration-guide/getting-started#authentication-context-class-reference-acr) nella richiesta di autorizzazione OIDC consentono al Relying Party di imporre metodi specifici come App con Geofencing o Transaction Signing.
+Gli account amministratore e l'accesso a sistemi sensibili richiedono il massimo livello di garanzia. Le policy Conditional Access di Entra ID possono essere indirizzate a ruoli amministrativi specifici e applicazioni sensibili per richiedere External MFA tramite Mobile ID. Ciò che Entra controlla è **quando** il fattore aggiuntivo è richiesto. Quale metodo Mobile ID venga usato nel percorso provider è una responsabilità di Mobile ID.
+
+Controlli specifici di metodo, come gli ACR Mobile ID passkey-only, `keyringId` o altre regole di selezione diretta del metodo, appartengono a integrazioni OIDC dirette con Mobile ID al di fuori della superficie amministrativa di Entra External MFA.
 
 ### Forza lavoro ibrida e sul campo
 
@@ -206,8 +219,8 @@ La configurazione passo per passo è documentata nella [Cloud Integration Guide]
 
 ## Conclusione
 
-Con External MFA ora generalmente disponibile in Microsoft Entra ID, le organizzazioni non devono più scegliere tra gestione centralizzata delle identità e autenticazione specializzata. Entra ID resta il motore di policy. Mobile ID fornisce il secondo fattore, tramite SIM o App, a seconda del caso d'uso.
+Con External MFA ora generalmente disponibile in Microsoft Entra ID, le organizzazioni non devono più scegliere tra gestione centralizzata delle identità e autenticazione specializzata. Entra ID resta il motore di policy. Mobile ID fornisce il secondo fattore lato provider attraverso SIM, App e il più ampio ecosistema Mobile ID compatibile con i Passkeys, mentre Entra consuma solo il risultato External MFA.
 
-In pratica, questo significa poter contare su un unico provider MFA per Entra ID, applicazioni web, VPN e ambienti RADIUS, con copertura per tutti i tipi di dispositivi, dagli smartphone ai telefoni di base. Il tutto con un'infrastruttura operata in Svizzera, un'integrazione OIDC basata su standard e una base solida per il futuro, perché External MFA sostituisce i Custom Controls deprecati e Mobile ID continua a evolversi con nuove funzionalità come il [Passkey Vault](/release-notes/posts/2026-03-30-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault).
+In pratica, questo significa poter contare su un unico provider MFA per Entra ID, applicazioni web, VPN e ambienti RADIUS, con copertura che va dai telefoni di base alle moderne piattaforme compatibili con i Passkeys. SIM e App restano particolarmente forti per i percorsi enterprise out-of-band, mentre i Passkeys ampliano il portafoglio Mobile ID verso scenari browser resistenti al phishing quando la configurazione del provider e il supporto della piattaforma lo consentono. Il tutto con un'infrastruttura operata in Svizzera, un'integrazione OIDC basata su standard e una base solida per il futuro, perché External MFA sostituisce i Custom Controls deprecati e Mobile ID continua a evolversi con nuove funzionalità come il [Passkey Vault](/release-notes/posts/2026-03-30-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault).
 
 Per domande sulle integrazioni Mobile ID, contattare [Backoffice.Security@swisscom.com](mailto:Backoffice.Security@swisscom.com). Per informazioni generali sul servizio, visitare [mobileid.ch](https://www.mobileid.ch/it).

@@ -1,11 +1,8 @@
 # Imprint
 
-Mobile ID ist eine Marke von Swisscom.<br/>
-Swisscom (Schweiz) AG
+This legacy page is kept for compatibility with existing guide links.
 
-Sitz: Ittigen
+The current legal information for `docs.mobileid.ch` is available here:
 
-Postadresse:<br/>
-Swisscom (Schweiz) AG<br/>
-Alte Tiefenaustrasse 6<br/>
-CH-3050 Bern<br/>
+- [Imprint](/legal/imprint)
+- [Privacy Notice](/legal/privacy)

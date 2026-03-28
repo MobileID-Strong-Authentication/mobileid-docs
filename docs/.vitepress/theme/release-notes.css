@@ -259,6 +259,37 @@
   margin-right: -24px;
 }
 
+.blog-legal-footer {
+  border-top: 1px solid var(--blog-border);
+  background: var(--blog-bg-subtle);
+  margin-top: 24px;
+}
+
+.blog-legal-footer-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 24px 28px;
+  color: var(--blog-text-muted);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.blog-legal-footer a {
+  color: var(--blog-link);
+  text-decoration: none;
+}
+
+.blog-legal-footer a:hover,
+.blog-legal-footer a:focus-visible {
+  color: var(--blog-link-hover);
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .blog-content {
     padding: 24px 16px;

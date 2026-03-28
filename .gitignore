@@ -28,4 +28,7 @@ plan-*.md
 # AI assistant / editor local tooling (never commit)
 .claude/
 .cursor/
+.cursorrules
+CLAUDE.md
 AGENTS.md
+CODEX.md

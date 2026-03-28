@@ -4,15 +4,29 @@ This chapter covers a few Mobile ID integration scenario examples with popular p
 
 ## Microsoft Entra ID
 
-[MobileID](https://www.swisscom.ch/mid) integrates with Microsoft Entra ID using External MFA, enabling Multi-Factor-Authentication (MFA) for Entra ID logon. MobileID provides seamless inline user enrolment, self-service device management, and supports a range of authentication methods, including highly secure crypto-SIM tokens and app-based push authentication for iOS and Android, with advanced options such as Number Matching and Geofencing.
+[MobileID](https://www.swisscom.ch/mid) integrates with Microsoft Entra ID using External MFA. In this model, Entra ID remains the identity platform and hands the MFA step to MobileID as the external provider.
+
+Within the broader Mobile ID ecosystem, strong user authentication can be fulfilled with **Mobile ID SIM**, **Mobile ID App**, and **Mobile ID Passkeys**. Microsoft Entra ID does not need to understand or configure these internal methods individually. It consumes the successful result of the Mobile ID provider flow.
 
 In 2020, Microsoft announced plans to replace custom controls with a new method for integrating third-party authentication. MobileID has been working closely with Microsoft to deliver an authentication solution for Microsoft External MFA, previously known as External Authentication Methods (EAM), available from May 2024 and generally available since March 2026.
 
-MobileID via External MFA is fully recognized as a multifactor authentication method within Entra ID, meeting MFA policy requirements. Once MobileID is defined as an External MFA provider, you can create Entra ID conditional access policies with MFA using MobileID and assign these to specific users, groups, or applications.
+MobileID via External MFA can satisfy the standard **Require multifactor authentication** grant control in Entra ID Conditional Access and is managed alongside the other authentication methods in Entra ID. It is not identical to every built-in Entra method, however: Microsoft does not currently support External MFA with Authentication Strengths.
 
 ::: info
 External MFA in Microsoft Entra ID is now generally available. For the current Microsoft guidance, see the [GA announcement](https://techcommunity.microsoft.com/blog/microsoft-entra-blog/external-mfa-in-microsoft-entra-id-is-now-generally-available/4488926), [How to manage external MFA in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-authentication-external-method-manage), and the [Microsoft Entra External MFA method provider reference](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-external-method-provider). External MFA replaces Custom Controls, which Microsoft plans to deprecate on September 30, 2026.
 :::
+
+### How the Entra External MFA Hand-off Works
+
+Microsoft Entra ID talks to the external provider through the **OIDC implicit-flow pattern documented by Microsoft for External MFA**. In practice, Entra ID sends a request to the MobileID authorization endpoint with parameters such as `response_type=id_token`, `response_mode=form_post`, and an `id_token_hint` that identifies the user and tenant.
+
+MobileID validates that Entra context, runs the provider-side authentication journey, and returns a signed `id_token` to Entra ID. Entra ID validates the returned claims and decides whether the MFA requirement is satisfied.
+
+This separation is important for documentation and operations:
+
+- **Entra ID** decides when MFA is required and consumes the external MFA result.
+- **Mobile ID** decides how the user authenticates inside the provider journey.
+- Method-specific controls from the standard Mobile ID OIDC integration, such as ACR values or passkey `keyringId` handling, are **not configured in the Entra admin center**.
 
 ### Sign-in Flow
 
@@ -21,6 +35,7 @@ External MFA in Microsoft Entra ID is now generally available. For the current M
 ### Known Limitations
 
 - Users must specifically select the MobileID External MFA option during authentication. If they have other MFA methods configured besides MobileID, they may need to click "Other options" on the Microsoft "Verify your identity" prompt in order to choose MobileID.
+- Microsoft Entra ID does not expose Mobile ID-specific method selection. Whether Mobile ID uses SIM, App, or Passkey inside the provider journey depends on the user's activated methods and the Mobile ID provider-side configuration for that Entra integration.
 - Cross-tenant user authentication with MobileID External MFA has limitations. It will only work if:
   - The external Microsoft Entra organization trusts MFA claims from the user's home tenant.
   - The user has already established a valid MFA claim by authenticating to an application within their home tenant before accessing the cross-tenant application.
@@ -96,7 +111,7 @@ If you have multiple Entra ID authentication methods enabled, you may need to cl
 
 <img src="/img/entraid-other-options.png" alt="entraid-other-options" width="500">
 
-You will be redirected to the MobileID prompt or user enrolment, depending on your configuration.
+You will be redirected to the MobileID provider journey, where MobileID either starts user enrolment or prompts for one of the enabled authentication methods, depending on your configuration.
 
 Once you complete the MobileID authentication, you'll return to Entra ID to finish logging in to the application.
 

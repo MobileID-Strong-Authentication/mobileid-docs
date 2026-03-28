@@ -70,7 +70,7 @@ function startAnimation() {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
         </div>
         <div class="entra-flow-label">Mobile ID</div>
-        <div class="entra-flow-sublabel">SIM or App authentication</div>
+        <div class="entra-flow-sublabel">Provider-side method is selected</div>
       </div>
 
       <div class="entra-flow-arrow" :class="{ 'entra-flow-arrow--active': phase >= 4 }">

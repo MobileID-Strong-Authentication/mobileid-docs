@@ -6,6 +6,12 @@ MobileID Passkeys are now live in the production environment as a **freshly laun
 
 MobileID now supports **FIDO2 Passkeys** as an authentication method within the OpenID Connect service. Relying Parties can allow their users to authenticate using MobileID Passkeys - alongside or instead of the existing MobileID SIM, App, and OTP SMS methods.
 
+::: info Scope: standard Mobile ID OIDC vs. Entra External MFA
+This page documents the **standard Mobile ID OIDC relying-party integration**, where the RP uses the authorization code flow and can request Mobile ID-specific ACR values, passkey scopes, and `keyringId` handling.
+
+**Microsoft Entra ID External MFA is a different integration pattern.** In that model, Entra ID calls the external provider with its own OIDC implicit-flow profile and consumes only the provider result. The Entra admin center does not expose these Mobile ID-specific ACR or passkey controls. See [Public Cloud Integration / Microsoft Entra ID](/oidc-integration-guide/cloud-integration-guide#microsoft-entra-id).
+:::
+
 ## What Are Passkeys?
 
 The MobileID ecosystem already offers several proven authentication methods: **MobileID SIM** (SIM-based authentication), **MobileID App** (push-based authentication on iOS and Android), and **OTP SMS**. With the introduction of **FIDO2 Passkeys**, MobileID now adds a modern, phishing-resistant authentication option to its portfolio - giving Relying Parties and their users even more flexibility to balance security and convenience.

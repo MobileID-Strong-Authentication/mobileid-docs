@@ -9,29 +9,29 @@ const useCases = [
   {
     icon: 'cloud',
     title: 'Microsoft 365 & Cloud Apps',
-    desc: 'Secure access to Outlook, Teams, SharePoint and other cloud applications with Mobile ID as MFA — for every employee, on every device.',
-    methods: ['SIM', 'App'],
+    desc: 'Secure access to Outlook, Teams, SharePoint and other cloud applications. Entra consumes the external MFA result while Mobile ID runs the strong method.',
+    methods: ['SIM', 'App', 'Passkey'],
     color: 'blue'
   },
   {
     icon: 'shield',
     title: 'VPN & Remote Access',
-    desc: 'Protect VPN gateways, Citrix, VDI and remote desktop sessions. Mobile ID SIM works even on basic phones without app installation.',
+    desc: 'Protect VPN gateways, Citrix, VDI and remote desktop sessions. SIM and App both work well for out-of-band MFA in client-driven and remote-session journeys.',
     methods: ['SIM', 'App'],
     color: 'green'
   },
   {
     icon: 'lock',
     title: 'Privileged Access',
-    desc: 'Enforce stronger authentication for admin accounts and sensitive systems. Mobile ID provides multiple strong methods to protect privileged access.',
-    methods: ['SIM', 'App'],
+    desc: 'Require an external MFA step for admin accounts and sensitive systems. Entra decides when MFA is needed; Mobile ID handles the provider-side method.',
+    methods: ['SIM', 'App', 'Passkey'],
     color: 'pink'
   },
   {
     icon: 'users',
     title: 'Hybrid & Field Workforce',
-    desc: 'Field workers without smartphones use SIM-based MFA. Office staff use the App with biometrics. One provider, every scenario covered.',
-    methods: ['SIM', 'App'],
+    desc: 'Cover mixed workforces with one provider: SIM for users without smartphones, App for smartphone users, and passkeys for browser-centric journeys where enabled.',
+    methods: ['SIM', 'App', 'Passkey'],
     color: 'teal'
   }
 ]

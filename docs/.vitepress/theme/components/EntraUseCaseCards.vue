@@ -10,7 +10,7 @@ const useCases = [
     icon: 'cloud',
     title: 'Microsoft 365 & Cloud Apps',
     desc: 'Secure access to Outlook, Teams, SharePoint and other cloud applications with Mobile ID as MFA — for every employee, on every device.',
-    methods: ['SIM', 'App', 'Passkey'],
+    methods: ['SIM', 'App'],
     color: 'blue'
   },
   {
@@ -23,8 +23,8 @@ const useCases = [
   {
     icon: 'lock',
     title: 'Privileged Access',
-    desc: 'Enforce stronger authentication for admin accounts and sensitive systems. Geofencing and transaction signing add extra protection layers.',
-    methods: ['App', 'SIM'],
+    desc: 'Enforce stronger authentication for admin accounts and sensitive systems. Mobile ID provides multiple strong methods to protect privileged access.',
+    methods: ['SIM', 'App'],
     color: 'pink'
   },
   {

@@ -229,4 +229,4 @@ Enterprises benefit from a standard OIDC integration, Swiss data residency and t
 
 *Mobile ID: the right method for every scenario. Everything from one ecosystem.*
 
-If you would like to discuss your use case, contact us via [swisscom.ch/mobileid](https://www.swisscom.ch/mobileid).
+For questions about Mobile ID integrations, reach out to [Backoffice.Security@swisscom.com](mailto:Backoffice.Security@swisscom.com). For general information about the service, visit [mobileid.ch](https://www.mobileid.ch/en).

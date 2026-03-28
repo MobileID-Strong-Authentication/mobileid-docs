@@ -117,7 +117,7 @@ Questi sono scenari in cui un approccio basato solo su app raggiunge i propri li
 
 ## Casi d'uso aziendali
 
-External MFA con Mobile ID copre un'ampia gamma di scenari aziendali. SIM e App coprono i percorsi enterprise out-of-band più ampi. I Passkeys completano i percorsi browser-centrici dove il supporto WebAuthn è disponibile end-to-end.
+Mobile ID copre un'ampia gamma di scenari aziendali attraverso diversi modelli di integrazione. SIM e App coprono i percorsi enterprise out-of-band più ampi. I Passkeys completano i percorsi browser-centrici dove il supporto WebAuthn è disponibile end-to-end.
 
 <EntraUseCaseCards />
 
@@ -125,7 +125,7 @@ External MFA con Mobile ID copre un'ampia gamma di scenari aziendali. SIM e App 
 
 Lo scenario più comune: proteggere l'accesso a Outlook, Teams, SharePoint e altre applicazioni Microsoft 365. Quando una policy Conditional Access richiede la MFA, i dipendenti si autenticano tramite Mobile ID al posto di, o insieme a, Microsoft Authenticator.
 
-Questo è particolarmente prezioso per le organizzazioni che desiderano un **unico provider MFA per tutte le applicazioni**, non solo per i servizi Microsoft. Poiché Mobile ID utilizza [OIDC standard](/oidc-integration-guide/introduction), gli stessi metodi di autenticazione funzionano per Entra ID, applicazioni web custom, accesso VPN e altro.
+Questo è particolarmente prezioso per le organizzazioni che desiderano un **unico provider MFA per tutte le applicazioni**, non solo per i servizi Microsoft. I metodi di autenticazione Mobile ID — SIM, App e Passkeys — sono disponibili attraverso diversi modelli di integrazione: come provider Entra External MFA, tramite [OIDC standard](/oidc-integration-guide/introduction) per applicazioni web custom, e tramite il [RADIUS Interface Gateway](/radius-interface-gateway-guide/introduction) per l'accesso VPN e di rete.
 
 ### VPN e accesso remoto
 
@@ -206,7 +206,7 @@ Configurare Mobile ID come provider External MFA in Entra ID richiede tre prereq
   <div class="blog-step-card">
     <div class="blog-step-number">3</div>
     <div class="blog-step-body">
-      <p><span class="blog-step-title">Preparare un account amministratore Entra ID.</span> La configurazione iniziale richiede il ruolo Global Administrator oppure Privileged Role Administrator.</p>
+      <p><span class="blog-step-title">Preparare un account amministratore Entra ID.</span> La configurazione del metodo External MFA e delle policy Conditional Access richiede almeno il ruolo Authentication Policy Administrator. La concessione del consenso amministratore per l'applicazione del provider richiede almeno il ruolo Privileged Role Administrator.</p>
     </div>
   </div>
 </div>

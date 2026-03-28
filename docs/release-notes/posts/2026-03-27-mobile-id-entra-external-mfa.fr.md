@@ -117,7 +117,7 @@ Ce sont des scénarios où une approche exclusivement basée sur une application
 
 ## Cas d'usage en entreprise
 
-External MFA avec Mobile ID couvre un large éventail de scénarios d'entreprise. La SIM et l'App couvrent les parcours d'entreprise hors bande les plus larges. Les Passkeys complètent les parcours centrés navigateur là où la prise en charge WebAuthn est disponible de bout en bout.
+Mobile ID couvre un large éventail de scénarios d'entreprise à travers différents modèles d'intégration. La SIM et l'App couvrent les parcours d'entreprise hors bande les plus larges. Les Passkeys complètent les parcours centrés navigateur là où la prise en charge WebAuthn est disponible de bout en bout.
 
 <EntraUseCaseCards />
 
@@ -125,7 +125,7 @@ External MFA avec Mobile ID couvre un large éventail de scénarios d'entreprise
 
 Le scénario le plus courant : sécuriser l'accès à Outlook, Teams, SharePoint et aux autres applications Microsoft 365. Lorsqu'une politique Conditional Access exige le MFA, les collaborateurs s'authentifient via Mobile ID au lieu de, ou en complément de, Microsoft Authenticator.
 
-Cela est particulièrement pertinent pour les organisations qui souhaitent un **fournisseur MFA unique pour toutes les applications**, et pas uniquement pour les services Microsoft. Étant donné que Mobile ID utilise le [standard OIDC](/oidc-integration-guide/introduction), les mêmes méthodes d'authentification fonctionnent pour Entra ID, les applications web personnalisées, l'accès VPN et plus encore.
+Cela est particulièrement pertinent pour les organisations qui souhaitent un **fournisseur MFA unique pour toutes les applications**, et pas uniquement pour les services Microsoft. Les méthodes d'authentification Mobile ID — SIM, App et Passkeys — sont disponibles à travers différents modèles d'intégration : en tant que fournisseur Entra External MFA, via [OIDC standard](/oidc-integration-guide/introduction) pour les applications web personnalisées, et via le [RADIUS Interface Gateway](/radius-interface-gateway-guide/introduction) pour l'accès VPN et réseau.
 
 ### VPN et accès à distance
 
@@ -206,7 +206,7 @@ La mise en place de Mobile ID comme fournisseur External MFA dans Entra ID repos
   <div class="blog-step-card">
     <div class="blog-step-number">3</div>
     <div class="blog-step-body">
-      <p><span class="blog-step-title">Prévoir un compte administrateur Entra ID.</span> La configuration initiale requiert le rôle Global Administrator ou Privileged Role Administrator.</p>
+      <p><span class="blog-step-title">Prévoir un compte administrateur Entra ID.</span> La configuration de la méthode External MFA et des politiques Conditional Access requiert au minimum le rôle Authentication Policy Administrator. L'octroi du consentement administrateur pour l'application du fournisseur requiert au minimum le rôle Privileged Role Administrator.</p>
     </div>
   </div>
 </div>

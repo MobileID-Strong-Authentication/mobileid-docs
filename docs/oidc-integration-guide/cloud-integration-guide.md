@@ -55,7 +55,7 @@ If you did not receive this information, it means that your onboarding process i
 :::
 
 - An active [Entra ID P1 or P2](https://azure.microsoft.com/en-us/pricing/details/active-directory/) subscription with Conditional Access enabled, and P1/P2 licenses assigned to each user who will log in using MobileID MFA. Plans like Microsoft 365 E3, E5, and F3, as well as Enterprise Mobility + Security E3 and E5, and Microsoft Business Premium, all include Entra ID Premium.
-- A designated Entra ID admin service account to authorize the MobileID application access. This account requires the Entra ID Global Administrator or Privileged Role Administrator role during the MobileID setup process, though you can reduce the service account's role privileges afterward.
+- A designated Entra ID admin account. Configuring the external MFA method and Conditional Access policies requires at least the **Authentication Policy Administrator** role. Granting admin consent for the MobileID application (Step 8 below) requires at least the **Privileged Role Administrator** role. A Global Administrator can perform both steps, but is not the minimum required role for either. You can reduce the account's role privileges after setup is complete.
 
 ### Configure Entra ID
 
@@ -63,7 +63,7 @@ Follow these steps to configure MobileID as an External MFA method in Microsoft 
 
 | Step | Description |
 |------|-------------|
-| 1 | **Log in to Entra ID** <br><br> Go to the [Microsoft Entra admin center](https://entra.microsoft.com) and log in to your Entra ID tenant as a global administrator. <br><br> If you're using the [Azure portal](https://portal.azure.com), the navigation will differ slightly. |
+| 1 | **Log in to Entra ID** <br><br> Go to the [Microsoft Entra admin center](https://entra.microsoft.com) and log in to your Entra ID tenant as at least an Authentication Policy Administrator. For Step 8 (admin consent), you will need at least the Privileged Role Administrator role. <br><br> If you're using the [Azure portal](https://portal.azure.com), the navigation will differ slightly. |
 | 2 | **Navigate to Authentication Methods** <br><br> In the Entra Admin Center, go to **Entra ID → Authentication methods → Add external MFA**. <br><br> If you're logged into the Azure portal instead, first select Microsoft Entra ID, then go to **Security → Authentication Methods**. |
 | 3 | **Add External MFA** <br><br> Click **+ Add External MFA**. <br><br> ![entraid-add-external-method](/img/entraid-add-external-method.png) |
 | 4 | **Configure the External MFA Method** <br><br> On the "Add external MFA" page, enter a descriptive name for the MobileID method. The default name might be "Mobile ID" but you can choose a name that will make sense to your users since they'll see this during authentication. <br><br> **Note:** You cannot change the name after creation. <br><br> Enter the information you have received from Swisscom in the corresponding field: **Client ID**, **Discovery Endpoint**, **App ID**. <br><br> ![entraid-configure-external-method](/img/entraid-configure-external-method.png) |
@@ -76,7 +76,7 @@ Follow these steps to configure MobileID as an External MFA method in Microsoft 
 
 | Step | Description |
 |------|-------------|
-| 1 | **Log in to Entra ID** <br><br> Go to the [Microsoft Entra admin center](https://entra.microsoft.com) and log in to your Entra ID tenant as a global administrator. <br><br> If you're using the [Azure portal](https://portal.azure.com), the navigation will differ slightly. |
+| 1 | **Log in to Entra ID** <br><br> Go to the [Microsoft Entra admin center](https://entra.microsoft.com) and log in to your Entra ID tenant as at least an Authentication Policy Administrator. <br><br> If you're using the [Azure portal](https://portal.azure.com), the navigation will differ slightly. |
 | 2 | **Navigate to Conditional Access** <br><br> Click on **Conditional Access** in the left-hand menu, then click **+ Create New Policy**. <br><br> If you are in the Azure portal, navigate to **Security → Conditional Access → Policies**. <br><br> ![entraid-conditional-access](/img/entraid-conditional-access.png) |
 | 3 | **Name the Policy** <br><br> Enter a descriptive name for the new policy, such as "MobileID MFA for Acme Users". |
 | 4 | **Assign the Policy** <br><br> You can assign this policy to specific users or groups, Entra ID cloud apps, or other conditions like client platforms or networks. <br><br> *Example for assigning to users:* Click **Users** under "Assignments", then select **Users and groups** on the "Include" tab. Choose **Users and groups** and click **0 users and groups selected** to locate the users or Entra ID security groups for whom you want to enforce MobileID MFA. Select the users or groups, then click **Select** to apply your choices. <br><br> If you targeted specific groups when creating the MobileID external method, ensure that you apply this new policy to the same groups. <br><br> *Example for assigning to resources:* Click **Target resources**. On the "Include" tab, select **Apps**, and choose the Entra ID applications where you want MobileID MFA to be applied. |

@@ -78,7 +78,14 @@ Mobile ID est opéré par Swisscom depuis la Suisse. Les organisations ayant des
 
 ### Là où Mobile ID apporte une valeur ajoutée par rapport au MFA natif
 
-Microsoft Authenticator est un choix solide par défaut pour les organisations qui n'ont besoin que du push par application et du TOTP. Mobile ID devient pertinent lorsque cela ne suffit pas : lorsqu'une partie du personnel ne dispose pas de smartphone, lorsque l'authentification doit être liée à une zone géographique, lorsque les utilisateurs doivent confirmer explicitement les détails d'une transaction sur leur appareil, ou lorsque l'organisation souhaite un fournisseur MFA unique qui fonctionne à travers Entra ID, les applications personnalisées, le VPN et les environnements RADIUS. Ce sont des scénarios où une approche exclusivement basée sur une application atteint ses limites.
+Microsoft Authenticator est un choix solide par défaut pour les organisations qui n'ont besoin que du push par application et du TOTP. Mobile ID devient pertinent lorsque cela ne suffit pas :
+
+- Une partie du personnel ne dispose pas de smartphone
+- L'authentification doit être liée à une zone géographique
+- Les utilisateurs doivent confirmer explicitement les détails d'une transaction sur leur appareil
+- L'organisation souhaite un fournisseur MFA unique à travers Entra ID, les applications, le VPN et les environnements RADIUS
+
+Ce sont des scénarios où une approche exclusivement basée sur une application atteint ses limites.
 
 ## Cas d'usage en entreprise
 
@@ -129,9 +136,11 @@ Si vous découvrez Mobile ID et que vous l'envisagez comme fournisseur External 
 
 La mise en place de Mobile ID comme fournisseur External MFA dans Entra ID nécessite trois éléments :
 
-1. **Un onboarding Mobile ID complété.** Contactez Swisscom pour recevoir vos identifiants d'intégration ([premiers pas](/oidc-integration-guide/getting-started)).
-2. **Un abonnement Entra ID P1 ou P2** avec Conditional Access activé et des licences attribuées aux utilisateurs ciblés.
-3. **Un compte administrateur Entra ID** avec le rôle Global Administrator ou Privileged Role Administrator pour la configuration initiale.
+| | Prérequis | Détails |
+|---|---|---|
+| 1 | **Onboarding Mobile ID** | Contactez Swisscom pour recevoir vos identifiants d'intégration ([premiers pas](/oidc-integration-guide/getting-started)) |
+| 2 | **Abonnement Entra ID P1 ou P2** | Conditional Access activé, licences attribuées aux utilisateurs ciblés |
+| 3 | **Compte administrateur Entra ID** | Rôle Global Administrator ou Privileged Role Administrator pour la configuration initiale |
 
 La configuration pas à pas est documentée dans le [Cloud Integration Guide](/oidc-integration-guide/cloud-integration-guide#microsoft-entra-id), y compris la configuration de la politique Conditional Access, le consentement administrateur et les étapes optionnelles pour prioriser Mobile ID par rapport à Microsoft Authenticator.
 
@@ -143,6 +152,11 @@ La configuration pas à pas est documentée dans le [Cloud Integration Guide](/o
 
 Avec External MFA désormais disponible en version générale dans Microsoft Entra ID, les organisations n'ont plus à choisir entre une gestion centralisée des identités et une authentification spécialisée. Entra ID reste le moteur de politiques. Mobile ID fournit le second facteur, via la SIM ou l'App, selon le cas d'usage.
 
-Ce que cela signifie en pratique : un seul fournisseur MFA pour Entra ID, les applications web, le VPN et les environnements RADIUS. Tous les types d'appareils couverts, du smartphone au téléphone basique. Une infrastructure opérée en Suisse avec une intégration OIDC basée sur les standards. Et un chemin pérenne, puisque External MFA remplace les Custom Controls dépréciés et que Mobile ID continue d'évoluer avec de nouvelles fonctionnalités comme le [Passkey Vault](/release-notes/posts/2026-03-30-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault).
+Ce que cela signifie en pratique :
+
+- **Un seul fournisseur MFA** pour Entra ID, les applications web, le VPN et les environnements RADIUS
+- **Tous les types d'appareils couverts**, du smartphone au téléphone basique
+- **Infrastructure opérée en Suisse** avec intégration OIDC basée sur les standards
+- **Pérennité assurée**, puisque External MFA remplace les Custom Controls dépréciés et que Mobile ID continue d'évoluer avec de nouvelles fonctionnalités comme le [Passkey Vault](/release-notes/posts/2026-03-30-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault)
 
 Pour toute question sur les intégrations Mobile ID, contactez [Backoffice.Security@swisscom.com](mailto:Backoffice.Security@swisscom.com). Pour des informations générales sur le service, consultez [mobileid.ch](https://www.mobileid.ch/fr).

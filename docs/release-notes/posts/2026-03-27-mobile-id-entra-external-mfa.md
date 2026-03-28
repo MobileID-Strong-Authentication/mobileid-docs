@@ -78,7 +78,14 @@ Mobile ID is operated by Swisscom from Switzerland. Organizations with data resi
 
 ### Where Mobile ID Adds Value Beyond Native MFA
 
-Microsoft Authenticator is a solid default for organizations that only need app-based push and TOTP. Mobile ID becomes relevant when that is not enough: when parts of the workforce have no smartphone, when authentication needs to be tied to a geographic area, when users must explicitly confirm transaction details on their device, or when the organization wants a single MFA provider that works across Entra ID, custom applications, VPN and RADIUS environments. These are scenarios where an app-only approach hits its limits.
+Microsoft Authenticator is a solid default for organizations that only need app-based push and TOTP. Mobile ID becomes relevant when that is not enough:
+
+- Parts of the workforce have no smartphone
+- Authentication needs to be tied to a geographic area
+- Users must explicitly confirm transaction details on their device
+- The organization wants a single MFA provider across Entra ID, custom applications, VPN and RADIUS
+
+These are scenarios where an app-only approach hits its limits.
 
 <!-- Infographic removed pending factual review: the original NotebookLM-generated graphic
      incorrectly portrayed Microsoft Authenticator as Push/TOTP-only, omitting its passkey support.
@@ -133,9 +140,11 @@ If you are new to Mobile ID and considering it as your External MFA provider, Sw
 
 Setting up Mobile ID as an External MFA provider in Entra ID requires three things:
 
-1. **A completed Mobile ID onboarding.** Contact Swisscom to receive your integration credentials ([getting started](/oidc-integration-guide/getting-started)).
-2. **An Entra ID P1 or P2 subscription** with Conditional Access enabled and licenses assigned to the targeted users.
-3. **An Entra ID admin account** with Global Administrator or Privileged Role Administrator role for the initial setup.
+| | Prerequisite | Details |
+|---|---|---|
+| 1 | **Mobile ID onboarding** | Contact Swisscom to receive your integration credentials ([getting started](/oidc-integration-guide/getting-started)) |
+| 2 | **Entra ID P1 or P2 subscription** | Conditional Access enabled, licenses assigned to the targeted users |
+| 3 | **Entra ID admin account** | Global Administrator or Privileged Role Administrator for the initial setup |
 
 The step-by-step configuration is documented in the [Cloud Integration Guide](/oidc-integration-guide/cloud-integration-guide#microsoft-entra-id), including Conditional Access policy setup, admin consent, and optional steps to prioritize Mobile ID over Microsoft Authenticator.
 
@@ -147,6 +156,11 @@ The step-by-step configuration is documented in the [Cloud Integration Guide](/o
 
 With External MFA now generally available in Microsoft Entra ID, organizations no longer have to choose between centralized identity management and specialized authentication. Entra ID stays the policy engine. Mobile ID delivers the second factor, through SIM or App, depending on the use case.
 
-What this means in practice: one MFA provider for Entra ID, web applications, VPN and RADIUS environments. Every device type covered, from smartphones to basic phones. Swiss-operated infrastructure with standards-based OIDC integration. And a future-proof path, since External MFA replaces the deprecated Custom Controls and Mobile ID continues to evolve with new capabilities like the [Passkey Vault](/release-notes/posts/2026-03-30-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault).
+What this means in practice:
+
+- **One MFA provider** for Entra ID, web applications, VPN and RADIUS environments
+- **Every device type covered**, from smartphones to basic phones
+- **Swiss-operated infrastructure** with standards-based OIDC integration
+- **Future-proof**, since External MFA replaces the deprecated Custom Controls and Mobile ID continues to evolve with new capabilities like the [Passkey Vault](/release-notes/posts/2026-03-30-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault)
 
 For questions about Mobile ID integrations, reach out to [Backoffice.Security@swisscom.com](mailto:Backoffice.Security@swisscom.com). For general information about the service, visit [mobileid.ch](https://www.mobileid.ch/en).

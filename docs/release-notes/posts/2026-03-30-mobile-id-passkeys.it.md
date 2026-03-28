@@ -115,7 +115,7 @@ Importante: anche i Passkeys non sono esenti da vettori di attacco. Malware sull
 
 Per i login tramite client VPN, ambienti Remote Desktop/VDI, terminali kiosk, passaggi nativi app-to-app o callback dell'helpdesk, entrano in gioco altri meccanismi di protezione. In questi scenari non esiste un URL liberamente selezionabile. La connessione è controllata dal client o dall'infrastruttura. Lo URL-Spoofing non è un vettore di attacco.
 
-Mobile ID SIM e App offrono qui una sicurezza robusta grazie a binding hardware (EAL5+), Geofencing, Number Matching e Transaction Signing. In molti di questi scenari i Passkeys non sono nemmeno utilizzabili: WebAuthn è una tecnologia browser, e i client VPN o le sessioni Remote Desktop (nessun canale BLE verso l'authenticator!) spesso non li supportano.
+Mobile ID SIM e App offrono qui una sicurezza robusta grazie a binding hardware (EAL5+), Number Matching, Transaction Signing e Geofencing negli scenari supportati. Il Geofencing lato App usa GPS e segnali di integrità del dispositivo; il Geofencing SIM supportato usa dati di localizzazione della rete mobile. In molti di questi scenari i Passkeys non sono nemmeno utilizzabili: WebAuthn è una tecnologia browser, e i client VPN o le sessioni Remote Desktop (nessun canale BLE verso l'authenticator!) spesso non li supportano.
 
 ### SIM e App utilizzabili anche nel browser
 
@@ -139,9 +139,9 @@ In caso di cambio dispositivo, l'utente semplicemente sposta la SIM. L'account r
 
 ### Mobile ID App
 
-L'app Mobile ID (iOS e Android) offre, oltre all'autenticazione biometrica, un ampio spettro di funzionalità aggiuntive non realizzabili con i Passkeys:
+L'app Mobile ID (iOS e Android) offre, oltre all'autenticazione biometrica, un ampio spettro di vantaggi specifici dell'App non realizzabili con i soli Passkeys:
 
-**Autenticazione push-based** con biometria o passcode come secondo fattore. **Geofencing** con localizzazione GPS e rilevamento integrato di jailbreak e servizi mock, che ostacola lo spoofing GPS. **Number Matching**, in cui l'utente conferma nell'app un numero visualizzato sullo schermo. **[Transaction Signing](/oidc-integration-guide/message-formats)**, che mostra i dati della transazione (ad es. "Conferma il trasferimento di CHF 1'000 sul conto XY") direttamente sul dispositivo e richiede il consenso esplicito dell'utente. Il passaggio app-to-app consente negli scenari bancari la commutazione automatizzata dall'applicazione in uso all'app Mobile ID e ritorno.
+**Autenticazione push-based** con biometria o passcode come secondo fattore. **Geofencing lato App** con localizzazione GPS e rilevamento integrato di jailbreak e servizi mock, che ostacola lo spoofing GPS. **Number Matching e [Transaction Signing](/oidc-integration-guide/message-formats)** restano disponibili sia con Mobile ID SIM sia con Mobile ID App; nell'App si combinano con approvazione biometrica e una UX nativa da smartphone più ricca. **Il passaggio app-to-app** consente negli scenari bancari la commutazione automatizzata dall'applicazione in uso all'app Mobile ID e ritorno.
 
 L'app si basa sulla tecnologia di Futurae (spin-off dell'ETH di Zurigo) e utilizza il Trusted Execution Environment (TEE) del dispositivo. È disponibile in tutto il mondo nei paesi abilitati tramite l'App Store.
 
@@ -217,11 +217,11 @@ Con il Mobile ID Passkey Vault, Mobile ID dispone di una soluzione in roadmap, a
 
 Rispetto alle chiavi hardware fisiche, il Passkey Vault offre chiari vantaggi operativi: il login Passkey può essere combinato direttamente con Geoblocking e consenso esplicito dell'utente, e l'authenticator può essere distribuito e scalato in modo molto più semplice ed economico rispetto a costosi token hardware.
 
-L'app Mobile ID evolve così in un authenticator software scalabile che riunisce autenticazione SIM, MFA push-based, funzionalità Passkey e Transaction Signing in un'unica applicazione.
+L'app Mobile ID evolve così in un authenticator software scalabile che completa l'autenticazione basata su SIM con MFA push-based, funzionalità Passkey e una UX nativa da smartphone più ricca per Transaction Signing e consenso utente.
 
 ## Conclusione: tutto da un unico fornitore
 
-Con l'introduzione dei Passkeys, Mobile ID consolida la propria posizione come ecosistema unico che riunisce tutti i metodi di autenticazione rilevanti sotto un unico tetto. Passkeys per login browser resistenti al phishing. SIM per la massima sicurezza hardware senza installazione di app. App per Geofencing, Transaction Signing e utilizzo mondiale. E con l'Hybrid Auth Flow una soluzione che raggiunge un livello prossimo ad AAL3, senza che ogni utente debba possedere un token hardware.
+Con l'introduzione dei Passkeys, Mobile ID consolida la propria posizione come ecosistema unico che riunisce tutti i metodi di autenticazione rilevanti sotto un unico tetto. Passkeys per login browser resistenti al phishing. SIM per la massima sicurezza hardware senza installazione di app, incluso il Geofencing basato su rete mobile quando supportato. App per Geofencing GPS, biometria e utilizzo mondiale. Number Matching e Transaction Signing possono essere usati sia con SIM sia con App. E con l'Hybrid Auth Flow una soluzione che raggiunge un livello prossimo ad AAL3, senza che ogni utente debba possedere un token hardware.
 
 Le aziende beneficiano di un'integrazione OIDC standard, archiviazione dei dati in Svizzera e la sicurezza di un partner che impiega queste soluzioni internamente per proteggere infrastrutture altamente critiche.
 

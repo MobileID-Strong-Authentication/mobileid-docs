@@ -95,8 +95,10 @@ DTBD (DataToBeDisplayed) Classic View.
 
 
 
-The App also supports Transaction Approval Style, which enhances readability by displaying
-a title (type-field) and one or more key-value rows.
+The App also supports a structured Transaction Approval Style, which enhances readability
+by displaying a title (type-field) and one or more key-value rows. This presentation
+format is App-specific. The broader capability to display and sign transaction data
+exists with both SIM and App, while SIM uses the classic single-line DTBD format.
 
 <img
   src="/img/app-display-trans-approval.png"

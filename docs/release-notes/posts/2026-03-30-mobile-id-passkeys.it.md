@@ -1,6 +1,6 @@
 ---
 title: "Mobile ID Passkeys: autenticazione resistente al phishing per scenari browser"
-date: 2026-03-23
+date: 2026-03-30
 author: Mobile ID Team
 description: "I Passkeys consentono login resistenti al phishing tramite biometria in meno di 3 secondi. Mobile ID li integra nativamente nell'ecosistema OIDC e mostra perché SIM e App restano indispensabili."
 thumbnail: /release-notes/img/passkeys-thumb.png

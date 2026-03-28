@@ -76,6 +76,10 @@ Passkeys are a general Mobile ID capability available through the standard OIDC 
 
 Mobile ID is operated by Swisscom from Switzerland. Organizations with data residency requirements or a preference for European-operated security services can be confident that authentication data stays within Swiss jurisdiction.
 
+### Where Mobile ID Adds Value Beyond Native MFA
+
+Microsoft Authenticator is a solid default for organizations that only need app-based push and TOTP. Mobile ID becomes relevant when that is not enough: when parts of the workforce have no smartphone, when authentication needs to be tied to a geographic area, when users must explicitly confirm transaction details on their device, or when the organization wants a single MFA provider that works across Entra ID, custom applications, VPN and RADIUS environments. These are scenarios where an app-only approach hits its limits.
+
 <!-- Infographic removed pending factual review: the original NotebookLM-generated graphic
      incorrectly portrayed Microsoft Authenticator as Push/TOTP-only, omitting its passkey support.
      Replace with a manually verified graphic before publishing. -->

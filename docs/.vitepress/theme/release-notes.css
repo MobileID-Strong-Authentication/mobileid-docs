@@ -41,6 +41,11 @@
   --blog-bg-subtle: #f8f9fa;
   --blog-border: #e5e7eb;
   --blog-card-bg: #fff;
+  --blog-link: #0645ad;
+  --blog-link-hover: #0b57d0;
+  --blog-code-bg: #f1f3f5;
+  --blog-code-border: #d9dee5;
+  --blog-code-text: #1f2937;
 }
 
 .blog-layout h1,
@@ -59,6 +64,11 @@
   --blog-bg-subtle: #1a1a1a;
   --blog-border: #374151;
   --blog-card-bg: #1f2937;
+  --blog-link: #7fb3ff;
+  --blog-link-hover: #a8cbff;
+  --blog-code-bg: #273142;
+  --blog-code-border: #3b4b63;
+  --blog-code-text: #e5edf8;
 }
 
 /* Hero gradient (used by both layouts) */
@@ -89,6 +99,42 @@
 .blog-content p {
   margin-bottom: 1.2em;
   font-weight: 400;
+}
+
+.blog-content a:not(.header-anchor):not(.blog-card-link) {
+  color: var(--blog-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+
+.blog-content a:not(.header-anchor):not(.blog-card-link):visited {
+  color: var(--blog-link);
+}
+
+.blog-content a:not(.header-anchor):not(.blog-card-link):hover,
+.blog-content a:not(.header-anchor):not(.blog-card-link):focus-visible {
+  color: var(--blog-link-hover);
+  text-decoration-thickness: 2px;
+}
+
+.blog-content a:not(.header-anchor):not(.blog-card-link) code {
+  color: inherit;
+}
+
+.blog-content :not(pre) > code {
+  display: inline-block;
+  padding: 0.12em 0.42em;
+  border: 1px solid var(--blog-code-border);
+  border-radius: 6px;
+  background: var(--blog-code-bg);
+  color: var(--blog-code-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.9em;
+  line-height: 1.3;
+  vertical-align: baseline;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .blog-content h2 {

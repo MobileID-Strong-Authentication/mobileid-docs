@@ -154,12 +154,18 @@ const colorMap = {
   color: var(--blog-text-muted);
   padding: 3px 0;
   line-height: 1.5;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.35em;
+  align-items: start;
 }
 
 .passkey-type-traits li::before {
-  content: '→ ';
+  content: '→';
   color: var(--blog-green);
   font-weight: 700;
+  position: static;
+  width: 1em;
 }
 
 .passkey-type-roadmap-tag {

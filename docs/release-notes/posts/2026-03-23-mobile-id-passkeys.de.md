@@ -35,15 +35,15 @@ Microsoft blockiert täglich rund 7'000 Passwort-Angriffe pro Sekunde, und 47 % 
   </div>
 </div>
 
-## NIST AAL: Der Referenzrahmen für Sicherheitsniveaus
+## NIST AAL und ISO/IEC LoA: Referenzrahmen für Sicherheitsniveaus
 
-Bevor die einzelnen Methoden im Detail betrachtet werden, ist ein gemeinsames Verständnis der Sicherheitsstufen entscheidend. Der NIST-Standard SP 800-63B definiert drei Authenticator Assurance Levels (AAL), die in regulierten Branchen wie Banking, Healthcare und Government als Referenzrahmen dienen.
+Bevor die einzelnen Methoden im Detail betrachtet werden, ist ein gemeinsames Verständnis der Sicherheitsstufen entscheidend. In der Praxis werden dafür zwei Referenzrahmen häufig herangezogen: NIST SP 800-63B (heute in Revision 4) mit drei Authenticator Assurance Levels (AAL1-AAL3) und ISO/IEC 29115:2013 mit vier Levels of Assurance (LoA1-LoA4). Beide beschreiben vom Prinzip her dasselbe: wie hoch die Vertrauens- bzw. Sicherheitsstufe einer Authentisierung ist. Verwirrend ist nur, dass die Skalen unterschiedlich benannt und nummeriert sind. Das höchste Niveau ist daher je nach Referenzrahmen entweder **AAL3** oder **LoA4**.
 
 **AAL1** verlangt lediglich eine Einzel-Faktor-Authentisierung. Passwörter, SMS-OTPs oder einfache Token erfüllen diese Stufe. Das Sicherheitsniveau ist gering.
 
 **AAL2** erfordert zwei unterschiedliche Faktoren. Zusätzlich muss für Online-Dienste eine phishing-resistente Option angeboten werden. Cloud-Synced Passkeys, TOTP-Generatoren, Mobile Push (wie Mobile ID SIM oder App) und Multi-Faktor-OTP-Geräte erfüllen AAL2.
 
-**AAL3** ist das höchste Niveau. Es verlangt Public-Key-Kryptografie, ein nach FIPS 140 Level 2 oder höher validiertes Hardware-Modul, phishing-resistente Verfahren und einen nicht exportierbaren privaten Schlüssel. Zudem gilt eine Re-Authentisierung nach 15 Minuten Inaktivität. Nur wenige Authenticatoren erfüllen diese Anforderungen vollständig: FIPS-zertifizierte Security Keys (z.B. YubiKey 5 FIPS Series), bestimmte Smartcards und Hardware Security Modules.
+**AAL3** ist das höchste NIST-Niveau. Es verlangt phishing-resistente Public-Key-Kryptografie mit nicht exportierbarem privatem Schlüssel sowie zusätzliche Hardware-, Kryptografie- und Re-Authentisierungsanforderungen. Nur wenige Authenticatoren erfüllen diese Anforderungen vollständig: FIPS-zertifizierte Security Keys (z.B. YubiKey 5 FIPS Series), bestimmte Smartcards und Hardware Security Modules.
 
 ## Was sind Passkeys?
 
@@ -93,11 +93,11 @@ Dies ist die technische Grundlage für den geplanten Mobile ID Passkey Vault: Di
 
 Passkeys versprechen eine einfache User Experience. Die technische Realität hinter den Kulissen ist jedoch anspruchsvoll. Eine vollständige Passkey-Infrastruktur erfordert:
 
-Ein **WebAuthn-Backend** mit FIDO2-Server-Library, Attestation-Validierung, Credential-Management und sicherer Schlüsselspeicherung. Ein **Credential-Lifecycle-Management** für Registrierung, Deaktivierung, Wiederherstellung und die Verwaltung mehrerer Passkeys pro Benutzer. **Fallback-Mechanismen** für Benutzer ohne Passkey-fähiges Gerät oder bei fehlgeschlagener Authentisierung. **Compliance-Prüfungen** für regulierte Branchen, einschliesslich AAGUID-Validierung gegen die FIDO Metadata Service (MDS) Datenbank und FIPS-Zertifizierungsprüfung.
+Ein **WebAuthn-Backend** mit FIDO2-Server-Library, Attestation-Validierung, Credential-Management und sicherer Schlüsselspeicherung. Ein **Credential-Lifecycle-Management** für Registrierung, Deaktivierung, Wiederherstellung und die Verwaltung mehrerer Passkeys pro Benutzer. **[Fallback-Mechanismen](/oidc-integration-guide/passkey-authentication#passkey-only-vs-fallback)** für Benutzer ohne Passkey-fähiges Gerät oder bei fehlgeschlagener Authentisierung. **Compliance-Prüfungen** für regulierte Branchen, einschliesslich [AAGUID-Validierung](/oidc-integration-guide/passkey-authentication#rp-control-over-passkey-quality) gegen die FIDO Metadata Service (MDS) Datenbank und FIPS-Zertifizierungsprüfung.
 
 Mobile ID löst diese Komplexität: Relying Parties integrieren nicht die Passkey-Infrastruktur selbst, sondern den Mobile ID OIDC Service. Die Passkey-Registrierung und -Verwaltung findet zentral auf mobileid.ch statt. Ein Passkey wird einmal registriert und kann anschliessend bei allen angebundenen Relying Parties genutzt werden.
 
-Für Unternehmen bedeutet das eine Standard-OIDC-Integration mit konfigurierbaren ACR-Werten, automatischem Fallback auf SIM, App oder SMS und der Sicherheit eines Partners wie Swisscom, der diese Lösungen selbst zum Schutz hochkritischer Infrastrukturen einsetzt.
+Für Unternehmen bedeutet das eine Standard-OIDC-Integration mit [konfigurierbaren ACR-Werten](/oidc-integration-guide/passkey-authentication#passkey-acr-values), automatischem Fallback auf SIM, App oder SMS und der Sicherheit eines Partners wie Swisscom, der diese Lösungen selbst zum Schutz hochkritischer Infrastrukturen einsetzt.
 
 ## Sicherheitsprofil nach Nutzungskontext
 
@@ -141,7 +141,7 @@ Beim Gerätewechsel steckt der Benutzer die SIM einfach um. Das Konto bleibt erh
 
 Die Mobile ID App (iOS und Android) bietet neben biometrischer Authentisierung ein breites Spektrum an Zusatzfunktionen, die mit Passkeys nicht abbildbar sind:
 
-**Push-basierte Authentisierung** mit Biometrie oder Passcode als zweitem Faktor. **Geofencing** mit GPS-basierter Standortbestimmung und integrierter Jailbreak- und Mock-Service-Erkennung, die GPS-Spoofing erschwert. **Number Matching**, bei dem der Benutzer eine auf dem Bildschirm angezeigte Zahl in der App bestätigt. **Transaction Signing**, das Transaktionsdaten (z.B. "Bestätige die Überweisung von CHF 1'000 auf Konto XY") direkt auf dem Gerät anzeigt und die explizite Zustimmung des Benutzers erfordert. App-to-App-Wechsel ermöglicht in Banking-Szenarien den automatisierten Wechsel von der Fachapplikation zur Mobile ID App und zurück.
+**Push-basierte Authentisierung** mit Biometrie oder Passcode als zweitem Faktor. **Geofencing** mit GPS-basierter Standortbestimmung und integrierter Jailbreak- und Mock-Service-Erkennung, die GPS-Spoofing erschwert. **Number Matching**, bei dem der Benutzer eine auf dem Bildschirm angezeigte Zahl in der App bestätigt. **[Transaction Signing](/oidc-integration-guide/message-formats)**, das Transaktionsdaten (z.B. "Bestätige die Überweisung von CHF 1'000 auf Konto XY") direkt auf dem Gerät anzeigt und die explizite Zustimmung des Benutzers erfordert. App-to-App-Wechsel ermöglicht in Banking-Szenarien den automatisierten Wechsel von der Fachapplikation zur Mobile ID App und zurück.
 
 Die App basiert auf der Technologie von Futurae (ETH Zürich Spin-off) und nutzt das Trusted Execution Environment (TEE) des Geräts. Sie ist weltweit in freigegebenen Ländern über den App Store verfügbar.
 
@@ -167,7 +167,7 @@ Der Push-Schritt bleibt auf dem Smartphone. Am Desktop authentisiert sich der Be
 
 ## Mobile ID Authentication Levels: Granulare Steuerung über ACR-Werte
 
-Neben dem oben beschriebenen NIST-AAL-Referenzrahmen definiert Mobile ID eigene Authentication Levels (AL2–AL4) als ACR-Werte im OIDC Authorization Request. Diese Stufen steuern, welche Authentisierungsmethoden für einen Login zulässig sind, und sind nicht mit NIST AAL1–AAL3 zu verwechseln. Die vollständige ACR-Matrix ist im [OIDC Integration Guide](/oidc-integration-guide/getting-started#authentication-context-class-reference-acr) dokumentiert.
+Neben diesen externen Referenzrahmen definiert Mobile ID eigene Authentication Levels (AL2–AL4) als ACR-Werte im [OIDC Authorization Request](/oidc-integration-guide/getting-started#authorization-code-request). Diese Werte legen fest, welche Authentisierungsmethoden für einen Login erlaubt sind. Mobile ID orientiert sich dabei an der vierstufigen Logik aus ISO/IEC 29115. `AL4` bezeichnet entsprechend die höchste Mobile-ID-Sicherheitsstufe. Die vollständige ACR-Matrix ist im [OIDC Integration Guide](/oidc-integration-guide/getting-started#authentication-context-class-reference-acr) dokumentiert.
 
 <AcrLevels />
 
@@ -181,42 +181,33 @@ Der technische Rollout ist für Relying Parties denkbar einfach.
 
 ### Zentrale Registrierung auf mobileid.ch
 
-Benutzer verwalten ihre Passkeys über das MyMobileID Dashboard auf mobileid.ch/login. Dort können sie neue Keys hinzufügen, bestehende bearbeiten oder löschen. Die Passkeys werden auf der Domain m.mobileid.ch gespeichert und stehen anschliessend bei allen angebundenen Relying Parties zur Verfügung.
+Benutzer verwalten ihre Passkeys über das [MyMobileID Dashboard](/oidc-integration-guide/passkey-authentication#passkey-registration) auf mobileid.ch/login. Dort macht eine neue Kachel sichtbar, wo Passkeys zentral registriert und gepflegt werden. Die Passkeys werden auf der Domain m.mobileid.ch gespeichert und stehen anschliessend bei allen angebundenen Relying Parties zur Verfügung.
 
-Der Registrierungsablauf:
+Die neue Dashboard-Ansicht zeigt den Einstiegspunkt und die zentrale Verwaltung auf einen Blick:
 
-<ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="MyMobileID Dashboard: Mobile ID Passkey Kachel mit MANAGE PASSKEYS Button">
-<p><strong>1.</strong> Login auf mobileid.ch (Verifizierung via SMS-OTP zur Bestätigung der Mobilnummer).</p>
-<p><strong>2.</strong> Im Dashboard die Kachel "Mobile ID Passkey" anwählen und "MANAGE PASSKEYS" klicken.</p>
-<p><strong>3.</strong> "Add a passkey" wählen. Der native Browser-Dialog erscheint (Touch ID, Face ID oder Security Key).</p>
-<p><strong>4.</strong> Biometrische Bestätigung oder PIN-Eingabe am Authenticator.</p>
+<ScreenshotStep img="/release-notes/media/manage-passkeys-button.jpg" alt="MyMobileID Dashboard: Mobile ID Passkey Kachel mit MANAGE PASSKEYS Button">
+<p>Die Kachel <strong>Manage Passkeys</strong> ist der zentrale Einstiegspunkt für das neue Passkey-Feature in MyMobileID. Hier starten Benutzer die Registrierung und Verwaltung ihrer Passkeys.</p>
 </ScreenshotStep>
 
-<ScreenshotStep img="/release-notes/media/add-a-passkey.png" alt="Add a passkey: Nativer iOS-Dialog zum Speichern eines Passkeys auf m-lab.mobileid.ch">
-<p><strong>5.</strong> Der Passkey ist registriert und erhält eine eindeutige KeyRingID.</p>
-<p>Die KeyRingID (z.B. <code>MIDPK5VQ8JV1TGL</code>) ist die stabile Kennung einer Passkey-Registrierung. Für hohe Assurance-Szenarien (AL4) muss die Relying Party diese KeyRingID im <code>login_hint</code> übergeben, damit Mobile ID die korrekte Passkey-Bindung prüfen kann.</p>
-</ScreenshotStep>
-
-<ScreenshotStep img="/release-notes/media/passkey-management-list-passkeys.png" alt="Passkey-Management: Liste registrierter Passkeys mit Typ-Badges und KeyRingID">
-<p>Im Passkey-Management sieht der Benutzer alle registrierten Passkeys mit Typ-Kennzeichnung: Device-Bound Keys zeigen ein Stern-Badge, Cloud-Synced Keys zeigen "Synced" und "StepUp" Badges. Jeder Eintrag zeigt die KeyRingID, das Erstellungsdatum und die letzte Nutzung.</p>
+<ScreenshotStep img="/release-notes/media/manage-passkeys-2.jpg" alt="Passkey-Verwaltung in MyMobileID mit Liste registrierter Passkeys">
+<p>Nach dem Öffnen sehen Benutzer ihre bereits registrierten Passkeys in einer übersichtlichen Verwaltungsansicht und können ihr Passkey-Portfolio bei Bedarf erweitern oder pflegen.</p>
 </ScreenshotStep>
 
 <PasskeyRegistrationFlow />
 
 ### RP-Login via OIDC
 
-Wenn ein Benutzer bei einer Relying Party auf "Sign in with Mobile ID" klickt, erfolgt ein OIDC Authorization Code Flow:
+Für typische Login-Szenarien bei einer Relying Party steht im Dashboard neu auch der <strong>Mobile ID Check</strong> zur Verfügung. Damit können Benutzer ihre aktivierten Mobile ID Methoden in einem realistischen Authentisierungs-Use-Case testen:
 
-<ScreenshotStep img="/release-notes/media/sign-in-with-passkey.png" alt="Passkey-Login: Nativer iOS-Dialog zur Authentisierung mit Passkey auf mobileid.ch">
-<p><strong>1.</strong> Die RP leitet den Benutzer per Redirect zu Mobile ID weiter, mit dem gewünschten ACR-Wert im Authorization Request.</p>
-<p><strong>2.</strong> Mobile ID zeigt die Passkey-Authentisierungsseite ("Passkey oder FIDO2 Sicherheitsschlüssel").</p>
-<p><strong>3.</strong> Der native Browser-Dialog erscheint: "Sign in to mobileid.ch with your passkey".</p>
-<p><strong>4.</strong> Der Benutzer bestätigt per Biometrie oder Security Key.</p>
-<p><strong>5.</strong> Mobile ID validiert die Assertion und leitet mit Authorization Code zurück zur RP.</p>
-<p><strong>6.</strong> Die RP tauscht den Code gegen ID Token und Access Token.</p>
+<ScreenshotStep img="/release-notes/media/passkey-check-button.jpg" alt="MyMobileID Dashboard: Mobile ID Check Kachel mit TEST Button">
+<p>Die Kachel <strong>Mobile ID Check</strong> bietet einen einfachen Einstieg, um vorhandene Mobile ID Methoden wie SIM, App oder neu auch Passkey direkt im Dashboard zu testen.</p>
 </ScreenshotStep>
 
-Je nach konfiguriertem ACR-Wert wird der passende Flow ausgelöst. Bei `mid_al4_passkey` wird ausschliesslich ein Passkey akzeptiert. Bei `mid_al2_any` kann der Benutzer zwischen Passkey, SIM, App oder SMS wählen. Bei Fehlern oder fehlenden Passkeys kann die RP einen sicheren Fallback auf andere Methoden zulassen.
+<ScreenshotStep img="/release-notes/media/passkey-check-2.jpg" alt="Mobile ID Check mit Auswahl der verfügbaren Methoden App und Passkey">
+<p>Ist bereits mindestens ein Passkey registriert, erscheint Passkey als auswählbare Methode. So lässt sich die neue Login-Option vor dem produktiven Einsatz in einem typischen [Login-Flow](/oidc-integration-guide/passkey-authentication#authentication-flow-oidc) schnell validieren.</p>
+</ScreenshotStep>
+
+Je nach konfiguriertem [ACR-Wert](/oidc-integration-guide/passkey-authentication#passkey-acr-values) wird der passende Flow ausgelöst. Bei `mid_al4_passkey` wird ausschliesslich ein Passkey akzeptiert. Bei `mid_al2_any` kann der Benutzer zwischen Passkey, SIM, App oder SMS wählen. Bei Fehlern oder fehlenden Passkeys kann die RP einen sicheren [Fallback](/oidc-integration-guide/passkey-authentication#passkey-only-vs-fallback) auf andere Methoden zulassen.
 
 <PasskeyLoginFlow />
 

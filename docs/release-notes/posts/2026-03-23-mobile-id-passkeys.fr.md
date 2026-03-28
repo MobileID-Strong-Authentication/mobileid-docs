@@ -93,11 +93,11 @@ C'est le fondement technique du futur Mobile ID Passkey Vault : l'application Mo
 
 Les Passkeys promettent une expérience utilisateur simple. La réalité technique en coulisse est toutefois exigeante. Une infrastructure Passkey complète nécessite :
 
-Un **backend WebAuthn** avec bibliothèque serveur FIDO2, validation de l'attestation, gestion des credentials et stockage sécurisé des clés. Un **Credential Lifecycle Management** pour l'enregistrement, la désactivation, la récupération et la gestion de plusieurs Passkeys par utilisateur. Des **mécanismes de fallback** pour les utilisateurs sans appareil compatible Passkey ou en cas d'échec d'authentification. Des **vérifications de conformité** pour les secteurs réglementés, incluant la validation AAGUID contre la base de données FIDO Metadata Service (MDS) et la vérification de certification FIPS.
+Un **backend WebAuthn** avec bibliothèque serveur FIDO2, validation de l'attestation, gestion des credentials et stockage sécurisé des clés. Un **Credential Lifecycle Management** pour l'enregistrement, la désactivation, la récupération et la gestion de plusieurs Passkeys par utilisateur. Des **[mécanismes de fallback](/oidc-integration-guide/passkey-authentication#passkey-only-vs-fallback)** pour les utilisateurs sans appareil compatible Passkey ou en cas d'échec d'authentification. Des **vérifications de conformité** pour les secteurs réglementés, incluant la [validation AAGUID](/oidc-integration-guide/passkey-authentication#rp-control-over-passkey-quality) contre la base de données FIDO Metadata Service (MDS) et la vérification de certification FIPS.
 
 Mobile ID résout cette complexité : les Relying Parties n'intègrent pas l'infrastructure Passkey elles-mêmes, mais le service OIDC de Mobile ID. L'enregistrement et la gestion des Passkeys se font de manière centralisée sur mobileid.ch. Un Passkey est enregistré une seule fois et peut ensuite être utilisé auprès de toutes les Relying Parties connectées.
 
-Pour les entreprises, cela signifie une intégration OIDC standard avec des valeurs ACR configurables, un fallback automatique vers SIM, App ou SMS, et la fiabilité d'un partenaire comme Swisscom, qui utilise lui-même ces solutions pour protéger des infrastructures hautement critiques.
+Pour les entreprises, cela signifie une intégration OIDC standard avec des [valeurs ACR configurables](/oidc-integration-guide/passkey-authentication#passkey-acr-values), un fallback automatique vers SIM, App ou SMS, et la fiabilité d'un partenaire comme Swisscom, qui utilise lui-même ces solutions pour protéger des infrastructures hautement critiques.
 
 ## Profil de sécurité selon le contexte d'utilisation
 
@@ -141,7 +141,7 @@ Lors d'un changement d'appareil, l'utilisateur transfère simplement sa SIM. Le 
 
 L'application Mobile ID (iOS et Android) offre, en plus de l'authentification biométrique, un large éventail de fonctions complémentaires qui ne sont pas reproductibles avec les Passkeys :
 
-**Authentification par Push** avec biométrie ou code d'accès comme second facteur. **Geofencing** avec localisation GPS et détection intégrée de jailbreak et de services de simulation, rendant le GPS spoofing plus difficile. **Number Matching**, où l'utilisateur confirme dans l'application un numéro affiché à l'écran. **Transaction Signing**, qui affiche les données de transaction (par ex. « Confirmez le virement de CHF 1'000 sur le compte XY ») directement sur l'appareil et exige le consentement explicite de l'utilisateur. Le passage App-to-App permet dans les scénarios bancaires le basculement automatisé de l'application métier vers l'application Mobile ID et retour.
+**Authentification par Push** avec biométrie ou code d'accès comme second facteur. **Geofencing** avec localisation GPS et détection intégrée de jailbreak et de services de simulation, rendant le GPS spoofing plus difficile. **Number Matching**, où l'utilisateur confirme dans l'application un numéro affiché à l'écran. **[Transaction Signing](/oidc-integration-guide/message-formats)**, qui affiche les données de transaction (par ex. « Confirmez le virement de CHF 1'000 sur le compte XY ») directement sur l'appareil et exige le consentement explicite de l'utilisateur. Le passage App-to-App permet dans les scénarios bancaires le basculement automatisé de l'application métier vers l'application Mobile ID et retour.
 
 L'application repose sur la technologie de Futurae (spin-off de l'ETH Zurich) et utilise le Trusted Execution Environment (TEE) de l'appareil. Elle est disponible dans le monde entier, dans les pays autorisés, via l'App Store.
 
@@ -167,7 +167,7 @@ L'étape Push reste sur le smartphone. Sur le desktop, l'utilisateur s'authentif
 
 ## Mobile ID Authentication Levels : pilotage granulaire via les valeurs ACR
 
-En plus du cadre de référence NIST AAL décrit ci-dessus, Mobile ID définit ses propres Authentication Levels (AL2–AL4) comme valeurs ACR dans l'OIDC Authorization Request. Ces niveaux déterminent quelles méthodes d'authentification sont autorisées pour un login donné et ne doivent pas être confondus avec NIST AAL1–AAL3. La matrice ACR complète est documentée dans le [guide d'intégration OIDC](/oidc-integration-guide/getting-started#authentication-context-class-reference-acr).
+En plus de ces cadres de référence externes, Mobile ID définit ses propres Authentication Levels (AL2–AL4) comme valeurs ACR dans l'[OIDC Authorization Request](/oidc-integration-guide/getting-started#authorization-code-request). Ces valeurs déterminent quelles méthodes d'authentification sont autorisées pour un login donné. Mobile ID s'aligne ici sur la logique à quatre niveaux d'ISO/IEC 29115. `AL4` désigne donc le niveau de sécurité Mobile ID le plus élevé. La matrice ACR complète est documentée dans le [guide d'intégration OIDC](/oidc-integration-guide/getting-started#authentication-context-class-reference-acr).
 
 <AcrLevels />
 
@@ -181,42 +181,33 @@ Le déploiement technique est remarquablement simple pour les Relying Parties.
 
 ### Enregistrement centralisé sur mobileid.ch
 
-Les utilisateurs gèrent leurs Passkeys via le tableau de bord MyMobileID sur mobileid.ch/login. Ils peuvent y ajouter de nouvelles clés, modifier ou supprimer les clés existantes. Les Passkeys sont stockés sur le domaine m.mobileid.ch et sont ensuite disponibles auprès de toutes les Relying Parties connectées.
+Les utilisateurs gèrent leurs Passkeys via le [tableau de bord MyMobileID](/oidc-integration-guide/passkey-authentication#passkey-registration) sur mobileid.ch/login. Une nouvelle tuile indique immédiatement où les Passkeys peuvent être enregistrés et administrés de manière centralisée. Les Passkeys sont stockés sur le domaine m.mobileid.ch et sont ensuite disponibles auprès de toutes les Relying Parties connectées.
 
-Le processus d'enregistrement :
+Les nouvelles vues du tableau de bord montrent d'un coup d'oeil le point d'entrée et l'expérience de gestion centralisée :
 
-<ScreenshotStep img="/release-notes/media/mymobileid-dashboard-manage-passkeys-tile.png" alt="Tableau de bord MyMobileID : tuile Mobile ID Passkey avec bouton MANAGE PASSKEYS">
-<p><strong>1.</strong> Connexion sur mobileid.ch (vérification par SMS-OTP pour confirmer le numéro de mobile).</p>
-<p><strong>2.</strong> Dans le tableau de bord, sélectionner la tuile « Mobile ID Passkey » et cliquer sur « MANAGE PASSKEYS ».</p>
-<p><strong>3.</strong> Choisir « Add a passkey ». Le dialogue natif du navigateur apparaît (Touch ID, Face ID ou clé de sécurité).</p>
-<p><strong>4.</strong> Confirmation biométrique ou saisie du PIN sur l'authenticateur.</p>
+<ScreenshotStep img="/release-notes/media/manage-passkeys-button.jpg" alt="Tableau de bord MyMobileID : tuile Mobile ID Passkey avec bouton MANAGE PASSKEYS">
+<p>La tuile <strong>Manage Passkeys</strong> constitue le point d'entrée central de la nouvelle fonctionnalité Passkey dans MyMobileID. C'est ici que les utilisateurs démarrent l'enregistrement et la gestion de leurs Passkeys.</p>
 </ScreenshotStep>
 
-<ScreenshotStep img="/release-notes/media/add-a-passkey.png" alt="Add a passkey : dialogue natif iOS pour enregistrer un Passkey sur m-lab.mobileid.ch">
-<p><strong>5.</strong> Le Passkey est enregistré et reçoit un identifiant unique KeyRingID.</p>
-<p>La KeyRingID (par ex. <code>MIDPK5VQ8JV1TGL</code>) est l'identifiant stable d'un enregistrement Passkey. Pour les scénarios à haute assurance (AL4), la Relying Party doit transmettre cette KeyRingID dans le <code>login_hint</code> afin que Mobile ID puisse vérifier la liaison Passkey correcte.</p>
-</ScreenshotStep>
-
-<ScreenshotStep img="/release-notes/media/passkey-management-list-passkeys.png" alt="Gestion des Passkeys : liste des Passkeys enregistrés avec badges de type et KeyRingID">
-<p>Dans la gestion des Passkeys, l'utilisateur voit tous les Passkeys enregistrés avec leur indication de type : les Device-Bound Keys affichent un badge étoile, les Cloud-Synced Keys affichent les badges « Synced » et « StepUp ». Chaque entrée montre la KeyRingID, la date de création et la dernière utilisation.</p>
+<ScreenshotStep img="/release-notes/media/manage-passkeys-2.jpg" alt="Gestion des Passkeys dans MyMobileID avec la liste des Passkeys enregistrés">
+<p>Une fois la vue ouverte, les utilisateurs retrouvent leurs Passkeys déjà enregistrés dans un écran de gestion clair et peuvent compléter ou entretenir leur portefeuille de Passkeys si nécessaire.</p>
 </ScreenshotStep>
 
 <PasskeyRegistrationFlow />
 
 ### Connexion RP via OIDC
 
-Lorsqu'un utilisateur clique sur « Sign in with Mobile ID » chez une Relying Party, un flux OIDC Authorization Code se déclenche :
+Pour les scénarios de connexion typiques chez une Relying Party, le tableau de bord inclut désormais aussi le <strong>Mobile ID Check</strong>. Il permet aux utilisateurs de tester leurs méthodes Mobile ID activées dans un cas d'usage d'authentification réaliste :
 
-<ScreenshotStep img="/release-notes/media/sign-in-with-passkey.png" alt="Connexion par Passkey : dialogue natif iOS pour l'authentification par Passkey sur mobileid.ch">
-<p><strong>1.</strong> La RP redirige l'utilisateur vers Mobile ID, avec la valeur ACR souhaitée dans la requête d'autorisation.</p>
-<p><strong>2.</strong> Mobile ID affiche la page d'authentification par Passkey (« Passkey ou clé de sécurité FIDO2 »).</p>
-<p><strong>3.</strong> Le dialogue natif du navigateur apparaît : « Sign in to mobileid.ch with your passkey ».</p>
-<p><strong>4.</strong> L'utilisateur confirme par biométrie ou clé de sécurité.</p>
-<p><strong>5.</strong> Mobile ID valide l'assertion et redirige avec un Authorization Code vers la RP.</p>
-<p><strong>6.</strong> La RP échange le code contre un ID Token et un Access Token.</p>
+<ScreenshotStep img="/release-notes/media/passkey-check-button.jpg" alt="Tableau de bord MyMobileID : tuile Mobile ID Check avec bouton TEST">
+<p>La tuile <strong>Mobile ID Check</strong> offre un point d'entrée simple pour tester directement depuis le tableau de bord les méthodes Mobile ID disponibles, comme la SIM, l'App et désormais aussi le Passkey.</p>
 </ScreenshotStep>
 
-Selon la valeur ACR configurée, le flux approprié est déclenché. Avec `mid_al4_passkey`, seul un Passkey est accepté. Avec `mid_al2_any`, l'utilisateur peut choisir entre Passkey, SIM, App ou SMS. En cas d'erreur ou d'absence de Passkeys, la RP peut autoriser un fallback sécurisé vers d'autres méthodes.
+<ScreenshotStep img="/release-notes/media/passkey-check-2.jpg" alt="Mobile ID Check avec les méthodes sélectionnables App et Passkey">
+<p>Si au moins un Passkey a déjà été enregistré, Passkey apparaît comme méthode sélectionnable. La nouvelle option de connexion peut ainsi être validée rapidement dans un [flux de login](/oidc-integration-guide/passkey-authentication#authentication-flow-oidc) typique avant sa mise en production.</p>
+</ScreenshotStep>
+
+Selon la [valeur ACR](/oidc-integration-guide/passkey-authentication#passkey-acr-values) configurée, le flux approprié est déclenché. Avec `mid_al4_passkey`, seul un Passkey est accepté. Avec `mid_al2_any`, l'utilisateur peut choisir entre Passkey, SIM, App ou SMS. En cas d'erreur ou d'absence de Passkeys, la RP peut autoriser un [fallback](/oidc-integration-guide/passkey-authentication#passkey-only-vs-fallback) sécurisé vers d'autres méthodes.
 
 <PasskeyLoginFlow />
 

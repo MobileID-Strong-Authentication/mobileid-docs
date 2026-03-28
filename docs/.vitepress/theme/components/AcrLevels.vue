@@ -5,20 +5,20 @@ defineProps({
     default: () => [
       {
         acr: 'mid_al2_any',
-        label: 'UX-focused',
+        label: 'UX-focused / AL2',
         description: 'Passkey preferred, fallback to SIM/App/SMS',
         color: 'green',
       },
       {
         acr: 'mid_al4_any',
-        label: 'Security-focused',
+        label: 'Security-focused / AL4',
         description: 'Passkey preferred, fallback to SIM/App',
         color: 'darkgreen',
       },
       {
         acr: 'mid_al4_passkey',
-        label: 'Highest security / AAL3',
-        description: 'Passkey-only, no fallback',
+        label: 'Highest security / AL4',
+        description: 'Passkey-only, no fallback; can satisfy NIST AAL3 in suitable deployments',
         color: 'pink',
       },
     ],

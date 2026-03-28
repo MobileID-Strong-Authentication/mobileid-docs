@@ -22,6 +22,16 @@ import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher
 Microsoft Entra ID is the identity platform behind millions of enterprise environments. With <strong>External MFA now generally available</strong>, organizations can plug a trusted third-party authentication provider into Entra ID while keeping full control over Conditional Access policies. Mobile ID, operated by Swisscom, adds <a href="/rest-api-guide/introduction#mobile-id-sim---method">hardware-grade SIM authentication</a> and <a href="/rest-api-guide/introduction#mobile-id-app---method">app-based push with geofencing</a> to Entra ID logins that require MFA.
 </div>
 
+<div class="blog-video">
+  <video controls preload="metadata" poster="/release-notes/img/entra-eam-thumb.png">
+    <source src="/release-notes/media/entra-external-mfa-explainer.mp4" type="video/mp4" />
+  </video>
+  <div class="blog-video-caption">
+    <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    <span>Video summary (7 min). The key points of this article at a glance.</span>
+  </div>
+</div>
+
 ## What Is Microsoft Entra External MFA?
 
 Microsoft Entra ID is the central identity and access management platform for enterprises using Microsoft 365, Azure and thousands of connected applications. When users sign in, Entra ID evaluates **Conditional Access policies** to decide whether additional verification is needed and which method to use.
@@ -78,12 +88,12 @@ Mobile ID is operated by Swisscom from Switzerland. Organizations with data resi
 
 ### Where Mobile ID Adds Value Beyond Native MFA
 
-Microsoft Authenticator is a solid default for organizations that only need app-based push and TOTP. Mobile ID becomes relevant when that is not enough:
+Microsoft Authenticator is a solid default for organizations that only need app-based push and TOTP. Mobile ID adds clear value when requirements go beyond that baseline:
 
-- Parts of the workforce have no smartphone
-- Authentication needs to be tied to a geographic area
-- Users must explicitly confirm transaction details on their device
-- The organization wants a single MFA provider across Entra ID, custom applications, VPN and RADIUS
+- **Parts of the workforce do not use smartphones.**
+- **Authentication must be restricted to a defined geographic area.**
+- **Users need to confirm transaction details explicitly on their device.**
+- **One MFA provider should cover Entra ID, custom applications, VPN and RADIUS.**
 
 These are scenarios where an app-only approach hits its limits.
 
@@ -127,10 +137,32 @@ Microsoft has set a clear timeline. Organizations still using Custom Controls fo
 
 The migration can happen gradually. Microsoft supports running Custom Controls and External MFA **in parallel** during the transition period. A recommended approach:
 
-1. Configure Mobile ID as an External MFA method in the Entra admin center using the [configuration guide](/oidc-integration-guide/cloud-integration-guide#microsoft-entra-id)
-2. Create a parallel Conditional Access policy targeting a test group of users
-3. Validate the authentication flow with the test group
-4. Expand to all users and disable the legacy Custom Controls policy
+<div class="blog-step-list">
+  <div class="blog-step-card">
+    <div class="blog-step-number">1</div>
+    <div class="blog-step-body">
+      <p><span class="blog-step-title">Configure Mobile ID in Entra ID.</span> Set up Mobile ID as your External MFA method in the Entra admin center by following the <a href="/oidc-integration-guide/cloud-integration-guide#microsoft-entra-id">configuration guide</a>.</p>
+    </div>
+  </div>
+  <div class="blog-step-card">
+    <div class="blog-step-number">2</div>
+    <div class="blog-step-body">
+      <p><span class="blog-step-title">Create a parallel Conditional Access policy.</span> Target a defined test group first so the new flow can be introduced without affecting the full workforce immediately.</p>
+    </div>
+  </div>
+  <div class="blog-step-card">
+    <div class="blog-step-number">3</div>
+    <div class="blog-step-body">
+      <p><span class="blog-step-title">Validate the authentication flow with that group.</span> Confirm that policy evaluation, the redirect to Mobile ID and the successful MFA return all work as expected.</p>
+    </div>
+  </div>
+  <div class="blog-step-card">
+    <div class="blog-step-number">4</div>
+    <div class="blog-step-body">
+      <p><span class="blog-step-title">Roll out broadly and retire the legacy policy.</span> Expand the policy to all intended users and then disable the old Custom Controls configuration.</p>
+    </div>
+  </div>
+</div>
 
 ::: tip
 If you are new to Mobile ID and considering it as your External MFA provider, Swisscom handles the [client onboarding](/oidc-integration-guide/getting-started) process. You will receive the Application ID, Client ID and Discovery URL needed to configure External MFA in Entra ID.
@@ -138,13 +170,28 @@ If you are new to Mobile ID and considering it as your External MFA provider, Sw
 
 ## How to Get Started
 
-Setting up Mobile ID as an External MFA provider in Entra ID requires three things:
+Setting up Mobile ID as an External MFA provider in Entra ID requires three prerequisites:
 
-| | Prerequisite | Details |
-|---|---|---|
-| 1 | **Mobile ID onboarding** | Contact Swisscom to receive your integration credentials ([getting started](/oidc-integration-guide/getting-started)) |
-| 2 | **Entra ID P1 or P2 subscription** | Conditional Access enabled, licenses assigned to the targeted users |
-| 3 | **Entra ID admin account** | Global Administrator or Privileged Role Administrator for the initial setup |
+<div class="blog-step-list">
+  <div class="blog-step-card">
+    <div class="blog-step-number">1</div>
+    <div class="blog-step-body">
+      <p><span class="blog-step-title">Complete the Mobile ID onboarding.</span> Contact Swisscom to receive your integration credentials and complete the onboarding process via <a href="/oidc-integration-guide/getting-started">getting started</a>.</p>
+    </div>
+  </div>
+  <div class="blog-step-card">
+    <div class="blog-step-number">2</div>
+    <div class="blog-step-body">
+      <p><span class="blog-step-title">Use an Entra ID P1 or P2 subscription.</span> Conditional Access must be enabled, and the relevant users must have the required licenses.</p>
+    </div>
+  </div>
+  <div class="blog-step-card">
+    <div class="blog-step-number">3</div>
+    <div class="blog-step-body">
+      <p><span class="blog-step-title">Prepare an Entra ID admin account.</span> The initial setup requires either the Global Administrator role or the Privileged Role Administrator role.</p>
+    </div>
+  </div>
+</div>
 
 The step-by-step configuration is documented in the [Cloud Integration Guide](/oidc-integration-guide/cloud-integration-guide#microsoft-entra-id), including Conditional Access policy setup, admin consent, and optional steps to prioritize Mobile ID over Microsoft Authenticator.
 
@@ -156,11 +203,6 @@ The step-by-step configuration is documented in the [Cloud Integration Guide](/o
 
 With External MFA now generally available in Microsoft Entra ID, organizations no longer have to choose between centralized identity management and specialized authentication. Entra ID stays the policy engine. Mobile ID delivers the second factor, through SIM or App, depending on the use case.
 
-What this means in practice:
-
-- **One MFA provider** for Entra ID, web applications, VPN and RADIUS environments
-- **Every device type covered**, from smartphones to basic phones
-- **Swiss-operated infrastructure** with standards-based OIDC integration
-- **Future-proof**, since External MFA replaces the deprecated Custom Controls and Mobile ID continues to evolve with new capabilities like the [Passkey Vault](/release-notes/posts/2026-03-30-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault)
+In practice, this gives organizations one MFA provider for Entra ID, web applications, VPN and RADIUS environments while covering every device type from smartphones to basic phones. It combines Swiss-operated infrastructure with standards-based OIDC integration and creates a future-ready path as External MFA replaces deprecated Custom Controls and Mobile ID continues to evolve with new capabilities such as the [Passkey Vault](/release-notes/posts/2026-03-30-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault).
 
 For questions about Mobile ID integrations, reach out to [Backoffice.Security@swisscom.com](mailto:Backoffice.Security@swisscom.com). For general information about the service, visit [mobileid.ch](https://www.mobileid.ch/en).

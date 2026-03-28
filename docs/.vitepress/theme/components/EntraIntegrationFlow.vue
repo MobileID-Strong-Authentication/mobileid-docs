@@ -85,11 +85,6 @@ function startAnimation() {
         <div class="entra-flow-sublabel">MFA satisfied, token issued</div>
       </div>
     </div>
-
-    <div class="entra-flow-protocol" :class="{ 'entra-flow-protocol--active': phase >= 3 }">
-      <span class="entra-flow-protocol-badge">OpenID Connect</span>
-      <span class="entra-flow-protocol-text">Standards-based, no proprietary integration required</span>
-    </div>
   </div>
 </template>
 
@@ -190,35 +185,6 @@ function startAnimation() {
 
 .entra-flow-arrow--active {
   opacity: 1;
-}
-
-.entra-flow-protocol {
-  text-align: center;
-  margin-top: 8px;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-.entra-flow-protocol--active {
-  opacity: 1;
-}
-
-.entra-flow-protocol-badge {
-  display: inline-block;
-  background: var(--blog-green);
-  color: #fff;
-  font-size: 0.65em;
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 10px;
-  margin-right: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.entra-flow-protocol-text {
-  font-size: 0.7em;
-  color: var(--blog-text-muted);
 }
 
 @media (max-width: 600px) {

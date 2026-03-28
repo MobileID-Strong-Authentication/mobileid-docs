@@ -29,7 +29,7 @@ import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher
 <LanguageSwitcher />
 
 <div class="blog-lead">
-Microsoft Entra ID is the identity platform behind millions of enterprise environments. With <strong>External MFA now generally available</strong>, organizations can plug a trusted third-party authentication provider into Entra ID while keeping full control over Conditional Access policies. Mobile ID, operated by Swisscom, combines <a href="/rest-api-guide/introduction#mobile-id-sim---method">hardware-grade SIM authentication</a>, <a href="/rest-api-guide/introduction#mobile-id-app---method">app-based push with geofencing</a>, and a broader OIDC ecosystem that now also includes <a href="/oidc-integration-guide/passkey-authentication">Mobile ID Passkeys</a>. In the Entra External MFA journey, Entra consumes the provider result while Mobile ID runs the second-factor experience.
+Microsoft Entra ID is the identity platform behind millions of enterprise environments. With <strong>External MFA now generally available</strong>, organizations can plug a trusted third-party authentication provider into Entra ID while keeping full control over Conditional Access policies. Mobile ID, operated by Swisscom, combines <a href="/rest-api-guide/introduction#mobile-id-sim---method">hardware-grade SIM authentication</a>, <a href="/rest-api-guide/introduction#mobile-id-app---method">app-based push</a>, shared controls such as number matching and transaction signing, differentiated geofencing options, and a broader OIDC ecosystem that now also includes <a href="/oidc-integration-guide/passkey-authentication">Mobile ID Passkeys</a>. In the Entra External MFA journey, Entra consumes the provider result while Mobile ID runs the second-factor experience.
 </div>
 
 <div class="blog-video">
@@ -86,7 +86,7 @@ The two factors are the physical SIM card (possession) and the personal Mobile I
 
 ### App-Based Authentication: Beyond Simple Push
 
-The [Mobile ID App](/rest-api-guide/introduction#mobile-id-app---method) for iOS and Android goes well beyond standard push notifications. Users can authenticate with fingerprint or face recognition. [Geofencing](/oidc-integration-guide/getting-started#authentication-context-class-reference-acr) restricts authentication to specific geographic areas, with built-in jailbreak and GPS spoofing detection. Number matching lets the user confirm a code displayed on screen, which prevents MFA fatigue attacks. And [transaction signing](/oidc-integration-guide/message-formats) displays the details of a transaction directly on the device (e.g. "Confirm the transfer of CHF 1,000 to account XY") so the user gives explicit consent.
+The [Mobile ID App](/rest-api-guide/introduction#mobile-id-app---method) for iOS and Android goes well beyond standard push notifications. Users can authenticate with fingerprint or face recognition. **Number matching** and **[transaction signing](/oidc-integration-guide/message-formats)** are available with both Mobile ID SIM and Mobile ID App. On the App, these capabilities are combined with smartphone-native UX and biometrics. **App-based geofencing** uses GPS-based location determination plus built-in jailbreak and mock-service detection, which makes GPS spoofing more difficult. In supported Swisscom SIM scenarios, geofencing is also possible via the mobile-network location mechanism.
 
 The app is built on technology from Futurae, an ETH Zurich spin-off, and stores keys in the device's Trusted Execution Environment (TEE).
 

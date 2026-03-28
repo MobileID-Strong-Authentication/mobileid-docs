@@ -757,7 +757,8 @@ In case a user has a too low location confidence score, the following points sho
 ::: info Geofencing Service Limitations
 - Geofencing information is given without any guarantee and with the exclusion of any legal liability.
 - At the time of writing only MobileID App or Swisscom Mobile ID SIM cards support location data.
-- For the MobileID App, the user must have the geofencing toggle enabled and location services permitted. Both Android and iOS App version 1.2.0 or higher support geofencing.
+- MobileID App geofencing uses GPS-based location together with device and OS integrity signals. For the MobileID App, the user must have the geofencing toggle enabled and location services permitted. Both Android and iOS App version 1.2.0 or higher support geofencing.
+- Supported Swisscom Mobile ID SIM scenarios use mobile-network location data. Availability depends on SIM support and on current network-provided location information.
 :::
 
 
@@ -1349,7 +1350,7 @@ Example usage (code snippet from the MSS Signature Request):
 
 Mobile ID App screens can present the Data-To-Be-Displayed (DTBD) in two formats.
 Use **Classic DTBD** for short confirmations and when you must support SIM users. Keep messages concise and always include the “DTBD Prefix” (refer to chapter 2.1).
-Use **Transaction Approval** when readability matters (e.g., PSD2 payments, contract consent, step up login verification). Force the App method with Device LoA4, keep within byte limits, and generate the escaped JSON programmatically.
+Use **Transaction Approval** when readability matters (e.g., PSD2 payments, contract consent, step up login verification). This is an App-specific presentation format, not the only way to do transaction signing with Mobile ID. Force the App method with Device LoA4, keep within byte limits, and generate the escaped JSON programmatically.
 
 1. Classic DTBD (single text line) uses plain UTF-8 string that is also signed (DTBS).
 
@@ -1360,7 +1361,7 @@ Length limited and no formatting options.
 ![app-display-utf8](/img/app-display-utf8.png)
 
 
-2.	Transaction Approval (key/value pairs) is a structured App-only format that renders a title (type) and one or more key and value rows for improved readability.
+2.	Transaction Approval (key/value pairs) is a structured App-only presentation format that renders a title (type) and one or more key and value rows for improved readability. SIM users can still perform transaction signing with the classic DTBD format.
 
 Approve/Cancel becomes active only after the user scrolls to the end if content exceeds one screen.
 
@@ -1402,7 +1403,7 @@ Use `MimeType = "text/plain"` and place the “DTBD Prefix”.
 
 #### Transaction Approval (key/value pairs)
 
-A structured DTBD that the Mobile ID App renders as a title and rows of key/value pairs. If content overflows, the user must scroll to the bottom; only then are Approve/Cancel enabled.
+A structured DTBD that the Mobile ID App renders as a title and rows of key/value pairs. This section describes the App-specific Transaction Approval presentation format; the broader transaction-signing capability also exists for SIM via classic DTBD. If content overflows, the user must scroll to the bottom; only then are Approve/Cancel enabled.
 
 SIM does not support this format. Always select an App profile (e.g., `Device-LoA4`).
 
@@ -2162,5 +2163,3 @@ The lines highlighted in pink are optional Profile Query Extension parameters (s
 ```
 
 :::
-
-

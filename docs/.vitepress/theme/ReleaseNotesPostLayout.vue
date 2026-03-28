@@ -1,5 +1,6 @@
 <script setup>
 import { useData } from 'vitepress'
+import LegalFooter from './components/LegalFooter.vue'
 
 const { frontmatter } = useData()
 
@@ -36,5 +37,7 @@ function formatDate(dateStr) {
     <div class="blog-content">
       <Content />
     </div>
+
+    <LegalFooter />
   </div>
 </template>

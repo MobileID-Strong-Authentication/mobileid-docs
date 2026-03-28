@@ -1,5 +1,6 @@
 <script setup>
 import { data as posts } from './release-notes.data.mts'
+import LegalFooter from './components/LegalFooter.vue'
 
 function formatDate(dateStr) {
   if (!dateStr) return ''
@@ -48,5 +49,7 @@ function formatDate(dateStr) {
         </div>
       </a>
     </div>
+
+    <LegalFooter />
   </div>
 </template>

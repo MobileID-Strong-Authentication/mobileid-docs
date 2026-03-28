@@ -246,7 +246,14 @@ export default withMermaid(defineConfig({
       { text: 'REST API Guide', link: '/rest-api-guide/introduction' },
       { text: 'OIDC Integration Guide', link: '/oidc-integration-guide/introduction' },
       { text: 'RADIUS Gateway Guide', link: '/radius-interface-gateway-guide/introduction' },
-      { text: 'Release Notes', link: '/release-notes/' }
+      { text: 'Release Notes', link: '/release-notes/' },
+      {
+        text: 'Legal',
+        items: [
+          { text: 'Imprint', link: '/legal/imprint' },
+          { text: 'Privacy Notice', link: '/legal/privacy' }
+        ]
+      }
     ],
 
     sidebar: {
@@ -278,7 +285,10 @@ export default withMermaid(defineConfig({
         },
         {
           text: '',
-          items: [{ text: 'Imprint', link: '/rest-api-guide/imprint' }]
+          items: [
+            { text: 'Imprint', link: '/legal/imprint' },
+            { text: 'Privacy Notice', link: '/legal/privacy' }
+          ]
         }
 
       ],
@@ -297,7 +307,10 @@ export default withMermaid(defineConfig({
         },
         {
           text: '',
-          items: [{ text: 'Imprint', link: '/oidc-integration-guide/imprint' }]
+          items: [
+            { text: 'Imprint', link: '/legal/imprint' },
+            { text: 'Privacy Notice', link: '/legal/privacy' }
+          ]
         }
       ],
 
@@ -315,7 +328,10 @@ export default withMermaid(defineConfig({
         },
         {
           text: '',
-          items: [{ text: 'Imprint', link: '/radius-interface-gateway-guide/imprint' }]
+          items: [
+            { text: 'Imprint', link: '/legal/imprint' },
+            { text: 'Privacy Notice', link: '/legal/privacy' }
+          ]
         }
       ]
 

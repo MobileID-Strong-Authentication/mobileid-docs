@@ -117,7 +117,7 @@ Das sind Szenarien, in denen ein reiner App-Ansatz an seine Grenzen stösst.
 
 ## Unternehmens-Anwendungsfälle
 
-External MFA mit Mobile ID adressiert ein breites Spektrum von Unternehmensszenarien. SIM und App decken die breitesten Out-of-Band-Enterprise-Journeys ab. Passkeys ergänzen browser-zentrierte Journeys dort, wo WebAuthn-Unterstützung Ende-zu-Ende verfügbar ist.
+Mobile ID adressiert ein breites Spektrum von Unternehmensszenarien über unterschiedliche Integrationsmodelle. SIM und App decken die breitesten Out-of-Band-Enterprise-Journeys ab. Passkeys ergänzen browser-zentrierte Journeys dort, wo WebAuthn-Unterstützung Ende-zu-Ende verfügbar ist.
 
 <EntraUseCaseCards />
 
@@ -125,7 +125,7 @@ External MFA mit Mobile ID adressiert ein breites Spektrum von Unternehmensszena
 
 Das häufigste Szenario: Absicherung des Zugangs zu Outlook, Teams, SharePoint und anderen Microsoft 365-Anwendungen. Wenn eine Conditional Access Policy MFA verlangt, authentisieren sich Mitarbeitende über Mobile ID anstelle von oder ergänzend zu Microsoft Authenticator.
 
-Das ist besonders wertvoll für Organisationen, die einen **einzigen MFA-Anbieter über alle Anwendungen hinweg** wollen, nicht nur für Microsoft-Dienste. Da Mobile ID [Standard-OIDC](/oidc-integration-guide/introduction) verwendet, funktionieren die gleichen Authentisierungsmethoden für Entra ID, eigene Webanwendungen, VPN-Zugang und mehr.
+Das ist besonders wertvoll für Organisationen, die einen **einzigen MFA-Anbieter über alle Anwendungen hinweg** wollen, nicht nur für Microsoft-Dienste. Die Mobile ID-Authentisierungsmethoden — SIM, App und Passkeys — stehen über verschiedene Integrationsmodelle zur Verfügung: als Entra External MFA-Anbieter, über [Standard-OIDC](/oidc-integration-guide/introduction) für eigene Webanwendungen und via [RADIUS Interface Gateway](/radius-interface-gateway-guide/introduction) für VPN- und Netzwerkzugang.
 
 ### VPN und Remote Access
 
@@ -206,7 +206,7 @@ Die Einrichtung von Mobile ID als External MFA-Anbieter in Entra ID erfordert dr
   <div class="blog-step-card">
     <div class="blog-step-number">3</div>
     <div class="blog-step-body">
-      <p><span class="blog-step-title">Ein Entra ID-Administratorkonto vorbereiten.</span> Für die Ersteinrichtung ist die Rolle Global Administrator oder Privileged Role Administrator erforderlich.</p>
+      <p><span class="blog-step-title">Ein Entra ID-Administratorkonto vorbereiten.</span> Für die Konfiguration der externen MFA-Methode und der Conditional Access Policies ist mindestens die Rolle Authentication Policy Administrator erforderlich. Für die Erteilung der Admin-Zustimmung für die Anbieteranwendung wird mindestens die Rolle Privileged Role Administrator benötigt.</p>
     </div>
   </div>
 </div>

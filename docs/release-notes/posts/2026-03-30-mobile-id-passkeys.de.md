@@ -229,4 +229,4 @@ Unternehmen profitieren von einer Standard-OIDC-Integration, Schweizer Datenhalt
 
 *Mobile ID: die richtige Methode für jedes Szenario. Alles aus einem Ökosystem.*
 
-Wenn Sie Ihren Use Case besprechen möchten, kontaktieren Sie uns über [swisscom.ch/mobileid](https://www.swisscom.ch/mobileid).
+Bei Fragen zu Mobile ID Integrationen wenden Sie sich an [Backoffice.Security@swisscom.com](mailto:Backoffice.Security@swisscom.com). Allgemeine Informationen zum Service finden Sie auf [mobileid.ch](https://www.mobileid.ch/de).

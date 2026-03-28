@@ -75,6 +75,24 @@ function getAlternatePages(relativePath: string) {
   })
 }
 
+function getFrontmatterKeywords(frontmatter: Record<string, any>): string[] {
+  const rawKeywords = frontmatter.keywords
+  if (Array.isArray(rawKeywords)) {
+    return rawKeywords
+      .map((keyword) => String(keyword).trim())
+      .filter(Boolean)
+  }
+
+  if (typeof rawKeywords === 'string') {
+    return rawKeywords
+      .split(',')
+      .map((keyword) => keyword.trim())
+      .filter(Boolean)
+  }
+
+  return []
+}
+
 // https://vitepress.dev/reference/site-config
 export default withMermaid(defineConfig({
   title: 'Mobile ID docs',
@@ -144,6 +162,7 @@ export default withMermaid(defineConfig({
       ? toAbsoluteUrl(pageData.frontmatter.thumbnail)
       : undefined
     const isReleaseNotesPost = pageData.frontmatter.layout === RELEASE_NOTES_POST_LAYOUT
+    const keywords = getFrontmatterKeywords(pageData.frontmatter)
     const head: HeadConfig[] = [
       ['link', { rel: 'canonical', href: canonicalUrl }],
       ['meta', { property: 'og:title', content: ogTitle }],
@@ -182,6 +201,14 @@ export default withMermaid(defineConfig({
 
       head.push(['meta', { property: 'article:section', content: 'Release Notes' }])
 
+      if (keywords.length > 0) {
+        head.push(['meta', { name: 'keywords', content: keywords.join(', ') }])
+
+        for (const keyword of keywords) {
+          head.push(['meta', { property: 'article:tag', content: keyword }])
+        }
+      }
+
       if (alternates.length > 1) {
         const currentAlternate = alternates.find((alternate) => alternate.lang === lang)
         const xDefault = alternates.find((alternate) => alternate.lang === 'en') ?? currentAlternate
@@ -211,6 +238,7 @@ export default withMermaid(defineConfig({
         datePublished: publishedDate,
         inLanguage: HREFLANG_BY_LANG[lang],
         articleSection: 'Release Notes',
+        keywords: keywords.length > 0 ? keywords : undefined,
         image: socialImage ? [socialImage] : undefined,
         author: pageData.frontmatter.author
           ? {

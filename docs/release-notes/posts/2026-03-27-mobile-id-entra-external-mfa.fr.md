@@ -2,9 +2,18 @@
 title: "Mobile ID et Microsoft Entra ID : un MFA renforcé avec External Authentication"
 date: 2026-03-27
 author: Mobile ID Team
-description: "Microsoft Entra External MFA est désormais disponible en version générale. Découvrez comment Mobile ID s'intègre en tant que fournisseur External MFA de confiance, apportant l'authentification basée sur la SIM et sur l'App à votre environnement Entra ID."
+description: "Microsoft Entra External MFA est disponible en version générale. Découvrez comment Mobile ID ajoute un MFA par SIM et par App pour Entra ID, le VPN, les applications web et les équipes hybrides."
 thumbnail: /release-notes/img/entra-eam-thumb.png
 lang: fr
+keywords:
+  - Microsoft Entra External MFA
+  - Mobile ID
+  - fournisseur External MFA
+  - MFA Entra ID
+  - Conditional Access
+  - MFA par SIM
+  - MFA par App
+  - MFA VPN
 readingTime: 10
 layout: release-notes-post
 ---

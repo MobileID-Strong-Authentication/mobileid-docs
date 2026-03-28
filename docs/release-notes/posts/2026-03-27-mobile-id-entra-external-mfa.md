@@ -1,6 +1,6 @@
 ---
 title: "Mobile ID and Microsoft Entra ID: Stronger MFA with External Authentication"
-date: 2026-03-28
+date: 2026-03-27
 author: Mobile ID Team
 description: "Microsoft Entra External MFA is now generally available. Learn how Mobile ID integrates as a trusted external MFA provider, bringing SIM-based, app-based and passkey authentication to your Entra ID environment."
 thumbnail: /release-notes/img/entra-eam-thumb.png
@@ -73,7 +73,7 @@ The app is built on technology from Futurae (ETH Zurich spin-off) and uses the d
 
 Mobile ID also supports [FIDO2 passkeys](/oidc-integration-guide/passkey-authentication) for phishing-resistant authentication. Passkeys are cryptographically bound to the domain, making them immune to URL spoofing attacks. Users register their passkeys centrally on [mobileid.ch](https://mobileid.ch/login) and can use them across all connected relying parties.
 
-For a detailed look at passkeys and their role in the Mobile ID ecosystem, see the companion article: [Mobile ID Passkeys: Phishing-Resistant Authentication for Browser Scenarios](/release-notes/posts/2026-03-23-mobile-id-passkeys).
+For a detailed look at passkeys and their role in the Mobile ID ecosystem, see the companion article: [Mobile ID Passkeys: Phishing-Resistant Authentication for Browser Scenarios](/release-notes/posts/2026-03-30-mobile-id-passkeys).
 
 ### Swiss Operation and Data Residency
 
@@ -151,7 +151,7 @@ For enterprises, this means:
 - **One MFA provider** for Entra ID, web applications, VPN and RADIUS environments
 - **Every device covered** — from smartphones to basic phones, from desktops to kiosk terminals
 - **Swiss-operated** infrastructure with standards-based OIDC integration
-- **Future-proof** — External MFA replaces the deprecated Custom Controls, and Mobile ID continues to evolve with new capabilities like the [Passkey Vault](/release-notes/posts/2026-03-23-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault)
+- **Future-proof** — External MFA replaces the deprecated Custom Controls, and Mobile ID continues to evolve with new capabilities like the [Passkey Vault](/release-notes/posts/2026-03-30-mobile-id-passkeys#roadmap-the-mobile-id-passkey-vault)
 
 **The right authentication method for every scenario. Seamlessly integrated into Microsoft Entra ID.**
 

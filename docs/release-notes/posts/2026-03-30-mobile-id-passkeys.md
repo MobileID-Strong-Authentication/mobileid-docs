@@ -1,6 +1,6 @@
 ---
 title: "Mobile ID Passkeys: Phishing-Resistant Authentication for Browser Scenarios"
-date: 2026-03-23
+date: 2026-03-30
 author: Mobile ID Team
 description: "Passkeys enable phishing-resistant logins via biometrics in under 3 seconds. Mobile ID integrates them natively into the OIDC ecosystem and shows why SIM and App remain indispensable."
 thumbnail: /release-notes/img/passkeys-thumb.png

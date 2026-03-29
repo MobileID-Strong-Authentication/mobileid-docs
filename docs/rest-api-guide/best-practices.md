@@ -58,7 +58,7 @@ The key validation aspects are as follows:
 2. **Validate the Mobile User’s X.509 Certificate**
    - Ensure the user certificate chains up to a trusted root CA contained in your local TrustStore.
    - The client should only trust certificates that link to a trust anchor matching the expected Swisscom Mobile ID CA.
-   - Your TrustStore should only contain the relevant root CA certificate (see **[Root CA Certificates](/rest-api-guide/root-ca-certs.md)**).
+   - Your TrustStore should only contain the relevant root CA certificate (see **[Root CA Certificates](/rest-api-guide/root-ca-certs)**).
 
 3. **Verify the Digital Signature**
    - Confirm that the received digital signature is cryptographically valid.

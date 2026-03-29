@@ -109,8 +109,8 @@
 - Release Notes Overview
   https://docs.mobileid.ch/release-notes/
 
-- Mobile ID Passkeys Launch (2026-03-23)
-  https://docs.mobileid.ch/release-notes/posts/2026-03-23-mobile-id-passkeys.html
+- Mobile ID Passkeys Launch (2026-03-30)
+  https://docs.mobileid.ch/release-notes/posts/2026-03-30-mobile-id-passkeys.html
 
 
 ## Additional resources

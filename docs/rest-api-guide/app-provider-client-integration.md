@@ -8,7 +8,7 @@ Before using the Swisscom Mobile ID web service, some initial provisioning steps
 
 1. **The Mobile ID customer (your company) has an agreement with Swisscom:**
    - **Connectivity** (Internet or [EC](https://www.swisscom.ch/en/business/enterprise/offer/wireline/enterprise-connect.html)) between the **AP** and **Mobile ID** has been established.
-   - The customer has delivered the **X.509 client certificate** to Swisscom (see [Create X509 Client Certificates](/rest-api-guide/create-client-certs.md)).
+   - The customer has delivered the **X.509 client certificate** to Swisscom (see [Create X509 Client Certificates](/rest-api-guide/create-client-certs)).
 
 ::: warning Firewall Whitelisting
 The AP’s public source IP address (or range) must be whitelisted in the **Swisscom Firewall**. Contact Swisscom to request whitelisting.
@@ -109,7 +109,7 @@ A certificate-based mutual authentication when accessing the Mobile ID web servi
   - Authentication is denied if the client sends a bag with the full certificate chain.
 
 - The Enhanced Key Usage value of client certificates must include Client Authentication (`1.3.6.1.5.5.7.3.2`).
-  - See **[Create X509 Client Certificates](/rest-api-guide/create-client-certs.md)** for examples of creating self-signed certificates.
+  - See **[Create X509 Client Certificates](/rest-api-guide/create-client-certs)** for examples of creating self-signed certificates.
 
 ::: danger
 All requests to the Mobile ID service must originate only from servers that you control.
@@ -123,7 +123,6 @@ Never send requests directly from client-side code such as mobile apps or JavaSc
 ::: info
 Get the root certificate from https://www.swisssign.com/en/support/faq.html
 :::
-
 
 
 

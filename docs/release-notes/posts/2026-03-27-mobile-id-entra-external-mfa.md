@@ -38,7 +38,7 @@ Microsoft Entra ID is the identity platform behind millions of enterprise enviro
   </video>
   <div class="blog-video-caption">
     <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    <span>Video summary (7 min). The key points of this article at a glance.</span>
+    <span>This explainer video was created with Google NotebookLM based on the Mobile ID article.</span>
   </div>
 </div>
 

@@ -31,7 +31,7 @@ Microsoft bloque chaque jour environ 7'000 attaques par mot de passe par seconde
   </video>
   <div class="blog-video-caption">
     <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    <span>Résumé vidéo (7 min) — Les points clés de cet article en un coup d'œil.</span>
+    <span>Cette vidéo explicative a été créée avec Google NotebookLM à partir de l'article Mobile ID.</span>
   </div>
 </div>
 

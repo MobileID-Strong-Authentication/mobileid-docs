@@ -38,7 +38,7 @@ Microsoft Entra ID è la piattaforma di identità alla base di milioni di ambien
   </video>
   <div class="blog-video-caption">
     <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    <span>Sintesi video (7 min). I punti chiave di questo articolo a colpo d'occhio.</span>
+    <span>Questo video esplicativo è stato creato con Google NotebookLM sulla base dell'articolo Mobile ID.</span>
   </div>
 </div>
 

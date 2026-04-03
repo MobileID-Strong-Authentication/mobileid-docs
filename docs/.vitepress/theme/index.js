@@ -1,7 +1,7 @@
 import DefaultTheme from 'vitepress/theme'
 import mediumZoom from 'medium-zoom'
 import { h, onMounted, watch, nextTick } from 'vue'
-import { useRoute, useData } from 'vitepress'
+import { useRoute } from 'vitepress'
 import { theme as openApiTheme, useOpenapi } from 'vitepress-openapi/client'
 import 'vitepress-openapi/dist/style.css'
 import specYaml from '../../public/openapi-mobileid.yaml?raw'
@@ -15,20 +15,15 @@ export default {
   extends: DefaultTheme,
   Layout() {
     return h({
-      setup() {
-        const { frontmatter } = useData()
-        return () => {
-          const layout = frontmatter.value.layout
-          if (layout === 'release-notes-index') return h(ReleaseNotesLayout)
-          if (layout === 'release-notes-post') return h(ReleaseNotesPostLayout)
-          return h(DefaultTheme.Layout, null, {
-            'doc-after': () => h(DocFeedback),
-          })
-        }
-      }
+      setup: () => () => h(DefaultTheme.Layout, null, {
+        'doc-after': () => h(DocFeedback),
+      }),
     })
   },
   async enhanceApp({ app }) {
+    app.component('release-notes-index', ReleaseNotesLayout)
+    app.component('release-notes-post', ReleaseNotesPostLayout)
+
     useOpenapi({
       spec: specYaml,
       config: {

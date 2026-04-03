@@ -43,23 +43,14 @@ export default {
       })
     }
 
-    const updatePageClass = () => {
-      document.documentElement.classList.toggle(
-        'rn-page',
-        route.path.startsWith('/release-notes/')
-      )
-    }
-
     onMounted(() => {
       initZoom()
-      updatePageClass()
     })
 
     watch(
       () => route.path,
       () => nextTick(() => {
         initZoom()
-        updatePageClass()
       })
     )
   }

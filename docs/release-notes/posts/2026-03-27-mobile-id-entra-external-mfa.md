@@ -24,6 +24,7 @@ import EntraIntegrationFlow from '../../.vitepress/theme/components/EntraIntegra
 import EntraUseCaseCards from '../../.vitepress/theme/components/EntraUseCaseCards.vue'
 import EntraMigrationTimeline from '../../.vitepress/theme/components/EntraMigrationTimeline.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
+import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
 </script>
 
 <LanguageSwitcher />
@@ -32,15 +33,9 @@ import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher
 Microsoft Entra ID is the identity platform behind millions of enterprise environments. With <strong>External MFA now generally available</strong>, organizations can plug a trusted third-party authentication provider into Entra ID while keeping full control over Conditional Access policies. Mobile ID, operated by Swisscom, combines <a href="/rest-api-guide/introduction#mobile-id-sim---method">hardware-grade SIM authentication</a>, <a href="/rest-api-guide/introduction#mobile-id-app---method">app-based push</a>, shared controls such as number matching and transaction signing, differentiated geofencing options, and a broader OIDC ecosystem that now also includes <a href="/oidc-integration-guide/passkey-authentication">Mobile ID Passkeys</a>. In the Entra External MFA journey, Entra consumes the provider result while Mobile ID runs the second-factor experience.
 </div>
 
-<div class="blog-video">
-  <video controls preload="metadata" poster="/release-notes/img/entra-eam-thumb.png">
-    <source src="/release-notes/media/entra-external-mfa-explainer.mp4" type="video/mp4" />
-  </video>
-  <div class="blog-video-caption">
-    <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    <span>This explainer video was created with Google NotebookLM based on the Mobile ID article.</span>
-  </div>
-</div>
+<VideoEmbed src="/release-notes/media/entra-external-mfa-explainer.mp4" poster="/release-notes/img/entra-eam-thumb.png">
+  This explainer video was created with Google NotebookLM based on the Mobile ID article.
+</VideoEmbed>
 
 ## What Is Microsoft Entra External MFA?
 

@@ -277,6 +277,103 @@ html.dark .VPSidebarItem.is-link > .item > .link:hover .text {
   }
 }
 
+/* Release notes pages: align shell with doc pages.
+   VitePress only adds `has-sidebar` when the sidebar config resolves to a
+   non-empty array. Release notes use custom layouts with their own sidebar,
+   so VitePress sees no sidebar and positions everything differently.
+   We toggle `rn-page` on <html> via JS and replicate every has-sidebar rule
+   here so the chrome stays fixed across all pages.
+*/
+
+/* — VPNavBar --------------------------------------------------------- */
+@media (min-width: 960px) {
+  html.rn-page .VPNavBar .wrapper {
+    padding: 0;
+  }
+
+  html.rn-page .VPNavBar .container {
+    max-width: 100%;
+  }
+
+  html.rn-page .VPNavBar .title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    padding: 0 32px;
+    width: var(--vp-sidebar-width);
+    height: var(--vp-nav-height);
+    background-color: transparent;
+  }
+
+  html.rn-page .VPNavBar .content {
+    position: relative;
+    z-index: 1;
+    padding-right: 32px;
+    padding-left: var(--vp-sidebar-width);
+  }
+
+  html.rn-page .VPNavBar .content-body {
+    position: relative;
+    background-color: var(--vp-nav-bg-color);
+  }
+
+  html.rn-page .VPNavBar .divider {
+    padding-left: var(--vp-sidebar-width);
+  }
+}
+
+@media (min-width: 1440px) {
+  html.rn-page .VPNavBar .title {
+    width: var(--vp-sidebar-width) !important;
+    padding-left: 32px !important;
+  }
+
+  html.rn-page .VPNavBar .content {
+    padding-left: var(--vp-sidebar-width) !important;
+    padding-right: 32px !important;
+  }
+}
+
+/* — VPNavBarTitle (border under logo area) --------------------------- */
+@media (min-width: 960px) {
+  html.rn-page .VPNavBarTitle .title {
+    border-bottom-color: var(--vp-c-divider);
+  }
+}
+
+/* — VPLocalNav (secondary mobile nav bar) ---------------------------- */
+@media (min-width: 960px) {
+  html.rn-page .VPLocalNav {
+    padding-left: var(--vp-sidebar-width);
+  }
+}
+
+@media (min-width: 1440px) {
+  html.rn-page .VPLocalNav {
+    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+  }
+}
+
+/* — VPContent (main content area offset) ----------------------------- */
+html.rn-page .VPContent {
+  margin: 0;
+}
+
+@media (min-width: 960px) {
+  html.rn-page .VPContent {
+    margin: var(--vp-layout-top-height, 0px) 0 0;
+    padding-left: var(--vp-sidebar-width);
+  }
+}
+
+@media (min-width: 1440px) {
+  html.rn-page .VPContent {
+    padding-right: calc((100vw - var(--vp-layout-max-width)) / 2);
+    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+  }
+}
+
 /* Medium-zoom: clickable image hint */
 .vp-doc img:not(.no-zoom) {
   cursor: zoom-in;

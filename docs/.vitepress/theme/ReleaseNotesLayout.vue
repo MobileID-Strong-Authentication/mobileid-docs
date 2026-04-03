@@ -15,11 +15,13 @@ function formatDate(dateStr) {
 
 <template>
   <div class="blog-layout">
-    <div class="blog-hero">
-      <h1 style="color: #fff; margin: 0; font-size: 2em;">Release Notes</h1>
-      <p style="opacity: 0.85; margin-top: 8px; font-size: 1em;">
-        New features and updates for Mobile ID
-      </p>
+    <div class="blog-hero blog-hero--centered">
+      <div class="blog-hero-copy">
+        <h1 style="color: #fff; margin: 0; font-size: 2em;">Release Notes</h1>
+        <p style="opacity: 0.85; margin: 10px 0 0; font-size: 1em;">
+          New features and updates for Mobile ID
+        </p>
+      </div>
     </div>
 
     <div style="padding: 32px 24px; max-width: 800px; margin: 0 auto;">

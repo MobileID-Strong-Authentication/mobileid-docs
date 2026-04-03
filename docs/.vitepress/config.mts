@@ -275,17 +275,10 @@ export default withMermaid(defineConfig({
       { text: 'OIDC Integration Guide', link: '/oidc-integration-guide/introduction' },
       { text: 'RADIUS Gateway Guide', link: '/radius-interface-gateway-guide/introduction' },
       { text: 'Release Notes', link: '/release-notes/' },
-      {
-        text: 'Legal',
-        items: [
-          { text: 'Imprint', link: '/legal/imprint' },
-          { text: 'Privacy Notice', link: '/legal/privacy' }
-        ]
-      }
     ],
 
     sidebar: {
-      '/release-notes/': false,
+      '/release-notes/': [],
       '/rest-api-guide/': [
         {
           text: 'REST API Guide',

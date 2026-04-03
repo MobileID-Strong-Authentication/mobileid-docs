@@ -227,6 +227,10 @@ html.dark .rn-sidebar-nav .rn-sidebar-link.is-active::before {
    occupies the same space as VitePress's VPSidebar and article content
    aligns with regular doc pages (VPDoc padding: 48px 32px 0). */
 @media (min-width: 960px) {
+  .rn-index {
+    padding-left: 64px;
+  }
+
   .rn-post-layout {
     margin-left: calc(-1 * var(--vp-sidebar-width));
     width: calc(100% + var(--vp-sidebar-width));
@@ -241,11 +245,12 @@ html.dark .rn-sidebar-nav .rn-sidebar-link.is-active::before {
     position: sticky;
     top: calc(var(--vp-nav-height) + 32px);
     margin: 0;
-    padding: 32px;
+    width: calc(var(--vp-sidebar-width) + var(--rn-sidebar-overhang, 0px));
+    padding: 32px 32px 32px calc(32px + var(--rn-sidebar-overhang, 0px));
   }
 
   .rn-article {
-    padding: 48px 32px 0;
+    padding: 48px 32px 48px 64px;
   }
 }
 

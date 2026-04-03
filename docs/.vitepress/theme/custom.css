@@ -285,6 +285,19 @@ html.dark .VPSidebarItem.is-link > .item > .link:hover .text {
    here so the chrome stays fixed across all pages.
 */
 
+@media (min-width: 960px) {
+  html.rn-page {
+    --rn-shell-offset: var(--vp-sidebar-width);
+  }
+}
+
+@media (min-width: 1440px) {
+  html.rn-page {
+    --rn-shell-offset: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+    --rn-sidebar-overhang: calc(var(--vp-sidebar-width) - var(--rn-shell-offset));
+  }
+}
+
 /* — VPNavBar --------------------------------------------------------- */
 @media (min-width: 960px) {
   html.rn-page .VPNavBar .wrapper {
@@ -295,7 +308,7 @@ html.dark .VPSidebarItem.is-link > .item > .link:hover .text {
     max-width: 100%;
   }
 
-  html.rn-page .VPNavBar .title {
+  html.rn-page .VPNavBar .container > .title {
     position: absolute;
     top: 0;
     left: 0;
@@ -306,7 +319,7 @@ html.dark .VPSidebarItem.is-link > .item > .link:hover .text {
     background-color: transparent;
   }
 
-  html.rn-page .VPNavBar .content {
+  html.rn-page .VPNavBar .container > .content {
     position: relative;
     z-index: 1;
     padding-right: 32px;
@@ -324,12 +337,12 @@ html.dark .VPSidebarItem.is-link > .item > .link:hover .text {
 }
 
 @media (min-width: 1440px) {
-  html.rn-page .VPNavBar .title {
+  html.rn-page .VPNavBar .container > .title {
     width: var(--vp-sidebar-width) !important;
     padding-left: 32px !important;
   }
 
-  html.rn-page .VPNavBar .content {
+  html.rn-page .VPNavBar .container > .content {
     padding-left: var(--vp-sidebar-width) !important;
     padding-right: 32px !important;
   }
@@ -345,13 +358,13 @@ html.dark .VPSidebarItem.is-link > .item > .link:hover .text {
 /* — VPLocalNav (secondary mobile nav bar) ---------------------------- */
 @media (min-width: 960px) {
   html.rn-page .VPLocalNav {
-    padding-left: var(--vp-sidebar-width);
+    padding-left: var(--rn-shell-offset);
   }
 }
 
 @media (min-width: 1440px) {
   html.rn-page .VPLocalNav {
-    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+    padding-left: var(--rn-shell-offset);
   }
 }
 
@@ -363,14 +376,14 @@ html.rn-page .VPContent {
 @media (min-width: 960px) {
   html.rn-page .VPContent {
     margin: var(--vp-layout-top-height, 0px) 0 0;
-    padding-left: var(--vp-sidebar-width);
+    padding-left: var(--rn-shell-offset);
   }
 }
 
 @media (min-width: 1440px) {
   html.rn-page .VPContent {
     padding-right: calc((100vw - var(--vp-layout-max-width)) / 2);
-    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+    padding-left: var(--rn-shell-offset);
   }
 }
 

@@ -38,18 +38,29 @@ export default {
     const route = useRoute()
 
     const initZoom = () => {
-      mediumZoom('.vp-doc img:not(.no-zoom), .blog-content img:not(.no-zoom)', {
+      mediumZoom('.vp-doc img:not(.no-zoom)', {
         background: 'rgba(255, 255, 255, 0.95)'
       })
     }
 
+    const updatePageClass = () => {
+      document.documentElement.classList.toggle(
+        'rn-page',
+        route.path.startsWith('/release-notes/')
+      )
+    }
+
     onMounted(() => {
       initZoom()
+      updatePageClass()
     })
 
     watch(
       () => route.path,
-      () => nextTick(() => initZoom())
+      () => nextTick(() => {
+        initZoom()
+        updatePageClass()
+      })
     )
   }
 }

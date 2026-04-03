@@ -17,6 +17,7 @@ import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCar
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
 import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue'
+import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
 </script>
 
 <LanguageSwitcher />
@@ -25,15 +26,9 @@ import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue
 Microsoft bloque chaque jour environ 7'000 attaques par mot de passe par seconde, et 47 % des consommateurs abandonnent un achat lorsqu'ils ont oublié leur mot de passe. Dans un monde où le phishing reste le vecteur d'attaque le plus courant, une réponse fondamentalement nouvelle s'impose. Les <strong>Passkeys</strong> sont cette réponse. Mobile ID les intègre désormais nativement dans son écosystème OIDC et les combine avec les atouts éprouvés de la SIM et de l'App.
 </div>
 
-<div class="blog-video">
-  <video controls preload="metadata" poster="/release-notes/media/infografik-overview.webp">
-    <source src="/release-notes/media/passkey-advantage.mp4" type="video/mp4" />
-  </video>
-  <div class="blog-video-caption">
-    <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    <span>Cette vidéo explicative a été créée avec Google NotebookLM à partir de l'article Mobile ID.</span>
-  </div>
-</div>
+<VideoEmbed src="/release-notes/media/passkey-advantage.mp4" poster="/release-notes/media/infografik-overview.webp">
+  Cette vidéo explicative a été créée avec Google NotebookLM à partir de l'article Mobile ID.
+</VideoEmbed>
 
 ## NIST AAL : le cadre de référence pour les niveaux de sécurité
 

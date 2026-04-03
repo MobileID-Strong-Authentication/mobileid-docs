@@ -17,6 +17,7 @@ import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCar
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
 import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue'
+import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
 </script>
 
 <LanguageSwitcher />
@@ -25,15 +26,9 @@ import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue
 Microsoft blocks roughly 7,000 password attacks per second every day, and 47% of consumers abandon a purchase when they forget their password. In a world where phishing remains the most common attack vector, a fundamentally new answer is needed. <strong>Passkeys</strong> are that answer. Mobile ID now integrates them natively into its OIDC ecosystem and combines them with the proven strengths of SIM and App.
 </div>
 
-<div class="blog-video">
-  <video controls preload="metadata" poster="/release-notes/media/infografik-overview.webp">
-    <source src="/release-notes/media/passkey-advantage.mp4" type="video/mp4" />
-  </video>
-  <div class="blog-video-caption">
-    <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    <span>This explainer video was created with Google NotebookLM based on the Mobile ID article.</span>
-  </div>
-</div>
+<VideoEmbed src="/release-notes/media/passkey-advantage.mp4" poster="/release-notes/media/infografik-overview.webp">
+  This explainer video was created with Google NotebookLM based on the Mobile ID article.
+</VideoEmbed>
 
 ## NIST AAL and ISO/IEC LoA: Reference Frameworks for Security Levels
 

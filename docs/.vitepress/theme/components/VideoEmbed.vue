@@ -1,95 +1,46 @@
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, watch, nextTick, onMounted } from 'vue'
+import { useRoute } from 'vitepress'
 
-defineProps({
+const props = defineProps({
   src: { type: String, required: true },
   poster: { type: String, default: '' },
+  type: { type: String, default: 'video/mp4' },
 })
 
-const started = ref(false)
-const video = ref(null)
+const videoRef = ref(null)
+const route = useRoute()
 
-async function play() {
-  started.value = true
-  await nextTick()
-  if (video.value) video.value.play()
+// Force the video element to re-initialise after SPA navigation.
+// Browsers can skip loading when Vue patches an existing <video> during
+// client-side route transitions, leaving it in a broken state.
+function reload() {
+  nextTick(() => {
+    const el = videoRef.value
+    if (!el) return
+    el.load()
+  })
 }
+
+onMounted(reload)
+watch(() => route.path, reload)
 </script>
 
 <template>
-  <div
-    class="video-embed"
-    :class="{ 'video-embed--playing': started }"
-    :role="started ? undefined : 'button'"
-    :tabindex="started ? undefined : 0"
-    :aria-label="started ? undefined : 'Video abspielen'"
-    @click="play"
-    @keydown.enter="play"
-    @keydown.space.prevent="play"
-  >
+  <div class="blog-video">
     <video
-      v-if="started"
-      ref="video"
-      :src="src"
-      :poster="poster"
+      ref="videoRef"
       controls
       preload="metadata"
-      style="width: 100%; height: 100%; border-radius: 12px;"
-    />
-    <template v-else>
-      <img v-if="poster" :src="poster" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" />
-      <div class="video-embed-overlay">
-        <div class="video-embed-play">▶</div>
-      </div>
-    </template>
+      playsinline
+      :poster="poster || undefined"
+    >
+      <source :src="src" :type="type" />
+      Your browser does not support the video element.
+    </video>
+    <div v-if="$slots.default" class="blog-video-caption">
+      <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <span><slot /></span>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.video-embed {
-  position: relative;
-  background: #111;
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 1.5em 0;
-  aspect-ratio: 16 / 9;
-  cursor: pointer;
-}
-
-.video-embed--playing {
-  cursor: default;
-}
-
-.video-embed-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
-  transition: background 0.2s;
-}
-
-.video-embed:hover .video-embed-overlay {
-  background: rgba(0, 0, 0, 0.15);
-}
-
-.video-embed-play {
-  width: 64px;
-  height: 64px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: #fff;
-  transition: transform 0.2s, background 0.2s;
-}
-
-.video-embed:hover .video-embed-play {
-  transform: scale(1.1);
-  background: rgba(255, 255, 255, 0.3);
-}
-</style>

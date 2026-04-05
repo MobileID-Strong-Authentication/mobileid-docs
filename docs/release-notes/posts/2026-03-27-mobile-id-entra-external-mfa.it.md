@@ -24,7 +24,7 @@ import EntraIntegrationFlow from '../../.vitepress/theme/components/EntraIntegra
 import EntraUseCaseCards from '../../.vitepress/theme/components/EntraUseCaseCards.vue'
 import EntraMigrationTimeline from '../../.vitepress/theme/components/EntraMigrationTimeline.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
-import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
+import VideoWatchCard from '../../.vitepress/theme/components/VideoWatchCard.vue'
 </script>
 
 <LanguageSwitcher />
@@ -33,9 +33,14 @@ import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
 Microsoft Entra ID è la piattaforma di identità alla base di milioni di ambienti aziendali. Con <strong>External MFA ora generalmente disponibile</strong>, le organizzazioni possono integrare un provider di autenticazione di terze parti affidabile in Entra ID, mantenendo il pieno controllo sulle policy Conditional Access. Mobile ID, operato da Swisscom, combina <a href="/rest-api-guide/introduction#mobile-id-sim---method">l'autenticazione hardware-grade basata su SIM</a>, <a href="/rest-api-guide/introduction#mobile-id-app---method">l'autenticazione push tramite app</a>, controlli condivisi come Number Matching e Transaction Signing, opzioni di Geofencing differenziate e un ecosistema OIDC più ampio che ora include anche i <a href="/oidc-integration-guide/passkey-authentication">Mobile ID Passkeys</a>. Nel percorso Entra External MFA, Entra consuma il risultato del provider mentre Mobile ID esegue l'esperienza di secondo fattore.
 </div>
 
-<VideoEmbed src="/release-notes/media/entra-external-mfa-explainer.mp4" poster="/release-notes/img/entra-eam-thumb.png">
-  Questo video esplicativo è stato creato con Google NotebookLM sulla base dell'articolo Mobile ID.
-</VideoEmbed>
+<VideoWatchCard
+  href="/release-notes/videos/2026-03-27-mobile-id-entra-external-mfa-explainer.it.html"
+  poster="/release-notes/img/entra-eam-thumb.png"
+  label="Guarda il video esplicativo"
+  title="Mobile ID e Microsoft Entra ID: MFA rafforzata con External Authentication"
+>
+  Breve video esplicativo che mostra come Mobile ID si integra con Microsoft Entra External MFA.
+</VideoWatchCard>
 
 ## Cos'è Microsoft Entra External MFA?
 

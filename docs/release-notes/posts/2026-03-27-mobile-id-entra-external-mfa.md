@@ -24,7 +24,7 @@ import EntraIntegrationFlow from '../../.vitepress/theme/components/EntraIntegra
 import EntraUseCaseCards from '../../.vitepress/theme/components/EntraUseCaseCards.vue'
 import EntraMigrationTimeline from '../../.vitepress/theme/components/EntraMigrationTimeline.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
-import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
+import VideoWatchCard from '../../.vitepress/theme/components/VideoWatchCard.vue'
 </script>
 
 <LanguageSwitcher />
@@ -33,9 +33,14 @@ import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
 Microsoft Entra ID is the identity platform behind millions of enterprise environments. With <strong>External MFA now generally available</strong>, organizations can plug a trusted third-party authentication provider into Entra ID while keeping full control over Conditional Access policies. Mobile ID, operated by Swisscom, combines <a href="/rest-api-guide/introduction#mobile-id-sim---method">hardware-grade SIM authentication</a>, <a href="/rest-api-guide/introduction#mobile-id-app---method">app-based push</a>, shared controls such as number matching and transaction signing, differentiated geofencing options, and a broader OIDC ecosystem that now also includes <a href="/oidc-integration-guide/passkey-authentication">Mobile ID Passkeys</a>. In the Entra External MFA journey, Entra consumes the provider result while Mobile ID runs the second-factor experience.
 </div>
 
-<VideoEmbed src="/release-notes/media/entra-external-mfa-explainer.mp4" poster="/release-notes/img/entra-eam-thumb.png">
-  This explainer video was created with Google NotebookLM based on the Mobile ID article.
-</VideoEmbed>
+<VideoWatchCard
+  href="/release-notes/videos/2026-03-27-mobile-id-entra-external-mfa-explainer.html"
+  poster="/release-notes/img/entra-eam-thumb.png"
+  label="Watch the explainer video"
+  title="Mobile ID and Microsoft Entra ID: Stronger MFA with External Authentication"
+>
+  Short explainer video showing how Mobile ID integrates with Microsoft Entra External MFA.
+</VideoWatchCard>
 
 ## What Is Microsoft Entra External MFA?
 
@@ -110,7 +115,7 @@ Microsoft Authenticator is a solid default for organizations that only need app-
 
 These are scenarios where an app-only approach hits its limits.
 
-<!-- Infographic removed pending factual review: the original NotebookLM-generated graphic
+<!-- Infographic removed pending factual review: the earlier draft
      incorrectly portrayed Microsoft Authenticator as Push/TOTP-only, omitting its passkey support.
      Replace with a manually verified graphic before publishing. -->
 

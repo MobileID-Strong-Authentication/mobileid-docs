@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url'
 const SITE_URL = 'https://docs.mobileid.ch'
 const DOCS_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const RELEASE_NOTES_POST_LAYOUT = 'release-notes-post'
+const RELEASE_NOTES_VIDEO_LAYOUT = 'release-notes-video'
 const SUPPORTED_LANGS = ['en', 'de', 'fr', 'it'] as const
 
 type SupportedLang = typeof SUPPORTED_LANGS[number]
@@ -93,6 +94,30 @@ function getFrontmatterKeywords(frontmatter: Record<string, any>): string[] {
   return []
 }
 
+function getVideoMeta(frontmatter: Record<string, any>) {
+  const rawVideo = frontmatter.video
+  if (!rawVideo || typeof rawVideo !== 'object') return undefined
+
+  const video = rawVideo as Record<string, unknown>
+  const getString = (key: string) => {
+    const value = video[key]
+    return typeof value === 'string' && value.trim() ? value.trim() : undefined
+  }
+
+  const src = getString('src')
+  if (!src) return undefined
+
+  return {
+    src,
+    title: getString('title'),
+    description: getString('description'),
+    poster: getString('poster'),
+    type: getString('type') ?? 'video/mp4',
+    duration: getString('duration'),
+    uploadDate: getString('uploadDate'),
+  }
+}
+
 // https://vitepress.dev/reference/site-config
 export default withMermaid(defineConfig({
   title: 'Mobile ID docs',
@@ -155,20 +180,25 @@ export default withMermaid(defineConfig({
     const canonicalUrl = `${SITE_URL}/${pagePath}`
     const lang = getPageLang(pageData)
     const alternates = getAlternatePages(pageData.relativePath)
+    const videoMeta = getVideoMeta(pageData.frontmatter)
 
     const ogTitle = pageData.title || 'Mobile ID docs'
     const ogDesc = pageData.description || 'Technical documentation for Mobile ID integration'
     const socialImage = pageData.frontmatter.thumbnail
       ? toAbsoluteUrl(pageData.frontmatter.thumbnail)
+      : videoMeta?.poster
+        ? toAbsoluteUrl(videoMeta.poster)
       : undefined
     const isReleaseNotesPost = pageData.frontmatter.layout === RELEASE_NOTES_POST_LAYOUT
+    const isReleaseNotesVideo = pageData.frontmatter.layout === RELEASE_NOTES_VIDEO_LAYOUT
+    const isReleaseNotesContent = isReleaseNotesPost || isReleaseNotesVideo
     const keywords = getFrontmatterKeywords(pageData.frontmatter)
     const head: HeadConfig[] = [
       ['link', { rel: 'canonical', href: canonicalUrl }],
       ['meta', { property: 'og:title', content: ogTitle }],
       ['meta', { property: 'og:description', content: ogDesc }],
       ['meta', { property: 'og:url', content: canonicalUrl }],
-      ['meta', { property: 'og:type', content: isReleaseNotesPost ? 'article' : 'website' }],
+      ['meta', { property: 'og:type', content: isReleaseNotesVideo ? 'video.other' : isReleaseNotesPost ? 'article' : 'website' }],
       ['meta', { property: 'og:locale', content: OG_LOCALE_BY_LANG[lang] }],
     ]
 
@@ -181,32 +211,14 @@ export default withMermaid(defineConfig({
       )
     }
 
-    if (isReleaseNotesPost) {
-      const publishedDate = pageData.frontmatter.date
-        ? new Date(pageData.frontmatter.date).toISOString()
-        : undefined
-
+    if (isReleaseNotesContent) {
       head.push(
         ['meta', { name: 'twitter:title', content: ogTitle }],
         ['meta', { name: 'twitter:description', content: ogDesc }],
       )
 
-      if (publishedDate) {
-        head.push(['meta', { property: 'article:published_time', content: publishedDate }])
-      }
-
-      if (pageData.frontmatter.author) {
-        head.push(['meta', { property: 'article:author', content: pageData.frontmatter.author }])
-      }
-
-      head.push(['meta', { property: 'article:section', content: 'Release Notes' }])
-
       if (keywords.length > 0) {
         head.push(['meta', { name: 'keywords', content: keywords.join(', ') }])
-
-        for (const keyword of keywords) {
-          head.push(['meta', { property: 'article:tag', content: keyword }])
-        }
       }
 
       if (alternates.length > 1) {
@@ -225,6 +237,28 @@ export default withMermaid(defineConfig({
           if (alternate.lang !== lang) {
             head.push(['meta', { property: 'og:locale:alternate', content: alternate.ogLocale }])
           }
+        }
+      }
+    }
+
+    if (isReleaseNotesPost) {
+      const publishedDate = pageData.frontmatter.date
+        ? new Date(pageData.frontmatter.date).toISOString()
+        : undefined
+
+      if (publishedDate) {
+        head.push(['meta', { property: 'article:published_time', content: publishedDate }])
+      }
+
+      if (pageData.frontmatter.author) {
+        head.push(['meta', { property: 'article:author', content: pageData.frontmatter.author }])
+      }
+
+      head.push(['meta', { property: 'article:section', content: 'Release Notes' }])
+
+      if (keywords.length > 0) {
+        for (const keyword of keywords) {
+          head.push(['meta', { property: 'article:tag', content: keyword }])
         }
       }
 
@@ -258,6 +292,36 @@ export default withMermaid(defineConfig({
         { type: 'application/ld+json' },
         JSON.stringify(articleSchema),
       ])
+    }
+
+    if (isReleaseNotesVideo && videoMeta) {
+      const uploadDate = videoMeta.uploadDate
+        ?? (pageData.frontmatter.date ? new Date(pageData.frontmatter.date).toISOString() : undefined)
+      const contentUrl = toAbsoluteUrl(videoMeta.src)
+      const videoSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'VideoObject',
+        name: videoMeta.title ?? ogTitle,
+        description: videoMeta.description ?? ogDesc,
+        thumbnailUrl: socialImage ? [socialImage] : undefined,
+        uploadDate,
+        duration: videoMeta.duration,
+        contentUrl,
+        embedUrl: canonicalUrl,
+        inLanguage: HREFLANG_BY_LANG[lang],
+        publisher: {
+          '@type': 'Organization',
+          name: 'Swisscom',
+          url: 'https://www.swisscom.ch/mobileid',
+        },
+      }
+
+      head.push(
+        ['meta', { property: 'og:video', content: contentUrl }],
+        ['meta', { property: 'og:video:secure_url', content: contentUrl }],
+        ['meta', { property: 'og:video:type', content: videoMeta.type }],
+        ['script', { type: 'application/ld+json' }, JSON.stringify(videoSchema)],
+      )
     }
 
     pageData.frontmatter.head ??= []

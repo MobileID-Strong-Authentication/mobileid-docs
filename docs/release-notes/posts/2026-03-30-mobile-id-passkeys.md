@@ -7,6 +7,13 @@ thumbnail: /release-notes/img/passkeys-thumb.png
 lang: en
 readingTime: 12
 layout: release-notes-post
+video:
+  title: "Mobile ID Passkeys: Phishing-Resistant Authentication for Browser Scenarios"
+  description: "Short explainer video covering where passkeys fit in the Mobile ID ecosystem."
+  src: /release-notes/media/passkey-advantage.mp4
+  poster: /release-notes/img/passkeys-thumb.png
+  duration: PT6M56S
+  uploadDate: 2026-03-30T00:00:00.000Z
 ---
 
 <script setup>
@@ -17,7 +24,7 @@ import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCar
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
 import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue'
-import VideoWatchCard from '../../.vitepress/theme/components/VideoWatchCard.vue'
+import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
 </script>
 
 <LanguageSwitcher />
@@ -26,14 +33,9 @@ import VideoWatchCard from '../../.vitepress/theme/components/VideoWatchCard.vue
 Microsoft blocks roughly 7,000 password attacks per second every day, and 47% of consumers abandon a purchase when they forget their password. In a world where phishing remains the most common attack vector, a fundamentally new answer is needed. <strong>Passkeys</strong> are that answer. Mobile ID now integrates them natively into its OIDC ecosystem and combines them with the proven strengths of SIM and App.
 </div>
 
-<VideoWatchCard
-  href="/release-notes/videos/2026-03-30-mobile-id-passkeys-explainer.html"
-  poster="/release-notes/img/passkeys-thumb.png"
-  label="Watch the explainer video"
-  title="Mobile ID Passkeys: Phishing-Resistant Authentication for Browser Scenarios"
->
+<VideoEmbed src="/release-notes/media/passkey-advantage.mp4" poster="/release-notes/img/passkeys-thumb.png" link-text="Open MP4">
   Short explainer video covering where passkeys fit in the Mobile ID ecosystem.
-</VideoWatchCard>
+</VideoEmbed>
 
 ## NIST AAL and ISO/IEC LoA: Reference Frameworks for Security Levels
 

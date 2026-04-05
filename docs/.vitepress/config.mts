@@ -8,7 +8,6 @@ import { fileURLToPath } from 'node:url'
 const SITE_URL = 'https://docs.mobileid.ch'
 const DOCS_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const RELEASE_NOTES_POST_LAYOUT = 'release-notes-post'
-const RELEASE_NOTES_VIDEO_LAYOUT = 'release-notes-video'
 const SUPPORTED_LANGS = ['en', 'de', 'fr', 'it'] as const
 
 type SupportedLang = typeof SUPPORTED_LANGS[number]
@@ -190,15 +189,13 @@ export default withMermaid(defineConfig({
         ? toAbsoluteUrl(videoMeta.poster)
       : undefined
     const isReleaseNotesPost = pageData.frontmatter.layout === RELEASE_NOTES_POST_LAYOUT
-    const isReleaseNotesVideo = pageData.frontmatter.layout === RELEASE_NOTES_VIDEO_LAYOUT
-    const isReleaseNotesContent = isReleaseNotesPost || isReleaseNotesVideo
     const keywords = getFrontmatterKeywords(pageData.frontmatter)
     const head: HeadConfig[] = [
       ['link', { rel: 'canonical', href: canonicalUrl }],
       ['meta', { property: 'og:title', content: ogTitle }],
       ['meta', { property: 'og:description', content: ogDesc }],
       ['meta', { property: 'og:url', content: canonicalUrl }],
-      ['meta', { property: 'og:type', content: isReleaseNotesVideo ? 'video.other' : isReleaseNotesPost ? 'article' : 'website' }],
+      ['meta', { property: 'og:type', content: isReleaseNotesPost ? 'article' : 'website' }],
       ['meta', { property: 'og:locale', content: OG_LOCALE_BY_LANG[lang] }],
     ]
 
@@ -211,7 +208,7 @@ export default withMermaid(defineConfig({
       )
     }
 
-    if (isReleaseNotesContent) {
+    if (isReleaseNotesPost) {
       head.push(
         ['meta', { name: 'twitter:title', content: ogTitle }],
         ['meta', { name: 'twitter:description', content: ogDesc }],
@@ -294,7 +291,7 @@ export default withMermaid(defineConfig({
       ])
     }
 
-    if (isReleaseNotesVideo && videoMeta) {
+    if (videoMeta) {
       const uploadDate = videoMeta.uploadDate
         ?? (pageData.frontmatter.date ? new Date(pageData.frontmatter.date).toISOString() : undefined)
       const contentUrl = toAbsoluteUrl(videoMeta.src)

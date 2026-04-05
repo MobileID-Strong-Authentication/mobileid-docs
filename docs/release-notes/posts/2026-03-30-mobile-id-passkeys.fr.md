@@ -7,6 +7,13 @@ thumbnail: /release-notes/img/passkeys-thumb.png
 lang: fr
 readingTime: 12
 layout: release-notes-post
+video:
+  title: "Mobile ID Passkeys: authentification résistante au phishing pour les scénarios navigateur"
+  description: "Courte vidéo explicative sur la place des Passkeys dans l'écosystème Mobile ID."
+  src: /release-notes/media/passkey-advantage.mp4
+  poster: /release-notes/img/passkeys-thumb.png
+  duration: PT6M56S
+  uploadDate: 2026-03-30T00:00:00.000Z
 ---
 
 <script setup>
@@ -17,7 +24,7 @@ import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCar
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
 import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue'
-import VideoWatchCard from '../../.vitepress/theme/components/VideoWatchCard.vue'
+import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
 </script>
 
 <LanguageSwitcher />
@@ -26,14 +33,9 @@ import VideoWatchCard from '../../.vitepress/theme/components/VideoWatchCard.vue
 Microsoft bloque chaque jour environ 7'000 attaques par mot de passe par seconde, et 47 % des consommateurs abandonnent un achat lorsqu'ils ont oublié leur mot de passe. Dans un monde où le phishing reste le vecteur d'attaque le plus courant, une réponse fondamentalement nouvelle s'impose. Les <strong>Passkeys</strong> sont cette réponse. Mobile ID les intègre désormais nativement dans son écosystème OIDC et les combine avec les atouts éprouvés de la SIM et de l'App.
 </div>
 
-<VideoWatchCard
-  href="/release-notes/videos/2026-03-30-mobile-id-passkeys-explainer.fr.html"
-  poster="/release-notes/img/passkeys-thumb.png"
-  label="Regarder la vidéo explicative"
-  title="Mobile ID Passkeys: authentification résistante au phishing pour les scénarios navigateur"
->
+<VideoEmbed src="/release-notes/media/passkey-advantage.mp4" poster="/release-notes/img/passkeys-thumb.png" link-text="Ouvrir le MP4">
   Courte vidéo explicative sur la place des Passkeys dans l'écosystème Mobile ID.
-</VideoWatchCard>
+</VideoEmbed>
 
 ## NIST AAL : le cadre de référence pour les niveaux de sécurité
 

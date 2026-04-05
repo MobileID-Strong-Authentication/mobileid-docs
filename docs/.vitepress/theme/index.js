@@ -8,7 +8,6 @@ import specYaml from '../../public/openapi-mobileid.yaml?raw'
 import DocFeedback from './DocFeedback.vue'
 import ReleaseNotesLayout from './ReleaseNotesLayout.vue'
 import ReleaseNotesPostLayout from './ReleaseNotesPostLayout.vue'
-import ReleaseNotesVideoLayout from './ReleaseNotesVideoLayout.vue'
 import './custom.css'
 import './release-notes.css'
 
@@ -24,7 +23,6 @@ export default {
   async enhanceApp({ app }) {
     app.component('release-notes-index', ReleaseNotesLayout)
     app.component('release-notes-post', ReleaseNotesPostLayout)
-    app.component('release-notes-video', ReleaseNotesVideoLayout)
 
     useOpenapi({
       spec: specYaml,

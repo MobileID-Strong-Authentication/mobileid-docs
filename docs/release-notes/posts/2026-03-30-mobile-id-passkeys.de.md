@@ -7,6 +7,13 @@ thumbnail: /release-notes/img/passkeys-thumb.png
 lang: de
 readingTime: 12
 layout: release-notes-post
+video:
+  title: "Mobile ID Passkeys: Phishing-resistente Authentisierung für Browser-Szenarien"
+  description: "Kurzes Erklaervideo dazu, welche Rolle Passkeys im Mobile-ID-Ecosystem spielen."
+  src: /release-notes/media/passkey-advantage.mp4
+  poster: /release-notes/img/passkeys-thumb.png
+  duration: PT6M56S
+  uploadDate: 2026-03-30T00:00:00.000Z
 ---
 
 <script setup>
@@ -17,7 +24,7 @@ import PasskeyTypesCards from '../../.vitepress/theme/components/PasskeyTypesCar
 import HybridAuthFlow from '../../.vitepress/theme/components/HybridAuthFlow.vue'
 import LanguageSwitcher from '../../.vitepress/theme/components/LanguageSwitcher.vue'
 import ScreenshotStep from '../../.vitepress/theme/components/ScreenshotStep.vue'
-import VideoWatchCard from '../../.vitepress/theme/components/VideoWatchCard.vue'
+import VideoEmbed from '../../.vitepress/theme/components/VideoEmbed.vue'
 </script>
 
 <LanguageSwitcher />
@@ -26,14 +33,9 @@ import VideoWatchCard from '../../.vitepress/theme/components/VideoWatchCard.vue
 Microsoft blockiert täglich rund 7'000 Passwort-Angriffe pro Sekunde, und 47 % der Konsumenten brechen einen Kauf ab, wenn sie ihr Passwort vergessen. In einer Welt, in der Phishing nach wie vor der häufigste Angriffsvektor ist, braucht es eine grundlegend neue Antwort. <strong>Passkeys</strong> sind diese Antwort. Mobile ID integriert sie jetzt nativ in sein OIDC Ecosystem und kombiniert sie mit den bewährten Stärken von SIM und App.
 </div>
 
-<VideoWatchCard
-  href="/release-notes/videos/2026-03-30-mobile-id-passkeys-explainer.de.html"
-  poster="/release-notes/img/passkeys-thumb.png"
-  label="Erklaervideo ansehen"
-  title="Mobile ID Passkeys: Phishing-resistente Authentisierung für Browser-Szenarien"
->
+<VideoEmbed src="/release-notes/media/passkey-advantage.mp4" poster="/release-notes/img/passkeys-thumb.png" link-text="MP4 öffnen">
   Kurzes Erklaervideo dazu, welche Rolle Passkeys im Mobile-ID-Ecosystem spielen.
-</VideoWatchCard>
+</VideoEmbed>
 
 ## NIST AAL und ISO/IEC LoA: Referenzrahmen für Sicherheitsniveaus
 

@@ -85,6 +85,14 @@ for (const langSuffix of ['', '.de', '.fr', '.it']) {
     `/release-notes/posts/2026-03-28-mobile-id-entra-external-mfa${langSuffix}`,
     `/release-notes/posts/2026-03-27-mobile-id-entra-external-mfa${langSuffix}`,
   )
+  addRedirect(
+    `/release-notes/videos/2026-03-30-mobile-id-passkeys-explainer${langSuffix}`,
+    `/release-notes/posts/2026-03-30-mobile-id-passkeys${langSuffix}`,
+  )
+  addRedirect(
+    `/release-notes/videos/2026-03-27-mobile-id-entra-external-mfa-explainer${langSuffix}`,
+    `/release-notes/posts/2026-03-27-mobile-id-entra-external-mfa${langSuffix}`,
+  )
 }
 
 function renderRedirectHtml(targetPath) {

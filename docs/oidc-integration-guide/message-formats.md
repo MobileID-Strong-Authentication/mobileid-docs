@@ -1,6 +1,6 @@
 # Message Formats on the Mobile ID App
 
-Mobile ID App screens can present the Data-To-Be-Displayed (DTBD) in two formats.
+Mobile ID supports three request variants for the Data-To-Be-Displayed (DTBD): Classic, Transaction Approval, and a mixed format that contains both.
 
 ::: tip
 Use **Classic DTBD** for short confirmations and when you must support SIM users. Keep messages concise and always include the "DTBD Prefix".
@@ -21,9 +21,13 @@ Use **Transaction Approval** when readability matters (e.g., [PSD2](https://eur-
 
    Approve/Cancel becomes active only after the user scrolls to the end if content exceeds one screen.
 
-   RPs request this by sending a JSON object in the dtbd authorization parameter.
+   RPs request this by sending a JSON object in the `dtbd` authorization parameter.
 
    <img src="/img/message-formats-transaction-approval.png" alt="message-formats-transaction-approval" width="350">
+
+3. **Mixed DTBD** (JSON array with Classic + Transaction Approval) lets the RP send both representations in one request.
+
+   This is useful with `_any` ACR values (for example `mid_al3_any`) where the final method is resolved at runtime.
 
 
 ## Classic DTBD
@@ -71,6 +75,43 @@ How to request it: Send a JSON object via the `dtbd` authorization request param
 - sum(keys+values) ≤ 2000 (bytes; non-ASCII uses 2–4 bytes)
 - **DTBD Prefix** (required): your configured prefix must be in the value of the first pair
   e.g., `{"key":"Company","value":"Acme AG: ..."}`
+
+## Mixed DTBD (Classic + Transaction Approval)
+
+Send a JSON array in `dtbd` that contains:
+
+- exactly one Classic DTBD string
+- exactly one Transaction Approval object
+
+The order does not matter. The OP detects element types by JSON type (string vs object).
+
+```json
+[
+  "MobileID: Confirm sign in to MyBank? Ref: #SESSION#",
+  {
+    "type": "MyBank Login",
+    "dtbd": [
+      { "key": "Username", "value": "MobileID: Nora Keller" },
+      { "key": "IP Address", "value": "185.45.16.238" },
+      { "key": "City", "value": "Basel" },
+      { "key": "Agent", "value": "Apple iPhone" },
+      { "key": "Reference ID", "value": "LOGIN-VRFY-XZ1" }
+    ]
+  }
+]
+```
+
+Selection behavior:
+
+- **SIM resolved:** Classic DTBD is used.
+- **App resolved:** Transaction Approval is used when present.
+- **Passkey resolved:** `dtbd` is ignored (existing behavior).
+
+Validation notes:
+
+- The `dtbd` array must contain one string and one object (max two elements).
+- Empty arrays, duplicate types, malformed JSON, or unsupported element types are rejected with `mid_auth_4000`.
+- Existing Classic and Transaction Approval limits apply unchanged inside the array.
 
 ## Transaction Approval Example
 
@@ -141,10 +182,13 @@ Request an App ACR (e.g., `mid_al3_mobileapp`) if you want to ensure the App met
 
 i.e., the `dtbd` array only; the `type` label is not part of the signed bytes.
 
+**Mixed DTBD:** only the representation selected for the resolved method is signed (Classic text for SIM, Transaction Approval normalized content for App).
+
 ## Best practices
 
 ::: info
 - **Build → URL-encode → send:** generate the JSON with your library, then URL-encode as `dtbd`. Avoid hand-crafted strings. (Use PAR for large payloads/confidentiality.)
+- **Use mixed format for `_any` ACRs:** when method resolution may end on SIM or App, send both representations in one array.
 - **Select App method:** use `acr_values` (e.g., `mid_al3_mobileapp`) when you want to ensure App UX.
 - **Prefix rule:** include your DTBD prefix in the value of the first pair.
 - **Respect byte limits:** limits are in bytes, not characters; UTF-8 non-ASCII uses 2–4 bytes.

@@ -186,9 +186,11 @@ To receive passkey-related claims, add the `mid_passkey` scope to the authorizat
 | | `mid_pk_cred_fingerprint` | string | `pQECAyYgASFY...` | SHA-256 of the credential public key ([COSE](https://datatracker.ietf.org/doc/html/rfc9052) format) |
 | | `mid_pk_auth_attachment` | string | `platform` \| `cross-platform` | Authenticator attachment modality |
 | | `mid_pk_os_family` | string | `iOS` \| `Android` \| `Windows` | OS family of the authenticator platform |
+| | `mid_pk_aal3` | boolean | `true` | Whether the authenticator used in the transaction is NIST AAL3-compliant |
 
 ::: tip Claim delivery and availability
 The `mid_pk_keyringid` claim is also available via the `mid_profile` scope, allowing RPs to retrieve the KeyRingID without requesting the full `mid_passkey` scope.
+The signer certificate chain claim `mid_profile_signer_cert_chain` is delivered via `mid_profile` scope (not `mid_passkey`).
 
 **ID Token** should carry the minimal set of claims needed for cryptographic proof (sub, iss, aud, acr, amr, nonce, etc.). **UserInfo endpoint** is the recommended delivery channel for passkey detail claims, as they may change and can be verbose.
 

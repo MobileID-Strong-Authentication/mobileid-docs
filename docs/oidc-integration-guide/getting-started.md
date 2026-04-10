@@ -93,7 +93,7 @@ The following request query string parameters are supported:
 | `id_token_hint` | SHALL NOT be used | |
 | `claims` | SHALL NOT be used | |
 | `login_hint` | CAN be set to provide a login hint to the authorization server about the end-user's phone number(s) or LDAP username. Must be in a JSON format. | See [Login Hint Examples](/oidc-integration-guide/getting-started#login-hint-examples) below. |
-| `dtbd` | CAN be set to overwrite the default authentication message displayed to the end-user if the authentication method is either Mobile ID SIM or Mobile ID App. | See [DTBD Parameter](/oidc-integration-guide/getting-started#dtbd-parameter) below. |
+| `dtbd` | CAN be set to overwrite the default authentication message displayed to the end-user if the authentication method is either Mobile ID SIM or Mobile ID App. Supports plain string, JSON object, or mixed JSON array. | See [DTBD Parameter](/oidc-integration-guide/getting-started#dtbd-parameter) below and [Message Formats](/oidc-integration-guide/message-formats). |
 
 #### Login Hint Examples
 
@@ -142,6 +142,8 @@ The `dtbd` message should include these keywords:
 - `#SESSION#` — A unique transaction number. In case MFA Number Matching is enabled, this keyword will be replaced with the matching number.
 - `#CLIENT#` — Relying Party Display Name.
 
+For requests using `_any` ACR values (for example `mid_al2_any` or `mid_al3_any`), the final method can be resolved at runtime. In this case, you can send mixed `dtbd` (JSON array with one Classic string and one Transaction Approval object) so SIM and App are both covered in one request. See [Message Formats](/oidc-integration-guide/message-formats#mixed-dtbd-classic--transaction-approval).
+
 The default authentication message is:
 
 | Language | Message |
@@ -170,6 +172,7 @@ Given below is the list of supported scopes that can be requested during the aut
 | `mid_profile` | `mid_profile_recovery_code_status` | boolean | `true` | Whether a recovery code has been set |
 | | `mid_profile_serial` | string | `MIDCHEYUD1YE4QB1` | Mobile ID serial number |
 | | `mid_pk_keyringid` | string | `MIDPK123A567B90` | Passkey keyring identifier |
+| | `mid_profile_signer_cert_chain` | string[] | `["MIIF...","MIIE..."]` | Signer certificate chain (Base64-encoded DER certificates) |
 | | `mid_profile_sim_status` | string | `active` | SIM card activation status |
 | | `mid_profile_sim_pin_status` | string | `active` | SIM PIN status |
 | | `mid_profile_sim_mcc` | string | `228` | Mobile Country Code |
@@ -191,6 +194,7 @@ Given below is the list of supported scopes that can be requested during the aut
 | | `mid_pk_cred_fingerprint` | string | `pQECAyYgASFY...` | SHA-256 of the credential public key ([COSE](https://datatracker.ietf.org/doc/html/rfc9052)) |
 | | `mid_pk_auth_attachment` | string | `platform` \| `cross-platform` | Authenticator attachment modality |
 | | `mid_pk_os_family` | string | `iOS` \| `Android` \| `Windows` | OS family of the authenticator platform |
+| | `mid_pk_aal3` | boolean | `true` | Whether the passkey authenticator used in the transaction is NIST AAL3-compliant |
 
 ::: tip
 A Relying Party should always respect the user's privacy and keep the requested claims down to the very essential. For example, using scope `openid` only, the user sign-in will be anonymous. Neither the phone number nor any other user information will be passed on to the Relying Party's application.

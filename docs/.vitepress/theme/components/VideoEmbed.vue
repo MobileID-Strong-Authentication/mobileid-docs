@@ -45,7 +45,7 @@ watch(() => route.path, reload)
         <svg class="video-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         <span><slot /></span>
       </span>
-      <a class="blog-video-link" :href="src" target="_blank" rel="noopener">{{ linkText }}</a>
+      <a class="blog-video-link" :href="src" target="_blank" rel="noopener noreferrer">{{ linkText }}</a>
     </div>
   </div>
 </template>

@@ -98,7 +98,12 @@ for (const langSuffix of ['', '.de', '.fr', '.it']) {
 function renderRedirectHtml(targetPath) {
   const escapedTarget = targetPath
     .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;')
+
+  const scriptSafeTarget = JSON.stringify(targetPath).replace(/</g, '\\u003c')
 
   return `<!doctype html>
 <html lang="en">
@@ -109,7 +114,7 @@ function renderRedirectHtml(targetPath) {
     <meta name="robots" content="noindex,follow">
     <link rel="canonical" href="${escapedTarget}">
     <script>
-      window.location.replace(${JSON.stringify(targetPath)});
+      window.location.replace(${scriptSafeTarget});
     </script>
   </head>
   <body>
